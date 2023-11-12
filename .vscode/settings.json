@@ -8,5 +8,6 @@
         "**/*.o": true,
         "**/*.exe": true
     },
-    "C_Cpp.default.compilerPath": "C:/raylib/w64devkit/bin/gcc.exe"
+    "C_Cpp.default.compilerPath": "C:/raylib/w64devkit/bin/gcc.exe",
+    "cmake.sourceDirectory": "C:/Users/Fernando/Documents/GitHub/proyecto-juego/CMakeLists.txt"
 }
