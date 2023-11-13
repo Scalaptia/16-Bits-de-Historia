@@ -18,8 +18,8 @@ int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 440;
+    int screenWidth = 800;
+    int screenHeight = 440;
 
     InitWindow(screenWidth, screenHeight, "juego");
     InitAudioDevice();

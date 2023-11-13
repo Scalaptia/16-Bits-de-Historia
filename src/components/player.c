@@ -8,17 +8,26 @@ void actPlayer(Player *player)
 
 void movePlayer(Player *player, int upKey, int downKey, int leftKey, int rightKey)
 {
+    Vector2 direction = {0.0f, 0.0f};
+
     if (IsKeyDown(upKey))
-        player->position.y -= 3.0f;
+        direction.y -= 1.0f;
 
     if (IsKeyDown(downKey))
-        player->position.y += 3.0f;
+        direction.y += 1.0f;
 
     if (IsKeyDown(leftKey))
-        player->position.x -= 3.0f;
+        direction.x -= 1.0f;
 
     if (IsKeyDown(rightKey))
-        player->position.x += 3.0f;
+        direction.x += 1.0f;
+
+    if (Vector2Length(direction) > 0.0f)
+    {
+        direction = Vector2Normalize(direction);
+        player->position.x += direction.x * 3.0f;
+        player->position.y += direction.y * 3.0f;
+    }
 }
 
 void playerAttack(Player *player, int attackKey)
