@@ -21,27 +21,20 @@ int main(void)
     const int screenWidth = 800;
     const int screenHeight = 440;
 
-    InitWindow(screenWidth, screenHeight, "split screen");
+    InitWindow(screenWidth, screenHeight, "juego");
+    InitAudioDevice();
 
-    Player player1 = {.position = {(screenWidth / 4) - 100, screenHeight / 2}, .color = RED};
-    Player player2 = {.position = {(screenWidth / 4) + 100, screenHeight / 2}, .color = BLUE};
+    Player player = {.position = {(screenWidth / 2), screenHeight / 2}, .color = BLUE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
 
-    Camera2D camera1 = {0};
-    camera1.target = (Vector2){player1.position.x, player1.position.y};
-    camera1.offset = (Vector2){200.0f, 200.0f};
-    camera1.zoom = 1.0f;
+    Camera2D camera = {0};
+    camera.target = (Vector2){player.position.x, player.position.y};
+    camera.offset = (Vector2){(screenWidth / 2) - (PLAYER_SIZE / 2), (screenHeight / 2) - (PLAYER_SIZE / 2)};
+    camera.zoom = 1.0f;
 
-    Camera2D camera2 = {0};
-    camera2.target = (Vector2){player2.position.x, player2.position.y};
-    camera2.offset = (Vector2){200.0f, 200.0f};
-    camera2.zoom = 1.0f;
+    Sound fxHurt = LoadSound("resources/hurt.wav");
 
-    // Crea dos texturas para dibujar la escena en split screen
-    RenderTexture screenCamera1 = LoadRenderTexture(screenWidth / 2, screenHeight);
-    RenderTexture screenCamera2 = LoadRenderTexture(screenWidth / 2, screenHeight);
-
-    // Rectangulo tamaño mitad de la pantalla para dibujar las texturas de las camaras
-    Rectangle splitScreenRect = {0.0f, 0.0f, (float)screenCamera1.texture.width, (float)-screenCamera1.texture.height};
+    // Textura para camara
+    RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
@@ -53,69 +46,37 @@ int main(void)
         //----------------------------------------------------------------------------------
 
         // Movimiento del jugador
-        movePlayer(&player1, KEY_W, KEY_S, KEY_A, KEY_D);
-        movePlayer(&player2, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT);
-
-        camera1.target = (Vector2){player1.position.x, player1.position.y};
-        camera2.target = (Vector2){player2.position.x, player2.position.y};
-        //----------------------------------------------------------------------------------
+        //-----------------------------------------
+        actPlayer(&player);
+        camera.target = (Vector2){player.position.x, player.position.y};
 
         // Draw
         //----------------------------------------------------------------------------------
-        // Escena Camara 1
-        //-----------------------------------------
-        BeginTextureMode(screenCamera1);
+        BeginTextureMode(screenCam);
         {
             ClearBackground(RAYWHITE);
 
-            BeginMode2D(camera1);
+            BeginMode2D(camera);
             {
                 PaintGrid((Grid){PLAYER_SIZE, screenWidth, screenHeight, LIGHTGRAY});
 
-                DrawRectangleRec((Rectangle){player1.position.x, player1.position.y, PLAYER_SIZE, PLAYER_SIZE}, player1.color);
-                DrawRectangleRec((Rectangle){player2.position.x, player2.position.y, PLAYER_SIZE, PLAYER_SIZE}, player2.color);
+                DrawRectangleRec((Rectangle){player.position.x, player.position.y, PLAYER_SIZE, PLAYER_SIZE}, player.color);
             }
             EndMode2D();
 
             // UI drawing
-            DrawRectangle(0, 0, GetScreenWidth() / 2, 30, Fade(RAYWHITE, 0.6f));
-            DrawText("PLAYER1: W/S/A/D", 10, 10, 10, MAROON);
+            DrawRectangle(0, 0, screenWidth, 30, Fade(RAYWHITE, 0.6f));
+            DrawText("MOVE: W/A/S/D", 10, 10, 10, MAROON);
         }
         EndTextureMode();
         //-----------------------------------------
 
-        // Escena Camara 2
-        //-----------------------------------------
-        BeginTextureMode(screenCamera2);
-        {
-            ClearBackground(RAYWHITE);
-
-            BeginMode2D(camera2);
-            {
-                PaintGrid((Grid){PLAYER_SIZE, screenWidth, screenHeight, GRAY});
-
-                DrawRectangleRec((Rectangle){player1.position.x, player1.position.y, PLAYER_SIZE, PLAYER_SIZE}, player1.color);
-                DrawRectangleRec((Rectangle){player2.position.x, player2.position.y, PLAYER_SIZE, PLAYER_SIZE}, player2.color);
-            }
-            EndMode2D();
-
-            // UI drawing
-            DrawRectangle(0, 0, GetScreenWidth() / 2, 30, Fade(RAYWHITE, 0.6f));
-            DrawText("PLAYER2: UP/DOWN/LEFT/RIGHT", 10, 10, 10, DARKBLUE);
-        }
-        EndTextureMode();
-        //-----------------------------------------
-
-        // Pinta ambas vistas para renderizar lado a lado
-        //----------------------------------------------------------------------------------
+        // Renderizar camara
         BeginDrawing();
 
         ClearBackground(BLACK);
 
-        DrawTextureRec(screenCamera1.texture, splitScreenRect, (Vector2){0, 0}, WHITE);
-        DrawTextureRec(screenCamera2.texture, splitScreenRect, (Vector2){screenWidth / 2.0f, 0}, WHITE);
-
-        DrawRectangle(GetScreenWidth() / 2 - 2, 0, 4, GetScreenHeight(), LIGHTGRAY);
+        DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
 
         DrawFPS(GetScreenWidth() - 95, 10);
         EndDrawing();
@@ -123,9 +84,9 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    UnloadRenderTexture(screenCamera1);
-    UnloadRenderTexture(screenCamera2);
+    UnloadRenderTexture(screenCam);
 
+    CloseAudioDevice();
     CloseWindow();
     //--------------------------------------------------------------------------------------
 
