@@ -13,6 +13,7 @@
     "files.associations": {
         "*.excalidraw": "json",
         "*.excalidrawlib": "json",
-        "raylib-tmx.h": "c"
+        "raylib-tmx.h": "c",
+        "graphics.h": "c"
     }
 }

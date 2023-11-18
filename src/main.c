@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "./headers/player.h"
 #include "./headers/grid.h"
+#include "./headers/graphics.h"
 
 //----------------------------------------------------------------------------------
 // Variables Locales (al módulo)
@@ -19,9 +20,13 @@ int main(void)
     // Initialization
     //--------------------------------------------------------------------------------------
     int screenWidth = 800;
-    int screenHeight = 440;
+    int screenHeight = 800;
+
+    Rectangle window = {0, 0, screenWidth, screenHeight};
 
     InitWindow(screenWidth, screenHeight, "juego");
+    GraphicsData tileset;
+    InitGraphics(&tileset);
 
     Player player = {.position = {(screenWidth / 2), screenHeight / 2}, .color = BLUE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
 
@@ -56,6 +61,7 @@ int main(void)
 
             BeginMode2D(camera);
             {
+                DrawTexturePro(tileset.texture, tileset.size, window, (Vector2){0, 0}, 0, WHITE);
                 PaintGrid((Grid){PLAYER_SIZE, screenWidth, screenHeight, LIGHTGRAY});
 
                 DrawRectangleRec((Rectangle){player.position.x, player.position.y, PLAYER_SIZE, PLAYER_SIZE}, player.color);
@@ -84,6 +90,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadRenderTexture(screenCam);
 
+    UnloadGraphics(&tileset);
     CloseWindow();
     //--------------------------------------------------------------------------------------
 
