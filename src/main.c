@@ -22,7 +22,6 @@ int main(void)
     int screenHeight = 440;
 
     InitWindow(screenWidth, screenHeight, "juego");
-    InitAudioDevice();
 
     Player player = {.position = {(screenWidth / 2), screenHeight / 2}, .color = BLUE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
 
@@ -30,8 +29,6 @@ int main(void)
     camera.target = (Vector2){player.position.x, player.position.y};
     camera.offset = (Vector2){(screenWidth / 2) - (PLAYER_SIZE / 2), (screenHeight / 2) - (PLAYER_SIZE / 2)};
     camera.zoom = 1.0f;
-
-    Sound fxHurt = LoadSound("resources/hurt.wav");
 
     // Textura para camara
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
@@ -48,6 +45,7 @@ int main(void)
         // Movimiento del jugador
         //-----------------------------------------
         actPlayer(&player);
+
         camera.target = (Vector2){player.position.x, player.position.y};
 
         // Draw
@@ -86,7 +84,6 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadRenderTexture(screenCam);
 
-    CloseAudioDevice();
     CloseWindow();
     //--------------------------------------------------------------------------------------
 
