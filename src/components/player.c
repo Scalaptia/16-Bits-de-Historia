@@ -9,6 +9,7 @@ void actPlayer(Player *player)
 void movePlayer(Player *player, int upKey, int downKey, int leftKey, int rightKey)
 {
     Vector2 direction = {0.0f, 0.0f};
+    player->speed = 300.0f;
 
     if (IsKeyDown(upKey))
         direction.y -= 1.0f;
@@ -25,8 +26,8 @@ void movePlayer(Player *player, int upKey, int downKey, int leftKey, int rightKe
     if (Vector2Length(direction) > 0.0f)
     {
         direction = Vector2Normalize(direction);
-        player->position.x += direction.x * 3.0f;
-        player->position.y += direction.y * 3.0f;
+        player->position.x += direction.x * player->speed * GetFrameTime();
+        player->position.y += direction.y * player->speed * GetFrameTime();
     }
 }
 

@@ -28,10 +28,11 @@ int main(void)
     //--------------------------------------------------------------------------------------
     Rectangle window = {0, 0, screenWidth, screenHeight};
     GraphicsData tileset;
+    Sprite charSprite;
 
     InitWindow(screenWidth, screenHeight, "juego");
+    InitSprite(&charSprite);
     InitGraphics(&tileset);
-    InitCharacter();
 
     Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
 
@@ -42,7 +43,7 @@ int main(void)
 
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
-    SetTargetFPS(120);
+    SetTargetFPS(144);
     //--------------------------------------------------------------------------------------
 
     // Main game loop
@@ -55,14 +56,14 @@ int main(void)
             debug = !debug;
         }
 
-        if (IsKeyDown(KEY_PAGE_UP) && camera.zoom <= 1.8f)
+        if (IsKeyPressed(KEY_PAGE_UP) && camera.zoom <= 1.8f)
         {
-            camera.zoom += 0.01f;
+            camera.zoom += 0.05f;
         }
 
-        if (IsKeyDown(KEY_PAGE_DOWN) && camera.zoom >= 0.4f)
+        if (IsKeyPressed(KEY_PAGE_DOWN) && camera.zoom >= 0.4f)
         {
-            camera.zoom -= 0.01f;
+            camera.zoom -= 0.05f;
         }
 
         if (IsKeyPressed(KEY_F5))
@@ -92,7 +93,7 @@ int main(void)
                     PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
                 }
 
-                DrawCharacter((Rectangle){player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, player.color);
+                UpdateSprite(&charSprite, player.position, SCALE, player.color);
             }
             EndMode2D();
         }
@@ -114,7 +115,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadRenderTexture(screenCam);
 
-    UnloadCharacter();
+    UnloadSprite(&charSprite);
     UnloadGraphics(&tileset);
     CloseWindow();
     //--------------------------------------------------------------------------------------
