@@ -9,7 +9,7 @@
         "**/*.exe": true
     },
     "C_Cpp.default.compilerPath": "C:/raylib/w64devkit/bin/gcc.exe",
-    "cmake.sourceDirectory": "C:/Users/Fernando/Documents/GitHub/proyecto-juego/CMakeLists.txt",
+    "cmake.sourceDirectory": "C:/GitHub/proyecto-juego/CMakeLists.txt",
     "files.associations": {
         "*.excalidraw": "json",
         "*.excalidrawlib": "json",
