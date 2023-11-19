@@ -5,6 +5,7 @@
 #include "./headers/player.h"
 #include "./headers/grid.h"
 #include "./headers/graphics.h"
+#include "./headers/animation.h"
 
 //----------------------------------------------------------------------------------
 // Variables Locales (al módulo)
@@ -30,8 +31,9 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "juego");
     InitGraphics(&tileset);
+    InitCharacter();
 
-    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = BLUE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
+    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
 
     Camera2D camera = {0};
     camera.target = (Vector2){player.position.x, player.position.y};
@@ -63,6 +65,11 @@ int main(void)
             camera.zoom -= 0.01f;
         }
 
+        if (IsKeyPressed(KEY_F5))
+        {
+            TakeScreenshot("screenshot.png");
+        }
+
         // Movimiento del jugador
         //-----------------------------------------
         actPlayer(&player);
@@ -85,7 +92,7 @@ int main(void)
                     PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
                 }
 
-                DrawRectangleRec((Rectangle){player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, player.color);
+                DrawCharacter((Rectangle){player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, player.color);
             }
             EndMode2D();
         }
@@ -107,6 +114,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
     UnloadRenderTexture(screenCam);
 
+    UnloadCharacter();
     UnloadGraphics(&tileset);
     CloseWindow();
     //--------------------------------------------------------------------------------------

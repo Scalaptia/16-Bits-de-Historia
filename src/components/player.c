@@ -38,6 +38,6 @@ void playerAttack(Player *player, int attackKey)
     }
     else
     {
-        player->color = BLUE;
+        player->color = WHITE;
     }
 }
