@@ -14,6 +14,7 @@
         "*.excalidraw": "json",
         "*.excalidrawlib": "json",
         "raylib-tmx.h": "c",
-        "graphics.h": "c"
+        "graphics.h": "c",
+        "raylib.h": "c"
     }
 }

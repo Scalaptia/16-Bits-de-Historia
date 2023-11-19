@@ -9,7 +9,9 @@
 //----------------------------------------------------------------------------------
 // Variables Locales (al módulo)
 //----------------------------------------------------------------------------------
-#define PLAYER_SIZE 40
+#define TILE_SIZE 16
+#define SCALE 4.0f
+#define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
 //----------------------------------------------------------------------------------
 // Funciones Locales
@@ -17,25 +19,24 @@
 
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
     int screenWidth = 800;
     int screenHeight = 800;
 
+    // Config
+    //--------------------------------------------------------------------------------------
     Rectangle window = {0, 0, screenWidth, screenHeight};
+    GraphicsData tileset;
 
     InitWindow(screenWidth, screenHeight, "juego");
-    GraphicsData tileset;
     InitGraphics(&tileset);
 
-    Player player = {.position = {(screenWidth / 2), screenHeight / 2}, .color = BLUE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
+    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = BLUE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
 
     Camera2D camera = {0};
     camera.target = (Vector2){player.position.x, player.position.y};
-    camera.offset = (Vector2){(screenWidth / 2) - (PLAYER_SIZE / 2), (screenHeight / 2) - (PLAYER_SIZE / 2)};
+    camera.offset = (Vector2){(screenWidth / 2) - (TILE_SIZE / 2), (screenHeight / 2) - (TILE_SIZE / 2)};
     camera.zoom = 1.0f;
 
-    // Textura para camara
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     SetTargetFPS(60);
@@ -57,20 +58,17 @@ int main(void)
         //----------------------------------------------------------------------------------
         BeginTextureMode(screenCam);
         {
-            ClearBackground(RAYWHITE);
+            ClearBackground(BLACK);
 
             BeginMode2D(camera);
             {
-                DrawTexturePro(tileset.texture, tileset.size, window, (Vector2){0, 0}, 0, WHITE);
-                PaintGrid((Grid){PLAYER_SIZE, screenWidth, screenHeight, LIGHTGRAY});
+                DrawElement(&tileset, "ROOM", (Vector2){0, 0}, SCALE);
+                DrawElement(&tileset, "DOOR_LEFT_OPEN", DOWN, SCALE);
+                PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
 
-                DrawRectangleRec((Rectangle){player.position.x, player.position.y, PLAYER_SIZE, PLAYER_SIZE}, player.color);
+                DrawRectangleRec((Rectangle){player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, player.color);
             }
             EndMode2D();
-
-            // UI drawing
-            DrawRectangle(0, 0, screenWidth, 30, Fade(RAYWHITE, 0.6f));
-            DrawText("MOVE: W/A/S/D", 10, 10, 10, MAROON);
         }
         EndTextureMode();
         //-----------------------------------------
