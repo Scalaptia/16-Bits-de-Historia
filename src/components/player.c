@@ -1,26 +1,32 @@
 #include "../headers/player.h"
 
+Controls controls = {.UP_KEY = KEY_W,
+                     .DOWN_KEY = KEY_S,
+                     .LEFT_KEY = KEY_A,
+                     .RIGHT_KEY = KEY_D,
+                     .ATTACK_KEY = KEY_SPACE};
+
 void actPlayer(Player *player)
 {
-    movePlayer(player, player->controls.upKey, player->controls.downKey, player->controls.leftKey, player->controls.rightKey);
-    playerAttack(player, player->controls.attackKey);
+    movePlayer(player);
+    playerAttack(player);
 }
 
-void movePlayer(Player *player, int upKey, int downKey, int leftKey, int rightKey)
+void movePlayer(Player *player)
 {
     Vector2 direction = {0.0f, 0.0f};
     player->speed = 300.0f;
 
-    if (IsKeyDown(upKey))
+    if (IsKeyDown(controls.UP_KEY))
         direction.y -= 1.0f;
 
-    if (IsKeyDown(downKey))
+    if (IsKeyDown(controls.DOWN_KEY))
         direction.y += 1.0f;
 
-    if (IsKeyDown(leftKey))
+    if (IsKeyDown(controls.LEFT_KEY))
         direction.x -= 1.0f;
 
-    if (IsKeyDown(rightKey))
+    if (IsKeyDown(controls.RIGHT_KEY))
         direction.x += 1.0f;
 
     if (Vector2Length(direction) > 0.0f)
@@ -31,9 +37,9 @@ void movePlayer(Player *player, int upKey, int downKey, int leftKey, int rightKe
     }
 }
 
-void playerAttack(Player *player, int attackKey)
+void playerAttack(Player *player)
 {
-    if (IsKeyDown(attackKey))
+    if (IsKeyDown(controls.ATTACK_KEY))
     {
         player->color = RED;
     }

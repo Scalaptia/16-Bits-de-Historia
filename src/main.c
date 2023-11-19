@@ -6,6 +6,7 @@
 #include "./headers/grid.h"
 #include "./headers/graphics.h"
 #include "./headers/animation.h"
+#include "./headers/keybinds.h"
 
 //----------------------------------------------------------------------------------
 // Variables Locales (al módulo)
@@ -34,7 +35,7 @@ int main(void)
     InitSprite(&charSprite);
     InitGraphics(&tileset);
 
-    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
+    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE};
 
     Camera2D camera = {0};
     camera.target = (Vector2){player.position.x, player.position.y};
@@ -51,28 +52,7 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyPressed(KEY_F1))
-        {
-            debug = !debug;
-        }
-
-        if (IsKeyPressed(KEY_PAGE_UP) && camera.zoom <= 1.8f)
-        {
-            camera.zoom += 0.05f;
-        }
-
-        if (IsKeyPressed(KEY_PAGE_DOWN) && camera.zoom >= 0.4f)
-        {
-            camera.zoom -= 0.05f;
-        }
-
-        if (IsKeyPressed(KEY_F5))
-        {
-            TakeScreenshot("screenshot.png");
-        }
-
-        // Movimiento del jugador
-        //-----------------------------------------
+        Keybinds(&debug, &camera);
         actPlayer(&player);
         camera.target = (Vector2){player.position.x, player.position.y};
 
@@ -86,7 +66,6 @@ int main(void)
             {
                 DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
                 DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, 0}, SCALE);
-                DrawRoom(&tileset, (Vector2){TILE_SIZE * 12, 0}, SCALE);
 
                 if (debug)
                 {
@@ -100,14 +79,15 @@ int main(void)
         EndTextureMode();
         //-----------------------------------------
 
-        // Renderizar camara
         BeginDrawing();
+        {
+            ClearBackground(BLACK);
 
-        ClearBackground(BLACK);
+            // Pintar pantalla (textura)
+            DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
 
-        DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
-
-        DrawFPS(GetScreenWidth() - 95, 10);
+            DrawFPS(GetScreenWidth() - 95, 10);
+        }
         EndDrawing();
     }
 
