@@ -10,7 +10,7 @@
 // Variables Locales (al módulo)
 //----------------------------------------------------------------------------------
 #define TILE_SIZE 16
-#define SCALE 4.0f
+#define SCALE 5.0f
 #define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
 //----------------------------------------------------------------------------------
@@ -21,6 +21,7 @@ int main(void)
 {
     int screenWidth = 800;
     int screenHeight = 800;
+    bool debug = false;
 
     // Config
     //--------------------------------------------------------------------------------------
@@ -39,7 +40,7 @@ int main(void)
 
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
-    SetTargetFPS(60);
+    SetTargetFPS(120);
     //--------------------------------------------------------------------------------------
 
     // Main game loop
@@ -47,11 +48,14 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
+        if (IsKeyPressed(KEY_F1))
+        {
+            debug = !debug;
+        }
 
         // Movimiento del jugador
         //-----------------------------------------
         actPlayer(&player);
-
         camera.target = (Vector2){player.position.x, player.position.y};
 
         // Draw
@@ -62,9 +66,14 @@ int main(void)
 
             BeginMode2D(camera);
             {
-                DrawElement(&tileset, "ROOM", (Vector2){0, 0}, SCALE);
-                DrawElement(&tileset, "DOOR_LEFT_OPEN", DOWN, SCALE);
-                PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
+                DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
+                DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, 0}, SCALE);
+                DrawRoom(&tileset, (Vector2){TILE_SIZE * 12, 0}, SCALE);
+
+                if (debug)
+                {
+                    PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
+                }
 
                 DrawRectangleRec((Rectangle){player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, player.color);
             }
