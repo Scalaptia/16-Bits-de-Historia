@@ -6,6 +6,23 @@ Controls controls = {.UP_KEY = KEY_W,
                      .RIGHT_KEY = KEY_D,
                      .ATTACK_KEY = KEY_SPACE};
 
+Player player;
+Camera2D camera;
+
+void InitPlayer(Sprite *sprite, Rectangle screen, int tileSize, int relTileSize)
+{
+    InitSprite(sprite);
+
+    player.position.x = relTileSize * 2;
+    player.position.y = relTileSize * 2;
+    player.color = WHITE;
+    player.direction = 1;
+
+    camera.target = (Vector2){player.position.x, player.position.y};
+    camera.offset = (Vector2){(screen.width / 2) - (tileSize * 2), (screen.height / 2) - (tileSize * 2)};
+    camera.zoom = 1.0f;
+}
+
 void actPlayer(Player *player, Music *sfx)
 {
     movePlayer(player, sfx);

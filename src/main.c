@@ -14,6 +14,7 @@
 // Variables Locales (al módulo)
 //----------------------------------------------------------------------------------
 #define TILE_SIZE 16
+#define SCALE 5
 #define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
 //----------------------------------------------------------------------------------
@@ -25,44 +26,32 @@ int main(void)
     //------------------------------------------------
     int screenWidth = 1920;
     int screenHeight = 1080;
-    float SCALE = 5.0f;
 
-    //------------------------------------------------
     bool debug = false;
     bool pause = false;
     bool exitWindow = false;
 
-    //------------------------------------------------
-
-    // Config
-    //--------------------------------------------------------------------------------------
+    // Config -----------------------------------------
     Rectangle window = {0, 0, screenWidth, screenHeight};
 
     GraphicsData tileset;
 
     InitWindow(screenWidth, screenHeight, "juego");
 
-    InitSprite(&charSprite);
-    InitGraphics(&tileset);
+    InitPlayer(&charSprite, window, TILE_SIZE, REL_TILE_SIZE); // Inicializa sprite, player y cámara
+    InitGraphics(&tileset);                                    // Inicializa tileset (mapa)
+
     InitBackground();
-    InitMenuButtons((Rectangle){0, 0, screenWidth, screenHeight});
+    InitMenuButtons(window);
 
     InitAudioDevice();
     InitSounds();
 
-    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .direction = 1};
-
-    //------------------------------------------------
-    Camera2D camera = {0};
-    camera.target = (Vector2){player.position.x, player.position.y};
-    camera.offset = (Vector2){(screenWidth / 2) - (TILE_SIZE * 2), (screenHeight / 2) - (TILE_SIZE * 2)};
-    camera.zoom = 1.0f;
-
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     //------------------------
-
     SetTargetFPS(144);
+
     // Main game loop
     while (!exitWindow)
     {
@@ -107,7 +96,9 @@ int main(void)
                 {
                     ClearBackground(BLACK);
                     DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
+                    DrawRoom(&tileset, (Vector2){0, TILE_SIZE * 5}, SCALE);
                     DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, 0}, SCALE);
+                    DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, TILE_SIZE * 5}, SCALE);
 
                     if (debug)
                     {
@@ -126,7 +117,6 @@ int main(void)
             {
                 // Pintar pantalla (textura)
                 DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
-
                 DrawFPS(GetScreenWidth() - 95, 10);
             }
             EndDrawing();
