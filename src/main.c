@@ -35,7 +35,7 @@ int main(void)
     InitSprite(&charSprite);
     InitGraphics(&tileset);
 
-    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE};
+    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .direction = 1};
 
     Camera2D camera = {0};
     camera.target = (Vector2){player.position.x, player.position.y};
@@ -44,14 +44,14 @@ int main(void)
 
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
-    InitAudioDevice();              // Initialize audio device
+    InitAudioDevice(); // Initialize audio device
 
     Music music = LoadMusicStream(ASSETS_PATH "Music/meow.mp3");
 
     PlayMusicStream(music);
 
-    float timePlayed = 0.0f;        // Time played normalized [0.0f..1.0f]
-    bool pause = false;             // Music playing paused
+    float timePlayed = 0.0f; // Time played normalized [0.0f..1.0f]
+    bool pause = false;      // Music playing paused
 
     SetTargetFPS(144);
     //--------------------------------------------------------------------------------------
@@ -61,13 +61,13 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        //Musica--
+        // Musica--
         UpdateMusicStream(music);
 
-        if(IsKeyPressed(KEY_P))
+        if (IsKeyPressed(KEY_P))
         {
-            pause=!pause;
-            if(pause)
+            pause = !pause;
+            if (pause)
             {
                 PauseMusicStream(music);
             }
@@ -77,9 +77,10 @@ int main(void)
             }
         }
 
-        timePlayed = GetMusicTimePlayed(music)/GetMusicTimeLength(music);
+        timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music);
 
-        if (timePlayed > 1.0f) timePlayed = 1.0f;
+        if (timePlayed > 1.0f)
+            timePlayed = 1.0f;
         //----------------
 
         Keybinds(&debug, &camera);
@@ -102,7 +103,8 @@ int main(void)
                     PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
                 }
 
-                UpdateSprite(&charSprite, player.position, SCALE, player.color);
+                // DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
+                UpdateSprite(&charSprite, player.position, SCALE, player.color, player.direction);
             }
             EndMode2D();
         }
@@ -124,7 +126,7 @@ int main(void)
     // De-Initialization
     //--------------------------------------------------------------------------------------
     UnloadRenderTexture(screenCam);
-    
+
     UnloadMusicStream(music);
     CloseAudioDevice();
 

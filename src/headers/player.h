@@ -10,6 +10,7 @@ typedef struct Player
     Vector2 position;
     Color color;
     float speed;
+    int direction;
 } Player;
 
 void actPlayer(Player *player);

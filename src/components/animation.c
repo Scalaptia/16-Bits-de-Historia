@@ -20,7 +20,7 @@ void InitSprite(Sprite *sprite)
     sprite->textures[3] = LoadTextureFromImage(sprite->frames[3]);
 }
 
-void UpdateSprite(Sprite *sprite, Vector2 position, float scale, Color color)
+void UpdateSprite(Sprite *sprite, Vector2 position, float scale, Color color, int direction)
 {
     sprite->currentTime += GetFrameTime();
 
@@ -35,7 +35,13 @@ void UpdateSprite(Sprite *sprite, Vector2 position, float scale, Color color)
         }
     }
 
-    DrawTexturePro(sprite->textures[sprite->frameCurrent], (Rectangle){0, 0, 16, 16}, (Rectangle){position.x, position.y, 16 * scale, 16 * scale}, (Vector2){0, 0}, 0, color);
+    float width = 16 * scale;
+    float height = 16 * scale;
+    Vector2 origin = {0, 0};
+
+    float sourceWidth = direction < 0 ? -16.0f : 16.0f;
+
+    DrawTexturePro(sprite->textures[sprite->frameCurrent], (Rectangle){0, 0, sourceWidth, 16}, (Rectangle){position.x, position.y, width, height}, origin, 0, color);
 }
 
 void UnloadSprite(Sprite *sprite)

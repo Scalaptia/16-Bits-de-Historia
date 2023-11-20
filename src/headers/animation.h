@@ -17,7 +17,7 @@ typedef struct Sprite
 } Sprite;
 
 void InitSprite(Sprite *sprite);
-void UpdateSprite(Sprite *sprite, Vector2 position, float scale, Color color);
+void UpdateSprite(Sprite *sprite, Vector2 position, float scale, Color color, int direction);
 void UnloadSprite(Sprite *sprite);
 
 #endif

@@ -24,10 +24,16 @@ void movePlayer(Player *player)
         direction.y += 1.0f;
 
     if (IsKeyDown(controls.LEFT_KEY))
+    {
         direction.x -= 1.0f;
+        player->direction = -1;
+    }
 
     if (IsKeyDown(controls.RIGHT_KEY))
+    {
         direction.x += 1.0f;
+        player->direction = 1;
+    }
 
     if (Vector2Length(direction) > 0.0f)
     {
