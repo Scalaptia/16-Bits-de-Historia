@@ -1,21 +1,35 @@
 #include "../headers/sound.h"
 
-Music music;
+Music GameMusic;
 float timePlayed;
 Music MenuMusic;
-float timePlayedMenu;
 Sound fxButton;
 Music fxPasosGrava;
 
-void InitSound()
+void InitSounds()
 {
-    music = LoadMusicStream(ASSETS_PATH "Music/meow.mp3");
-    timePlayed = 0.0f; // Time played normalized [0.0f..1.0f]
-
+    GameMusic = LoadMusicStream(ASSETS_PATH "Music/meow.mp3");
     MenuMusic = LoadMusicStream(ASSETS_PATH "Music/gerudo.mp3");
-    timePlayedMenu = 0.0f; // Time played normalized [0.0f..1.0f]
 
     fxButton = LoadSound(ASSETS_PATH "SoundEffects/Mine_button.mp3");
-
     fxPasosGrava = LoadMusicStream(ASSETS_PATH "SoundEffects/Pasos_Grava/MP1.mp3");
+}
+
+void PlayMusic(Music music)
+{
+    UpdateMusicStream(music);
+    PlayMusicStream(music);
+
+    timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music);
+
+    if (timePlayed > 1.0f)
+        timePlayed = 1.0f;
+}
+
+void UnloadSounds()
+{
+    UnloadMusicStream(GameMusic);
+    UnloadMusicStream(MenuMusic);
+    UnloadSound(fxButton);
+    UnloadMusicStream(fxPasosGrava);
 }

@@ -48,7 +48,7 @@ int main(void)
     InitMenuButtons((Rectangle){0, 0, screenWidth, screenHeight});
 
     InitAudioDevice();
-    InitSound();
+    InitSounds();
 
     Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .direction = 1};
 
@@ -75,16 +75,7 @@ int main(void)
         switch (menu.state)
         {
         case MENU:
-            // Musica de menu ----------------------------------
-            UpdateMusicStream(MenuMusic);
-
-            PlayMusicStream(MenuMusic);
-
-            timePlayedMenu = GetMusicTimePlayed(MenuMusic) / GetMusicTimeLength(MenuMusic);
-            if (timePlayedMenu > 1.0f)
-                timePlayedMenu = 1.0f;
-
-            StopMusicStream(music); // Detiene la musica de la escena 1
+            PlayMusic(MenuMusic);
 
             //-------------------------------------------------
             CheckMenuButtons(fxButton, MenuMusic);
@@ -100,18 +91,10 @@ int main(void)
             break;
 
         case GAME:
-            // Musica
-            //-------------------------------------------------------------
-            UpdateMusicStream(music);
-            PlayMusicStream(music);
-
-            timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music);
-
-            if (timePlayed > 1.0f)
-                timePlayed = 1.0f;
+            PlayMusic(GameMusic);
             //-----------------------------------------------------------
 
-            Keybinds(&debug, &pause, &camera, &music, &fxButton);
+            Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
             actPlayer(&player, &fxPasosGrava);
 
             camera.target = (Vector2){player.position.x, player.position.y};
@@ -151,6 +134,7 @@ int main(void)
             break;
 
         case OPTIONS:
+            PlayMusic(MenuMusic);
             menu.state = MENU;
             break;
 
@@ -179,15 +163,15 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    UnloadRenderTexture(screenCam);
 
-    UnloadMusicStream(music);
-    UnloadMusicStream(MenuMusic);
+    UnloadSounds();
     CloseAudioDevice();
 
-    UnloadSprite(&charSprite);
+    UnloadRenderTexture(screenCam);
     UnloadBackground();
+    UnloadSprite(&charSprite);
     UnloadGraphics(&tileset);
+
     CloseWindow();
     //--------------------------------------------------------------------------------------
 

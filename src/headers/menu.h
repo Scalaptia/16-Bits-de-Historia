@@ -28,10 +28,10 @@ typedef struct Menu
 
 void InitBackground();
 void InitMenuButtons(Rectangle screen);
+void CheckMenuButtons(Sound fxButton, Music MenuMusic);
 void UpdateBackground(Rectangle screen);
 void DrawMenuUI();
 void UnloadBackground();
-void CheckMenuButtons(Sound fxButton, Music MenuMusic);
 
 extern Sprite menuBackground;
 

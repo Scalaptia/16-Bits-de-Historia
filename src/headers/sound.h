@@ -3,10 +3,12 @@
 
 #include "raylib.h"
 
-void InitSound();
+void InitSounds();
+void PlayMusic(Music music);
+void UnloadSounds();
 
 // Musica 1----------------
-extern Music music;
+extern Music GameMusic;
 extern float timePlayed;
 
 // Musica 2-----------------
