@@ -32,39 +32,23 @@ int main(void)
     bool pause = false;
     bool exitWindow = false;
 
-    Color selectedColor = {0, 0, 0, 255};
-    Color rectangleColor = {0, 0, 0, 128};
-
-    MenuButton start = {.text = "Start Game", .rect = {screenWidth / 2 - 100, screenHeight / 2 - 50, 200, 50}, .color = WHITE};
-    MenuButton options = {.text = "Options", .rect = {screenWidth / 2 - 100, screenHeight / 2, 200, 50}, .color = WHITE};
-    MenuButton exit = {.text = "Exit", .rect = {screenWidth / 2 - 100, screenHeight / 2 + 50, 200, 50}, .color = WHITE};
-
-    Menu menu = {.state = MENU, .prevState = MENU};
-
     //------------------------------------------------
 
     // Config
     //--------------------------------------------------------------------------------------
     Rectangle window = {0, 0, screenWidth, screenHeight};
-    Vector2 mousePoint = {0.0f, 0.0f};
 
     GraphicsData tileset;
 
     InitWindow(screenWidth, screenHeight, "juego");
 
     InitSprite(&charSprite);
+    InitGraphics(&tileset);
     InitBackground();
+    InitMenuButtons((Rectangle){0, 0, screenWidth, screenHeight});
 
     InitAudioDevice();
     InitSound();
-
-    // Calcular scale
-    char path[100];
-    sprintf(path, ASSETS_PATH "background/bg1.png");
-    Image temp = LoadImage(path);
-    UnloadImage(temp);
-
-    InitGraphics(&tileset);
 
     Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .direction = 1};
 
@@ -101,66 +85,15 @@ int main(void)
                 timePlayedMenu = 1.0f;
 
             StopMusicStream(music); // Detiene la musica de la escena 1
+
             //-------------------------------------------------
-
-            mousePoint = GetMousePosition();
-
-            start.color = rectangleColor;
-            options.color = rectangleColor;
-            exit.color = rectangleColor;
-
-            // Check mouse collision with buttons
-            if (CheckCollisionPointRec(mousePoint, start.rect))
-            {
-                start.color = selectedColor;
-
-                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                {
-                    PlaySound(fxButton);
-                    StopMusicStream(MenuMusic);
-                    menu.state = GAME;
-                }
-            }
-
-            if (CheckCollisionPointRec(mousePoint, options.rect))
-            {
-                options.color = selectedColor;
-
-                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                {
-                    PlaySound(fxButton);
-                    StopMusicStream(MenuMusic);
-                    menu.state = OPTIONS;
-                }
-            }
-
-            if (CheckCollisionPointRec(mousePoint, exit.rect))
-            {
-                exit.color = selectedColor;
-
-                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                {
-                    PlaySound(fxButton);
-                    StopMusicStream(MenuMusic);
-                    menu.prevState = menu.state;
-                    menu.state = EXIT;
-                }
-            }
+            CheckMenuButtons(fxButton, MenuMusic);
 
             BeginDrawing();
             {
                 ClearBackground(WHITE);
-                UpdateBackground((Vector2){screenWidth, screenHeight});
-
-                // Draw buttons
-                DrawRectangleRec(start.rect, start.color);
-                DrawRectangleRec(options.rect, options.color);
-                DrawRectangleRec(exit.rect, exit.color);
-
-                // Draw text
-                DrawText(start.text, start.rect.x + 10, start.rect.y, 30, WHITE);
-                DrawText(options.text, options.rect.x + 10, options.rect.y, 30, WHITE);
-                DrawText(exit.text, exit.rect.x + 10, exit.rect.y + 10, 30, WHITE);
+                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight});
+                DrawMenuUI();
             }
             EndDrawing();
 

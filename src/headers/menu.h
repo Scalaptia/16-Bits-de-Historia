@@ -27,9 +27,21 @@ typedef struct Menu
 } Menu;
 
 void InitBackground();
-void UpdateBackground(Vector2 screen);
+void InitMenuButtons(Rectangle screen);
+void UpdateBackground(Rectangle screen);
+void DrawMenuUI();
 void UnloadBackground();
+void CheckMenuButtons(Sound fxButton, Music MenuMusic);
 
 extern Sprite menuBackground;
+
+extern Color selectedColor;
+extern Color rectangleColor;
+
+extern MenuButton startButton;
+extern MenuButton optionsButton;
+extern MenuButton exitButton;
+
+extern Menu menu;
 
 #endif
