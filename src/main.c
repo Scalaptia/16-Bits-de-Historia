@@ -7,6 +7,7 @@
 #include "./headers/graphics.h"
 #include "./headers/animation.h"
 #include "./headers/keybinds.h"
+#include "./headers/menu.h"
 
 //----------------------------------------------------------------------------------
 // Variables Locales (al módulo)
@@ -20,14 +21,29 @@
 
 int main(void)
 {
+    //------------------------------------------------
     int screenWidth = 800;
     int screenHeight = 800;
     float SCALE = 5.0f;
+
+    //------------------------------------------------
     bool debug = false;
+    bool pause = false;
+    bool exitWindow = false;
+
+    MenuButton start = {.text = "Start Game", .rect = {screenWidth / 2 - 100, screenHeight / 2 - 50, 200, 50}, .color = WHITE};
+    MenuButton options = {.text = "Options", .rect = {screenWidth / 2 - 100, screenHeight / 2, 200, 50}, .color = WHITE};
+    MenuButton exit = {.text = "Exit", .rect = {screenWidth / 2 - 100, screenHeight / 2 + 50, 200, 50}, .color = WHITE};
+
+    Menu menu = {.state = MENU, .prevState = MENU};
+
+    //------------------------------------------------
 
     // Config
     //--------------------------------------------------------------------------------------
     Rectangle window = {0, 0, screenWidth, screenHeight};
+    Vector2 mousePoint = {0.0f, 0.0f};
+
     GraphicsData tileset;
     Sprite charSprite;
 
@@ -37,6 +53,7 @@ int main(void)
 
     Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .direction = 1};
 
+    //------------------------------------------------
     Camera2D camera = {0};
     camera.target = (Vector2){player.position.x, player.position.y};
     camera.offset = (Vector2){(screenWidth / 2) - (TILE_SIZE * 2), (screenHeight / 2) - (TILE_SIZE * 2)};
@@ -44,83 +61,153 @@ int main(void)
 
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
+    //------------------------------------------------
     InitAudioDevice(); // Initialize audio device
-
     Music music = LoadMusicStream(ASSETS_PATH "Music/meow.mp3");
-
     PlayMusicStream(music);
 
     float timePlayed = 0.0f; // Time played normalized [0.0f..1.0f]
-    bool pause = false;      // Music playing paused
 
-    SetTargetFPS(144);
     //--------------------------------------------------------------------------------------
 
+    SetTargetFPS(144);
     // Main game loop
-    while (!WindowShouldClose())
+    while (!exitWindow)
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        // Musica--
-        UpdateMusicStream(music);
-
-        if (IsKeyPressed(KEY_P))
+        if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
         {
-            pause = !pause;
-            if (pause)
-            {
-                PauseMusicStream(music);
-            }
-            else
-            {
-                ResumeMusicStream(music);
-            }
+            menu.prevState = menu.state;
+            menu.state = MENU;
         }
 
-        timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music);
-
-        if (timePlayed > 1.0f)
-            timePlayed = 1.0f;
-        //----------------
-
-        Keybinds(&debug, &camera);
-        actPlayer(&player);
-        camera.target = (Vector2){player.position.x, player.position.y};
-
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginTextureMode(screenCam);
+        switch (menu.state)
         {
-            ClearBackground(BLACK);
+        case MENU:
+            mousePoint = GetMousePosition();
 
-            BeginMode2D(camera);
+            start.color = WHITE;
+            options.color = WHITE;
+            exit.color = WHITE;
+
+            // Check mouse collision with buttons
+            if (CheckCollisionPointRec(mousePoint, start.rect))
             {
-                DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
-                DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, 0}, SCALE);
+                start.color = GRAY;
 
-                if (debug)
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
-                    PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
+                    menu.state = GAME;
                 }
-
-                // DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
-                UpdateSprite(&charSprite, player.position, SCALE, player.color, player.direction);
             }
-            EndMode2D();
+
+            if (CheckCollisionPointRec(mousePoint, options.rect))
+            {
+                options.color = GRAY;
+
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                {
+                    menu.state = OPTIONS;
+                }
+            }
+
+            if (CheckCollisionPointRec(mousePoint, exit.rect))
+            {
+                exit.color = GRAY;
+
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                {
+                    menu.prevState = menu.state;
+                    menu.state = EXIT;
+                }
+            }
+
+            BeginDrawing();
+            {
+                ClearBackground(BLACK);
+                // Draw buttons
+                DrawRectangleRec(start.rect, start.color);
+                DrawRectangleRec(options.rect, options.color);
+                DrawRectangleRec(exit.rect, exit.color);
+
+                // Draw text
+                DrawText(start.text, start.rect.x + 10, start.rect.y + 10, 30, BLACK);
+                DrawText(options.text, options.rect.x + 10, options.rect.y + 10, 30, BLACK);
+                DrawText(exit.text, exit.rect.x + 10, exit.rect.y + 10, 30, BLACK);
+            }
+            EndDrawing();
+
+            break;
+
+        case GAME:
+            // Musica
+            //-------------------------------------------------------------
+            UpdateMusicStream(music);
+
+            timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music);
+
+            if (timePlayed > 1.0f)
+                timePlayed = 1.0f;
+            //-----------------------------------------------------------
+
+            Keybinds(&debug, &pause, &camera, &music);
+            actPlayer(&player);
+            camera.target = (Vector2){player.position.x, player.position.y};
+
+            // Draw
+            //----------------------------------------------------------------------------------
+            BeginTextureMode(screenCam);
+            {
+                BeginMode2D(camera);
+                {
+                    ClearBackground(BLACK);
+                    DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
+                    DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, 0}, SCALE);
+
+                    if (debug)
+                    {
+                        PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
+                    }
+
+                    // DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
+                    UpdateSprite(&charSprite, player.position, SCALE, player.color, player.direction);
+                }
+                EndMode2D();
+            }
+            EndTextureMode();
+            //-----------------------------------------
+
+            BeginDrawing();
+            {
+                // Pintar pantalla (textura)
+                DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
+
+                DrawFPS(GetScreenWidth() - 95, 10);
+            }
+            EndDrawing();
+
+            break;
+
+        case OPTIONS:
+            menu.state = MENU;
+            break;
+
+        case EXIT:
+            if (IsKeyPressed(KEY_Y))
+                exitWindow = true;
+            else if (IsKeyPressed(KEY_N))
+                menu.state = menu.prevState;
+
+            BeginDrawing();
+            {
+                ClearBackground(RAYWHITE);
+
+                DrawRectangle(0, 100, screenWidth, 200, BLACK);
+                DrawText("Are you sure you want to exit program? [Y/N]", 40, 180, 30, WHITE);
+            }
+            EndDrawing();
+
+            break;
         }
-        EndTextureMode();
-        //-----------------------------------------
-
-        BeginDrawing();
-        {
-            ClearBackground(BLACK);
-
-            // Pintar pantalla (textura)
-            DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
-
-            DrawFPS(GetScreenWidth() - 95, 10);
-        }
-        EndDrawing();
     }
 
     // De-Initialization

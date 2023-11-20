@@ -18,8 +18,9 @@ typedef struct Keys
     KeyboardKey ZOOM_IN_KEY;
     KeyboardKey ZOOM_OUT_KEY;
     KeyboardKey SCREENSHOT_KEY;
+    KeyboardKey PAUSE_KEY;
 } Keys;
 
-void Keybinds(bool *debug, Camera2D *camera);
+void Keybinds(bool *debug, bool *pause, Camera2D *camera, Music *music);
 
 #endif

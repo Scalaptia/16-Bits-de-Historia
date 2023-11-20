@@ -3,9 +3,10 @@
 Keys keys = {.DEBUG_KEY = KEY_F1,
              .ZOOM_IN_KEY = KEY_PAGE_DOWN,
              .ZOOM_OUT_KEY = KEY_PAGE_UP,
-             .SCREENSHOT_KEY = KEY_F12};
+             .SCREENSHOT_KEY = KEY_F12,
+             .PAUSE_KEY = KEY_P};
 
-void Keybinds(bool *debug, Camera2D *camera)
+void Keybinds(bool *debug, bool *pause, Camera2D *camera, Music *music)
 {
     if (IsKeyPressed(keys.DEBUG_KEY))
     {
@@ -25,5 +26,19 @@ void Keybinds(bool *debug, Camera2D *camera)
     if (IsKeyPressed(keys.SCREENSHOT_KEY))
     {
         TakeScreenshot("screenshot.png");
+    }
+
+    if (IsKeyPressed(KEY_P))
+    {
+        *pause = !(*pause);
+
+        if (*pause)
+        {
+            PauseMusicStream(*music);
+        }
+        else
+        {
+            ResumeMusicStream(*music);
+        }
     }
 }
