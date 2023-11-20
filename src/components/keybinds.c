@@ -6,7 +6,7 @@ Keys keys = {.DEBUG_KEY = KEY_F1,
              .SCREENSHOT_KEY = KEY_F12,
              .PAUSE_KEY = KEY_P};
 
-void Keybinds(bool *debug, bool *pause, Camera2D *camera, Music *music)
+void Keybinds(bool *debug, bool *pause, Camera2D *camera, Music *music, Sound *sound)
 {
     if (IsKeyPressed(keys.DEBUG_KEY))
     {
@@ -35,6 +35,7 @@ void Keybinds(bool *debug, bool *pause, Camera2D *camera, Music *music)
         if (*pause)
         {
             PauseMusicStream(*music);
+            PlaySound(*sound);
         }
         else
         {

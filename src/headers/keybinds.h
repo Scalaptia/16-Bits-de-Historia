@@ -21,6 +21,6 @@ typedef struct Keys
     KeyboardKey PAUSE_KEY;
 } Keys;
 
-void Keybinds(bool *debug, bool *pause, Camera2D *camera, Music *music);
+void Keybinds(bool *debug, bool *pause, Camera2D *camera, Music *music, Sound *sound);
 
 #endif

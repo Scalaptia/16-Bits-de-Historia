@@ -89,6 +89,12 @@ int main(void)
     //Botton Sound------------
     Sound fxBotton = LoadSound(ASSETS_PATH "SoundEffects/Mine_botton.mp3");
 
+    //----Pasos-----
+    Sound paso1 = LoadSound(ASSETS_PATH "SoundEffects/Pasos_Grava/MP1.mp3");
+    Sound paso2 = LoadSound(ASSETS_PATH "SoundEffects/Pasos_Grava/MP2.mp3");
+    Sound paso3 = LoadSound(ASSETS_PATH "SoundEffects/Pasos_Grava/MP3.mp3");
+    Sound paso4 = LoadSound(ASSETS_PATH "SoundEffects/Pasos_Grava/MP4.mp3");
+
     //------------------------
 
     SetTargetFPS(144);
@@ -177,7 +183,6 @@ int main(void)
             EndDrawing();
             
             break;
-            UnloadMusicStream(MenuMusic);
 
         case GAME:
             // Musica
@@ -191,8 +196,8 @@ int main(void)
                 timePlayed = 1.0f;
             //-----------------------------------------------------------
 
-            Keybinds(&debug, &pause, &camera, &music);
-            actPlayer(&player);
+            Keybinds(&debug, &pause, &camera, &music, &fxBotton);
+            actPlayer(&player,&paso1,&paso2,&paso3,&paso4);
             camera.target = (Vector2){player.position.x, player.position.y};
 
             // Draw

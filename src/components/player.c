@@ -6,31 +6,37 @@ Controls controls = {.UP_KEY = KEY_W,
                      .RIGHT_KEY = KEY_D,
                      .ATTACK_KEY = KEY_SPACE};
 
-void actPlayer(Player *player)
+void actPlayer(Player *player, Sound *sound1, Sound *sound2, Sound *sound3, Sound *sound4)
 {
-    movePlayer(player);
+    movePlayer(player, sound1, sound2, sound3, sound4);
     playerAttack(player);
 }
 
-void movePlayer(Player *player)
+void movePlayer(Player *player, Sound *sound1, Sound *sound2, Sound *sound3, Sound *sound4)
 {
     Vector2 direction = {0.0f, 0.0f};
     player->speed = 300.0f;
 
     if (IsKeyDown(controls.UP_KEY))
+    {
+        PlaySound(*sound1);
         direction.y -= 1.0f;
-
+    }
     if (IsKeyDown(controls.DOWN_KEY))
+    {
+        PlaySound(*sound2);
         direction.y += 1.0f;
-
+    }
     if (IsKeyDown(controls.LEFT_KEY))
     {
+        PlaySound(*sound3);
         direction.x -= 1.0f;
         player->direction = -1;
     }
 
     if (IsKeyDown(controls.RIGHT_KEY))
     {
+        PlaySound(*sound4);
         direction.x += 1.0f;
         player->direction = 1;
     }
