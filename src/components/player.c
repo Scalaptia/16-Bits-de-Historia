@@ -6,43 +6,42 @@ Controls controls = {.UP_KEY = KEY_W,
                      .RIGHT_KEY = KEY_D,
                      .ATTACK_KEY = KEY_SPACE};
 
-void actPlayer(Player *player, Sound *sound1, Sound *sound2, Sound *sound3, Sound *sound4)
+void actPlayer(Player *player, Music *sfx)
 {
-    movePlayer(player, sound1, sound2, sound3, sound4);
+    movePlayer(player, sfx);
     playerAttack(player);
 }
 
-void movePlayer(Player *player, Sound *sound1, Sound *sound2, Sound *sound3, Sound *sound4)
+void movePlayer(Player *player, Music *sfx)
 {
     Vector2 direction = {0.0f, 0.0f};
     player->speed = 300.0f;
 
     if (IsKeyDown(controls.UP_KEY))
     {
-        PlaySound(*sound1);
         direction.y -= 1.0f;
     }
     if (IsKeyDown(controls.DOWN_KEY))
     {
-        PlaySound(*sound2);
         direction.y += 1.0f;
     }
     if (IsKeyDown(controls.LEFT_KEY))
     {
-        PlaySound(*sound3);
         direction.x -= 1.0f;
         player->direction = -1;
     }
 
     if (IsKeyDown(controls.RIGHT_KEY))
     {
-        PlaySound(*sound4);
         direction.x += 1.0f;
         player->direction = 1;
     }
 
     if (Vector2Length(direction) > 0.0f)
     {
+        UpdateMusicStream(*sfx);
+        PlayMusicStream(*sfx);
+
         direction = Vector2Normalize(direction);
         player->position.x += direction.x * player->speed * GetFrameTime();
         player->position.y += direction.y * player->speed * GetFrameTime();

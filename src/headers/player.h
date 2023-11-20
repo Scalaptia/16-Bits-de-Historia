@@ -13,8 +13,8 @@ typedef struct Player
     int direction;
 } Player;
 
-void actPlayer(Player *player, Sound *sound1, Sound *sound2, Sound *sound3, Sound *sound4);
-void movePlayer(Player *player, Sound *sound1, Sound *sound2, Sound *sound3, Sound *sound4);
+void actPlayer(Player *player, Music *sfx);
+void movePlayer(Player *player, Music *sfx);
 void playerAttack(Player *player);
 
 #endif
