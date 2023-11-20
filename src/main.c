@@ -72,15 +72,24 @@ int main(void)
     camera.zoom = 1.0f;
 
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
-
-    //------------------------------------------------
+    //SONIDO-----------------------------------------------------------------------------------------------------------------
     InitAudioDevice(); // Initialize audio device
+    
+    //Musica 1----------------
     Music music = LoadMusicStream(ASSETS_PATH "Music/meow.mp3");
     PlayMusicStream(music);
 
     float timePlayed = 0.0f; // Time played normalized [0.0f..1.0f]
 
-    //--------------------------------------------------------------------------------------
+    //Musica 2-----------------
+    Music MenuMusic = LoadMusicStream(ASSETS_PATH "Music/gerudo.mp3");
+
+    float timePlayedMenu = 0.0f; // Time played normalized [0.0f..1.0f]
+    
+    //Botton Sound------------
+    Sound fxBotton = LoadSound(ASSETS_PATH "SoundEffects/Mine_botton.mp3");
+
+    //------------------------
 
     SetTargetFPS(144);
     // Main game loop
@@ -95,6 +104,17 @@ int main(void)
         switch (menu.state)
         {
         case MENU:
+            //Musica de menu ----------------------------------
+            UpdateMusicStream(MenuMusic);
+
+            PlayMusicStream(MenuMusic);
+
+            timePlayedMenu = GetMusicTimePlayed(MenuMusic) / GetMusicTimeLength(MenuMusic);
+            if (timePlayedMenu > 1.0f) timePlayedMenu = 1.0f;
+
+            StopMusicStream(music);//Detiene la musica de la escena 1
+            //-------------------------------------------------
+
             mousePoint = GetMousePosition();
 
             start.color = rectangleColor;
@@ -108,6 +128,8 @@ int main(void)
 
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
+                    PlaySound(fxBotton);
+                    StopMusicStream(MenuMusic);
                     menu.state = GAME;
                 }
             }
@@ -118,6 +140,8 @@ int main(void)
 
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
+                    PlaySound(fxBotton);
+                    StopMusicStream(MenuMusic);
                     menu.state = OPTIONS;
                 }
             }
@@ -128,6 +152,8 @@ int main(void)
 
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
+                    PlaySound(fxBotton);
+                    StopMusicStream(MenuMusic);
                     menu.prevState = menu.state;
                     menu.state = EXIT;
                 }
@@ -149,13 +175,15 @@ int main(void)
                 DrawText(exit.text, exit.rect.x + 10, exit.rect.y + 10, 30, WHITE);
             }
             EndDrawing();
-
+            
             break;
+            UnloadMusicStream(MenuMusic);
 
         case GAME:
             // Musica
             //-------------------------------------------------------------
             UpdateMusicStream(music);
+            PlayMusicStream(music);
 
             timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music);
 
@@ -198,8 +226,9 @@ int main(void)
                 DrawFPS(GetScreenWidth() - 95, 10);
             }
             EndDrawing();
-
+            
             break;
+            
 
         case OPTIONS:
             menu.state = MENU;
@@ -207,9 +236,13 @@ int main(void)
 
         case EXIT:
             if (IsKeyPressed(KEY_Y))
+            {
                 exitWindow = true;
+            }
             else if (IsKeyPressed(KEY_N))
+            {
                 menu.state = menu.prevState;
+            }
 
             BeginDrawing();
             {
