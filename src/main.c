@@ -85,7 +85,7 @@ int main(void)
     Music MenuMusic = LoadMusicStream(ASSETS_PATH "Music/gerudo.mp3");
 
     float timePlayedMenu = 0.0f; // Time played normalized [0.0f..1.0f]
-    
+
     //Botton Sound------------
     Sound fxBotton = LoadSound(ASSETS_PATH "SoundEffects/Mine_botton.mp3");
 
@@ -262,6 +262,7 @@ int main(void)
     UnloadRenderTexture(screenCam);
 
     UnloadMusicStream(music);
+    UnloadMusicStream(MenuMusic);
     CloseAudioDevice();
 
     UnloadSprite(&charSprite);
