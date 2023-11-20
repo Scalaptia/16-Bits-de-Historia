@@ -22,14 +22,17 @@
 int main(void)
 {
     //------------------------------------------------
-    int screenWidth = 800;
-    int screenHeight = 800;
+    int screenWidth = 1920;
+    int screenHeight = 1080;
     float SCALE = 5.0f;
 
     //------------------------------------------------
     bool debug = false;
     bool pause = false;
     bool exitWindow = false;
+
+    Color selectedColor = {0, 0, 0, 255};
+    Color rectangleColor = {0, 0, 0, 128};
 
     MenuButton start = {.text = "Start Game", .rect = {screenWidth / 2 - 100, screenHeight / 2 - 50, 200, 50}, .color = WHITE};
     MenuButton options = {.text = "Options", .rect = {screenWidth / 2 - 100, screenHeight / 2, 200, 50}, .color = WHITE};
@@ -46,9 +49,18 @@ int main(void)
 
     GraphicsData tileset;
     Sprite charSprite;
+    Sprite menuBackground;
 
     InitWindow(screenWidth, screenHeight, "juego");
     InitSprite(&charSprite);
+    InitBackground(&menuBackground);
+
+    // Calcular scale
+    char path[100];
+    sprintf(path, ASSETS_PATH "background/bg1.png");
+    Image temp = LoadImage(path);
+    UnloadImage(temp);
+
     InitGraphics(&tileset);
 
     Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE, .direction = 1};
@@ -74,7 +86,7 @@ int main(void)
     // Main game loop
     while (!exitWindow)
     {
-        if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
+        if (WindowShouldClose())
         {
             menu.prevState = menu.state;
             menu.state = MENU;
@@ -85,14 +97,14 @@ int main(void)
         case MENU:
             mousePoint = GetMousePosition();
 
-            start.color = WHITE;
-            options.color = WHITE;
-            exit.color = WHITE;
+            start.color = rectangleColor;
+            options.color = rectangleColor;
+            exit.color = rectangleColor;
 
             // Check mouse collision with buttons
             if (CheckCollisionPointRec(mousePoint, start.rect))
             {
-                start.color = GRAY;
+                start.color = selectedColor;
 
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
@@ -102,7 +114,7 @@ int main(void)
 
             if (CheckCollisionPointRec(mousePoint, options.rect))
             {
-                options.color = GRAY;
+                options.color = selectedColor;
 
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
@@ -112,7 +124,7 @@ int main(void)
 
             if (CheckCollisionPointRec(mousePoint, exit.rect))
             {
-                exit.color = GRAY;
+                exit.color = selectedColor;
 
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
@@ -123,16 +135,18 @@ int main(void)
 
             BeginDrawing();
             {
-                ClearBackground(BLACK);
+                ClearBackground(WHITE);
+                UpdateBackground(&menuBackground, (Vector2){screenWidth, screenHeight});
+
                 // Draw buttons
                 DrawRectangleRec(start.rect, start.color);
                 DrawRectangleRec(options.rect, options.color);
                 DrawRectangleRec(exit.rect, exit.color);
 
                 // Draw text
-                DrawText(start.text, start.rect.x + 10, start.rect.y + 10, 30, BLACK);
-                DrawText(options.text, options.rect.x + 10, options.rect.y + 10, 30, BLACK);
-                DrawText(exit.text, exit.rect.x + 10, exit.rect.y + 10, 30, BLACK);
+                DrawText(start.text, start.rect.x + 10, start.rect.y, 30, WHITE);
+                DrawText(options.text, options.rect.x + 10, options.rect.y, 30, WHITE);
+                DrawText(exit.text, exit.rect.x + 10, exit.rect.y + 10, 30, WHITE);
             }
             EndDrawing();
 
@@ -218,6 +232,7 @@ int main(void)
     CloseAudioDevice();
 
     UnloadSprite(&charSprite);
+    UnloadBackground(&menuBackground);
     UnloadGraphics(&tileset);
     CloseWindow();
     //--------------------------------------------------------------------------------------

@@ -2,6 +2,8 @@
 #define MENU_H
 
 #include "raylib.h"
+#include "../headers/animation.h"
+#include <stdio.h>
 
 enum GameState
 {
@@ -23,5 +25,9 @@ typedef struct Menu
     enum GameState state;
     enum GameState prevState;
 } Menu;
+
+void InitBackground(Sprite *sprite);
+void UpdateBackground(Sprite *sprite, Vector2 screen);
+void UnloadBackground(Sprite *sprite);
 
 #endif

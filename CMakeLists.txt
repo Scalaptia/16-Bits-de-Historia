@@ -28,7 +28,7 @@ src/headers/grid.h src/components/grid.c
 src/headers/graphics.h src/components/graphics.c 
 src/headers/animation.h src/components/animation.c
 src/headers/keybinds.h src/components/keybinds.c
-src/headers/menu.h)
+src/headers/menu.h src/components/menu.c)
 
 target_link_libraries(raylib_template PUBLIC raylib)
 target_compile_definitions(raylib_template PUBLIC ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets/")
