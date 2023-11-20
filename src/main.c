@@ -5,6 +5,8 @@
 #include "./headers/player.h"
 #include "./headers/grid.h"
 #include "./headers/graphics.h"
+#include "./headers/animation.h"
+#include "./headers/keybinds.h"
 
 //----------------------------------------------------------------------------------
 // Variables Locales (al módulo)
@@ -27,11 +29,13 @@ int main(void)
     //--------------------------------------------------------------------------------------
     Rectangle window = {0, 0, screenWidth, screenHeight};
     GraphicsData tileset;
+    Sprite charSprite;
 
     InitWindow(screenWidth, screenHeight, "juego");
+    InitSprite(&charSprite);
     InitGraphics(&tileset);
 
-    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = BLUE, .controls = {KEY_W, KEY_S, KEY_A, KEY_D, KEY_SPACE}};
+    Player player = {.position = {REL_TILE_SIZE * 2, REL_TILE_SIZE * 2}, .color = WHITE};
 
     Camera2D camera = {0};
     camera.target = (Vector2){player.position.x, player.position.y};
@@ -40,7 +44,16 @@ int main(void)
 
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
-    SetTargetFPS(120);
+    InitAudioDevice();              // Initialize audio device
+
+    Music music = LoadMusicStream(ASSETS_PATH "Music/meow.mp3");
+
+    PlayMusicStream(music);
+
+    float timePlayed = 0.0f;        // Time played normalized [0.0f..1.0f]
+    bool pause = false;             // Music playing paused
+
+    SetTargetFPS(144);
     //--------------------------------------------------------------------------------------
 
     // Main game loop
@@ -48,23 +61,28 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyPressed(KEY_F1))
+        //Musica--
+        UpdateMusicStream(music);
+
+        if(IsKeyPressed(KEY_P))
         {
-            debug = !debug;
+            pause=!pause;
+            if(pause)
+            {
+                PauseMusicStream(music);
+            }
+            else
+            {
+                ResumeMusicStream(music);
+            }
         }
 
-        if (IsKeyDown(KEY_PAGE_UP) && camera.zoom <= 1.8f)
-        {
-            camera.zoom += 0.01f;
-        }
+        timePlayed = GetMusicTimePlayed(music)/GetMusicTimeLength(music);
 
-        if (IsKeyDown(KEY_PAGE_DOWN) && camera.zoom >= 0.4f)
-        {
-            camera.zoom -= 0.01f;
-        }
+        if (timePlayed > 1.0f) timePlayed = 1.0f;
+        //----------------
 
-        // Movimiento del jugador
-        //-----------------------------------------
+        Keybinds(&debug, &camera);
         actPlayer(&player);
         camera.target = (Vector2){player.position.x, player.position.y};
 
@@ -78,35 +96,39 @@ int main(void)
             {
                 DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
                 DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, 0}, SCALE);
-                DrawRoom(&tileset, (Vector2){TILE_SIZE * 12, 0}, SCALE);
 
                 if (debug)
                 {
                     PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
                 }
 
-                DrawRectangleRec((Rectangle){player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, player.color);
+                UpdateSprite(&charSprite, player.position, SCALE, player.color);
             }
             EndMode2D();
         }
         EndTextureMode();
         //-----------------------------------------
 
-        // Renderizar camara
         BeginDrawing();
+        {
+            ClearBackground(BLACK);
 
-        ClearBackground(BLACK);
+            // Pintar pantalla (textura)
+            DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
 
-        DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
-
-        DrawFPS(GetScreenWidth() - 95, 10);
+            DrawFPS(GetScreenWidth() - 95, 10);
+        }
         EndDrawing();
     }
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
     UnloadRenderTexture(screenCam);
+    
+    UnloadMusicStream(music);
+    CloseAudioDevice();
 
+    UnloadSprite(&charSprite);
     UnloadGraphics(&tileset);
     CloseWindow();
     //--------------------------------------------------------------------------------------
