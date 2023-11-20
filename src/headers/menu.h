@@ -26,8 +26,10 @@ typedef struct Menu
     enum GameState prevState;
 } Menu;
 
-void InitBackground(Sprite *sprite);
-void UpdateBackground(Sprite *sprite, Vector2 screen);
-void UnloadBackground(Sprite *sprite);
+void InitBackground();
+void UpdateBackground(Vector2 screen);
+void UnloadBackground();
+
+extern Sprite menuBackground;
 
 #endif

@@ -1,53 +1,55 @@
 #include "../headers/menu.h"
 
-void InitBackground(Sprite *sprite)
+Sprite menuBackground;
+
+void InitBackground()
 {
     char path[100];
 
-    sprite->frameCount = 33;
-    sprite->frameCurrent = 0;
-    sprite->frameTime = ANIMATION_SPEED / 2;
+    menuBackground.frameCount = 33;
+    menuBackground.frameCurrent = 0;
+    menuBackground.frameTime = ANIMATION_SPEED / 2;
 
-    sprite->frames = (Image *)malloc(sizeof(Image) * 33);
-    sprite->textures = (Texture2D *)malloc(sizeof(Texture2D) * 33);
+    menuBackground.frames = (Image *)malloc(sizeof(Image) * 33);
+    menuBackground.textures = (Texture2D *)malloc(sizeof(Texture2D) * 33);
 
     for (int i = 0; i < 33; i++)
     {
         sprintf(path, ASSETS_PATH "background/bg%d.png", i + 1);
-        sprite->frames[i] = LoadImage(path);
+        menuBackground.frames[i] = LoadImage(path);
 
-        sprite->textures[i] = LoadTextureFromImage(sprite->frames[i]);
+        menuBackground.textures[i] = LoadTextureFromImage(menuBackground.frames[i]);
     }
 }
 
-void UpdateBackground(Sprite *sprite, Vector2 screen)
+void UpdateBackground(Vector2 screen)
 {
-    sprite->currentTime += GetFrameTime();
+    menuBackground.currentTime += GetFrameTime();
 
-    if (sprite->currentTime >= sprite->frameTime)
+    if (menuBackground.currentTime >= menuBackground.frameTime)
     {
-        sprite->currentTime = 0.0f;
-        sprite->frameCurrent++;
+        menuBackground.currentTime = 0.0f;
+        menuBackground.frameCurrent++;
 
-        if (sprite->frameCurrent >= sprite->frameCount)
+        if (menuBackground.frameCurrent >= menuBackground.frameCount)
         {
-            sprite->frameCurrent = 0;
+            menuBackground.frameCurrent = 0;
         }
     }
 
     Vector2 origin = {0, 0};
 
-    DrawTexturePro(sprite->textures[sprite->frameCurrent], (Rectangle){0, 0, screen.x / 3, screen.y / 2.8}, (Rectangle){0, 0, screen.x, screen.y}, origin, 0, WHITE);
+    DrawTexturePro(menuBackground.textures[menuBackground.frameCurrent], (Rectangle){0, 0, screen.x / 3, screen.y / 2.8}, (Rectangle){0, 0, screen.x, screen.y}, origin, 0, WHITE);
 }
 
-void UnloadBackground(Sprite *sprite)
+void UnloadBackground()
 {
     for (int i = 0; i < 33; i++)
     {
-        UnloadImage(sprite->frames[i]);
-        UnloadTexture(sprite->textures[i]);
+        UnloadImage(menuBackground.frames[i]);
+        UnloadTexture(menuBackground.textures[i]);
     }
 
-    free(sprite->frames);
-    free(sprite->textures);
+    free(menuBackground.frames);
+    free(menuBackground.textures);
 }

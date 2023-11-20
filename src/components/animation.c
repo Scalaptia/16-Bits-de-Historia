@@ -1,5 +1,7 @@
 #include "../headers/animation.h"
 
+Sprite charSprite;
+
 void InitSprite(Sprite *sprite)
 {
     sprite->frameCount = 4;

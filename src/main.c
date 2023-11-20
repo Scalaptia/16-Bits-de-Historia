@@ -8,6 +8,7 @@
 #include "./headers/animation.h"
 #include "./headers/keybinds.h"
 #include "./headers/menu.h"
+#include "./headers/sound.h"
 
 //----------------------------------------------------------------------------------
 // Variables Locales (al módulo)
@@ -48,12 +49,14 @@ int main(void)
     Vector2 mousePoint = {0.0f, 0.0f};
 
     GraphicsData tileset;
-    Sprite charSprite;
-    Sprite menuBackground;
 
     InitWindow(screenWidth, screenHeight, "juego");
+
     InitSprite(&charSprite);
-    InitBackground(&menuBackground);
+    InitBackground();
+
+    InitAudioDevice();
+    InitSound();
 
     // Calcular scale
     char path[100];
@@ -72,26 +75,6 @@ int main(void)
     camera.zoom = 1.0f;
 
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
-
-    // SONIDO-----------------------------------------------------------------------------------------------------------------
-    InitAudioDevice(); // Initialize audio device
-
-    // Musica 1----------------
-    Music music = LoadMusicStream(ASSETS_PATH "Music/meow.mp3");
-    PlayMusicStream(music);
-
-    float timePlayed = 0.0f; // Time played normalized [0.0f..1.0f]
-
-    // Musica 2-----------------
-    Music MenuMusic = LoadMusicStream(ASSETS_PATH "Music/gerudo.mp3");
-
-    float timePlayedMenu = 0.0f; // Time played normalized [0.0f..1.0f]
-
-    // Botton Sound------------
-    Sound fxButton = LoadSound(ASSETS_PATH "SoundEffects/Mine_button.mp3");
-
-    //----Pasos-----
-    Music fxPasosGrava = LoadMusicStream(ASSETS_PATH "SoundEffects/Pasos_Grava/MP1.mp3");
 
     //------------------------
 
@@ -167,7 +150,7 @@ int main(void)
             BeginDrawing();
             {
                 ClearBackground(WHITE);
-                UpdateBackground(&menuBackground, (Vector2){screenWidth, screenHeight});
+                UpdateBackground((Vector2){screenWidth, screenHeight});
 
                 // Draw buttons
                 DrawRectangleRec(start.rect, start.color);
@@ -270,7 +253,7 @@ int main(void)
     CloseAudioDevice();
 
     UnloadSprite(&charSprite);
-    UnloadBackground(&menuBackground);
+    UnloadBackground();
     UnloadGraphics(&tileset);
     CloseWindow();
     //--------------------------------------------------------------------------------------
