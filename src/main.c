@@ -132,7 +132,7 @@ int main(void)
             break;
 
         case EXIT:
-            if (IsKeyPressed(KEY_Y))
+            if (IsKeyPressed(KEY_S))
             {
                 exitWindow = true;
             }
@@ -149,7 +149,7 @@ int main(void)
                 DrawRectangle(0, 0, screenWidth, screenHeight, rectangleColor); // Fondo gris
 
                 DrawRectangle(0, screenHeight / 2 - 100, screenWidth, 200, BLACK); //
-                DrawText("Are you sure you want to exit? [Y/N]", screenWidth / 2 - 300, screenHeight / 2 - 15, 30, WHITE);
+                DrawText("¿Desea salir del juego? [S/N]", screenWidth / 2 - 230, screenHeight / 2 - 15, 30, WHITE);
             }
             EndDrawing();
 

@@ -42,32 +42,32 @@ void InitBackground()
 
 void InitMenuButtons(Rectangle screen)
 {
-    startButton.text = "Start Game";
-    startButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 - 50, 250, 50};
+    startButton.text = "Jugar";
+    startButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 - 50, 300, 50};
     startButton.color = WHITE;
 
-    optionsButton.text = "Options";
-    optionsButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2, 250, 50};
+    optionsButton.text = "Opciones";
+    optionsButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2, 300, 50};
     optionsButton.color = WHITE;
 
-    exitButton.text = "Exit";
-    exitButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 + 100, 250, 50};
+    exitButton.text = "Salir";
+    exitButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 100, 300, 50};
     exitButton.color = WHITE;
 
-    fullscreenButton.text = "Fullscreen";
-    fullscreenButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 - 50, 250, 50};
+    fullscreenButton.text = "Pantalla Completa";
+    fullscreenButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 - 50, 300, 50};
     fullscreenButton.color = WHITE;
 
-    volumeUpButton.text = "Volume Up";
-    volumeUpButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 + 0, 250, 50};
+    volumeUpButton.text = "Subir Volumen";
+    volumeUpButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 0, 300, 50};
     volumeUpButton.color = WHITE;
 
-    volumeDownButton.text = "Volume Down";
-    volumeDownButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 + 50, 250, 50};
+    volumeDownButton.text = "Bajar Volumen";
+    volumeDownButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 50, 300, 50};
     volumeDownButton.color = WHITE;
 
-    backButton.text = "Back";
-    backButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 + 150, 250, 50};
+    backButton.text = "Atrás";
+    backButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 150, 300, 50};
     backButton.color = WHITE;
 
     menu.state = MENU;
