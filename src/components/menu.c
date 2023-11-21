@@ -33,7 +33,7 @@ void InitBackground()
 
     for (int i = 0; i < 33; i++)
     {
-        sprintf(path, ASSETS_PATH "background/bg%d.png", i + 1);
+        sprintf(path, ASSETS_PATH "Background/bg%d.png", i + 1);
         menuBackground.frames[i] = LoadImage(path);
 
         menuBackground.textures[i] = LoadTextureFromImage(menuBackground.frames[i]);

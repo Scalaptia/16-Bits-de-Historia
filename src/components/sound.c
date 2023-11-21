@@ -8,11 +8,11 @@ Music fxPasosGrava;
 
 void InitSounds()
 {
-    GameMusic = LoadMusicStream(ASSETS_PATH "Music/meow.mp3");
-    MenuMusic = LoadMusicStream(ASSETS_PATH "Music/gerudo.mp3");
+    GameMusic = LoadMusicStream(AUDIO_PATH "Music/meow.mp3");
+    MenuMusic = LoadMusicStream(AUDIO_PATH "Music/gerudo.mp3");
 
-    fxButton = LoadSound(ASSETS_PATH "SoundEffects/Mine_button.mp3");
-    fxPasosGrava = LoadMusicStream(ASSETS_PATH "SoundEffects/Pasos_Grava/MP1.mp3");
+    fxButton = LoadSound(AUDIO_PATH "SoundEffects/Mine_button.mp3");
+    fxPasosGrava = LoadMusicStream(AUDIO_PATH "SoundEffects/Pasos_Grava/MP1.mp3");
 }
 
 void PlayMusic(Music music)

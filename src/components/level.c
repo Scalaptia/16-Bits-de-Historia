@@ -1,4 +1,4 @@
-#include "../headers/graphics.h"
+#include "../headers/level.h"
 
 void InitGraphics(GraphicsData *tileset)
 {

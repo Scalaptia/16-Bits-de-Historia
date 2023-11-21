@@ -1,9 +1,12 @@
-#ifndef GRAPHICS_H
-#define GRAPHICS_H
+#ifndef LEVEL_H
+#define LEVEL_H
 
 #include "raylib.h"
 #include "raymath.h"
 #include "string.h"
+#include <stdlib.h>
+
+#define TILE_SIZE 16
 
 typedef struct GraphicsData
 {
@@ -12,7 +15,11 @@ typedef struct GraphicsData
     Rectangle size;
 } GraphicsData;
 
-#define TILE_SIZE 16
+typedef struct LevelData
+{
+    Vector2 *walls;
+    int wallsCount;
+} LevelData;
 
 /* PROTOTIPOS*/
 
