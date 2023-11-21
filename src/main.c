@@ -32,8 +32,12 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "juego");
 
+    strcpy(charSprite.path, "Personaje/char");
+    strcpy(npcSprite.path, "Character_animation/monsters_idle/skeleton1/v2/skeleton1_v2_");
+
     InitPlayer(&charSprite, window); // Inicializa sprite, player y cámara
     InitGraphics(&tileset);          // Inicializa tileset (mapa)
+    InitSprite(&npcSprite);
 
     InitBackground();
     InitMenuButtons(window);
@@ -85,6 +89,7 @@ int main(void)
 
             // Draw
             //----------------------------------------------------------------------------------
+            UpdateSpritesFrame();
             BeginTextureMode(screenCam);
             {
                 BeginMode2D(camera);
@@ -92,13 +97,17 @@ int main(void)
                     ClearBackground(BLACK);
                     DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
 
+                    DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE, REL_TILE_SIZE}, SCALE, WHITE, 1);
+
                     if (debug)
                     {
                         PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
+                        DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
                     }
-
-                    // DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
-                    UpdateSprite(&charSprite, player.position, SCALE, player.color, player.direction);
+                    else
+                    {
+                        DrawSpriteFrame(&charSprite, player.position, SCALE, player.color, player.direction);
+                    }
                 }
                 EndMode2D();
             }

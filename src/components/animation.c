@@ -1,10 +1,11 @@
 #include "../headers/animation.h"
 
 Sprite charSprite;
+Sprite npcSprite;
 
 void InitSprite(Sprite *sprite)
 {
-    char path[100];
+    char path[150];
 
     sprite->frameCount = 4;
     sprite->frameCurrent = 0;
@@ -15,13 +16,14 @@ void InitSprite(Sprite *sprite)
 
     for (int i = 0; i < 4; i++)
     {
-        sprintf(path, ASSETS_PATH "Personaje/char%d.png", i + 1);
+        sprintf(path, ASSETS_PATH "%s%d.png", sprite->path, i + 1);
+
         sprite->frames[i] = LoadImage(path);
         sprite->textures[i] = LoadTextureFromImage(sprite->frames[i]);
     }
 }
 
-void UpdateSprite(Sprite *sprite, Vector2 position, float scale, Color color, int direction)
+void UpdateSpriteFrame(Sprite *sprite)
 {
     sprite->currentTime += GetFrameTime();
 
@@ -35,7 +37,16 @@ void UpdateSprite(Sprite *sprite, Vector2 position, float scale, Color color, in
             sprite->frameCurrent = 0;
         }
     }
+}
 
+void UpdateSpritesFrame()
+{
+    UpdateSpriteFrame(&charSprite);
+    UpdateSpriteFrame(&npcSprite);
+}
+
+void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction)
+{
     float width = 16 * scale;
     float height = 16 * scale;
     Vector2 origin = {0, 0};
