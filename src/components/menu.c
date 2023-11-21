@@ -14,6 +14,7 @@ MenuButton exitButton;
 
 /* Options Menu*/
 MenuButton fullscreenButton;
+MenuButton toggleMusicButton;
 MenuButton volumeUpButton;
 MenuButton volumeDownButton;
 MenuButton backButton;
@@ -58,16 +59,20 @@ void InitMenuButtons(Rectangle screen)
     fullscreenButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 - 50, 300, 50};
     fullscreenButton.color = WHITE;
 
+    toggleMusicButton.text = "Apagar Música";
+    toggleMusicButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 0, 300, 50};
+    toggleMusicButton.color = WHITE;
+
     volumeUpButton.text = "Subir Volumen";
-    volumeUpButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 0, 300, 50};
+    volumeUpButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 50, 300, 50};
     volumeUpButton.color = WHITE;
 
     volumeDownButton.text = "Bajar Volumen";
-    volumeDownButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 50, 300, 50};
+    volumeDownButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 100, 300, 50};
     volumeDownButton.color = WHITE;
 
     backButton.text = "Atrás";
-    backButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 150, 300, 50};
+    backButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 200, 300, 50};
     backButton.color = WHITE;
 
     menu.state = MENU;
@@ -120,11 +125,21 @@ void CheckMenuButtons(Sound fxButton, Music MenuMusic)
     }
 }
 
-void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume)
+void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *ToggleMusic)
 {
     mousePoint = GetMousePosition();
 
     fullscreenButton.color = rectangleColor;
+    toggleMusicButton.color = rectangleColor;
+    if (*ToggleMusic)
+    {
+        toggleMusicButton.text = "Apagar Música";
+    }
+    else
+    {
+        toggleMusicButton.text = "Encender Música";
+    }
+
     volumeUpButton.color = rectangleColor;
     volumeDownButton.color = rectangleColor;
     backButton.color = rectangleColor;
@@ -138,6 +153,16 @@ void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume)
         {
             PlaySound(fxButton);
             ToggleFullscreen();
+        }
+    }
+
+    if (CheckCollisionPointRec(mousePoint, toggleMusicButton.rect))
+    {
+        toggleMusicButton.color = selectedColor;
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            (*ToggleMusic) = !(*ToggleMusic);
         }
     }
 
@@ -194,12 +219,14 @@ void DrawOptionsUI()
 {
     // Draw buttons
     DrawRectangleRec(fullscreenButton.rect, fullscreenButton.color);
+    DrawRectangleRec(toggleMusicButton.rect, toggleMusicButton.color);
     DrawRectangleRec(volumeUpButton.rect, volumeUpButton.color);
     DrawRectangleRec(volumeDownButton.rect, volumeDownButton.color);
     DrawRectangleRec(backButton.rect, backButton.color);
 
     // Draw text
     DrawText(fullscreenButton.text, fullscreenButton.rect.x + 10, fullscreenButton.rect.y + 10, 30, WHITE);
+    DrawText(toggleMusicButton.text, toggleMusicButton.rect.x + 10, toggleMusicButton.rect.y + 10, 30, WHITE);
     DrawText(volumeUpButton.text, volumeUpButton.rect.x + 10, volumeUpButton.rect.y + 10, 30, WHITE);
     DrawText(volumeDownButton.text, volumeDownButton.rect.x + 10, volumeDownButton.rect.y + 10, 30, WHITE);
     DrawText(backButton.text, backButton.rect.x + 10, backButton.rect.y + 10, 30, WHITE);

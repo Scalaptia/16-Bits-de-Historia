@@ -24,6 +24,7 @@ int main(void)
     bool debug = false;
     bool pause = false;
     bool exitWindow = false;
+    bool ToggleMusic = true;
 
     // Config -----------------------------------------
     Rectangle window = {0, 0, screenWidth, screenHeight};
@@ -63,7 +64,8 @@ int main(void)
         switch (menu.state)
         {
         case MENU:
-            PlayMusic(MenuMusic);
+            if (ToggleMusic)
+                PlayMusic(MenuMusic);
 
             //-------------------------------------------------
             CheckMenuButtons(fxButton, MenuMusic);
@@ -79,7 +81,8 @@ int main(void)
             break;
 
         case GAME:
-            PlayMusic(GameMusic);
+            if (ToggleMusic)
+                PlayMusic(GameMusic);
             //-----------------------------------------------------------
 
             Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
@@ -102,7 +105,7 @@ int main(void)
 
                     if (debug)
                     {
-                        PaintGrid((Grid){REL_TILE_SIZE, REL_TILE_SIZE * 20, REL_TILE_SIZE * 10, LIGHTGRAY});
+                        PaintGrid((Grid){REL_TILE_SIZE, REL_TILE_SIZE * 6, REL_TILE_SIZE * 5, LIGHTGRAY});
                         DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
 
                         // Draw debug walls
@@ -133,9 +136,10 @@ int main(void)
             break;
 
         case OPTIONS:
-            PlayMusic(MenuMusic);
+            if (ToggleMusic)
+                PlayMusic(MenuMusic);
 
-            CheckOptionsButtons(fxButton, MenuMusic, &masterVolume);
+            CheckOptionsButtons(fxButton, MenuMusic, &masterVolume, &ToggleMusic);
 
             BeginDrawing();
             {
