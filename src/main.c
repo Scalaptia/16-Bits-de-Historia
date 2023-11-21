@@ -26,6 +26,7 @@ int main(void)
     //------------------------------------------------
     int screenWidth = 1920;
     int screenHeight = 1080;
+    float masterVolume = 0.5f;
 
     bool debug = false;
     bool pause = false;
@@ -55,6 +56,7 @@ int main(void)
     // Main game loop
     while (!exitWindow)
     {
+        SetMasterVolume(masterVolume);
         if (WindowShouldClose())
         {
             menu.prevState = menu.state;
@@ -96,9 +98,6 @@ int main(void)
                 {
                     ClearBackground(BLACK);
                     DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
-                    DrawRoom(&tileset, (Vector2){0, TILE_SIZE * 5}, SCALE);
-                    DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, 0}, SCALE);
-                    DrawRoom(&tileset, (Vector2){TILE_SIZE * 6, TILE_SIZE * 5}, SCALE);
 
                     if (debug)
                     {
@@ -117,6 +116,7 @@ int main(void)
             {
                 // Pintar pantalla (textura)
                 DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
+
                 DrawFPS(GetScreenWidth() - 95, 10);
             }
             EndDrawing();
@@ -125,7 +125,17 @@ int main(void)
 
         case OPTIONS:
             PlayMusic(MenuMusic);
-            menu.state = MENU;
+
+            CheckOptionsButtons(fxButton, MenuMusic, &masterVolume);
+
+            BeginDrawing();
+            {
+                ClearBackground(WHITE);
+                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight});
+                DrawOptionsUI();
+            }
+            EndDrawing();
+
             break;
 
         case EXIT:
@@ -142,8 +152,11 @@ int main(void)
             {
                 ClearBackground(RAYWHITE);
 
-                DrawRectangle(0, 100, screenWidth, 200, BLACK);
-                DrawText("Are you sure you want to exit program? [Y/N]", 40, 180, 30, WHITE);
+                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight});
+                DrawRectangle(0, 0, screenWidth, screenHeight, rectangleColor); // Fondo gris
+
+                DrawRectangle(0, screenHeight / 2 - 100, screenWidth, 200, BLACK); //
+                DrawText("Are you sure you want to exit? [Y/N]", screenWidth / 2 - 300, screenHeight / 2 - 15, 30, WHITE);
             }
             EndDrawing();
 

@@ -28,9 +28,14 @@ typedef struct Menu
 
 void InitBackground();
 void InitMenuButtons(Rectangle screen);
+
 void CheckMenuButtons(Sound fxButton, Music MenuMusic);
+void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume);
+
 void UpdateBackground(Rectangle screen);
 void DrawMenuUI();
+void DrawOptionsUI();
+
 void UnloadBackground();
 
 extern Sprite menuBackground;
@@ -41,6 +46,11 @@ extern Color rectangleColor;
 extern MenuButton startButton;
 extern MenuButton optionsButton;
 extern MenuButton exitButton;
+
+extern MenuButton fullscreenButton;
+extern MenuButton volumeUpButton;
+extern MenuButton volumeDownButton;
+extern MenuButton backButton;
 
 extern Menu menu;
 

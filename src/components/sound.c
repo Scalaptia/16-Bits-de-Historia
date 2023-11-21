@@ -17,8 +17,8 @@ void InitSounds()
 
 void PlayMusic(Music music)
 {
-    UpdateMusicStream(music);
     PlayMusicStream(music);
+    UpdateMusicStream(music);
 
     timePlayed = GetMusicTimePlayed(music) / GetMusicTimeLength(music);
 

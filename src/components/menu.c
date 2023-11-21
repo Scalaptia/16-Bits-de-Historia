@@ -6,9 +6,17 @@ Color selectedColor = {0, 0, 0, 255};
 Color rectangleColor = {0, 0, 0, 128};
 
 Vector2 mousePoint = {0.0f, 0.0f};
+
+/* Main Menu */
 MenuButton startButton;
 MenuButton optionsButton;
 MenuButton exitButton;
+
+/* Options Menu*/
+MenuButton fullscreenButton;
+MenuButton volumeUpButton;
+MenuButton volumeDownButton;
+MenuButton backButton;
 
 Menu menu;
 
@@ -34,18 +42,33 @@ void InitBackground()
 
 void InitMenuButtons(Rectangle screen)
 {
-
     startButton.text = "Start Game";
-    startButton.rect = (Rectangle){screen.width / 2 - 100, screen.height / 2 - 50, 200, 50};
+    startButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 - 50, 250, 50};
     startButton.color = WHITE;
 
     optionsButton.text = "Options";
-    optionsButton.rect = (Rectangle){screen.width / 2 - 100, screen.height / 2, 200, 50};
+    optionsButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2, 250, 50};
     optionsButton.color = WHITE;
 
     exitButton.text = "Exit";
-    exitButton.rect = (Rectangle){screen.width / 2 - 100, screen.height / 2 + 50, 200, 50};
+    exitButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 + 100, 250, 50};
     exitButton.color = WHITE;
+
+    fullscreenButton.text = "Fullscreen";
+    fullscreenButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 - 50, 250, 50};
+    fullscreenButton.color = WHITE;
+
+    volumeUpButton.text = "Volume Up";
+    volumeUpButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 + 0, 250, 50};
+    volumeUpButton.color = WHITE;
+
+    volumeDownButton.text = "Volume Down";
+    volumeDownButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 + 50, 250, 50};
+    volumeDownButton.color = WHITE;
+
+    backButton.text = "Back";
+    backButton.rect = (Rectangle){screen.width / 2 - 125, screen.height / 2 + 150, 250, 50};
+    backButton.color = WHITE;
 
     menu.state = MENU;
     menu.prevState = MENU;
@@ -97,6 +120,63 @@ void CheckMenuButtons(Sound fxButton, Music MenuMusic)
     }
 }
 
+void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume)
+{
+    mousePoint = GetMousePosition();
+
+    fullscreenButton.color = rectangleColor;
+    volumeUpButton.color = rectangleColor;
+    volumeDownButton.color = rectangleColor;
+    backButton.color = rectangleColor;
+
+    // Check mouse collision with buttons
+    if (CheckCollisionPointRec(mousePoint, fullscreenButton.rect))
+    {
+        fullscreenButton.color = selectedColor;
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            PlaySound(fxButton);
+            ToggleFullscreen();
+        }
+    }
+
+    if (CheckCollisionPointRec(mousePoint, volumeUpButton.rect))
+    {
+        volumeUpButton.color = selectedColor;
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            PlaySound(fxButton);
+            if (*volume < 1.0f)
+                (*volume) += 0.1f;
+        }
+    }
+
+    if (CheckCollisionPointRec(mousePoint, volumeDownButton.rect))
+    {
+        volumeDownButton.color = selectedColor;
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            PlaySound(fxButton);
+            if (*volume > 0.0f)
+                (*volume) -= 0.1f;
+        }
+    }
+
+    if (CheckCollisionPointRec(mousePoint, backButton.rect))
+    {
+        backButton.color = selectedColor;
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            PlaySound(fxButton);
+            menu.state = MENU;
+        }
+    }
+}
+
 void DrawMenuUI()
 {
     // Draw buttons
@@ -105,9 +185,24 @@ void DrawMenuUI()
     DrawRectangleRec(exitButton.rect, exitButton.color);
 
     // Draw text
-    DrawText(startButton.text, startButton.rect.x + 10, startButton.rect.y, 30, WHITE);
-    DrawText(optionsButton.text, optionsButton.rect.x + 10, optionsButton.rect.y, 30, WHITE);
+    DrawText(startButton.text, startButton.rect.x + 10, startButton.rect.y + 10, 30, WHITE);
+    DrawText(optionsButton.text, optionsButton.rect.x + 10, optionsButton.rect.y + 10, 30, WHITE);
     DrawText(exitButton.text, exitButton.rect.x + 10, exitButton.rect.y + 10, 30, WHITE);
+}
+
+void DrawOptionsUI()
+{
+    // Draw buttons
+    DrawRectangleRec(fullscreenButton.rect, fullscreenButton.color);
+    DrawRectangleRec(volumeUpButton.rect, volumeUpButton.color);
+    DrawRectangleRec(volumeDownButton.rect, volumeDownButton.color);
+    DrawRectangleRec(backButton.rect, backButton.color);
+
+    // Draw text
+    DrawText(fullscreenButton.text, fullscreenButton.rect.x + 10, fullscreenButton.rect.y + 10, 30, WHITE);
+    DrawText(volumeUpButton.text, volumeUpButton.rect.x + 10, volumeUpButton.rect.y + 10, 30, WHITE);
+    DrawText(volumeDownButton.text, volumeDownButton.rect.x + 10, volumeDownButton.rect.y + 10, 30, WHITE);
+    DrawText(backButton.text, backButton.rect.x + 10, backButton.rect.y + 10, 30, WHITE);
 }
 
 void UpdateBackground(Rectangle screen)
