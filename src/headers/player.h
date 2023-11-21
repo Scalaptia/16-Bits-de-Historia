@@ -5,6 +5,7 @@
 #include "raymath.h"
 #include "../headers/keybinds.h"
 #include "../headers/animation.h"
+#include "../headers/level.h"
 
 typedef struct Player
 {
@@ -19,8 +20,8 @@ typedef struct Player
 #define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
 void InitPlayer(Sprite *sprite, Rectangle screen);
-void actPlayer(Player *player, Music *sfx);
-void movePlayer(Player *player, Music *sfx);
+void actPlayer(Player *player, Music *sfx, LevelData room);
+void movePlayer(Player *player, Music *sfx, LevelData room);
 void playerAttack(Player *player);
 
 extern Player player;

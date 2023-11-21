@@ -23,14 +23,17 @@ void InitPlayer(Sprite *sprite, Rectangle screen)
     camera.zoom = 1.0f;
 }
 
-void actPlayer(Player *player, Music *sfx)
+void actPlayer(Player *player, Music *sfx, LevelData room)
 {
-    movePlayer(player, sfx);
+    movePlayer(player, sfx, room);
     playerAttack(player);
 }
 
-void movePlayer(Player *player, Music *sfx)
+void movePlayer(Player *player, Music *sfx, LevelData room)
 {
+    float old_x = player->position.x;
+    float old_y = player->position.y;
+
     Vector2 direction = {0.0f, 0.0f};
     player->speed = 300.0f;
 
@@ -56,12 +59,48 @@ void movePlayer(Player *player, Music *sfx)
 
     if (Vector2Length(direction) > 0.0f)
     {
-        UpdateMusicStream(*sfx);
-        PlayMusicStream(*sfx);
-
         direction = Vector2Normalize(direction);
-        player->position.x += direction.x * player->speed * GetFrameTime();
-        player->position.y += direction.y * player->speed * GetFrameTime();
+
+        Vector2 new_position;
+        new_position.x = player->position.x + direction.x * player->speed * GetFrameTime();
+        new_position.y = player->position.y + direction.y * player->speed * GetFrameTime();
+
+        // Check for collisions in the x direction
+        bool collision_x = false;
+        for (int i = 0; i < room.wallsCount; i++)
+        {
+            if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
+            {
+                collision_x = true;
+                break;
+            }
+        }
+
+        // Check for collisions in the y direction
+        bool collision_y = false;
+        for (int i = 0; i < room.wallsCount; i++)
+        {
+            if (CheckCollisionRecs((Rectangle){player->position.x, new_position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
+            {
+                collision_y = true;
+                break;
+            }
+        }
+
+        if (!collision_x)
+        {
+            player->position.x = new_position.x;
+        }
+        if (!collision_y)
+        {
+            player->position.y = new_position.y;
+        }
+
+        if (old_x != player->position.x || old_y != player->position.y)
+        {
+            UpdateMusicStream(*sfx);
+            PlayMusicStream(*sfx);
+        }
     }
 }
 

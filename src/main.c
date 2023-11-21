@@ -83,7 +83,7 @@ int main(void)
             //-----------------------------------------------------------
 
             Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
-            actPlayer(&player, &fxPasosGrava);
+            actPlayer(&player, &fxPasosGrava, room1);
 
             camera.target = (Vector2){player.position.x, player.position.y};
 
@@ -95,14 +95,21 @@ int main(void)
                 BeginMode2D(camera);
                 {
                     ClearBackground(BLACK);
-                    DrawRoom(&tileset, (Vector2){0, 0}, SCALE);
+                    DrawRoom(&tileset, (Vector2){0, 0});
 
                     DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE, REL_TILE_SIZE}, SCALE, WHITE, 1);
+                    DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE * 4, REL_TILE_SIZE * 3}, SCALE, WHITE, -1);
 
                     if (debug)
                     {
-                        PaintGrid((Grid){REL_TILE_SIZE, screenWidth * 2, screenHeight * 2, LIGHTGRAY});
+                        PaintGrid((Grid){REL_TILE_SIZE, REL_TILE_SIZE * 20, REL_TILE_SIZE * 10, LIGHTGRAY});
                         DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
+
+                        // Draw debug walls
+                        for (int i = 0; i < room1.wallsCount; i++)
+                        {
+                            DrawRectangleLinesEx((Rectangle){room1.walls[i].x, room1.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}, 4, RED);
+                        }
                     }
                     else
                     {

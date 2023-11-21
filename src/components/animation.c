@@ -11,8 +11,8 @@ void InitSprite(Sprite *sprite)
     sprite->frameCurrent = 0;
     sprite->frameTime = ANIMATION_SPEED;
 
-    sprite->frames = (Image *)malloc(sizeof(Image) * 4);
-    sprite->textures = (Texture2D *)malloc(sizeof(Texture2D) * 4);
+    sprite->frames = (Image *)malloc(sizeof(Image) * sprite->frameCount);
+    sprite->textures = (Texture2D *)malloc(sizeof(Texture2D) * sprite->frameCount);
 
     for (int i = 0; i < 4; i++)
     {
