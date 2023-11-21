@@ -24,67 +24,11 @@ void DrawElement(GraphicsData *tileset, char *element, Vector2 position, float s
         ScaleRec(&room_dst, scale);
         DrawTexturePro(tileset->texture, room_src, room_dst, (Vector2){0, 0}, 0, WHITE);
     }
-
-    if (strcmp(element, "WALL_1") == 0)
-    {
-        Rectangle wall_src = {TILE_SIZE, 0, TILE_SIZE, TILE_SIZE};
-        Rectangle wall_dst = {position.x, position.y, wall_src.width, wall_src.height};
-        ScaleRec(&wall_dst, scale);
-        DrawTexturePro(tileset->texture, wall_src, wall_dst, (Vector2){0, 0}, 0, WHITE);
-    }
-
-    if (strcmp(element, "UP_WALL_1") == 0)
-    {
-        Rectangle wall_src = {TILE_SIZE * 5, TILE_SIZE * 5, TILE_SIZE, TILE_SIZE};
-        Rectangle wall_dst = {position.x, position.y, TILE_SIZE, TILE_SIZE};
-        ScaleRec(&wall_dst, scale);
-        DrawTexturePro(tileset->texture, wall_src, wall_dst, (Vector2){0, 0}, 0, WHITE);
-    }
-
-    if (strcmp(element, "UP_WALL_2") == 0)
-    {
-        Rectangle wall_src = {TILE_SIZE * 4, TILE_SIZE * 5, TILE_SIZE, TILE_SIZE};
-        Rectangle wall_dst = {position.x, position.y, TILE_SIZE, TILE_SIZE};
-        ScaleRec(&wall_dst, scale);
-        DrawTexturePro(tileset->texture, wall_src, wall_dst, (Vector2){0, 0}, 0, WHITE);
-    }
-
-    if (strcmp(element, "FLOOR_1") == 0)
-    {
-        Rectangle floor_src = {TILE_SIZE * 7, TILE_SIZE, TILE_SIZE, TILE_SIZE};
-        Rectangle floor_dst = {position.x, position.y, floor_src.width + 2, floor_src.height};
-        ScaleRec(&floor_dst, scale);
-        DrawTexturePro(tileset->texture, floor_src, floor_dst, (Vector2){0, 0}, 0, WHITE);
-    }
-
-    if (strcmp(element, "FLOOR_2") == 0)
-    {
-        Rectangle floor_src = {TILE_SIZE * 7, TILE_SIZE, TILE_SIZE, TILE_SIZE};
-        Rectangle floor_dst = {position.x - 2, position.y, floor_src.width + 2, floor_src.height};
-        ScaleRec(&floor_dst, scale);
-        DrawTexturePro(tileset->texture, floor_src, floor_dst, (Vector2){0, 0}, 0, WHITE);
-    }
-
-    if (strcmp(element, "DOOR_LEFT_OPEN") == 0)
-    {
-        DrawElement(tileset, "WALL_1", position, scale);
-        DrawElement(tileset, "UP_WALL_1", Vector2Add(position, Vector2Add(DOWN, DOWN)), scale);
-        DrawElement(tileset, "FLOOR_1", Vector2Add(position, DOWN), scale);
-    }
-
-    if (strcmp(element, "DOOR_RIGHT_OPEN") == 0)
-    {
-        DrawElement(tileset, "WALL_1", position, scale);
-        DrawElement(tileset, "UP_WALL_2", Vector2Add(position, Vector2Add(DOWN, DOWN)), scale);
-        DrawElement(tileset, "FLOOR_2", Vector2Add(position, DOWN), scale);
-    }
 }
 
 void DrawRoom(GraphicsData *tileset, Vector2 position, float scale)
 {
     DrawElement(tileset, "ROOM", position, scale);
-    DrawElement(tileset, "DOOR_LEFT_OPEN", Vector2Add(position, DOWN), scale);
-    DrawElement(tileset, "DOOR_RIGHT_OPEN", Vector2Add(position, (Vector2){5 * TILE_SIZE, TILE_SIZE}), scale);
 }
 
 void UnloadGraphics(GraphicsData *tileset)

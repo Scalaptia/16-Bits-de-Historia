@@ -9,17 +9,17 @@ Controls controls = {.UP_KEY = KEY_W,
 Player player;
 Camera2D camera;
 
-void InitPlayer(Sprite *sprite, Rectangle screen, int tileSize, int relTileSize)
+void InitPlayer(Sprite *sprite, Rectangle screen)
 {
     InitSprite(sprite);
 
-    player.position.x = relTileSize * 2;
-    player.position.y = relTileSize * 2;
+    player.position.x = REL_TILE_SIZE * 2;
+    player.position.y = REL_TILE_SIZE * 2;
     player.color = WHITE;
     player.direction = 1;
 
     camera.target = (Vector2){player.position.x, player.position.y};
-    camera.offset = (Vector2){(screen.width / 2) - (tileSize * 2), (screen.height / 2) - (tileSize * 2)};
+    camera.offset = (Vector2){(screen.width / 2) - (TILE_SIZE * 2), (screen.height / 2) - (TILE_SIZE * 2)};
     camera.zoom = 1.0f;
 }
 

@@ -13,8 +13,6 @@ typedef struct GraphicsData
 } GraphicsData;
 
 #define TILE_SIZE 16
-#define DOWN \
-    (Vector2) { 0, TILE_SIZE }
 
 /* PROTOTIPOS*/
 
@@ -24,13 +22,6 @@ void InitGraphics(GraphicsData *tileset);
 /*
     #### LISTA DE ELEMENTOS
     - "ROOM"
-    - "WALL_1"
-    - "UP_WALL_1"
-    - "UP_WALL_2"
-    - "FLOOR_1"
-    - "FLOOR_2"
-    - "DOOR_LEFT_OPEN"
-    - "DOOR_RIGHT_OPEN"
 */
 void DrawElement(GraphicsData *tileset, char *element, Vector2 position, float scale);
 void DrawRoom(GraphicsData *tileset, Vector2 position, float scale);

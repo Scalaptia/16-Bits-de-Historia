@@ -14,7 +14,11 @@ typedef struct Player
     int direction;
 } Player;
 
-void InitPlayer(Sprite *sprite, Rectangle screen, int TILE_SIZE, int REL_TILE_SIZE);
+#define TILE_SIZE 16
+#define SCALE 5
+#define REL_TILE_SIZE (TILE_SIZE * SCALE)
+
+void InitPlayer(Sprite *sprite, Rectangle screen);
 void actPlayer(Player *player, Music *sfx);
 void movePlayer(Player *player, Music *sfx);
 void playerAttack(Player *player);

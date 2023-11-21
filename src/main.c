@@ -11,14 +11,7 @@
 #include "./headers/sound.h"
 
 //----------------------------------------------------------------------------------
-// Variables Locales (al módulo)
-//----------------------------------------------------------------------------------
-#define TILE_SIZE 16
-#define SCALE 5
-#define REL_TILE_SIZE (TILE_SIZE * SCALE)
-
-//----------------------------------------------------------------------------------
-// Funciones Locales
+// Código
 //----------------------------------------------------------------------------------
 
 int main(void)
@@ -39,8 +32,8 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "juego");
 
-    InitPlayer(&charSprite, window, TILE_SIZE, REL_TILE_SIZE); // Inicializa sprite, player y cámara
-    InitGraphics(&tileset);                                    // Inicializa tileset (mapa)
+    InitPlayer(&charSprite, window); // Inicializa sprite, player y cámara
+    InitGraphics(&tileset);          // Inicializa tileset (mapa)
 
     InitBackground();
     InitMenuButtons(window);
