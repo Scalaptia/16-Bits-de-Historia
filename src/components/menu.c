@@ -1,5 +1,6 @@
 #include "../headers/menu.h"
 
+Sprite loadingScreen;
 Sprite menuBackground;
 
 Color selectedColor = {0, 0, 0, 255};
@@ -21,6 +22,18 @@ MenuButton backButton;
 
 Menu menu;
 
+void InitLoadingScreen()
+{
+    char path[100];
+
+    loadingScreen.frameCount = 248;
+    loadingScreen.frameCurrent = 0;
+    loadingScreen.frameTime = 0.03f;
+
+    loadingScreen.frames = (Image *)malloc(sizeof(Image));
+    loadingScreen.textures = (Texture2D *)malloc(sizeof(Texture2D));
+}
+
 void InitBackground()
 {
     char path[100];
@@ -29,10 +42,10 @@ void InitBackground()
     menuBackground.frameCurrent = 0;
     menuBackground.frameTime = ANIMATION_SPEED / 2;
 
-    menuBackground.frames = (Image *)malloc(sizeof(Image) * 33);
-    menuBackground.textures = (Texture2D *)malloc(sizeof(Texture2D) * 33);
+    menuBackground.frames = (Image *)malloc(sizeof(Image) * menuBackground.frameCount);
+    menuBackground.textures = (Texture2D *)malloc(sizeof(Texture2D) * menuBackground.frameCount);
 
-    for (int i = 0; i < 33; i++)
+    for (int i = 0; i < menuBackground.frameCount; i++)
     {
         sprintf(path, ASSETS_PATH "Background/bg%d.png", i + 1);
         menuBackground.frames[i] = LoadImage(path);
@@ -249,7 +262,7 @@ void UpdateBackground(Rectangle screen)
 
     Vector2 origin = {0, 0};
 
-    DrawTexturePro(menuBackground.textures[menuBackground.frameCurrent], (Rectangle){0, 0, screen.width / 3, screen.height / 2.8}, screen, origin, 0, WHITE);
+    DrawTexturePro(menuBackground.textures[menuBackground.frameCurrent], (Rectangle){0, 0, 640, 400}, screen, origin, 0, WHITE);
 }
 
 void UnloadBackground()

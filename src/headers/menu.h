@@ -7,6 +7,7 @@
 
 enum GameState
 {
+    LOADING,
     MENU,
     GAME,
     OPTIONS,
@@ -26,6 +27,8 @@ typedef struct Menu
     enum GameState prevState;
 } Menu;
 
+void InitLoadingScreen();
+
 void InitBackground();
 void InitMenuButtons(Rectangle screen);
 
@@ -38,6 +41,7 @@ void DrawOptionsUI();
 
 void UnloadBackground();
 
+extern Sprite loadingScreen;
 extern Sprite menuBackground;
 
 extern Color selectedColor;

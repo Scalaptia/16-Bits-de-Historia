@@ -17,14 +17,15 @@
 int main(void)
 {
     //------------------------------------------------
-    int screenWidth = 1600;
-    int screenHeight = 900;
+    int screenWidth = 1920;
+    int screenHeight = 1080;
     float masterVolume = 0.5f;
 
     bool debug = false;
     bool pause = false;
     bool exitWindow = false;
     bool ToggleMusic = true;
+    char path[100];
 
     // Config -----------------------------------------
 
@@ -42,6 +43,7 @@ int main(void)
     InitGraphics(&tileset);          // Inicializa tileset (mapa)
     InitSprite(&npcSprite);
 
+    InitLoadingScreen();
     InitBackground();
     InitMenuButtons(window);
 
@@ -53,6 +55,7 @@ int main(void)
     //------------------------
     SetTargetFPS(144);
 
+    menu.state = LOADING;
     // Main game loop
     while (!exitWindow)
     {
@@ -65,6 +68,41 @@ int main(void)
 
         switch (menu.state)
         {
+        case LOADING:
+            while (loadingScreen.frameCurrent < loadingScreen.frameCount)
+            {
+                PlayMusic(IntroMusic);
+                BeginDrawing();
+                {
+                    ClearBackground(RAYWHITE);
+
+                    loadingScreen.currentTime += GetFrameTime();
+
+                    if (loadingScreen.currentTime >= loadingScreen.frameTime)
+                    {
+                        loadingScreen.currentTime = 0.0f;
+                        loadingScreen.frameCurrent++;
+
+                        sprintf(path, ASSETS_PATH "LoadingScreen/frame%04d.png", loadingScreen.frameCurrent + 1);
+                        loadingScreen.frames[0] = LoadImage(path);
+                        loadingScreen.textures[0] = LoadTextureFromImage(loadingScreen.frames[0]);
+                    }
+
+                    DrawTexturePro(loadingScreen.textures[0], (Rectangle){0, 0, 1280, 720}, (Rectangle){0, 0, screenWidth, screenHeight}, (Vector2){0, 0}, 0, WHITE);
+
+                    if (loadingScreen.frameCurrent == loadingScreen.frameCount - 1)
+                    {
+                        menu.state = MENU;
+                        menu.prevState = MENU;
+                        EndDrawing();
+                        break;
+                    }
+                }
+                EndDrawing();
+            }
+
+            break;
+
         case MENU:
             if (ToggleMusic)
                 PlayMusic(MenuMusic);
