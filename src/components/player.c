@@ -59,6 +59,8 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
 
     if (Vector2Length(direction) > 0.0f)
     {
+        player->isAnimated = true;
+
         direction = Vector2Normalize(direction);
 
         Vector2 new_position;
@@ -101,6 +103,10 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
             UpdateMusicStream(*sfx);
             PlayMusicStream(*sfx);
         }
+    }
+    else
+    {
+        player->isAnimated = false;
     }
 }
 

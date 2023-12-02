@@ -45,7 +45,7 @@ void UpdateSpritesFrame()
     UpdateSpriteFrame(&npcSprite);
 }
 
-void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction)
+void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction, bool isAnimated)
 {
     float width = 16 * scale;
     float height = 16 * scale;
@@ -53,7 +53,14 @@ void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color,
 
     float sourceWidth = direction < 0 ? -16.0f : 16.0f;
 
-    DrawTexturePro(sprite->textures[sprite->frameCurrent], (Rectangle){0, 0, sourceWidth, 16}, (Rectangle){position.x, position.y, width, height}, origin, 0, color);
+    if (isAnimated)
+    {
+        DrawTexturePro(sprite->textures[sprite->frameCurrent], (Rectangle){0, 0, sourceWidth, 16}, (Rectangle){position.x, position.y, width, height}, origin, 0, color);
+    }
+    else
+    {
+        DrawTexturePro(sprite->textures[0], (Rectangle){0, 0, sourceWidth, 16}, (Rectangle){position.x, position.y, width, height}, origin, 0, color);
+    }
 }
 
 void UnloadSprite(Sprite *sprite)

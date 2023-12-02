@@ -13,6 +13,7 @@ typedef struct Player
     Color color;
     float speed;
     int direction;
+    bool isAnimated;
 } Player;
 
 #define TILE_SIZE 16

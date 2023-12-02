@@ -55,7 +55,7 @@ int main(void)
     //------------------------
     SetTargetFPS(144);
 
-    menu.state = LOADING;
+    menu.state = MENU; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -140,8 +140,8 @@ int main(void)
                     ClearBackground(BLACK);
                     DrawRoom(&tileset, (Vector2){0, 0});
 
-                    DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE, REL_TILE_SIZE}, SCALE, WHITE, 1);
-                    DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE * 4, REL_TILE_SIZE * 3}, SCALE, WHITE, -1);
+                    DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE, REL_TILE_SIZE}, SCALE, WHITE, 1, true);
+                    DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE * 4, REL_TILE_SIZE * 3}, SCALE, WHITE, -1, true);
 
                     if (debug)
                     {
@@ -156,7 +156,7 @@ int main(void)
                     }
                     else
                     {
-                        DrawSpriteFrame(&charSprite, player.position, SCALE, player.color, player.direction);
+                        DrawSpriteFrame(&charSprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
                     }
                 }
                 EndMode2D();

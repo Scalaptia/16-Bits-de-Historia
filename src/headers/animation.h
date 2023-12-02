@@ -32,7 +32,7 @@ void InitSprite(Sprite *sprite);
 void UpdateSpriteFrame(Sprite *sprite);
 void UpdateSpritesFrame();
 
-void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction);
+void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction, bool isAnimated);
 void UnloadSprite(Sprite *sprite);
 
 extern Sprite charSprite;
