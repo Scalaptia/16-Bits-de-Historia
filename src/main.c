@@ -17,8 +17,8 @@
 int main(void)
 {
     //------------------------------------------------
-    int screenWidth = 1920;
-    int screenHeight = 1080;
+    int screenWidth = 1600;
+    int screenHeight = 900;
     float masterVolume = 0.5f;
 
     bool debug = false;
@@ -27,11 +27,13 @@ int main(void)
     bool ToggleMusic = true;
 
     // Config -----------------------------------------
+
     Rectangle window = {0, 0, screenWidth, screenHeight};
 
     GraphicsData tileset;
 
-    InitWindow(screenWidth, screenHeight, "juego");
+    InitWindow(screenWidth, screenHeight, "16-Bits de Historia");
+    SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
     strcpy(charSprite.path, "Personaje/char");
     strcpy(npcSprite.path, "Character_animation/monsters_idle/skeleton1/v2/skeleton1_v2_");
