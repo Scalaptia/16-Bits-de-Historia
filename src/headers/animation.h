@@ -36,6 +36,7 @@ void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color,
 void UnloadSprite(Sprite *sprite);
 
 extern Sprite charSprite;
+extern Sprite charPickSprite;
 extern Sprite npcSprite;
 
 #endif

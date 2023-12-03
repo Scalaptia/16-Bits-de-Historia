@@ -9,9 +9,10 @@ Controls controls = {.UP_KEY = KEY_W,
 Player player;
 Camera2D camera;
 
-void InitPlayer(Sprite *sprite, Rectangle screen)
+void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
 {
     InitSprite(sprite);
+    InitSprite(actSprite);
 
     player.position.x = REL_TILE_SIZE * 2;
     player.position.y = REL_TILE_SIZE * 2;
@@ -35,7 +36,6 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
     float old_y = player->position.y;
 
     Vector2 direction = {0.0f, 0.0f};
-    player->speed = 300.0f;
 
     if (IsKeyDown(controls.UP_KEY))
     {
@@ -59,8 +59,6 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
 
     if (Vector2Length(direction) > 0.0f)
     {
-        player->isAnimated = true;
-
         direction = Vector2Normalize(direction);
 
         Vector2 new_position;
@@ -100,8 +98,13 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
 
         if (old_x != player->position.x || old_y != player->position.y)
         {
+            player->isAnimated = true;
             UpdateMusicStream(*sfx);
             PlayMusicStream(*sfx);
+        }
+        else
+        {
+            player->isAnimated = false;
         }
     }
     else
@@ -114,10 +117,12 @@ void playerAttack(Player *player)
 {
     if (IsKeyDown(controls.ATTACK_KEY))
     {
-        player->color = RED;
+        player->sprite = charPickSprite;
+        player->speed = 200.0f;
     }
     else
     {
-        player->color = WHITE;
+        player->sprite = charSprite;
+        player->speed = 300.0f;
     }
 }

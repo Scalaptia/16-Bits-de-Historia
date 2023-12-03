@@ -9,6 +9,8 @@
 
 typedef struct Player
 {
+    Sprite sprite;
+    Sprite actSprite;
     Vector2 position;
     Color color;
     float speed;
@@ -20,7 +22,7 @@ typedef struct Player
 #define SCALE 5
 #define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
-void InitPlayer(Sprite *sprite, Rectangle screen);
+void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen);
 void actPlayer(Player *player, Music *sfx, LevelData room);
 void movePlayer(Player *player, Music *sfx, LevelData room);
 void playerAttack(Player *player);

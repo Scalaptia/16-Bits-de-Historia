@@ -17,8 +17,8 @@
 int main(void)
 {
     //------------------------------------------------
-    int screenWidth = 1920;
-    int screenHeight = 1080;
+    int screenWidth = 1280;
+    int screenHeight = 720;
     float masterVolume = 0.5f;
 
     bool debug = false;
@@ -37,11 +37,12 @@ int main(void)
     SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
     strcpy(charSprite.path, "Personaje/char");
+    strcpy(charPickSprite.path, "Personaje/charpick");
     strcpy(npcSprite.path, "Character_animation/monsters_idle/skeleton1/v2/skeleton1_v2_");
 
-    InitPlayer(&charSprite, window); // Inicializa sprite, player y cámara
-    InitGraphics(&tileset);          // Inicializa tileset (mapa)
-    InitSprite(&npcSprite);
+    InitPlayer(&charSprite, &charPickSprite, window); // Inicializa sprite, player y cámara
+    InitGraphics(&tileset);                           // Inicializa tileset (mapa)
+    InitSprite(&npcSprite);                           // Inicializa sprite del NPC
 
     InitLoadingScreen();
     InitBackground();
@@ -55,7 +56,7 @@ int main(void)
     //------------------------
     SetTargetFPS(144);
 
-    menu.state = MENU; // DEBERÍA SER LOADING
+    menu.state = GAME; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -156,7 +157,7 @@ int main(void)
                     }
                     else
                     {
-                        DrawSpriteFrame(&charSprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+                        DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
                     }
                 }
                 EndMode2D();
@@ -226,6 +227,8 @@ int main(void)
     UnloadRenderTexture(screenCam);
     UnloadBackground();
     UnloadSprite(&charSprite);
+    UnloadSprite(&charPickSprite);
+    UnloadSprite(&npcSprite);
     UnloadGraphics(&tileset);
 
     CloseWindow();

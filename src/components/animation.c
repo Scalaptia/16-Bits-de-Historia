@@ -1,11 +1,12 @@
 #include "../headers/animation.h"
 
 Sprite charSprite;
+Sprite charPickSprite;
 Sprite npcSprite;
 
 void InitSprite(Sprite *sprite)
 {
-    char path[150];
+    char path[160];
 
     sprite->frameCount = 4;
     sprite->frameCurrent = 0;
@@ -42,6 +43,7 @@ void UpdateSpriteFrame(Sprite *sprite)
 void UpdateSpritesFrame()
 {
     UpdateSpriteFrame(&charSprite);
+    UpdateSpriteFrame(&charPickSprite);
     UpdateSpriteFrame(&npcSprite);
 }
 
