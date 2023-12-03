@@ -29,7 +29,8 @@ src/headers/level.h src/components/level.c
 src/headers/animation.h src/components/animation.c
 src/headers/keybinds.h src/components/keybinds.c
 src/headers/menu.h src/components/menu.c
-src/headers/sound.h src/components/sound.c)
+src/headers/sound.h src/components/sound.c
+src/headers/npc.h src/components/npc.c)
 
 target_link_libraries(raylib_template PUBLIC raylib)
 target_compile_definitions(raylib_template PUBLIC ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets/" AUDIO_PATH="${CMAKE_CURRENT_SOURCE_DIR}/audio/")

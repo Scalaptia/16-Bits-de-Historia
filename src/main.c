@@ -9,6 +9,7 @@
 #include "./headers/keybinds.h"
 #include "./headers/menu.h"
 #include "./headers/sound.h"
+#include "./headers/npc.h"
 
 //----------------------------------------------------------------------------------
 // Código
@@ -40,9 +41,9 @@ int main(void)
     strcpy(charPickSprite.path, "Personaje/charpick");
     strcpy(npcSprite.path, "Character_animation/monsters_idle/skeleton1/v2/skeleton1_v2_");
 
-    InitPlayer(&charSprite, &charPickSprite, window); // Inicializa sprite, player y cámara
-    InitGraphics(&tileset);                           // Inicializa tileset (mapa)
-    InitSprite(&npcSprite);                           // Inicializa sprite del NPC
+    InitPlayer(&charSprite, &charPickSprite, window);
+    InitNPCs(&npcSprite, window);
+    InitGraphics(&tileset);
 
     InitLoadingScreen();
     InitBackground();
@@ -56,7 +57,7 @@ int main(void)
     //------------------------
     SetTargetFPS(144);
 
-    menu.state = GAME; // DEBERÍA SER LOADING
+    menu.state = LOADING; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -126,8 +127,11 @@ int main(void)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------
 
-            Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
-            actPlayer(&player, &fxPasosGrava, room1);
+            if (!isInteracting)
+            {
+                Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
+                actPlayer(&player, &fxPasosGrava, room1);
+            }
 
             camera.target = (Vector2){player.position.x, player.position.y};
 
@@ -141,8 +145,7 @@ int main(void)
                     ClearBackground(BLACK);
                     DrawRoom(&tileset, (Vector2){0, 0});
 
-                    DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE, REL_TILE_SIZE}, SCALE, WHITE, 1, true);
-                    DrawSpriteFrame(&npcSprite, (Vector2){REL_TILE_SIZE * 4, REL_TILE_SIZE * 3}, SCALE, WHITE, -1, true);
+                    UpdateNPCs();
 
                     if (debug)
                     {
@@ -158,6 +161,18 @@ int main(void)
                     else
                     {
                         DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+
+                        if (IsKeyPressed(KEY_E) || isInteracting)
+                        {
+                            if (Vector2Distance(player.position, skeleton1.position) < 64)
+                            {
+                                InteractNPC(skeleton1);
+                            }
+                            else if (Vector2Distance(player.position, skeleton2.position) < 64)
+                            {
+                                InteractNPC(skeleton2);
+                            }
+                        }
                     }
                 }
                 EndMode2D();
@@ -169,6 +184,14 @@ int main(void)
             {
                 // Pintar pantalla (textura)
                 DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
+
+                if (isInteracting)
+                {
+                    DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
+                    DrawRectangle(0, screenHeight - screenHeight / 4, screenWidth, screenHeight / 4, Fade(BLACK, 0.9f));
+                    DrawText(currentName, 20, (screenHeight - screenHeight / 4) + 20, 30, WHITE);
+                    DrawText(currentDialogue, 20, (screenHeight - screenHeight / 4) + 70, 25, WHITE);
+                }
 
                 DrawFPS(GetScreenWidth() - 95, 10);
             }
@@ -209,7 +232,7 @@ int main(void)
                 UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight});
                 DrawRectangle(0, 0, screenWidth, screenHeight, rectangleColor); // Fondo gris
 
-                DrawRectangle(0, screenHeight / 2 - 100, screenWidth, 200, BLACK); //
+                DrawRectangle(0, screenHeight / 2 - 100, screenWidth, 200, BLACK);
                 DrawText("¿Desea salir del juego? [S/N]", screenWidth / 2 - 230, screenHeight / 2 - 15, 30, WHITE);
             }
             EndDrawing();
