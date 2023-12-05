@@ -57,7 +57,7 @@ int main(void)
     //------------------------
     SetTargetFPS(144);
 
-    menu.state = LOADING; // DEBERÍA SER LOADING
+    menu.state = GAME; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -156,6 +156,12 @@ int main(void)
                         for (int i = 0; i < room1.wallsCount; i++)
                         {
                             DrawRectangleLinesEx((Rectangle){room1.walls[i].x, room1.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}, 4, RED);
+                        }
+
+                        // Draw debug objects
+                        for (int i = 0; i < room1.objectsCount; i++)
+                        {
+                            DrawRectangleLinesEx(room1.objects[i], 4, RED);
                         }
                     }
                     else

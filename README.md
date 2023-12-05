@@ -1,4 +1,4 @@
-# Proyecto Final
+# 16-Bits de Historia - La batalla de Puebla
 
 **Materia:** Programación Estructurada
 
@@ -6,7 +6,3 @@
 
 -   Fernando Haro Calvo
 -   Adán González Ceseña
-
----
-
-# Juan Gatusia

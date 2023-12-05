@@ -1,6 +1,7 @@
 #include "../headers/level.h"
 
 LevelData room1;
+
 Vector2 ROOM1_POS = {TILE_SIZE * 3, TILE_SIZE * 3};
 
 void InitGraphics(GraphicsData *tileset)
@@ -31,25 +32,63 @@ void DrawElement(GraphicsData *tileset, char *element, Vector2 position)
 
 void DrawRoom(GraphicsData *tileset, Vector2 position)
 {
-    // Create collision walls
-    room1.wallsCount = 24;
-    room1.walls = malloc(sizeof(Vector2) * room1.wallsCount);
-
-    // Top and bottom walls
-    for (int i = 0; i < 6; i++)
-    {
-        room1.walls[i] = (Vector2){position.x + (i * REL_TILE_SIZE), position.y};
-        room1.walls[i + 6] = (Vector2){position.x + (i * REL_TILE_SIZE), position.y + (REL_TILE_SIZE * 4)};
-    }
-
-    // Left and right walls
-    for (int i = 0; i < 5; i++)
-    {
-        room1.walls[i + 12] = (Vector2){position.x, position.y + (i * REL_TILE_SIZE)};
-        room1.walls[i + 17] = (Vector2){position.x + (REL_TILE_SIZE * 5), position.y + (i * REL_TILE_SIZE)};
-    }
+    CreateCollisionWalls(position, (Vector2){12, 10}, &room1.wallsCount, &room1.walls);
+    CreateCollisionObject((Vector2){position.x + 4, position.y + 3}, (Vector2){2, 2}, &room1.objectsCount, &room1.objects);
+    CreateCollisionObject((Vector2){position.x + 8, position.y + 3}, (Vector2){2, 2}, &room1.objectsCount, &room1.objects);
 
     DrawElement(tileset, "ROOM", position);
+}
+
+void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vector2 **walls)
+{
+    // Make position relative to the tileset
+    position.x *= REL_TILE_SIZE;
+    position.y *= REL_TILE_SIZE;
+
+    int count = 0;
+    Vector2 *wallsArray = malloc(sizeof(Vector2) * (int)(size.x * 2 + size.y * 2));
+
+    for (int i = 0; i < size.x; i++)
+    {
+        wallsArray[count] = (Vector2){position.x + i * REL_TILE_SIZE, position.y};
+        count++;
+        wallsArray[count] = (Vector2){position.x + i * REL_TILE_SIZE, position.y + (size.y - 1) * REL_TILE_SIZE};
+        count++;
+    }
+
+    for (int i = 0; i < size.y; i++)
+    {
+        wallsArray[count] = (Vector2){position.x, position.y + i * REL_TILE_SIZE};
+        count++;
+        wallsArray[count] = (Vector2){position.x + (size.x - 1) * REL_TILE_SIZE, position.y + i * REL_TILE_SIZE};
+        count++;
+    }
+
+    *wallsCount = count;
+    *walls = wallsArray;
+}
+
+void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Rectangle **objects)
+{
+    position.x *= REL_TILE_SIZE;
+    position.y *= REL_TILE_SIZE;
+
+    int newObjectsCount = (int)(size.x * size.y);
+    Rectangle *newObjects = malloc(sizeof(Rectangle) * newObjectsCount);
+
+    for (int i = 0; i < size.x; i++)
+    {
+        for (int j = 0; j < size.y; j++)
+        {
+            newObjects[i * (int)size.y + j] = (Rectangle){position.x + i * REL_TILE_SIZE, position.y + j * REL_TILE_SIZE, REL_TILE_SIZE, REL_TILE_SIZE};
+        }
+    }
+
+    // Concatenar objetos nuevos con objetos viejos
+    *objects = realloc(*objects, sizeof(Rectangle) * (*objectsCount + newObjectsCount));
+    memcpy(*objects + *objectsCount, newObjects, sizeof(Rectangle) * newObjectsCount);
+    *objectsCount += newObjectsCount;
+    free(newObjects);
 }
 
 void UnloadGraphics(GraphicsData *tileset)
