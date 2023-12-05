@@ -33,7 +33,7 @@ void DrawElement(GraphicsData *tileset, char *element, Vector2 position)
 void DrawRoom(GraphicsData *tileset, Vector2 position)
 {
     CreateCollisionWalls(position, (Vector2){12, 10}, &room1.wallsCount, &room1.walls);
-    CreateCollisionObject((Vector2){position.x + 4, position.y + 3}, (Vector2){2, 2}, &room1.objectsCount, &room1.objects);
+    CreateCollisionObject((Vector2){position.x + 2, position.y + 3}, (Vector2){2, 2}, &room1.objectsCount, &room1.objects);
     CreateCollisionObject((Vector2){position.x + 8, position.y + 3}, (Vector2){2, 2}, &room1.objectsCount, &room1.objects);
 
     DrawElement(tileset, "ROOM", position);
@@ -80,7 +80,7 @@ void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Re
     {
         for (int j = 0; j < size.y; j++)
         {
-            newObjects[i * (int)size.y + j] = (Rectangle){position.x + i * REL_TILE_SIZE, position.y + j * REL_TILE_SIZE, REL_TILE_SIZE, REL_TILE_SIZE};
+            newObjects[i * (int)size.y + j] = (Rectangle){position.x + i * REL_TILE_SIZE + 2.5, position.y + j * REL_TILE_SIZE + 2.5, REL_TILE_SIZE - 5, REL_TILE_SIZE - 5};
         }
     }
 

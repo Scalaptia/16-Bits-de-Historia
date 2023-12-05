@@ -25,7 +25,7 @@ int main(void)
     bool debug = false;
     bool pause = false;
     bool exitWindow = false;
-    bool ToggleMusic = true;
+    bool ToggleMusic = false; // Should be true
     char path[100];
 
     // Config -----------------------------------------
