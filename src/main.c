@@ -149,7 +149,7 @@ int main(void)
 
                     if (debug)
                     {
-                        PaintGrid((Grid){REL_TILE_SIZE, REL_TILE_SIZE * 6, REL_TILE_SIZE * 5, LIGHTGRAY});
+                        PaintGrid((Grid){REL_TILE_SIZE, REL_TILE_SIZE * 12, REL_TILE_SIZE * 10, LIGHTGRAY});
                         DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
 
                         // Draw debug walls
@@ -161,20 +161,28 @@ int main(void)
                         // Draw debug objects
                         for (int i = 0; i < room1.objectsCount; i++)
                         {
-                            DrawRectangleLinesEx(room1.objects[i], 4, RED);
+                            DrawRectangleLinesEx(room1.objects[i], 4, MAROON);
                         }
                     }
                     else
                     {
                         DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
 
-                        if (IsKeyPressed(KEY_E) || isInteracting)
+                        if (Vector2Distance(player.position, skeleton1.position) < 128)
                         {
-                            if (Vector2Distance(player.position, skeleton1.position) < 64)
+                            DrawRectangle(skeleton1.position.x - 17 + (REL_TILE_SIZE / 2), skeleton1.position.y - 50, 32, 50, Fade(BLACK, 0.8f));
+                            DrawText("E", skeleton1.position.x - 10 + (REL_TILE_SIZE / 2), skeleton1.position.y - 40, 30, WHITE);
+
+                            if (IsKeyPressed(KEY_E) || isInteracting)
                             {
                                 InteractNPC(skeleton1);
                             }
-                            else if (Vector2Distance(player.position, skeleton2.position) < 64)
+                        }
+                        else if (Vector2Distance(player.position, skeleton2.position) < 128)
+                        {
+                            DrawRectangle(skeleton2.position.x - 17 + (REL_TILE_SIZE / 2), skeleton2.position.y - 50, 32, 50, Fade(BLACK, 0.8f));
+                            DrawText("E", skeleton2.position.x - 10 + (REL_TILE_SIZE / 2), skeleton2.position.y - 40, 30, WHITE);
+                            if (IsKeyPressed(KEY_E) || isInteracting)
                             {
                                 InteractNPC(skeleton2);
                             }

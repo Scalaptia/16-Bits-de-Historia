@@ -32,11 +32,13 @@ void DrawElement(GraphicsData *tileset, char *element, Vector2 position)
 
 void DrawRoom(GraphicsData *tileset, Vector2 position)
 {
-    CreateCollisionWalls(position, (Vector2){12, 10}, &room1.wallsCount, &room1.walls);
-    CreateCollisionObject((Vector2){position.x + 2, position.y + 3}, (Vector2){2, 2}, &room1.objectsCount, &room1.objects);
-    CreateCollisionObject((Vector2){position.x + 8, position.y + 3}, (Vector2){2, 2}, &room1.objectsCount, &room1.objects);
-
     DrawElement(tileset, "ROOM", position);
+
+    CreateCollisionWalls(position, (Vector2){12, 10}, &room1.wallsCount, &room1.walls);
+    CreateCollisionObject((Vector2){position.x + 2, position.y + 7}, (Vector2){7, 1}, &room1.objectsCount, &room1.objects);
+    CreateCollisionObject((Vector2){position.x + 9, position.y + 2}, (Vector2){1, 6}, &room1.objectsCount, &room1.objects);
+    CreateCollisionObject((Vector2){position.x + 5, position.y + 3}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
+    CreateCollisionObject((Vector2){position.x + 4, position.y + 2}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
 }
 
 void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vector2 **walls)
