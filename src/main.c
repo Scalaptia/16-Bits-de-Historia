@@ -12,11 +12,6 @@
 #include "./headers/npc.h"
 
 //----------------------------------------------------------------------------------
-// Prototipos
-//----------------------------------------------------------------------------------
-bool IsRectangleOnScreen(Rectangle rect, Camera2D camera);
-
-//----------------------------------------------------------------------------------
 // Código
 //----------------------------------------------------------------------------------
 
@@ -162,7 +157,7 @@ int main(void)
                         for (int i = 0; i < room1.wallsCount; i++)
                         {
                             Rectangle wallRect = {room1.walls[i].x, room1.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE};
-                            if (IsRectangleOnScreen(wallRect, camera))
+                            if (IsRectangleOnCamera(wallRect, camera))
                             {
                                 DrawRectangleLinesEx(wallRect, 4, RED);
                             }
@@ -171,7 +166,7 @@ int main(void)
                         // Draw debug objects
                         for (int i = 0; i < room1.objectsCount; i++)
                         {
-                            if (IsRectangleOnScreen(room1.objects[i], camera))
+                            if (IsRectangleOnCamera(room1.objects[i], camera))
                             {
                                 DrawRectangleLinesEx(room1.objects[i], 4, MAROON);
                             }

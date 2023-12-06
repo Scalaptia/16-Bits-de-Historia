@@ -138,9 +138,8 @@ void UnloadGraphics(GraphicsData *tileset)
     UnloadImage(tileset->image);
 }
 
-bool IsRectangleOnScreen(Rectangle rect, Camera2D camera)
+// Check if a rectangle is 2 TILES away from the center of the camera
+bool IsRectangleOnCamera(Rectangle rect, Camera2D camera)
 {
-    Rectangle screen = {camera.target.x - camera.offset.x, camera.target.y - camera.offset.y, camera.offset.x * 2, camera.offset.y * 2};
-
-    return CheckCollisionRecs(rect, screen);
+    return CheckCollisionRecs(rect, (Rectangle){camera.target.x - REL_TILE_SIZE * 2, camera.target.y - REL_TILE_SIZE * 2, REL_TILE_SIZE * 4, REL_TILE_SIZE * 4});
 }

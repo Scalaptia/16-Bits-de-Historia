@@ -71,7 +71,7 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
         // Check for collisions in the x direction
         for (int i = 0; i < room.wallsCount; i++)
         {
-            if (IsRectangleOnScreen((Rectangle){0, 0, room.walls[i].x, room.walls[i].y}, camera))
+            if (IsRectangleOnCamera((Rectangle){0, 0, room.walls[i].x, room.walls[i].y}, camera))
             {
                 if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
                 {
@@ -88,7 +88,7 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
         // Check if the player is colliding with an object
         for (int i = 0; i < room.objectsCount; i++)
         {
-            if (IsRectangleOnScreen(room.objects[i], camera))
+            if (IsRectangleOnCamera(room.objects[i], camera))
             {
                 if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, room.objects[i]))
                 {
