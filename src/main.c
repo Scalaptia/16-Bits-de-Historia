@@ -12,6 +12,11 @@
 #include "./headers/npc.h"
 
 //----------------------------------------------------------------------------------
+// Prototipos
+//----------------------------------------------------------------------------------
+bool IsRectangleOnScreen(Rectangle rect, Camera2D camera);
+
+//----------------------------------------------------------------------------------
 // Código
 //----------------------------------------------------------------------------------
 
@@ -155,13 +160,20 @@ int main(void)
                         // Draw debug walls
                         for (int i = 0; i < room1.wallsCount; i++)
                         {
-                            DrawRectangleLinesEx((Rectangle){room1.walls[i].x, room1.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}, 4, RED);
+                            Rectangle wallRect = {room1.walls[i].x, room1.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE};
+                            if (IsRectangleOnScreen(wallRect, camera))
+                            {
+                                DrawRectangleLinesEx(wallRect, 4, RED);
+                            }
                         }
 
                         // Draw debug objects
                         for (int i = 0; i < room1.objectsCount; i++)
                         {
-                            DrawRectangleLinesEx(room1.objects[i], 4, MAROON);
+                            if (IsRectangleOnScreen(room1.objects[i], camera))
+                            {
+                                DrawRectangleLinesEx(room1.objects[i], 4, MAROON);
+                            }
                         }
                     }
                     else
@@ -272,4 +284,11 @@ int main(void)
     //--------------------------------------------------------------------------------------
 
     return 0;
+}
+
+bool IsRectangleOnScreen(Rectangle rect, Camera2D camera)
+{
+    Rectangle screen = {camera.target.x - camera.offset.x, camera.target.y - camera.offset.y, camera.offset.x * 2, camera.offset.y * 2};
+
+    return CheckCollisionRecs(rect, screen);
 }
