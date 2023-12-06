@@ -13,14 +13,14 @@ void InitNPCs(Sprite *sprite, Rectangle screen)
     skeleton1.name = "Esqueleto 1";
     skeleton1.dialogue = "A ochoa lo mataron a balazos.";
     skeleton1.position.x = REL_TILE_SIZE * 1;
-    skeleton1.position.y = REL_TILE_SIZE * 1;
+    skeleton1.position.y = REL_TILE_SIZE * 18;
     skeleton1.color = WHITE;
     skeleton1.direction = 1;
 
     skeleton2.name = "Esqueleto 2";
     skeleton2.dialogue = "El esqueleto 1 sabe cosas.";
     skeleton2.position.x = REL_TILE_SIZE * 4;
-    skeleton2.position.y = REL_TILE_SIZE * 3;
+    skeleton2.position.y = REL_TILE_SIZE * 4;
     skeleton2.color = WHITE;
     skeleton2.direction = -1;
 }

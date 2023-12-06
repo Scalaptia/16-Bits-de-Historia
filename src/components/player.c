@@ -61,50 +61,44 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
     {
         direction = Vector2Normalize(direction);
 
+        bool collision_x = false;
+        bool collision_y = false;
         Vector2 new_position;
+
         new_position.x = player->position.x + direction.x * player->speed * GetFrameTime();
         new_position.y = player->position.y + direction.y * player->speed * GetFrameTime();
 
         // Check for collisions in the x direction
-        bool collision_x = false;
         for (int i = 0; i < room.wallsCount; i++)
         {
-            // Check if the player is colliding with a wall
-            if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
+            if (IsRectangleOnScreen((Rectangle){0, 0, room.walls[i].x, room.walls[i].y}, camera))
             {
-                collision_x = true;
-                break;
+                if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
+                {
+                    collision_x = true;
+                }
+
+                if (CheckCollisionRecs((Rectangle){player->position.x, new_position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
+                {
+                    collision_y = true;
+                }
             }
         }
 
         // Check if the player is colliding with an object
-        for (int j = 0; j < room.objectsCount; j++)
+        for (int i = 0; i < room.objectsCount; i++)
         {
-            if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, room.objects[j]))
+            if (IsRectangleOnScreen(room.objects[i], camera))
             {
-                collision_x = true;
-                break;
-            }
-        }
+                if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, room.objects[i]))
+                {
+                    collision_x = true;
+                }
 
-        // Check for collisions in the y direction
-        bool collision_y = false;
-        for (int i = 0; i < room.wallsCount; i++)
-        {
-            if (CheckCollisionRecs((Rectangle){player->position.x, new_position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
-            {
-                collision_y = true;
-                break;
-            }
-        }
-
-        // Check if the player is colliding with an object
-        for (int j = 0; j < room.objectsCount; j++)
-        {
-            if (CheckCollisionRecs((Rectangle){player->position.x, new_position.y, REL_TILE_SIZE, REL_TILE_SIZE}, room.objects[j]))
-            {
-                collision_y = true;
-                break;
+                if (CheckCollisionRecs((Rectangle){player->position.x, new_position.y, REL_TILE_SIZE, REL_TILE_SIZE}, room.objects[i]))
+                {
+                    collision_y = true;
+                }
             }
         }
 

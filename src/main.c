@@ -52,6 +52,7 @@ int main(void)
 
     InitLoadingScreen();
     InitBackground();
+    InitRoom1Collisions((Vector2){0, 0});
     InitMenuButtons(window);
 
     InitAudioDevice();
@@ -60,7 +61,7 @@ int main(void)
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     //------------------------
-    SetTargetFPS(144);
+    // SetTargetFPS(144);
 
     menu.state = GAME; // DEBERÍA SER LOADING
     // Main game loop
@@ -284,11 +285,4 @@ int main(void)
     //--------------------------------------------------------------------------------------
 
     return 0;
-}
-
-bool IsRectangleOnScreen(Rectangle rect, Camera2D camera)
-{
-    Rectangle screen = {camera.target.x - camera.offset.x, camera.target.y - camera.offset.y, camera.offset.x * 2, camera.offset.y * 2};
-
-    return CheckCollisionRecs(rect, screen);
 }

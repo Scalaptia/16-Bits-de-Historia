@@ -19,21 +19,8 @@ void ScaleRec(Rectangle *rec)
     rec->height *= SCALE;
 }
 
-void DrawElement(GraphicsData *tileset, char *element, Vector2 position)
+void InitRoom1Collisions(Vector2 position)
 {
-    if (strcmp(element, "ROOM") == 0)
-    {
-        Rectangle room_src = {0, 0, tileset->image.width, tileset->image.height};
-        Rectangle room_dst = {position.x + TILE_SIZE, position.y + TILE_SIZE, room_src.width, room_src.height};
-        ScaleRec(&room_dst);
-        DrawTexturePro(tileset->texture, room_src, room_dst, (Vector2){0, 0}, 0, WHITE);
-    }
-}
-
-void DrawRoom(GraphicsData *tileset, Vector2 position)
-{
-    DrawElement(tileset, "ROOM", position);
-
     CreateCollisionWalls(position, (Vector2){32, 22}, &room1.wallsCount, &room1.walls);
 
     // 1, 1 - 6, 2
@@ -74,6 +61,22 @@ void DrawRoom(GraphicsData *tileset, Vector2 position)
 
     // 28, 7 - 3, 1
     CreateCollisionObject((Vector2){position.x + 28, position.y + 7}, (Vector2){3, 1}, &room1.objectsCount, &room1.objects);
+}
+
+void DrawElement(GraphicsData *tileset, char *element, Vector2 position)
+{
+    if (strcmp(element, "ROOM") == 0)
+    {
+        Rectangle room_src = {0, 0, tileset->image.width, tileset->image.height};
+        Rectangle room_dst = {position.x + TILE_SIZE, position.y + TILE_SIZE, room_src.width, room_src.height};
+        ScaleRec(&room_dst);
+        DrawTexturePro(tileset->texture, room_src, room_dst, (Vector2){0, 0}, 0, WHITE);
+    }
+}
+
+void DrawRoom(GraphicsData *tileset, Vector2 position)
+{
+    DrawElement(tileset, "ROOM", position);
 }
 
 void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vector2 **walls)
@@ -133,4 +136,11 @@ void UnloadGraphics(GraphicsData *tileset)
 {
     UnloadTexture(tileset->texture);
     UnloadImage(tileset->image);
+}
+
+bool IsRectangleOnScreen(Rectangle rect, Camera2D camera)
+{
+    Rectangle screen = {camera.target.x - camera.offset.x, camera.target.y - camera.offset.y, camera.offset.x * 2, camera.offset.y * 2};
+
+    return CheckCollisionRecs(rect, screen);
 }

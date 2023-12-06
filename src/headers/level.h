@@ -34,10 +34,13 @@ void InitGraphics(GraphicsData *tileset);
     - "ROOM"
 */
 void DrawElement(GraphicsData *tileset, char *element, Vector2 position);
+void InitRoom1Collisions(Vector2 position);
 void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vector2 **walls);
 void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Rectangle **objects);
+
 void DrawRoom(GraphicsData *tileset, Vector2 position);
 void UnloadGraphics(GraphicsData *tileset);
+bool IsRectangleOnScreen(Rectangle rect, Camera2D camera);
 
 extern LevelData room1;
 
