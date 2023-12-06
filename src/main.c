@@ -154,7 +154,7 @@ int main(void)
 
                     if (debug)
                     {
-                        PaintGrid((Grid){REL_TILE_SIZE, REL_TILE_SIZE * 12, REL_TILE_SIZE * 10, LIGHTGRAY});
+                        PaintGrid((Grid){REL_TILE_SIZE, REL_TILE_SIZE * 32, REL_TILE_SIZE * 22, LIGHTGRAY});
                         DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
 
                         // Draw debug walls
@@ -182,8 +182,8 @@ int main(void)
 
                         if (Vector2Distance(player.position, skeleton1.position) < 128)
                         {
-                            DrawRectangle(skeleton1.position.x - 17 + (REL_TILE_SIZE / 2), skeleton1.position.y - 50, 32, 50, Fade(BLACK, 0.8f));
-                            DrawText("E", skeleton1.position.x - 10 + (REL_TILE_SIZE / 2), skeleton1.position.y - 40, 30, WHITE);
+                            DrawRectangle(skeleton1.position.x - 17 + (REL_TILE_SIZE / 2), skeleton1.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
+                            DrawText("E", skeleton1.position.x - 10 + (REL_TILE_SIZE / 2), skeleton1.position.y - 45, 30, Fade(WHITE, 0.8f));
 
                             if (IsKeyPressed(KEY_E) || isInteracting)
                             {
@@ -192,8 +192,8 @@ int main(void)
                         }
                         else if (Vector2Distance(player.position, skeleton2.position) < 128)
                         {
-                            DrawRectangle(skeleton2.position.x - 17 + (REL_TILE_SIZE / 2), skeleton2.position.y - 50, 32, 50, Fade(BLACK, 0.8f));
-                            DrawText("E", skeleton2.position.x - 10 + (REL_TILE_SIZE / 2), skeleton2.position.y - 40, 30, WHITE);
+                            DrawRectangle(skeleton2.position.x - 17 + (REL_TILE_SIZE / 2), skeleton2.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
+                            DrawText("E", skeleton2.position.x - 10 + (REL_TILE_SIZE / 2), skeleton2.position.y - 45, 30, Fade(WHITE, 0.8f));
                             if (IsKeyPressed(KEY_E) || isInteracting)
                             {
                                 InteractNPC(skeleton2);
