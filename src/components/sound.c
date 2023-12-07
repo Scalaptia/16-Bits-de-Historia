@@ -1,6 +1,6 @@
 #include "../headers/sound.h"
 
-Music IntroMusic;
+Sound IntroSound;
 Music GameMusic;
 float timePlayed;
 Music MenuMusic;
@@ -9,7 +9,7 @@ Music fxPasosGrava;
 
 void InitSounds()
 {
-    IntroMusic = LoadMusicStream(AUDIO_PATH "LoadingScreen/intro.mp3");
+    IntroSound = LoadSound(AUDIO_PATH "LoadingScreen/intro.mp3");
     GameMusic = LoadMusicStream(AUDIO_PATH "Music/meow.mp3");
     MenuMusic = LoadMusicStream(AUDIO_PATH "Music/gerudo.mp3");
 
@@ -30,7 +30,7 @@ void PlayMusic(Music music)
 
 void UnloadSounds()
 {
-    UnloadMusicStream(IntroMusic);
+    UnloadSound(IntroSound);
     UnloadMusicStream(GameMusic);
     UnloadMusicStream(MenuMusic);
     UnloadSound(fxButton);

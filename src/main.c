@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------------------
 // Librerías
 //----------------------------------------------------------------------------------
-#include "raylib.h"
+#include <raylib.h>
 #include "./headers/player.h"
 #include "./headers/grid.h"
 #include "./headers/level.h"
@@ -56,9 +56,9 @@ int main(void)
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     //------------------------
-    // SetTargetFPS(144);
+    SetTargetFPS(60);
 
-    menu.state = GAME; // DEBERÍA SER LOADING
+    menu.state = LOADING; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -72,12 +72,12 @@ int main(void)
         switch (menu.state)
         {
         case LOADING:
+            PlaySound(IntroSound);
             while (loadingScreen.frameCurrent < loadingScreen.frameCount)
             {
-                PlayMusic(IntroMusic);
                 BeginDrawing();
                 {
-                    ClearBackground(RAYWHITE);
+                    ClearBackground(BLACK);
 
                     loadingScreen.currentTime += GetFrameTime();
 
@@ -85,25 +85,15 @@ int main(void)
                     {
                         loadingScreen.currentTime = 0.0f;
                         loadingScreen.frameCurrent++;
-
-                        sprintf(path, ASSETS_PATH "LoadingScreen/frame%04d.png", loadingScreen.frameCurrent + 1);
-                        loadingScreen.frames[0] = LoadImage(path);
-                        loadingScreen.textures[0] = LoadTextureFromImage(loadingScreen.frames[0]);
                     }
 
-                    DrawTexturePro(loadingScreen.textures[0], (Rectangle){0, 0, 1280, 720}, (Rectangle){0, 0, screenWidth, screenHeight}, (Vector2){0, 0}, 0, WHITE);
-
-                    if (loadingScreen.frameCurrent == loadingScreen.frameCount - 1)
-                    {
-                        menu.state = MENU;
-                        menu.prevState = MENU;
-                        EndDrawing();
-                        break;
-                    }
+                    DrawTexturePro(loadingScreen.textures[loadingScreen.frameCurrent], (Rectangle){0, 0, 800, 450}, (Rectangle){0, 0, screenWidth, screenHeight}, (Vector2){0, 0}, 0, WHITE);
                 }
                 EndDrawing();
             }
 
+            menu.state = MENU;
+            menu.prevState = MENU;
             break;
 
         case MENU:

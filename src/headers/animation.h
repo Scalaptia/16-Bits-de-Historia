@@ -20,7 +20,6 @@ enum Entities
 typedef struct Sprite
 {
     char path[100];
-    Image *frames;
     Texture2D *textures;
     float frameTime;
     float currentTime;

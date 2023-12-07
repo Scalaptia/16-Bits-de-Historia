@@ -8,7 +8,7 @@ void PlayMusic(Music music);
 void UnloadSounds();
 
 // Inicio
-extern Music IntroMusic;
+extern Sound IntroSound;
 
 // Musica 1----------------
 extern Music GameMusic;

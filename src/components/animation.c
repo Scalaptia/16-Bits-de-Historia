@@ -12,15 +12,15 @@ void InitSprite(Sprite *sprite)
     sprite->frameCurrent = 0;
     sprite->frameTime = ANIMATION_SPEED;
 
-    sprite->frames = (Image *)malloc(sizeof(Image) * sprite->frameCount);
     sprite->textures = (Texture2D *)malloc(sizeof(Texture2D) * sprite->frameCount);
 
     for (int i = 0; i < 4; i++)
     {
         sprintf(path, ASSETS_PATH "%s%d.png", sprite->path, i + 1);
 
-        sprite->frames[i] = LoadImage(path);
-        sprite->textures[i] = LoadTextureFromImage(sprite->frames[i]);
+        Image frameImage = LoadImage(path);
+        sprite->textures[i] = LoadTextureFromImage(frameImage);
+        UnloadImage(frameImage);
     }
 }
 
@@ -69,10 +69,8 @@ void UnloadSprite(Sprite *sprite)
 {
     for (int i = 0; i < 4; i++)
     {
-        UnloadImage(sprite->frames[i]);
         UnloadTexture(sprite->textures[i]);
     }
 
-    free(sprite->frames);
     free(sprite->textures);
 }

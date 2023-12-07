@@ -30,8 +30,16 @@ void InitLoadingScreen()
     loadingScreen.frameCurrent = 0;
     loadingScreen.frameTime = 0.03f;
 
-    loadingScreen.frames = (Image *)malloc(sizeof(Image));
-    loadingScreen.textures = (Texture2D *)malloc(sizeof(Texture2D));
+    loadingScreen.textures = (Texture2D *)malloc(sizeof(Texture2D) * loadingScreen.frameCount);
+
+    for (int i = 0; i < loadingScreen.frameCount; i++)
+    {
+        sprintf(path, ASSETS_PATH "LoadingScreen/frame%04d.png", i + 1);
+
+        Image frameImage = LoadImage(path);
+        loadingScreen.textures[i] = LoadTextureFromImage(frameImage);
+        UnloadImage(frameImage);
+    }
 }
 
 void InitBackground()
@@ -42,15 +50,14 @@ void InitBackground()
     menuBackground.frameCurrent = 0;
     menuBackground.frameTime = ANIMATION_SPEED / 2;
 
-    menuBackground.frames = (Image *)malloc(sizeof(Image) * menuBackground.frameCount);
     menuBackground.textures = (Texture2D *)malloc(sizeof(Texture2D) * menuBackground.frameCount);
 
     for (int i = 0; i < menuBackground.frameCount; i++)
     {
         sprintf(path, ASSETS_PATH "Background/bg%d.png", i + 1);
-        menuBackground.frames[i] = LoadImage(path);
-
-        menuBackground.textures[i] = LoadTextureFromImage(menuBackground.frames[i]);
+        Image frameImage = LoadImage(path);
+        menuBackground.textures[i] = LoadTextureFromImage(frameImage);
+        UnloadImage(frameImage);
     }
 }
 
@@ -269,10 +276,8 @@ void UnloadBackground()
 {
     for (int i = 0; i < 33; i++)
     {
-        UnloadImage(menuBackground.frames[i]);
         UnloadTexture(menuBackground.textures[i]);
     }
 
-    free(menuBackground.frames);
     free(menuBackground.textures);
 }
