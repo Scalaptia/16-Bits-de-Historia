@@ -20,7 +20,7 @@ typedef struct NPC
 #define SCALE 5
 #define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
-void InitNPCs(Sprite *sprite, Rectangle screen);
+void InitNPCs(Rectangle screen);
 void InteractNPC(NPC npc);
 void UpdateNPCs();
 
@@ -28,7 +28,7 @@ extern bool isInteracting;
 extern char *currentDialogue;
 extern char *currentName;
 
-extern NPC skeleton1;
-extern NPC skeleton2;
+extern NPC enojado1;
+extern NPC enojado2;
 
 #endif

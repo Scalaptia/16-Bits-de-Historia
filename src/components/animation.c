@@ -2,19 +2,21 @@
 
 Sprite charSprite;
 Sprite charPickSprite;
-Sprite npcSprite;
 
-void InitSprite(Sprite *sprite)
+Sprite npcE1Sprite;
+Sprite npcE2Sprite;
+
+void InitSprite(Sprite *sprite, int frameCount)
 {
     char path[160];
 
-    sprite->frameCount = 4;
+    sprite->frameCount = frameCount;
     sprite->frameCurrent = 0;
     sprite->frameTime = ANIMATION_SPEED;
 
     sprite->textures = (Texture2D *)malloc(sizeof(Texture2D) * sprite->frameCount);
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < sprite->frameCount; i++)
     {
         sprintf(path, ASSETS_PATH "%s%d.png", sprite->path, i + 1);
 
@@ -44,7 +46,8 @@ void UpdateSpritesFrame()
 {
     UpdateSpriteFrame(&charSprite);
     UpdateSpriteFrame(&charPickSprite);
-    UpdateSpriteFrame(&npcSprite);
+    UpdateSpriteFrame(&npcE1Sprite);
+    UpdateSpriteFrame(&npcE2Sprite);
 }
 
 void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction, bool isAnimated)
@@ -67,10 +70,31 @@ void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color,
 
 void UnloadSprite(Sprite *sprite)
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < sprite->frameCount; i++)
     {
         UnloadTexture(sprite->textures[i]);
     }
 
     free(sprite->textures);
+}
+
+void InitSprites()
+{
+    strcpy(charSprite.path, "Personaje/char");
+    strcpy(charPickSprite.path, "Personaje/charpick");
+    strcpy(npcE1Sprite.path, "NPCs/Enojado/Triste/");
+    strcpy(npcE2Sprite.path, "NPCs/Enojado/Feliz/");
+
+    InitSprite(&charSprite, 4);
+    InitSprite(&charPickSprite, 4);
+    InitSprite(&npcE1Sprite, 2);
+    InitSprite(&npcE2Sprite, 2);
+}
+
+void UnloadSprites()
+{
+    UnloadSprite(&charSprite);
+    UnloadSprite(&charPickSprite);
+    UnloadSprite(&npcE1Sprite);
+    UnloadSprite(&npcE2Sprite);
 }

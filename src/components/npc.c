@@ -1,37 +1,36 @@
 #include "../headers/npc.h"
 
-NPC skeleton1;
-NPC skeleton2;
+NPC enojado1;
+NPC enojado2;
+
 bool isInteracting = false;
 char *currentDialogue = "Placeholder Text";
 char *currentName = "Placeholder Name";
 
-void InitNPCs(Sprite *sprite, Rectangle screen)
+void InitNPCs(Rectangle screen)
 {
-    InitSprite(sprite);
+    enojado1.name = "Juan";
+    enojado1.dialogue = "Necesito municiones.";
+    enojado1.position.x = REL_TILE_SIZE * 1;
+    enojado1.position.y = REL_TILE_SIZE * 18;
+    enojado1.color = WHITE;
+    enojado1.direction = 1;
 
-    skeleton1.name = "Esqueleto 1";
-    skeleton1.dialogue = "A ochoa lo mataron a balazos.";
-    skeleton1.position.x = REL_TILE_SIZE * 1;
-    skeleton1.position.y = REL_TILE_SIZE * 18;
-    skeleton1.color = WHITE;
-    skeleton1.direction = 1;
-
-    skeleton2.name = "Esqueleto 2";
-    skeleton2.dialogue = "El esqueleto 1 sabe cosas.";
-    skeleton2.position.x = REL_TILE_SIZE * 4;
-    skeleton2.position.y = REL_TILE_SIZE * 4;
-    skeleton2.color = WHITE;
-    skeleton2.direction = -1;
+    enojado2.name = "Pepe";
+    enojado2.dialogue = "Muchas gracias!.";
+    enojado2.position.x = REL_TILE_SIZE * 4;
+    enojado2.position.y = REL_TILE_SIZE * 4;
+    enojado2.color = WHITE;
+    enojado2.direction = -1;
 }
 
 void UpdateNPCs()
 {
-    skeleton1.sprite = npcSprite;
-    skeleton2.sprite = npcSprite;
+    enojado1.sprite = npcE1Sprite;
+    enojado2.sprite = npcE2Sprite;
 
-    DrawSpriteFrame(&skeleton1.sprite, skeleton1.position, SCALE, skeleton1.color, skeleton1.direction, true);
-    DrawSpriteFrame(&skeleton2.sprite, skeleton2.position, SCALE, skeleton2.color, skeleton2.direction, true);
+    DrawSpriteFrame(&enojado1.sprite, enojado1.position, SCALE, enojado1.color, enojado1.direction, true);
+    DrawSpriteFrame(&enojado2.sprite, enojado2.position, SCALE, enojado2.color, enojado2.direction, true);
 }
 
 void InteractNPC(NPC npc)

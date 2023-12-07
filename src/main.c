@@ -37,15 +37,12 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "16-Bits de Historia");
     SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
-    strcpy(charSprite.path, "Personaje/char");
-    strcpy(charPickSprite.path, "Personaje/charpick");
-    strcpy(npcSprite.path, "Character_animation/monsters_idle/skeleton1/v2/skeleton1_v2_");
-
+    InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
-    InitNPCs(&npcSprite, window);
+    InitNPCs(window);
     InitGraphics(&tileset);
 
-    InitLoadingScreen();
+    // InitLoadingScreen();
     InitBackground();
     InitRoom1Collisions((Vector2){0, 0});
     InitMenuButtons(window);
@@ -58,7 +55,7 @@ int main(void)
     //------------------------
     SetTargetFPS(60);
 
-    menu.state = LOADING; // DEBERÍA SER LOADING
+    menu.state = GAME; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -166,23 +163,23 @@ int main(void)
                     {
                         DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
 
-                        if (Vector2Distance(player.position, skeleton1.position) < 128)
+                        if (Vector2Distance(player.position, enojado1.position) < 128)
                         {
-                            DrawRectangle(skeleton1.position.x - 17 + (REL_TILE_SIZE / 2), skeleton1.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
-                            DrawText("E", skeleton1.position.x - 10 + (REL_TILE_SIZE / 2), skeleton1.position.y - 45, 30, Fade(WHITE, 0.8f));
+                            DrawRectangle(enojado1.position.x - 17 + (REL_TILE_SIZE / 2), enojado1.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
+                            DrawText("E", enojado1.position.x - 10 + (REL_TILE_SIZE / 2), enojado1.position.y - 45, 30, Fade(WHITE, 0.8f));
 
                             if (IsKeyPressed(KEY_E) || isInteracting)
                             {
-                                InteractNPC(skeleton1);
+                                InteractNPC(enojado1);
                             }
                         }
-                        else if (Vector2Distance(player.position, skeleton2.position) < 128)
+                        else if (Vector2Distance(player.position, enojado2.position) < 128)
                         {
-                            DrawRectangle(skeleton2.position.x - 17 + (REL_TILE_SIZE / 2), skeleton2.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
-                            DrawText("E", skeleton2.position.x - 10 + (REL_TILE_SIZE / 2), skeleton2.position.y - 45, 30, Fade(WHITE, 0.8f));
+                            DrawRectangle(enojado2.position.x - 17 + (REL_TILE_SIZE / 2), enojado2.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
+                            DrawText("E", enojado2.position.x - 10 + (REL_TILE_SIZE / 2), enojado2.position.y - 45, 30, Fade(WHITE, 0.8f));
                             if (IsKeyPressed(KEY_E) || isInteracting)
                             {
-                                InteractNPC(skeleton2);
+                                InteractNPC(enojado2);
                             }
                         }
                     }
@@ -261,9 +258,8 @@ int main(void)
 
     UnloadRenderTexture(screenCam);
     UnloadBackground();
-    UnloadSprite(&charSprite);
-    UnloadSprite(&charPickSprite);
-    UnloadSprite(&npcSprite);
+    UnloadSprites();
+
     UnloadGraphics(&tileset);
 
     CloseWindow();

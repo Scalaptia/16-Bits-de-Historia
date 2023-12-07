@@ -27,15 +27,20 @@ typedef struct Sprite
     int frameCount;
 } Sprite;
 
-void InitSprite(Sprite *sprite);
+void InitSprite(Sprite *sprite, int frameCount);
 void UpdateSpriteFrame(Sprite *sprite);
 void UpdateSpritesFrame();
 
 void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction, bool isAnimated);
 void UnloadSprite(Sprite *sprite);
 
+void InitSprites();
+void UnloadSprites();
+
 extern Sprite charSprite;
 extern Sprite charPickSprite;
-extern Sprite npcSprite;
+
+extern Sprite npcE1Sprite;
+extern Sprite npcE2Sprite;
 
 #endif

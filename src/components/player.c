@@ -11,9 +11,6 @@ Camera2D camera;
 
 void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
 {
-    InitSprite(sprite);
-    InitSprite(actSprite);
-
     player.position.x = REL_TILE_SIZE * 2;
     player.position.y = REL_TILE_SIZE * 4;
     player.color = WHITE;
