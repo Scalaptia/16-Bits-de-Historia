@@ -24,10 +24,12 @@ typedef struct NPC
 
 void InitNPCs(Rectangle screen);
 void InteractNPC(NPC *npc, Player *player);
-void UpdateNPCs();
+void UpdateRoom1NPCs();
 
 void CheckNPC(Player *player, NPC *npc);
-void CheckNPCs(Player *player);
+
+void CheckRoom1NPCs(Player *player);
+void CheckRoom2NPCs(Player *player);
 
 extern NPC enojado1;
 extern NPC enojado2;

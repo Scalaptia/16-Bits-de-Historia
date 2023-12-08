@@ -9,7 +9,8 @@ enum GameState
 {
     LOADING,
     MENU,
-    GAME,
+    SCENE1,
+    SCENE2,
     OPTIONS,
     EXIT
 };

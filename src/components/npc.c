@@ -58,7 +58,7 @@ void InitNPCs(Rectangle screen)
     recargado2.status = false;
 }
 
-void UpdateNPCs()
+void UpdateRoom1NPCs()
 {
     if (enojado1.status)
         enojado1.sprite = npcEnojado2Sprite;
@@ -112,7 +112,7 @@ void CheckNPC(Player *player, NPC *npc)
     }
 }
 
-void CheckNPCs(Player *player)
+void CheckRoom1NPCs(Player *player)
 {
     CheckNPC(player, &enojado1);
     CheckNPC(player, &enojado2);

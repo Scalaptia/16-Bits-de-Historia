@@ -24,7 +24,7 @@ endif()
 
 add_executable(raylib_template src/main.c 
 src/headers/player.h src/components/player.c 
-src/headers/grid.h src/components/grid.c 
+src/headers/debug.h src/components/debug.c 
 src/headers/level.h src/components/level.c 
 src/headers/animation.h src/components/animation.c
 src/headers/keybinds.h src/components/keybinds.c

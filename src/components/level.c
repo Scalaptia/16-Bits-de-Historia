@@ -1,15 +1,7 @@
 #include "../headers/level.h"
 
 LevelData room1;
-
-Vector2 ROOM1_POS = {TILE_SIZE * 3, TILE_SIZE * 3};
-
-void InitGraphics(GraphicsData *tileset)
-{
-    tileset->image = LoadImage(ASSETS_PATH "Escenarios/Escena1.png");
-    tileset->texture = LoadTextureFromImage(tileset->image);
-    tileset->size = (Rectangle){0, 0, tileset->texture.width, tileset->texture.height};
-}
+LevelData room2;
 
 void ScaleRec(Rectangle *rec)
 {
@@ -19,8 +11,10 @@ void ScaleRec(Rectangle *rec)
     rec->height *= SCALE;
 }
 
-void InitRoom1Collisions(Vector2 position)
+void InitRoom1Collisions()
 {
+    Vector2 position = {0, 0};
+
     CreateCollisionWalls(position, (Vector2){32, 22}, &room1.wallsCount, &room1.walls);
 
     // 1, 1 - 6, 2
@@ -63,20 +57,42 @@ void InitRoom1Collisions(Vector2 position)
     CreateCollisionObject((Vector2){position.x + 28, position.y + 7}, (Vector2){3, 1}, &room1.objectsCount, &room1.objects);
 }
 
-void DrawElement(GraphicsData *tileset, char *element, Vector2 position)
+void InitRoom2Collisions()
 {
-    if (strcmp(element, "ROOM") == 0)
-    {
-        Rectangle room_src = {0, 0, tileset->image.width, tileset->image.height};
-        Rectangle room_dst = {position.x + TILE_SIZE, position.y + TILE_SIZE, room_src.width, room_src.height};
-        ScaleRec(&room_dst);
-        DrawTexturePro(tileset->texture, room_src, room_dst, (Vector2){0, 0}, 0, WHITE);
-    }
+    Vector2 position = {2, 24};
+    CreateCollisionWalls(position, (Vector2){28, 18}, &room2.wallsCount, &room2.walls);
 }
 
-void DrawRoom(GraphicsData *tileset, Vector2 position)
+void InitRoom1()
 {
-    DrawElement(tileset, "ROOM", position);
+    room1.tileset.image = LoadImage(ASSETS_PATH "Escenarios/Escena1.png");
+    room1.tileset.texture = LoadTextureFromImage(room1.tileset.image);
+    room1.tileset.size = (Rectangle){0, 0, room1.tileset.texture.width, room1.tileset.texture.height};
+
+    InitRoom1Collisions();
+}
+
+void InitRoom2()
+{
+    room2.tileset.image = LoadImage(ASSETS_PATH "Escenarios/Escena2.png");
+    room2.tileset.texture = LoadTextureFromImage(room2.tileset.image);
+    room2.tileset.size = (Rectangle){0, 0, room2.tileset.texture.width, room2.tileset.texture.height};
+
+    InitRoom2Collisions((Vector2){2, 22});
+}
+
+void InitRooms()
+{
+    InitRoom1();
+    InitRoom2();
+}
+
+void DrawElement(GraphicsData *tileset, Vector2 position)
+{
+    Rectangle room_src = {0, 0, tileset->image.width, tileset->image.height};
+    Rectangle room_dst = {position.x + TILE_SIZE, position.y + TILE_SIZE, room_src.width, room_src.height};
+    ScaleRec(&room_dst);
+    DrawTexturePro(tileset->texture, room_src, room_dst, (Vector2){0, 0}, 0, WHITE);
 }
 
 void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vector2 **walls)
@@ -130,6 +146,13 @@ void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Re
     }
 
     *objectsCount += newObjectsCount;
+}
+
+void UnloadRoom(LevelData *room)
+{
+    UnloadGraphics(&room->tileset);
+    free(room->walls);
+    free(room->objects);
 }
 
 void UnloadGraphics(GraphicsData *tileset)

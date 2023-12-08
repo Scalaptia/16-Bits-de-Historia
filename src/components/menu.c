@@ -117,7 +117,7 @@ void CheckMenuButtons(Sound fxButton, Music MenuMusic)
         {
             PlaySound(fxButton);
             StopMusicStream(MenuMusic);
-            menu.state = GAME;
+            menu.state = SCENE1;
         }
     }
 
