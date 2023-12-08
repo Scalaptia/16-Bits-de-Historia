@@ -37,6 +37,7 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "16-Bits de Historia");
     SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
+    InitObjects();
     InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
     InitNPCs(window);
@@ -163,6 +164,19 @@ int main(void)
                     {
                         DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
 
+                        // Draw held item
+                        if (player.heldItem != NONE)
+                        {
+                            if (player.direction == 1)
+                            {
+                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, 16, 16}, (Rectangle){player.position.x + (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                            }
+                            else
+                            {
+                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                            }
+                        }
+
                         if (Vector2Distance(player.position, enojado1.position) < 128)
                         {
                             DrawRectangle(enojado1.position.x - 17 + (REL_TILE_SIZE / 2), enojado1.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
@@ -170,7 +184,7 @@ int main(void)
 
                             if (IsKeyPressed(KEY_E) || isInteracting)
                             {
-                                InteractNPC(enojado1);
+                                InteractNPC(&enojado1, &player);
                             }
                         }
                         else if (Vector2Distance(player.position, enojado2.position) < 128)
@@ -179,7 +193,7 @@ int main(void)
                             DrawText("E", enojado2.position.x - 10 + (REL_TILE_SIZE / 2), enojado2.position.y - 45, 30, Fade(WHITE, 0.8f));
                             if (IsKeyPressed(KEY_E) || isInteracting)
                             {
-                                InteractNPC(enojado2);
+                                InteractNPC(&enojado2, &player);
                             }
                         }
                     }

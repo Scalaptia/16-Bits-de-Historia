@@ -7,6 +7,14 @@
 #include "../headers/animation.h"
 #include "../headers/level.h"
 
+enum Item
+{
+    NONE,
+    FOOD,
+    RIFLE,
+    MACHETE
+};
+
 typedef struct Player
 {
     Sprite sprite;
@@ -16,6 +24,8 @@ typedef struct Player
     float speed;
     int direction;
     bool isAnimated;
+    enum Item heldItem;
+    Texture2D heldTexture;
 } Player;
 
 #define TILE_SIZE 16
@@ -25,9 +35,15 @@ typedef struct Player
 void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen);
 void actPlayer(Player *player, Music *sfx, LevelData room);
 void movePlayer(Player *player, Music *sfx, LevelData room);
-void playerAttack(Player *player);
+void playerHold(Player *player);
+
+void InitObjects();
 
 extern Player player;
 extern Camera2D camera;
+
+extern Texture2D objFoodTexture;
+extern Texture2D objRifleTexture;
+extern Texture2D objMacheteTexture;
 
 #endif

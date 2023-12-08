@@ -9,12 +9,17 @@ Controls controls = {.UP_KEY = KEY_W,
 Player player;
 Camera2D camera;
 
+Texture2D objFoodTexture;
+Texture2D objRifleTexture;
+Texture2D objMacheteTexture;
+
 void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
 {
     player.position.x = REL_TILE_SIZE * 2;
     player.position.y = REL_TILE_SIZE * 4;
     player.color = WHITE;
     player.direction = 1;
+    player.heldItem = NONE;
 
     camera.target = (Vector2){player.position.x, player.position.y};
     camera.offset = (Vector2){(screen.width / 2) - (TILE_SIZE * 2), (screen.height / 2) - (TILE_SIZE * 2)};
@@ -24,7 +29,28 @@ void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
 void actPlayer(Player *player, Music *sfx, LevelData room)
 {
     movePlayer(player, sfx, room);
-    playerAttack(player);
+
+    if (IsKeyPressed(KEY_ONE))
+    {
+        player->heldItem = FOOD;
+    }
+
+    if (IsKeyPressed(KEY_TWO))
+    {
+        player->heldItem = RIFLE;
+    }
+
+    if (IsKeyPressed(KEY_THREE))
+    {
+        player->heldItem = MACHETE;
+    }
+
+    if (IsKeyPressed(KEY_ZERO))
+    {
+        player->heldItem = NONE;
+    }
+
+    playerHold(player);
 }
 
 void movePlayer(Player *player, Music *sfx, LevelData room)
@@ -125,16 +151,48 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
     }
 }
 
-void playerAttack(Player *player)
+void playerHold(Player *player)
 {
-    if (IsKeyDown(controls.ATTACK_KEY))
+    if (player->heldItem != NONE)
     {
         player->sprite = charPickSprite;
-        player->speed = 200.0f;
+
+        switch (player->heldItem)
+        {
+        case FOOD:
+            player->heldTexture = objFoodTexture;
+            break;
+        case RIFLE:
+            player->heldTexture = objRifleTexture;
+            break;
+        case MACHETE:
+            player->heldTexture = objMacheteTexture;
+            break;
+        }
+
+        player->speed = 300.0f;
     }
     else
     {
         player->sprite = charSprite;
-        player->speed = 300.0f;
+        player->speed = 350.0f;
     }
+}
+
+void InitObjects()
+{
+    // Load images
+    Image objFoodImage = LoadImage(ASSETS_PATH "Objetos/Plato.png");
+    Image objRifleImage = LoadImage(ASSETS_PATH "Objetos/Rifle.png");
+    Image objMacheteImage = LoadImage(ASSETS_PATH "Objetos/Machete.png");
+
+    // Load textures
+    objFoodTexture = LoadTextureFromImage(objFoodImage);
+    objRifleTexture = LoadTextureFromImage(objRifleImage);
+    objMacheteTexture = LoadTextureFromImage(objMacheteImage);
+
+    // Unload images
+    UnloadImage(objFoodImage);
+    UnloadImage(objRifleImage);
+    UnloadImage(objMacheteImage);
 }

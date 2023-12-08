@@ -11,12 +11,6 @@
 #define SCALE 5
 #define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
-enum Entities
-{
-    PLAYER,
-    ENEMY
-};
-
 typedef struct Sprite
 {
     char path[100];

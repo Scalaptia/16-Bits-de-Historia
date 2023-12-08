@@ -3,6 +3,7 @@
 Sprite charSprite;
 Sprite charPickSprite;
 
+// NPCs
 Sprite npcE1Sprite;
 Sprite npcE2Sprite;
 
