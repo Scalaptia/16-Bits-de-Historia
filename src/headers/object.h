@@ -18,7 +18,8 @@ typedef struct Object
 
 void InitObjects();
 void CheckObject(Player *player, Object *object);
-void CheckObjects(Player *player);
+
+void CheckRoom1Objects(Player *player);
 void InteractObject(Object *object, Player *player);
 
 extern Object objComida1;

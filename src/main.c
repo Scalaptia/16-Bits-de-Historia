@@ -53,8 +53,9 @@ int main(void)
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     //------------------------
-    // SetTargetFPS(60);
+    SetTargetFPS(60);
 
+    currentScene = SCENE1;
     menu.state = SCENE1; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
@@ -136,7 +137,7 @@ int main(void)
 
                     UpdateRoom1NPCs();
                     CheckRoom1NPCs(&player);
-                    CheckObjects(&player);
+                    CheckRoom1Objects(&player);
 
                     if (debug)
                     {
@@ -187,8 +188,9 @@ int main(void)
                 player.position.x = REL_TILE_SIZE * 4;
                 player.position.y = REL_TILE_SIZE * 27;
 
+                currentScene = SCENE2;
                 menu.prevState = menu.state;
-                menu.state = SCENE2;
+                menu.state = currentScene;
             }
 
             break;
@@ -213,12 +215,12 @@ int main(void)
             {
                 BeginMode2D(camera);
                 {
-                    ClearBackground(BLACK);
+                    ClearBackground(BROWN);
                     DrawElement(&room2.tileset, (Vector2){0, TILE_SIZE * 22});
 
                     // UpdateRoom2NPCs();
                     // CheckRoom2NPCs(&player);
-                    CheckObjects(&player);
+                    CheckRoom1Objects(&player);
 
                     if (debug)
                     {
@@ -269,8 +271,9 @@ int main(void)
                 player.position.x = REL_TILE_SIZE * 2;
                 player.position.y = REL_TILE_SIZE * 4;
 
+                currentScene = SCENE1;
                 menu.prevState = menu.state;
-                menu.state = SCENE1;
+                menu.state = currentScene;
             }
             break;
 

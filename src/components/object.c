@@ -72,12 +72,22 @@ void CheckObject(Player *player, Object *object)
     }
 }
 
-void CheckObjects(Player *player)
+void CheckRoom1Objects(Player *player)
 {
     CheckObject(player, &objComida1);
+
     CheckObject(player, &objRifle1);
+
     CheckObject(player, &objMachete1);
+    CheckObject(player, &objMachete2);
+    CheckObject(player, &objMachete3);
+    CheckObject(player, &objMachete4);
+
     CheckObject(player, &objLanza1);
+    CheckObject(player, &objLanza2);
+    CheckObject(player, &objLanza3);
+    CheckObject(player, &objLanza4);
+    CheckObject(player, &objLanza5);
 }
 
 void InteractObject(Object *object, Player *player)

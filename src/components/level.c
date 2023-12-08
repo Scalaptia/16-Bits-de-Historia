@@ -116,6 +116,7 @@ void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vecto
     {
         wallsArray[count] = (Vector2){position.x, position.y + i * REL_TILE_SIZE};
         count++;
+
         wallsArray[count] = (Vector2){position.x + (size.x - 1) * REL_TILE_SIZE, position.y + i * REL_TILE_SIZE};
         count++;
     }
@@ -141,7 +142,7 @@ void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Re
     {
         for (j = 0; j < size.y; j++)
         {
-            (*objects)[offset++] = (Rectangle){position.x + i * REL_TILE_SIZE + 2.5, position.y + j * REL_TILE_SIZE + 2.5, REL_TILE_SIZE - 5, REL_TILE_SIZE - 5};
+            (*objects)[offset++] = (Rectangle){position.x + i * REL_TILE_SIZE + 5, position.y + j * REL_TILE_SIZE + 5, REL_TILE_SIZE - 10, REL_TILE_SIZE - 10};
         }
     }
 

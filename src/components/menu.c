@@ -22,6 +22,8 @@ MenuButton backButton;
 
 Menu menu;
 
+enum GameState currentScene;
+
 void InitLoadingScreen()
 {
     char path[100];
@@ -117,7 +119,7 @@ void CheckMenuButtons(Sound fxButton, Music MenuMusic)
         {
             PlaySound(fxButton);
             StopMusicStream(MenuMusic);
-            menu.state = SCENE1;
+            menu.state = currentScene;
         }
     }
 

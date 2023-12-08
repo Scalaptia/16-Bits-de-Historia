@@ -60,4 +60,6 @@ extern MenuButton backButton;
 
 extern Menu menu;
 
+extern enum GameState currentScene;
+
 #endif
