@@ -7,10 +7,6 @@ NPC tirado2;
 NPC recargado1;
 NPC recargado2;
 
-bool isInteracting = false;
-char *currentDialogue = "Placeholder Text";
-char *currentName = "Placeholder Name";
-
 void InitNPCs(Rectangle screen)
 {
     enojado1.name = "Juan";
@@ -55,7 +51,7 @@ void InitNPCs(Rectangle screen)
 
     recargado2.name = "Luis";
     recargado2.position.x = REL_TILE_SIZE * 1;
-    recargado2.position.y = REL_TILE_SIZE * 13;
+    recargado2.position.y = REL_TILE_SIZE * 15;
     recargado2.color = WHITE;
     recargado2.direction = 1;
     recargado2.requiredItem = LANZA;

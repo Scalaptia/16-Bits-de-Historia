@@ -40,6 +40,10 @@ void playerHold(Player *player);
 
 void InitItemTextures();
 
+extern bool isInteracting;
+extern char *currentDialogue;
+extern char *currentName;
+
 extern Player player;
 extern Camera2D camera;
 

@@ -10,6 +10,7 @@
 #include "./headers/menu.h"
 #include "./headers/sound.h"
 #include "./headers/npc.h"
+#include "./headers/object.h"
 
 //----------------------------------------------------------------------------------
 // Código
@@ -38,12 +39,13 @@ int main(void)
     SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
     InitItemTextures();
+    InitObjects();
     InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
     InitNPCs(window);
     InitGraphics(&tileset);
 
-    // InitLoadingScreen();
+    InitLoadingScreen();
     InitBackground();
     InitRoom1Collisions((Vector2){0, 0});
     InitMenuButtons(window);
@@ -56,7 +58,7 @@ int main(void)
     //------------------------
     // SetTargetFPS(60);
 
-    menu.state = GAME; // DEBERÍA SER LOADING
+    menu.state = LOADING; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -90,6 +92,7 @@ int main(void)
                 EndDrawing();
             }
 
+            UnloadLoadingScreen();
             menu.state = MENU;
             menu.prevState = MENU;
             break;
@@ -136,6 +139,7 @@ int main(void)
 
                     UpdateNPCs();
                     CheckNPCs(&player);
+                    CheckObjects(&player);
 
                     if (debug)
                     {

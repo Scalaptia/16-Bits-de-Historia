@@ -40,6 +40,7 @@ void DrawMenuUI();
 void DrawOptionsUI();
 
 void UnloadBackground();
+void UnloadLoadingScreen();
 
 extern Sprite loadingScreen;
 extern Sprite menuBackground;

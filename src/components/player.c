@@ -14,6 +14,10 @@ Texture2D itemRifleTexture;
 Texture2D itemMacheteTexture;
 Texture2D itemLanzaTexture;
 
+bool isInteracting = false;
+char *currentDialogue = "Placeholder Text";
+char *currentName = "Placeholder Name";
+
 void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
 {
     player.position.x = REL_TILE_SIZE * 2;

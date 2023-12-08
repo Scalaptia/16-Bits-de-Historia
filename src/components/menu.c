@@ -25,6 +25,7 @@ Menu menu;
 void InitLoadingScreen()
 {
     char path[100];
+    Image frameImage;
 
     loadingScreen.frameCount = 248;
     loadingScreen.frameCurrent = 0;
@@ -36,7 +37,7 @@ void InitLoadingScreen()
     {
         sprintf(path, ASSETS_PATH "LoadingScreen/frame%04d.png", i + 1);
 
-        Image frameImage = LoadImage(path);
+        frameImage = LoadImage(path);
         loadingScreen.textures[i] = LoadTextureFromImage(frameImage);
         UnloadImage(frameImage);
     }
@@ -280,4 +281,14 @@ void UnloadBackground()
     }
 
     free(menuBackground.textures);
+}
+
+void UnloadLoadingScreen()
+{
+    for (int i = 0; i < loadingScreen.frameCount; i++)
+    {
+        UnloadTexture(loadingScreen.textures[i]);
+    }
+
+    free(loadingScreen.textures);
 }

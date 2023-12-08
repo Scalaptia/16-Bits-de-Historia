@@ -29,10 +29,6 @@ void UpdateNPCs();
 void CheckNPC(Player *player, NPC *npc);
 void CheckNPCs(Player *player);
 
-extern bool isInteracting;
-extern char *currentDialogue;
-extern char *currentName;
-
 extern NPC enojado1;
 extern NPC enojado2;
 
