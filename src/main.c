@@ -37,7 +37,7 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "16-Bits de Historia");
     SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
-    InitObjects();
+    InitItemTextures();
     InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
     InitNPCs(window);

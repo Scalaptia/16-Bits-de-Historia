@@ -9,7 +9,7 @@ typedef struct Controls
     KeyboardKey DOWN_KEY;
     KeyboardKey LEFT_KEY;
     KeyboardKey RIGHT_KEY;
-    KeyboardKey ATTACK_KEY;
+    KeyboardKey GRAB_KEY;
 } Controls;
 
 typedef struct Keys

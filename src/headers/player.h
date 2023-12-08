@@ -38,14 +38,14 @@ void actPlayer(Player *player, Music *sfx, LevelData room);
 void movePlayer(Player *player, Music *sfx, LevelData room);
 void playerHold(Player *player);
 
-void InitObjects();
+void InitItemTextures();
 
 extern Player player;
 extern Camera2D camera;
 
-extern Texture2D objFoodTexture;
-extern Texture2D objRifleTexture;
-extern Texture2D objMacheteTexture;
-extern Texture2D objLanzaTexture;
+extern Texture2D itemFoodTexture;
+extern Texture2D itemRifleTexture;
+extern Texture2D itemMacheteTexture;
+extern Texture2D itemLanzaTexture;
 
 #endif

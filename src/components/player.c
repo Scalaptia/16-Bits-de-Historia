@@ -4,15 +4,15 @@ Controls controls = {.UP_KEY = KEY_W,
                      .DOWN_KEY = KEY_S,
                      .LEFT_KEY = KEY_A,
                      .RIGHT_KEY = KEY_D,
-                     .ATTACK_KEY = KEY_SPACE};
+                     .GRAB_KEY = KEY_SPACE};
 
 Player player;
 Camera2D camera;
 
-Texture2D objFoodTexture;
-Texture2D objRifleTexture;
-Texture2D objMacheteTexture;
-Texture2D objLanzaTexture;
+Texture2D itemFoodTexture;
+Texture2D itemRifleTexture;
+Texture2D itemMacheteTexture;
+Texture2D itemLanzaTexture;
 
 void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
 {
@@ -166,16 +166,16 @@ void playerHold(Player *player)
         switch (player->heldItem)
         {
         case FOOD:
-            player->heldTexture = objFoodTexture;
+            player->heldTexture = itemFoodTexture;
             break;
         case RIFLE:
-            player->heldTexture = objRifleTexture;
+            player->heldTexture = itemRifleTexture;
             break;
         case MACHETE:
-            player->heldTexture = objMacheteTexture;
+            player->heldTexture = itemMacheteTexture;
             break;
         case LANZA:
-            player->heldTexture = objLanzaTexture;
+            player->heldTexture = itemLanzaTexture;
             break;
         }
 
@@ -188,23 +188,23 @@ void playerHold(Player *player)
     }
 }
 
-void InitObjects()
+void InitItemTextures()
 {
     // Load images
-    Image objFoodImage = LoadImage(ASSETS_PATH "Objetos/Plato.png");
-    Image objRifleImage = LoadImage(ASSETS_PATH "Objetos/Rifle.png");
-    Image objMacheteImage = LoadImage(ASSETS_PATH "Objetos/Machete.png");
-    Image objLanzaImage = LoadImage(ASSETS_PATH "Objetos/Lanza.png");
+    Image itemFoodImage = LoadImage(ASSETS_PATH "Items/Plato.png");
+    Image itemRifleImage = LoadImage(ASSETS_PATH "Items/Rifle.png");
+    Image itemMacheteImage = LoadImage(ASSETS_PATH "Items/Machete.png");
+    Image itemLanzaImage = LoadImage(ASSETS_PATH "Items/Lanza.png");
 
     // Load textures
-    objFoodTexture = LoadTextureFromImage(objFoodImage);
-    objRifleTexture = LoadTextureFromImage(objRifleImage);
-    objMacheteTexture = LoadTextureFromImage(objMacheteImage);
-    objLanzaTexture = LoadTextureFromImage(objLanzaImage);
+    itemFoodTexture = LoadTextureFromImage(itemFoodImage);
+    itemRifleTexture = LoadTextureFromImage(itemRifleImage);
+    itemMacheteTexture = LoadTextureFromImage(itemMacheteImage);
+    itemLanzaTexture = LoadTextureFromImage(itemLanzaImage);
 
     // Unload images
-    UnloadImage(objFoodImage);
-    UnloadImage(objRifleImage);
-    UnloadImage(objMacheteImage);
-    UnloadImage(objLanzaImage);
+    UnloadImage(itemFoodImage);
+    UnloadImage(itemRifleImage);
+    UnloadImage(itemMacheteImage);
+    UnloadImage(itemLanzaImage);
 }
