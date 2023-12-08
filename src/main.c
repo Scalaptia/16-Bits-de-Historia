@@ -54,7 +54,7 @@ int main(void)
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     //------------------------
-    SetTargetFPS(60);
+    // SetTargetFPS(60);
 
     menu.state = GAME; // DEBERÍA SER LOADING
     // Main game loop
@@ -135,6 +135,7 @@ int main(void)
                     DrawRoom(&tileset, (Vector2){0, 0});
 
                     UpdateNPCs();
+                    CheckNPCs(&player);
 
                     if (debug)
                     {
@@ -174,26 +175,6 @@ int main(void)
                             else
                             {
                                 DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
-                            }
-                        }
-
-                        if (Vector2Distance(player.position, enojado1.position) < 128)
-                        {
-                            DrawRectangle(enojado1.position.x - 17 + (REL_TILE_SIZE / 2), enojado1.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
-                            DrawText("E", enojado1.position.x - 10 + (REL_TILE_SIZE / 2), enojado1.position.y - 45, 30, Fade(WHITE, 0.8f));
-
-                            if (IsKeyPressed(KEY_E) || isInteracting)
-                            {
-                                InteractNPC(&enojado1, &player);
-                            }
-                        }
-                        else if (Vector2Distance(player.position, enojado2.position) < 128)
-                        {
-                            DrawRectangle(enojado2.position.x - 17 + (REL_TILE_SIZE / 2), enojado2.position.y - 50, 32, 38, Fade(BLACK, 0.6f));
-                            DrawText("E", enojado2.position.x - 10 + (REL_TILE_SIZE / 2), enojado2.position.y - 45, 30, Fade(WHITE, 0.8f));
-                            if (IsKeyPressed(KEY_E) || isInteracting)
-                            {
-                                InteractNPC(&enojado2, &player);
                             }
                         }
                     }

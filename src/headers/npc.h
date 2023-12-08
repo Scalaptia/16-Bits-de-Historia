@@ -26,11 +26,20 @@ void InitNPCs(Rectangle screen);
 void InteractNPC(NPC *npc, Player *player);
 void UpdateNPCs();
 
+void CheckNPC(Player *player, NPC *npc);
+void CheckNPCs(Player *player);
+
 extern bool isInteracting;
 extern char *currentDialogue;
 extern char *currentName;
 
 extern NPC enojado1;
 extern NPC enojado2;
+
+extern NPC tirado1;
+extern NPC tirado2;
+
+extern NPC recargado1;
+extern NPC recargado2;
 
 #endif

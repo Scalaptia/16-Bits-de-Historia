@@ -12,6 +12,7 @@ Camera2D camera;
 Texture2D objFoodTexture;
 Texture2D objRifleTexture;
 Texture2D objMacheteTexture;
+Texture2D objLanzaTexture;
 
 void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
 {
@@ -43,6 +44,11 @@ void actPlayer(Player *player, Music *sfx, LevelData room)
     if (IsKeyPressed(KEY_THREE))
     {
         player->heldItem = MACHETE;
+    }
+
+    if (IsKeyPressed(KEY_FOUR))
+    {
+        player->heldItem = LANZA;
     }
 
     if (IsKeyPressed(KEY_ZERO))
@@ -168,6 +174,9 @@ void playerHold(Player *player)
         case MACHETE:
             player->heldTexture = objMacheteTexture;
             break;
+        case LANZA:
+            player->heldTexture = objLanzaTexture;
+            break;
         }
 
         player->speed = 300.0f;
@@ -185,14 +194,17 @@ void InitObjects()
     Image objFoodImage = LoadImage(ASSETS_PATH "Objetos/Plato.png");
     Image objRifleImage = LoadImage(ASSETS_PATH "Objetos/Rifle.png");
     Image objMacheteImage = LoadImage(ASSETS_PATH "Objetos/Machete.png");
+    Image objLanzaImage = LoadImage(ASSETS_PATH "Objetos/Lanza.png");
 
     // Load textures
     objFoodTexture = LoadTextureFromImage(objFoodImage);
     objRifleTexture = LoadTextureFromImage(objRifleImage);
     objMacheteTexture = LoadTextureFromImage(objMacheteImage);
+    objLanzaTexture = LoadTextureFromImage(objLanzaImage);
 
     // Unload images
     UnloadImage(objFoodImage);
     UnloadImage(objRifleImage);
     UnloadImage(objMacheteImage);
+    UnloadImage(objLanzaImage);
 }

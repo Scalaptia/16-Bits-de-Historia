@@ -34,7 +34,13 @@ void UnloadSprites();
 extern Sprite charSprite;
 extern Sprite charPickSprite;
 
-extern Sprite npcE1Sprite;
-extern Sprite npcE2Sprite;
+extern Sprite npcEnojado1Sprite;
+extern Sprite npcEnojado2Sprite;
+
+extern Sprite npcTirado1Sprite;
+extern Sprite npcTirado2Sprite;
+
+extern Sprite npcRecargado1Sprite;
+extern Sprite npcRecargado2Sprite;
 
 #endif

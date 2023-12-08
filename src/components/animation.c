@@ -4,8 +4,12 @@ Sprite charSprite;
 Sprite charPickSprite;
 
 // NPCs
-Sprite npcE1Sprite;
-Sprite npcE2Sprite;
+Sprite npcEnojado1Sprite;
+Sprite npcEnojado2Sprite;
+Sprite npcTirado1Sprite;
+Sprite npcTirado2Sprite;
+Sprite npcRecargado1Sprite;
+Sprite npcRecargado2Sprite;
 
 void InitSprite(Sprite *sprite, int frameCount)
 {
@@ -13,7 +17,6 @@ void InitSprite(Sprite *sprite, int frameCount)
 
     sprite->frameCount = frameCount;
     sprite->frameCurrent = 0;
-    sprite->frameTime = ANIMATION_SPEED;
 
     sprite->textures = (Texture2D *)malloc(sizeof(Texture2D) * sprite->frameCount);
 
@@ -47,8 +50,12 @@ void UpdateSpritesFrame()
 {
     UpdateSpriteFrame(&charSprite);
     UpdateSpriteFrame(&charPickSprite);
-    UpdateSpriteFrame(&npcE1Sprite);
-    UpdateSpriteFrame(&npcE2Sprite);
+    UpdateSpriteFrame(&npcEnojado1Sprite);
+    UpdateSpriteFrame(&npcEnojado2Sprite);
+    UpdateSpriteFrame(&npcTirado1Sprite);
+    UpdateSpriteFrame(&npcTirado2Sprite);
+    UpdateSpriteFrame(&npcRecargado1Sprite);
+    UpdateSpriteFrame(&npcRecargado2Sprite);
 }
 
 void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction, bool isAnimated)
@@ -83,19 +90,46 @@ void InitSprites()
 {
     strcpy(charSprite.path, "Personaje/char");
     strcpy(charPickSprite.path, "Personaje/charpick");
-    strcpy(npcE1Sprite.path, "NPCs/Enojado/Triste/");
-    strcpy(npcE2Sprite.path, "NPCs/Enojado/Feliz/");
+    strcpy(npcEnojado1Sprite.path, "NPCs/Enojado/Triste/");
+    strcpy(npcEnojado2Sprite.path, "NPCs/Enojado/Feliz/");
+    strcpy(npcTirado1Sprite.path, "NPCs/Tirado/Triste/");
+    strcpy(npcTirado2Sprite.path, "NPCs/Tirado/Feliz/");
+    strcpy(npcRecargado1Sprite.path, "NPCs/Recargado/Triste/");
+    strcpy(npcRecargado2Sprite.path, "NPCs/Recargado/Feliz/");
 
+    charSprite.frameTime = ANIMATION_SPEED;
     InitSprite(&charSprite, 4);
+
+    charPickSprite.frameTime = ANIMATION_SPEED;
     InitSprite(&charPickSprite, 4);
-    InitSprite(&npcE1Sprite, 2);
-    InitSprite(&npcE2Sprite, 2);
+
+    npcEnojado1Sprite.frameTime = ANIMATION_SPEED * 4;
+    InitSprite(&npcEnojado1Sprite, 2);
+
+    npcEnojado2Sprite.frameTime = ANIMATION_SPEED * 4;
+    InitSprite(&npcEnojado2Sprite, 2);
+
+    npcTirado1Sprite.frameTime = ANIMATION_SPEED * 4;
+    InitSprite(&npcTirado1Sprite, 2);
+
+    npcTirado2Sprite.frameTime = ANIMATION_SPEED * 4;
+    InitSprite(&npcTirado2Sprite, 2);
+
+    npcRecargado1Sprite.frameTime = ANIMATION_SPEED * 4;
+    InitSprite(&npcRecargado1Sprite, 1);
+
+    npcRecargado2Sprite.frameTime = ANIMATION_SPEED * 4;
+    InitSprite(&npcRecargado2Sprite, 1);
 }
 
 void UnloadSprites()
 {
     UnloadSprite(&charSprite);
     UnloadSprite(&charPickSprite);
-    UnloadSprite(&npcE1Sprite);
-    UnloadSprite(&npcE2Sprite);
+    UnloadSprite(&npcEnojado1Sprite);
+    UnloadSprite(&npcEnojado2Sprite);
+    UnloadSprite(&npcTirado1Sprite);
+    UnloadSprite(&npcTirado2Sprite);
+    UnloadSprite(&npcRecargado1Sprite);
+    UnloadSprite(&npcRecargado2Sprite);
 }

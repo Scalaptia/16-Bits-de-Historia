@@ -12,7 +12,8 @@ enum Item
     NONE,
     FOOD,
     RIFLE,
-    MACHETE
+    MACHETE,
+    LANZA
 };
 
 typedef struct Player
@@ -45,5 +46,6 @@ extern Camera2D camera;
 extern Texture2D objFoodTexture;
 extern Texture2D objRifleTexture;
 extern Texture2D objMacheteTexture;
+extern Texture2D objLanzaTexture;
 
 #endif
