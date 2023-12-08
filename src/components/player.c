@@ -12,7 +12,9 @@ Camera2D camera;
 Texture2D itemFoodTexture;
 Texture2D itemRifleTexture;
 Texture2D itemMacheteTexture;
+Texture2D itemMachete2Texture;
 Texture2D itemLanzaTexture;
+Texture2D itemLanza2Texture;
 
 bool isInteracting = false;
 char *currentDialogue = "Placeholder Text";
@@ -198,17 +200,23 @@ void InitItemTextures()
     Image itemFoodImage = LoadImage(ASSETS_PATH "Items/Plato.png");
     Image itemRifleImage = LoadImage(ASSETS_PATH "Items/Rifle.png");
     Image itemMacheteImage = LoadImage(ASSETS_PATH "Items/Machete.png");
+    Image itemMachete2Image = LoadImage(ASSETS_PATH "Items/Machete2.png");
     Image itemLanzaImage = LoadImage(ASSETS_PATH "Items/Lanza.png");
+    Image itemLanza2Image = LoadImage(ASSETS_PATH "Items/Lanza2.png");
 
     // Load textures
     itemFoodTexture = LoadTextureFromImage(itemFoodImage);
     itemRifleTexture = LoadTextureFromImage(itemRifleImage);
     itemMacheteTexture = LoadTextureFromImage(itemMacheteImage);
+    itemMachete2Texture = LoadTextureFromImage(itemMachete2Image);
     itemLanzaTexture = LoadTextureFromImage(itemLanzaImage);
+    itemLanza2Texture = LoadTextureFromImage(itemLanza2Image);
 
     // Unload images
     UnloadImage(itemFoodImage);
     UnloadImage(itemRifleImage);
     UnloadImage(itemMacheteImage);
+    UnloadImage(itemMachete2Image);
     UnloadImage(itemLanzaImage);
+    UnloadImage(itemLanza2Image);
 }

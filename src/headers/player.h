@@ -48,8 +48,13 @@ extern Player player;
 extern Camera2D camera;
 
 extern Texture2D itemFoodTexture;
+
 extern Texture2D itemRifleTexture;
+
 extern Texture2D itemMacheteTexture;
+extern Texture2D itemMachete2Texture;
+
 extern Texture2D itemLanzaTexture;
+extern Texture2D itemLanza2Texture;
 
 #endif

@@ -8,8 +8,10 @@
 
 typedef struct Object
 {
+    Texture2D texture;
     Vector2 position;
     enum Item givenItem;
+    bool isTaken;
 } Object;
 
 #define TILE_SIZE 16

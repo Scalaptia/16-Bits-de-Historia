@@ -19,8 +19,8 @@
 int main(void)
 {
     //------------------------------------------------
-    int screenWidth = 1280;
-    int screenHeight = 720;
+    int screenWidth = 1366;
+    int screenHeight = 768;
     float masterVolume = 0.5f;
 
     bool debug = false;
@@ -53,7 +53,7 @@ int main(void)
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     //------------------------
-    SetTargetFPS(60);
+    SetTargetFPS(144);
 
     currentScene = SCENE1;
     menu.state = SCENE1; // DEBERÍA SER LOADING

@@ -33,11 +33,15 @@ void CheckRoom2NPCs(Player *player);
 
 extern NPC enojado1;
 extern NPC enojado2;
+extern NPC enojado3;
+extern NPC enojado4;
 
 extern NPC tirado1;
-extern NPC tirado2;
 
 extern NPC recargado1;
 extern NPC recargado2;
+extern NPC recargado3;
+extern NPC recargado4;
+extern NPC recargado5;
 
 #endif
