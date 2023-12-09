@@ -21,7 +21,7 @@ int main(void)
     //------------------------------------------------
     int screenWidth = 1366;
     int screenHeight = 768;
-    float masterVolume = 0.5f;
+    float masterVolume = 1.0f;
 
     bool debug = false;
     bool pause = false;
@@ -37,7 +37,7 @@ int main(void)
     SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
     InitItemTextures();
-    InitObjects();
+    InitRoom1Objects();
     InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
     InitNPCs(window);
@@ -136,8 +136,6 @@ int main(void)
                     DrawElement(&room1.tileset, (Vector2){0, 0});
 
                     UpdateRoom1NPCs();
-                    CheckRoom1NPCs(&player);
-                    CheckRoom1Objects(&player);
 
                     if (debug)
                     {
@@ -146,6 +144,8 @@ int main(void)
                     else
                     {
                         DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+                        CheckRoom1NPCs(&player);
+                        CheckRoom1Objects(&player);
 
                         // Draw held item
                         if (player.heldItem != NONE)
@@ -218,9 +218,9 @@ int main(void)
                     ClearBackground(BROWN);
                     DrawElement(&room2.tileset, (Vector2){0, TILE_SIZE * 22});
 
-                    // UpdateRoom2NPCs();
-                    // CheckRoom2NPCs(&player);
-                    CheckRoom1Objects(&player);
+                    UpdateRoom2NPCs();
+                    CheckRoom2NPCs(&player);
+                    CheckRoom2Objects(&player);
 
                     if (debug)
                     {

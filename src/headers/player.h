@@ -13,6 +13,7 @@ enum Item
     FOOD,
     RIFLE,
     MACHETE,
+    SACO,
     LANZA
 };
 

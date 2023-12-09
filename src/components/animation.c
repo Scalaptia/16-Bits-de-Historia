@@ -10,6 +10,8 @@ Sprite npcTirado1Sprite;
 Sprite npcTirado2Sprite;
 Sprite npcRecargado1Sprite;
 Sprite npcRecargado2Sprite;
+Sprite npcSaco1Sprite;
+Sprite npcSaco2Sprite;
 
 void InitSprite(Sprite *sprite, int frameCount)
 {
@@ -56,6 +58,8 @@ void UpdateSpritesFrame()
     UpdateSpriteFrame(&npcTirado2Sprite);
     UpdateSpriteFrame(&npcRecargado1Sprite);
     UpdateSpriteFrame(&npcRecargado2Sprite);
+    UpdateSpriteFrame(&npcSaco1Sprite);
+    UpdateSpriteFrame(&npcSaco2Sprite);
 }
 
 void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction, bool isAnimated)
@@ -96,6 +100,8 @@ void InitSprites()
     strcpy(npcTirado2Sprite.path, "NPCs/Tirado/Feliz/");
     strcpy(npcRecargado1Sprite.path, "NPCs/Recargado/Triste/");
     strcpy(npcRecargado2Sprite.path, "NPCs/Recargado/Feliz/");
+    strcpy(npcSaco1Sprite.path, "NPCs/Saco/Triste/");
+    strcpy(npcSaco2Sprite.path, "NPCs/Saco/Feliz/");
 
     charSprite.frameTime = ANIMATION_SPEED;
     InitSprite(&charSprite, 4);
@@ -115,11 +121,11 @@ void InitSprites()
     npcTirado2Sprite.frameTime = ANIMATION_SPEED * 4;
     InitSprite(&npcTirado2Sprite, 2);
 
-    npcRecargado1Sprite.frameTime = ANIMATION_SPEED * 4;
     InitSprite(&npcRecargado1Sprite, 1);
-
-    npcRecargado2Sprite.frameTime = ANIMATION_SPEED * 4;
     InitSprite(&npcRecargado2Sprite, 1);
+
+    InitSprite(&npcSaco1Sprite, 1);
+    InitSprite(&npcSaco2Sprite, 1);
 }
 
 void UnloadSprites()
@@ -132,4 +138,6 @@ void UnloadSprites()
     UnloadSprite(&npcTirado2Sprite);
     UnloadSprite(&npcRecargado1Sprite);
     UnloadSprite(&npcRecargado2Sprite);
+    UnloadSprite(&npcSaco1Sprite);
+    UnloadSprite(&npcSaco2Sprite);
 }

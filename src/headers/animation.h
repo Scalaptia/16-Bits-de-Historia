@@ -43,4 +43,7 @@ extern Sprite npcTirado2Sprite;
 extern Sprite npcRecargado1Sprite;
 extern Sprite npcRecargado2Sprite;
 
+extern Sprite npcSaco1Sprite;
+extern Sprite npcSaco2Sprite;
+
 #endif

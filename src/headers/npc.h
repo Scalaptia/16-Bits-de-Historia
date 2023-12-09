@@ -25,6 +25,7 @@ typedef struct NPC
 void InitNPCs(Rectangle screen);
 void InteractNPC(NPC *npc, Player *player);
 void UpdateRoom1NPCs();
+void UpdateRoom2NPCs();
 
 void CheckNPC(Player *player, NPC *npc);
 
@@ -43,5 +44,16 @@ extern NPC recargado2;
 extern NPC recargado3;
 extern NPC recargado4;
 extern NPC recargado5;
+
+extern NPC saco1;
+extern NPC saco2;
+extern NPC saco3;
+extern NPC saco4;
+extern NPC saco5;
+extern NPC saco6;
+extern NPC saco7;
+extern NPC saco8;
+extern NPC saco9;
+extern NPC saco10;
 
 #endif

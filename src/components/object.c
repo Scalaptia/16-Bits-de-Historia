@@ -8,14 +8,21 @@ Object objMachete1;
 Object objMachete2;
 Object objMachete3;
 Object objMachete4;
+Object objMachete5;
+Object objMachete6;
 
 Object objLanza1;
 Object objLanza2;
 Object objLanza3;
 Object objLanza4;
 Object objLanza5;
+Object objLanza6;
+Object objLanza7;
+Object objLanza8;
+Object objLanza9;
+Object objLanza10;
 
-void InitObjects()
+void InitRoom1Objects()
 {
     objComida1.position.x = REL_TILE_SIZE * 7;
     objComida1.position.y = REL_TILE_SIZE * 1;
@@ -67,6 +74,10 @@ void InitObjects()
     objLanza5.givenItem = LANZA;
 }
 
+void InitRoom2Objects()
+{
+}
+
 void CheckObject(Player *player, Object *object)
 {
     if (!object->isTaken)
@@ -107,6 +118,27 @@ void CheckRoom1Objects(Player *player)
     CheckObject(player, &objLanza3);
     CheckObject(player, &objLanza4);
     CheckObject(player, &objLanza5);
+}
+
+void CheckRoom2Objects(Player *player)
+{
+    CheckObject(player, &objMachete1);
+    CheckObject(player, &objMachete2);
+    CheckObject(player, &objMachete3);
+    CheckObject(player, &objMachete4);
+    CheckObject(player, &objMachete5);
+    CheckObject(player, &objMachete6);
+
+    CheckObject(player, &objLanza1);
+    CheckObject(player, &objLanza2);
+    CheckObject(player, &objLanza3);
+    CheckObject(player, &objLanza4);
+    CheckObject(player, &objLanza5);
+    CheckObject(player, &objLanza6);
+    CheckObject(player, &objLanza7);
+    CheckObject(player, &objLanza8);
+    CheckObject(player, &objLanza9);
+    CheckObject(player, &objLanza10);
 }
 
 void InteractObject(Object *object, Player *player)

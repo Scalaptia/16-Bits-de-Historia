@@ -105,6 +105,58 @@ void InitRoom2Collisions()
 {
     Vector2 position = {2, 24};
     CreateCollisionWalls(position, (Vector2){28, 18}, &room2.wallsCount, &room2.walls);
+
+    // *** Objects ***
+    // 4, 3
+    CreateCollisionObject((Vector2){position.x + 2, position.y + 1}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
+
+    // 3, 4
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 2}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
+
+    // 6, 5
+    CreateCollisionObject((Vector2){position.x + 4, position.y + 3}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
+
+    // 5, 5 - 3, 1
+    CreateCollisionObject((Vector2){position.x + 3, position.y + 3}, (Vector2){3, 1}, &room2.objectsCount, &room2.objects);
+
+    // 5, 6
+    CreateCollisionObject((Vector2){position.x + 3, position.y + 4}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
+
+    // 9, 5
+    CreateCollisionObject((Vector2){position.x + 7, position.y + 3}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
+
+    // 7, 2 - 2, 1
+    CreateCollisionObject((Vector2){position.x + 5, position.y + 0}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
+
+    // 3, 17 - 1, 2
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 15}, (Vector2){1, 2}, &room2.objectsCount, &room2.objects);
+
+    // 4, 18 - 2, 1
+    CreateCollisionObject((Vector2){position.x + 2, position.y + 16}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
+
+    // 7, 10 - 2, 1
+    CreateCollisionObject((Vector2){position.x + 5, position.y + 8}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
+
+    // 14, 14
+    CreateCollisionObject((Vector2){position.x + 12, position.y + 12}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
+
+    // 19, 13 - 2, 1
+    CreateCollisionObject((Vector2){position.x + 17, position.y + 11}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
+
+    // 23, 10 - 2, 1
+    CreateCollisionObject((Vector2){position.x + 21, position.y + 8}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
+
+    // 27, 18 - 2, 1
+    CreateCollisionObject((Vector2){position.x + 25, position.y + 16}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
+
+    // 28, 17
+    CreateCollisionObject((Vector2){position.x + 26, position.y + 15}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
+
+    // 22, 3
+    CreateCollisionObject((Vector2){position.x + 20, position.y + 1}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
+
+    // 27, 3 - 2, 2
+    CreateCollisionObject((Vector2){position.x + 25, position.y + 1}, (Vector2){2, 2}, &room2.objectsCount, &room2.objects);
 }
 
 void InitRoom1()
@@ -122,7 +174,7 @@ void InitRoom2()
     room2.tileset.texture = LoadTextureFromImage(room2.tileset.image);
     room2.tileset.size = (Rectangle){0, 0, room2.tileset.texture.width, room2.tileset.texture.height};
 
-    InitRoom2Collisions((Vector2){2, 22});
+    InitRoom2Collisions();
 }
 
 void InitRooms()
