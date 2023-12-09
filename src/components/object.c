@@ -37,6 +37,25 @@ void InitRoom1Objects()
 
 void InitRoom2Objects()
 {
+    // *** Machetes ***
+    InitObject(&objMachete1, itemMacheteTexture, (Vector2){3, 3 + 22}, MACHETE);
+    InitObject(&objMachete2, itemMacheteTexture, (Vector2){8, 5 + 22}, MACHETE);
+    InitObject(&objMachete3, itemMacheteTexture, (Vector2){26, 6 + 22}, MACHETE);
+    InitObject(&objMachete4, itemMachete2Texture, (Vector2){26, 9 + 22}, MACHETE);
+    InitObject(&objMachete5, itemMachete2Texture, (Vector2){18, 10 + 22}, MACHETE);
+    InitObject(&objMachete6, itemMacheteTexture, (Vector2){14, 14 + 22}, MACHETE);
+
+    // *** Lanzas ***
+    InitObject(&objLanza1, itemLanza2Texture, (Vector2){13, 5 + 22}, LANZA);
+    InitObject(&objLanza2, itemLanzaTexture, (Vector2){21, 3 + 22}, LANZA);
+    InitObject(&objLanza3, itemLanzaTexture, (Vector2){25, 3 + 22}, LANZA);
+    InitObject(&objLanza4, itemLanza2Texture, (Vector2){26, 7 + 22}, LANZA);
+    InitObject(&objLanza5, itemLanzaTexture, (Vector2){26, 8 + 22}, LANZA);
+    InitObject(&objLanza6, itemLanzaTexture, (Vector2){20, 10 + 22}, LANZA);
+    InitObject(&objLanza7, itemLanza2Texture, (Vector2){22, 18 + 22}, LANZA);
+    InitObject(&objLanza8, itemLanzaTexture, (Vector2){6, 10 + 22}, LANZA);
+    InitObject(&objLanza9, itemLanza2Texture, (Vector2){5, 12 + 22}, LANZA);
+    InitObject(&objLanza10, itemLanzaTexture, (Vector2){3, 16 + 22}, LANZA);
 }
 
 void InitObject(Object *object, Texture2D texture, Vector2 position, enum Item givenItem)
