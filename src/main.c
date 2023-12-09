@@ -36,11 +36,11 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "16-Bits de Historia");
     SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
-    InitItemTextures();
     InitRoom1Objects();
+    InitItemTextures();
     InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
-    InitNPCs(window);
+    InitNPCs();
 
     // InitLoadingScreen();
     InitBackground();
@@ -185,6 +185,7 @@ int main(void)
 
             if (IsKeyPressed(KEY_F2))
             {
+                InitRoom2Objects();
                 player.position.x = REL_TILE_SIZE * 4;
                 player.position.y = REL_TILE_SIZE * 27;
 
@@ -268,6 +269,7 @@ int main(void)
 
             if (IsKeyPressed(KEY_F2))
             {
+                InitRoom1Objects();
                 player.position.x = REL_TILE_SIZE * 2;
                 player.position.y = REL_TILE_SIZE * 4;
 

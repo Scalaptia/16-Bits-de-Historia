@@ -24,58 +24,30 @@ Object objLanza10;
 
 void InitRoom1Objects()
 {
-    objComida1.position.x = REL_TILE_SIZE * 7;
-    objComida1.position.y = REL_TILE_SIZE * 1;
-    objComida1.givenItem = FOOD;
-
-    objMachete1.texture = itemMacheteTexture;
-    objMachete1.position.x = REL_TILE_SIZE * 9;
-    objMachete1.position.y = REL_TILE_SIZE * 13;
-    objMachete1.givenItem = MACHETE;
-
-    objMachete2.texture = itemMacheteTexture;
-    objMachete2.position.x = REL_TILE_SIZE * 2;
-    objMachete2.position.y = REL_TILE_SIZE * 20;
-    objMachete2.givenItem = MACHETE;
-
-    objMachete3.texture = itemMacheteTexture;
-    objMachete3.position.x = REL_TILE_SIZE * 18;
-    objMachete3.position.y = REL_TILE_SIZE * 1;
-    objMachete3.givenItem = MACHETE;
-
-    objMachete4.texture = itemMachete2Texture;
-    objMachete4.position.x = REL_TILE_SIZE * 30;
-    objMachete4.position.y = REL_TILE_SIZE * 2;
-    objMachete4.givenItem = MACHETE;
-
-    objLanza1.texture = itemLanzaTexture;
-    objLanza1.position.x = REL_TILE_SIZE * 1;
-    objLanza1.position.y = REL_TILE_SIZE * 11;
-    objLanza1.givenItem = LANZA;
-
-    objLanza2.texture = itemLanzaTexture;
-    objLanza2.position.x = REL_TILE_SIZE * 1;
-    objLanza2.position.y = REL_TILE_SIZE * 19;
-    objLanza2.givenItem = LANZA;
-
-    objLanza3.texture = itemLanza2Texture;
-    objLanza3.position.x = REL_TILE_SIZE * 28;
-    objLanza3.position.y = REL_TILE_SIZE * 9;
-    objLanza3.givenItem = LANZA;
-
-    objLanza4.texture = itemLanzaTexture;
-    objLanza4.position.x = REL_TILE_SIZE * 30;
-    objLanza4.position.y = REL_TILE_SIZE * 11;
-    objLanza4.givenItem = LANZA;
-
-    objLanza5.texture = itemLanzaTexture;
-    objLanza5.position.x = REL_TILE_SIZE * 30;
-    objLanza5.position.y = REL_TILE_SIZE * 13;
-    objLanza5.givenItem = LANZA;
+    InitObject(&objComida1, itemFoodTexture, (Vector2){7, 1}, FOOD);
+    InitObject(&objMachete2, itemMacheteTexture, (Vector2){2, 20}, MACHETE);
+    InitObject(&objMachete3, itemMacheteTexture, (Vector2){18, 1}, MACHETE);
+    InitObject(&objMachete4, itemMachete2Texture, (Vector2){30, 2}, MACHETE);
+    InitObject(&objLanza1, itemLanzaTexture, (Vector2){1, 11}, LANZA);
+    InitObject(&objLanza2, itemLanzaTexture, (Vector2){1, 19}, LANZA);
+    InitObject(&objLanza3, itemLanza2Texture, (Vector2){28, 9}, LANZA);
+    InitObject(&objLanza4, itemLanzaTexture, (Vector2){30, 11}, LANZA);
+    InitObject(&objLanza5, itemLanzaTexture, (Vector2){30, 13}, LANZA);
 }
 
 void InitRoom2Objects()
 {
+}
+
+void InitObject(Object *object, Texture2D texture, Vector2 position, enum Item givenItem)
+{
+    position.x *= REL_TILE_SIZE;
+    position.y *= REL_TILE_SIZE;
+
+    object->texture = texture;
+    object->position = position;
+    object->givenItem = givenItem;
+    object->isTaken = false;
 }
 
 void CheckObject(Player *player, Object *object)

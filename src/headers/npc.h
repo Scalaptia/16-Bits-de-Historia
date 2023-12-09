@@ -14,6 +14,7 @@ typedef struct NPC
     int direction;
     char *name;
     char *dialogue;
+    char *happyDialogue;
     bool status;
     enum Item requiredItem;
 } NPC;
@@ -22,7 +23,8 @@ typedef struct NPC
 #define SCALE 5
 #define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
-void InitNPCs(Rectangle screen);
+void InitNPC(NPC *npc, Vector2 position, int direction, char *name, char *dialogue, char *happyDialogue, enum Item requiredItem);
+void InitNPCs();
 void InteractNPC(NPC *npc, Player *player);
 void UpdateRoom1NPCs();
 void UpdateRoom2NPCs();

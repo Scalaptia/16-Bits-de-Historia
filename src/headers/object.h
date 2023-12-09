@@ -19,6 +19,8 @@ typedef struct Object
 #define REL_TILE_SIZE (TILE_SIZE * SCALE)
 
 void InitRoom1Objects();
+void InitRoom2Objects();
+void InitObject(Object *object, Texture2D texture, Vector2 position, enum Item givenItem);
 void CheckObject(Player *player, Object *object);
 
 void CheckRoom1Objects(Player *player);

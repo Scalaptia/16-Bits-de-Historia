@@ -24,161 +24,48 @@ NPC saco8;
 NPC saco9;
 NPC saco10;
 
-void InitNPCs(Rectangle screen)
+void InitNPCs()
 {
     // *** Room 1 ***
+    InitNPC(&enojado1, (Vector2){21, 4}, 1, "Adan", "Necesito un machete.", "Muchas gracias soldado =)", MACHETE);
+    InitNPC(&enojado2, (Vector2){26, 4}, -1, "Fernando", "Necesito un machete.", "Muchas gracias soldado =)", MACHETE);
+    InitNPC(&enojado3, (Vector2){7, 15}, -1, "Ricardo", "Necesito un machete.", "Muchas gracias soldado =)", MACHETE);
+    InitNPC(&enojado4, (Vector2){13, 11}, -1, "Diego", "Necesito un machete.", "Muchas gracias soldado =)", MACHETE);
 
-    enojado1.name = "Adan";
-    enojado1.position.x = REL_TILE_SIZE * 21;
-    enojado1.position.y = REL_TILE_SIZE * 4;
-    enojado1.color = WHITE;
-    enojado1.direction = 1;
-    enojado1.requiredItem = MACHETE;
-    enojado1.status = false;
+    InitNPC(&tirado1, (Vector2){7, 8}, 1, "Luis", "Necesito comida plis.", "Muchas gracias soldado", FOOD);
 
-    enojado2.name = "Fernando";
-    enojado2.position.x = REL_TILE_SIZE * 26;
-    enojado2.position.y = REL_TILE_SIZE * 4;
-    enojado2.color = WHITE;
-    enojado2.direction = -1;
-    enojado2.requiredItem = MACHETE;
-    enojado2.status = false;
-
-    enojado3.name = "Ricardo";
-    enojado3.position.x = REL_TILE_SIZE * 7;
-    enojado3.position.y = REL_TILE_SIZE * 15;
-    enojado3.color = WHITE;
-    enojado3.direction = -1;
-    enojado3.requiredItem = MACHETE;
-    enojado3.status = false;
-
-    enojado4.name = "Diego";
-    enojado4.position.x = REL_TILE_SIZE * 13;
-    enojado4.position.y = REL_TILE_SIZE * 11;
-    enojado4.color = WHITE;
-    enojado4.direction = -1;
-    enojado4.requiredItem = MACHETE;
-    enojado4.status = false;
-
-    tirado1.name = "Luis";
-    tirado1.position.x = REL_TILE_SIZE * 7;
-    tirado1.position.y = REL_TILE_SIZE * 8;
-    tirado1.color = WHITE;
-    tirado1.direction = 1;
-    tirado1.requiredItem = FOOD;
-    tirado1.status = false;
-
-    recargado1.name = "Jorge";
-    recargado1.position.x = REL_TILE_SIZE * 1;
-    recargado1.position.y = REL_TILE_SIZE * 15;
-    recargado1.color = WHITE;
-    recargado1.direction = 1;
-    recargado1.requiredItem = LANZA;
-    recargado1.status = false;
-
-    recargado2.name = "Brayan";
-    recargado2.position.x = REL_TILE_SIZE * 7;
-    recargado2.position.y = REL_TILE_SIZE * 19;
-    recargado2.color = WHITE;
-    recargado2.direction = -1;
-    recargado2.requiredItem = LANZA;
-    recargado2.status = false;
-
-    recargado3.name = "Iván";
-    recargado3.position.x = REL_TILE_SIZE * 19;
-    recargado3.position.y = REL_TILE_SIZE * 20;
-    recargado3.color = WHITE;
-    recargado3.direction = 1;
-    recargado3.requiredItem = LANZA;
-    recargado3.status = false;
-
-    recargado4.name = "Kevin";
-    recargado4.position.x = REL_TILE_SIZE * 27;
-    recargado4.position.y = REL_TILE_SIZE * 16;
-    recargado4.color = WHITE;
-    recargado4.direction = -1;
-    recargado4.requiredItem = LANZA;
-    recargado4.status = false;
-
-    recargado5.name = "Diego";
-    recargado5.position.x = REL_TILE_SIZE * 30;
-    recargado5.position.y = REL_TILE_SIZE * 20;
-    recargado5.color = WHITE;
-    recargado5.direction = -1;
-    recargado5.requiredItem = LANZA;
-    recargado5.status = false;
+    InitNPC(&recargado1, (Vector2){1, 15}, 1, "Jorge", "Necesito una lanza.", "Muchas gracias soldado =)", LANZA);
+    InitNPC(&recargado2, (Vector2){7, 19}, -1, "Brayan", "Necesito una lanza.", "Muchas gracias soldado =)", LANZA);
+    InitNPC(&recargado3, (Vector2){19, 20}, 1, "Iván", "Necesito una lanza.", "Muchas gracias soldado =)", LANZA);
+    InitNPC(&recargado4, (Vector2){27, 16}, -1, "Kevin", "Necesito una lanza.", "Muchas gracias soldado =)", LANZA);
+    InitNPC(&recargado5, (Vector2){30, 20}, -1, "Diego", "Necesito una lanza.", "Muchas gracias soldado =)", LANZA);
 
     // *** Room 2 ***
+    InitNPC(&saco1, (Vector2){3, 4 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco2, (Vector2){4, 3 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco3, (Vector2){7, 5 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco4, (Vector2){8, 10 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco5, (Vector2){4, 18 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco6, (Vector2){5, 18 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco7, (Vector2){27, 4 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco8, (Vector2){24, 10 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco9, (Vector2){27, 18 + 22}, 1, "", "", "", SACO);
+    InitNPC(&saco10, (Vector2){28, 17 + 22}, 1, "", "", "", SACO);
+}
 
-    saco1.position.x = REL_TILE_SIZE * (3);
-    saco1.position.y = REL_TILE_SIZE * (4 + 22);
-    saco1.color = WHITE;
-    saco1.direction = 1;
-    saco1.requiredItem = BAG;
-    saco1.status = false;
+void InitNPC(NPC *npc, Vector2 position, int direction, char *name, char *dialogue, char *happyDialogue, enum Item requiredItem)
+{
+    position.x *= REL_TILE_SIZE;
+    position.y *= REL_TILE_SIZE;
 
-    saco2.position.x = REL_TILE_SIZE * (4);
-    saco2.position.y = REL_TILE_SIZE * (3 + 22);
-    saco2.color = WHITE;
-    saco2.direction = 1;
-    saco2.requiredItem = BAG;
-    saco2.status = false;
-
-    saco3.position.x = REL_TILE_SIZE * (7);
-    saco3.position.y = REL_TILE_SIZE * (5 + 22);
-    saco3.color = WHITE;
-    saco3.direction = 1;
-    saco3.requiredItem = BAG;
-    saco3.status = false;
-
-    saco4.position.x = REL_TILE_SIZE * (8);
-    saco4.position.y = REL_TILE_SIZE * (10 + 22);
-    saco4.color = WHITE;
-    saco4.direction = 1;
-    saco4.requiredItem = BAG;
-    saco4.status = false;
-
-    saco5.position.x = REL_TILE_SIZE * (4);
-    saco5.position.y = REL_TILE_SIZE * (18 + 22);
-    saco5.color = WHITE;
-    saco5.direction = 1;
-    saco5.requiredItem = BAG;
-    saco5.status = false;
-
-    saco6.position.x = REL_TILE_SIZE * (5);
-    saco6.position.y = REL_TILE_SIZE * (18 + 22);
-    saco6.color = WHITE;
-    saco6.direction = 1;
-    saco6.requiredItem = BAG;
-    saco6.status = false;
-
-    saco7.position.x = REL_TILE_SIZE * (27);
-    saco7.position.y = REL_TILE_SIZE * (4 + 22);
-    saco7.color = WHITE;
-    saco7.direction = 1;
-    saco7.requiredItem = BAG;
-    saco7.status = false;
-
-    saco8.position.x = REL_TILE_SIZE * (24);
-    saco8.position.y = REL_TILE_SIZE * (10 + 22);
-    saco8.color = WHITE;
-    saco8.direction = 1;
-    saco8.requiredItem = BAG;
-    saco8.status = false;
-
-    saco9.position.x = REL_TILE_SIZE * (27);
-    saco9.position.y = REL_TILE_SIZE * (18 + 22);
-    saco9.color = WHITE;
-    saco9.direction = 1;
-    saco9.requiredItem = BAG;
-    saco9.status = false;
-
-    saco10.position.x = REL_TILE_SIZE * (28);
-    saco10.position.y = REL_TILE_SIZE * (17 + 22);
-    saco10.color = WHITE;
-    saco10.direction = 1;
-    saco10.requiredItem = BAG;
-    saco10.status = false;
+    npc->position = position;
+    npc->color = WHITE;
+    npc->direction = direction;
+    npc->name = name;
+    npc->dialogue = dialogue;
+    npc->happyDialogue = happyDialogue;
+    npc->status = false;
+    npc->requiredItem = requiredItem;
 }
 
 void UpdateRoom1NPCs()
@@ -346,7 +233,7 @@ void CheckRoom2NPCs(Player *player)
 
 void CheckNPC(Player *player, NPC *npc)
 {
-    if (npc->requiredItem == BAG && npc->status == true)
+    if (npc->requiredItem == SACO && npc->status == true)
     {
         return;
     }
@@ -376,57 +263,26 @@ void InteractNPC(NPC *npc, Player *player)
 
     isInteracting = true;
 
-    if (npc->status == false)
+    if (npc->requiredItem == SACO)
     {
-        // Cambiar el texto dependiendo del item que se necesite
-        switch (npc->requiredItem)
+        if (player->heldItem == MACHETE || player->heldItem == LANZA)
         {
-        case FOOD:
-            necesidad = "comida";
-            break;
-        case RIFLE:
-            necesidad = "un rifle";
-            break;
-        case MACHETE:
-            necesidad = "un machete";
-            break;
-        case LANZA:
-            necesidad = "una lanza";
-            break;
-        case BAG:
-            if (player->heldItem == LANZA || player->heldItem == MACHETE)
-            {
-                player->heldItem = NONE;
-                npc->status = true;
-            }
-
-            isInteracting = false;
-            return;
-            break;
-        case NONE:
-            isInteracting = false;
-            return;
-            break;
-
-        default:
-            necesidad = "nada";
-            break;
+            player->heldItem = NONE;
+            npc->status = true;
         }
 
-        npc->dialogue = TextFormat("Necesito %s.", necesidad);
+        isInteracting = false;
+        return;
+    }
 
+    if (npc->status == false)
+    {
         if (player->heldItem == npc->requiredItem)
         {
             player->heldItem = NONE;
             npc->status = true;
-            npc->dialogue = "Muchas gracias soldado =)";
+            npc->dialogue = npc->happyDialogue;
         }
-    }
-
-    if (npc->requiredItem == BAG)
-    {
-        isInteracting = false;
-        return;
     }
 
     isInteracting = true;
