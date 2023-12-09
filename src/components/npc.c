@@ -231,6 +231,14 @@ void CheckRoom2NPCs(Player *player)
     CheckNPC(player, &saco10);
 }
 
+void UpdateRoom3NPCs()
+{
+}
+
+void CheckRoom3NPCs(Player *player)
+{
+}
+
 void CheckNPC(Player *player, NPC *npc)
 {
     if (npc->requiredItem == SACO && npc->status == true)

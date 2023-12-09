@@ -67,6 +67,39 @@ int main(void)
             menu.state = MENU;
         }
 
+        if (IsKeyPressed(KEY_F1))
+        {
+            InitRoom1Objects();
+            player.position.x = REL_TILE_SIZE * 2;
+            player.position.y = REL_TILE_SIZE * 4;
+
+            currentScene = SCENE1;
+            menu.prevState = menu.state;
+            menu.state = currentScene;
+        }
+
+        if (IsKeyPressed(KEY_F2))
+        {
+            InitRoom2Objects();
+            player.position.x = REL_TILE_SIZE * 4;
+            player.position.y = REL_TILE_SIZE * 27;
+
+            currentScene = SCENE2;
+            menu.prevState = menu.state;
+            menu.state = currentScene;
+        }
+
+        if (IsKeyPressed(KEY_F3))
+        {
+            InitRoom3Objects();
+            player.position.x = REL_TILE_SIZE * 4;
+            player.position.y = REL_TILE_SIZE * 49;
+
+            currentScene = SCENE3;
+            menu.prevState = menu.state;
+            menu.state = currentScene;
+        }
+
         switch (menu.state)
         {
         case LOADING:
@@ -183,17 +216,6 @@ int main(void)
             }
             EndDrawing();
 
-            if (IsKeyPressed(KEY_F2))
-            {
-                InitRoom2Objects();
-                player.position.x = REL_TILE_SIZE * 4;
-                player.position.y = REL_TILE_SIZE * 27;
-
-                currentScene = SCENE2;
-                menu.prevState = menu.state;
-                menu.state = currentScene;
-            }
-
             break;
 
         case SCENE2:
@@ -266,17 +288,78 @@ int main(void)
                 DrawFPS(GetScreenWidth() - 95, 10);
             }
             EndDrawing();
+            break;
 
-            if (IsKeyPressed(KEY_F2))
+        case SCENE3:
+            if (ToggleMusic)
+                PlayMusic(GameMusic);
+            //-----------------------------------------------------------
+
+            if (!isInteracting)
             {
-                InitRoom1Objects();
-                player.position.x = REL_TILE_SIZE * 2;
-                player.position.y = REL_TILE_SIZE * 4;
-
-                currentScene = SCENE1;
-                menu.prevState = menu.state;
-                menu.state = currentScene;
+                Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
+                actPlayer(&player, &fxPasosGrava, room3);
             }
+
+            camera.target = (Vector2){player.position.x, player.position.y};
+
+            // Draw
+            //----------------------------------------------------------------------------------
+            UpdateSpritesFrame();
+            BeginTextureMode(screenCam);
+            {
+                BeginMode2D(camera);
+                {
+                    ClearBackground(DARKGRAY);
+                    DrawElement(&room3.tileset, (Vector2){0, TILE_SIZE * 44});
+
+                    UpdateRoom3NPCs();
+                    CheckRoom3NPCs(&player);
+                    CheckRoom3Objects(&player);
+
+                    if (debug)
+                    {
+                        DebugRoom(camera, player, room3, (Vector2){0, 44});
+                    }
+                    else
+                    {
+                        DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+
+                        // Draw held item
+                        if (player.heldItem != NONE)
+                        {
+                            if (player.direction == 1)
+                            {
+                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, 16, 16}, (Rectangle){player.position.x + (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                            }
+                            else
+                            {
+                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                            }
+                        }
+                    }
+                }
+                EndMode2D();
+            }
+            EndTextureMode();
+            //-----------------------------------------
+
+            BeginDrawing();
+            {
+                // Pintar pantalla (textura)
+                DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
+
+                if (isInteracting)
+                {
+                    DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
+                    DrawRectangle(0, screenHeight - screenHeight / 4, screenWidth, screenHeight / 4, Fade(BLACK, 0.9f));
+                    DrawText(currentName, 20, (screenHeight - screenHeight / 4) + 20, 30, WHITE);
+                    DrawText(currentDialogue, 20, (screenHeight - screenHeight / 4) + 70, 25, WHITE);
+                }
+
+                DrawFPS(GetScreenWidth() - 95, 10);
+            }
+            EndDrawing();
             break;
 
         case OPTIONS:

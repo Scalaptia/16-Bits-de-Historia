@@ -1,6 +1,6 @@
 #include "../headers/keybinds.h"
 
-Keys keys = {.DEBUG_KEY = KEY_F1,
+Keys keys = {.DEBUG_KEY = KEY_F11,
              .ZOOM_IN_KEY = KEY_PAGE_DOWN,
              .ZOOM_OUT_KEY = KEY_PAGE_UP,
              .SCREENSHOT_KEY = KEY_F12,

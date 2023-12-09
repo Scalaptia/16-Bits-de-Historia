@@ -11,6 +11,7 @@ enum GameState
     MENU,
     SCENE1,
     SCENE2,
+    SCENE3,
     OPTIONS,
     EXIT
 };

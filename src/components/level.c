@@ -2,6 +2,7 @@
 
 LevelData room1;
 LevelData room2;
+LevelData room3;
 
 void ScaleRec(Rectangle *rec)
 {
@@ -159,28 +160,44 @@ void InitRoom2Collisions()
     CreateCollisionObject((Vector2){position.x + 25, position.y + 1}, (Vector2){2, 2}, &room2.objectsCount, &room2.objects);
 }
 
-void InitRoom1()
+void InitRoom3Collisions()
 {
-    room1.tileset.image = LoadImage(ASSETS_PATH "Escenarios/Escena1.png");
-    room1.tileset.texture = LoadTextureFromImage(room1.tileset.image);
-    room1.tileset.size = (Rectangle){0, 0, room1.tileset.texture.width, room1.tileset.texture.height};
-
-    InitRoom1Collisions();
+    Vector2 position = {0, 44};
+    CreateCollisionWalls(position, (Vector2){52, 22}, &room3.wallsCount, &room3.walls);
 }
 
-void InitRoom2()
+void InitRoom(LevelData *room, int roomNumber)
 {
-    room2.tileset.image = LoadImage(ASSETS_PATH "Escenarios/Escena2.png");
-    room2.tileset.texture = LoadTextureFromImage(room2.tileset.image);
-    room2.tileset.size = (Rectangle){0, 0, room2.tileset.texture.width, room2.tileset.texture.height};
+    char *path;
 
-    InitRoom2Collisions();
+    switch (roomNumber)
+    {
+    case 1:
+        path = ASSETS_PATH "Escenarios/Escena1.png";
+        InitRoom1Collisions();
+        break;
+    case 2:
+        path = ASSETS_PATH "Escenarios/Escena2.png";
+        InitRoom2Collisions();
+        break;
+    case 3:
+        path = ASSETS_PATH "Escenarios/Escena3.png";
+        InitRoom3Collisions();
+        break;
+    }
+
+    room->tileset.image = LoadImage(path);
+    room->tileset.texture = LoadTextureFromImage(room->tileset.image);
+    room->tileset.size = (Rectangle){0, 0, room->tileset.texture.width, room->tileset.texture.height};
+    UnloadImage(room->tileset.image);
 }
 
 void InitRooms()
 {
-    InitRoom1();
-    InitRoom2();
+    printf("Initializing rooms...\n");
+    InitRoom(&room1, 1);
+    InitRoom(&room2, 2);
+    InitRoom(&room3, 3);
 }
 
 void DrawElement(GraphicsData *tileset, Vector2 position)

@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "string.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 #define TILE_SIZE 16
@@ -31,6 +32,7 @@ typedef struct LevelData
 void DrawElement(GraphicsData *tileset, Vector2 position);
 void InitRoom1Collisions();
 void InitRoom2Collisions();
+void InitRoom3Collisions();
 
 void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vector2 **walls);
 void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Rectangle **objects);
@@ -38,13 +40,12 @@ void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Re
 void UnloadGraphics(GraphicsData *tileset);
 bool IsRectangleOnCamera(Rectangle rect, Camera2D camera);
 
-void InitRoom1();
-void InitRoom2();
 void InitRooms();
 
 void UnloadRoom(LevelData *room);
 
 extern LevelData room1;
 extern LevelData room2;
+extern LevelData room3;
 
 #endif

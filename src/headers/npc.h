@@ -28,11 +28,13 @@ void InitNPCs();
 void InteractNPC(NPC *npc, Player *player);
 void UpdateRoom1NPCs();
 void UpdateRoom2NPCs();
+void UpdateRoom3NPCs();
 
 void CheckNPC(Player *player, NPC *npc);
 
 void CheckRoom1NPCs(Player *player);
 void CheckRoom2NPCs(Player *player);
+void CheckRoom3NPCs(Player *player);
 
 extern NPC enojado1;
 extern NPC enojado2;

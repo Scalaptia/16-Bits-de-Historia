@@ -20,11 +20,13 @@ typedef struct Object
 
 void InitRoom1Objects();
 void InitRoom2Objects();
+void InitRoom3Objects();
 void InitObject(Object *object, Texture2D texture, Vector2 position, enum Item givenItem);
 void CheckObject(Player *player, Object *object);
 
 void CheckRoom1Objects(Player *player);
 void CheckRoom2Objects(Player *player);
+void CheckRoom3Objects(Player *player);
 void InteractObject(Object *object, Player *player);
 
 extern Object objComida1;

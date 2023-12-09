@@ -58,6 +58,10 @@ void InitRoom2Objects()
     InitObject(&objLanza10, itemLanzaTexture, (Vector2){3, 16 + 22}, LANZA);
 }
 
+void InitRoom3Objects()
+{
+}
+
 void InitObject(Object *object, Texture2D texture, Vector2 position, enum Item givenItem)
 {
     position.x *= REL_TILE_SIZE;
@@ -130,6 +134,10 @@ void CheckRoom2Objects(Player *player)
     CheckObject(player, &objLanza8);
     CheckObject(player, &objLanza9);
     CheckObject(player, &objLanza10);
+}
+
+void CheckRoom3Objects(Player *player)
+{
 }
 
 void InteractObject(Object *object, Player *player)

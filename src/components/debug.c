@@ -23,7 +23,9 @@ void PaintGrid(Grid grid)
 
 void DebugRoom(Camera2D camera, Player player, LevelData room, Vector2 position)
 {
-    PaintGrid((Grid){REL_TILE_SIZE, (Vector2){position.x * REL_TILE_SIZE, position.y * REL_TILE_SIZE}, REL_TILE_SIZE * 32, REL_TILE_SIZE * 22, LIGHTGRAY});
+    // Paint grid considering sizeof room
+    PaintGrid((Grid){REL_TILE_SIZE, (Vector2){position.x * REL_TILE_SIZE, position.y * REL_TILE_SIZE}, REL_TILE_SIZE * ((room.tileset.size.width / TILE_SIZE) + 2), REL_TILE_SIZE * ((room.tileset.size.height / TILE_SIZE) + 2), LIGHTGRAY});
+
     DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
 
     // Draw debug walls
