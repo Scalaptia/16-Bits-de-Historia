@@ -46,4 +46,15 @@ extern Sprite npcRecargado2Sprite;
 extern Sprite npcSaco1Sprite;
 extern Sprite npcSaco2Sprite;
 
+extern Sprite bulletSprite;
+extern Sprite enemy1Sprite;
+extern Sprite enemy2Sprite;
+extern Sprite enemy3Sprite;
+extern Sprite enemy4Sprite;
+
+extern Sprite npcMexicano1Sprite;
+extern Sprite npcMexicano2Sprite;
+extern Sprite npcMexicano3Sprite;
+extern Sprite npcMexicano4Sprite;
+
 #endif

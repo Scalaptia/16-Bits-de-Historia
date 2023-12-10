@@ -145,3 +145,42 @@ void InteractObject(Object *object, Player *player)
 {
     player->heldItem = object->givenItem;
 }
+
+void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu, enum GameState *currentScene)
+{
+    if (CheckCollisionRecs(player->hitbox, (Rectangle){x * REL_TILE_SIZE, y * REL_TILE_SIZE, REL_TILE_SIZE, REL_TILE_SIZE}))
+    {
+        switch (roomNumber)
+        {
+        case 1:
+            InitRoom1Objects();
+            player->position.x = REL_TILE_SIZE * 2;
+            player->position.y = REL_TILE_SIZE * 4;
+            player->heldItem = NONE;
+
+            *currentScene = SCENE1;
+            break;
+
+        case 2:
+            InitRoom2Objects();
+            player->position.x = REL_TILE_SIZE * 4;
+            player->position.y = REL_TILE_SIZE * 27;
+            player->heldItem = NONE;
+
+            *currentScene = SCENE2;
+            break;
+
+        case 3:
+            InitRoom3Objects();
+            player->position.x = REL_TILE_SIZE * 4;
+            player->position.y = REL_TILE_SIZE * 49;
+            player->heldItem = NONE;
+
+            *currentScene = SCENE3;
+            break;
+        }
+
+        menu->prevState = menu->state;
+        menu->state = *currentScene;
+    }
+}

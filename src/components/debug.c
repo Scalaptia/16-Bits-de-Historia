@@ -27,6 +27,7 @@ void DebugRoom(Camera2D camera, Player player, LevelData room, Vector2 position)
     PaintGrid((Grid){REL_TILE_SIZE, (Vector2){position.x * REL_TILE_SIZE, position.y * REL_TILE_SIZE}, REL_TILE_SIZE * ((room.tileset.size.width / TILE_SIZE) + 2), REL_TILE_SIZE * ((room.tileset.size.height / TILE_SIZE) + 2), LIGHTGRAY});
 
     DrawRectangle(player.position.x, player.position.y, REL_TILE_SIZE, REL_TILE_SIZE, player.color); // player collision
+    DrawRectangleLinesEx(player.hitbox, 4, BLACK);
 
     // Draw debug walls
     for (int i = 0; i < room.wallsCount; i++)

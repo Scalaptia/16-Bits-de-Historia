@@ -12,6 +12,7 @@
 #include "./headers/npc.h"
 #include "./headers/object.h"
 #include "./headers/cine.h"
+#include "./headers/enemy.h"
 
 //----------------------------------------------------------------------------------
 // Código
@@ -28,12 +29,15 @@ int main(void)
     bool pause = false;
     bool exitWindow = false;
     bool ToggleMusic = true; // Should be true
-    bool fishishedLevel = false;
+    bool finishedLevel = false;
     char path[100];
 
     bool cinema = false;
     bool cinema2 = false;
     bool cinema3 = false;
+
+    bool showHint = true;
+    char *hintText;
 
     // Config -----------------------------------------
 
@@ -46,6 +50,7 @@ int main(void)
     InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
     InitNPCs();
+    InitEnemys();
     InitRoom1Objects();
     InitCinematica();
 
@@ -155,14 +160,14 @@ int main(void)
 
             break;
 
-        case SCENE1:     
-            //Cinematica-------------------------------------------------           
+        case SCENE1:
+            // Cinematica-------------------------------------------------
             if (cinema == false)
             {
-                cinema = RunCimeatica1(screenWidth, screenHeight,ToggleMusic);
+                cinema = RunCimeatica1(screenWidth, screenHeight, ToggleMusic);
             }
 
-            //Nivel-------------------------------------------------------
+            // Nivel-------------------------------------------------------
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------
@@ -186,7 +191,7 @@ int main(void)
                     ClearBackground(BLACK);
                     DrawElement(&room1.tileset, (Vector2){0, 0});
 
-                    fishishedLevel = UpdateRoom1NPCs();
+                    finishedLevel = UpdateRoom1NPCs();
 
                     if (debug)
                     {
@@ -219,8 +224,27 @@ int main(void)
 
             BeginDrawing();
             {
+
                 // Pintar pantalla (textura)
                 DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
+
+                if (showHint)
+                {
+                    // Show hint at the middle-top of the screen
+                    DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
+
+                    if (finishedLevel)
+                    {
+                        hintText = "Encuentra la salida";
+                    }
+                    else
+                    {
+                        hintText = "Entrega el armamento a los soldados";
+                    }
+
+                    // "Entrega el armamento a los soldados"
+                    DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
+                }
 
                 if (isInteracting)
                 {
@@ -234,26 +258,16 @@ int main(void)
             }
             EndDrawing();
 
-            if (fishishedLevel && !isInteracting)
-            {
-                InitRoom2Objects();
-                player.position.x = REL_TILE_SIZE * 4;
-                player.position.y = REL_TILE_SIZE * 27;
-                player.heldItem = NONE;
-
-                StopMusicStream(GameMusic);
-                currentScene = SCENE2;
-                menu.prevState = menu.state;
-                menu.state = currentScene;
-            }
+            if (finishedLevel && !isInteracting)
+                CheckTeleportTile(&player, 3, 3, 2, &menu, &currentScene);
 
             break;
 
         case SCENE2:
-            //Cinematica
-            if(cinema2==false)
+            // Cinematica
+            if (cinema2 == false)
             {
-                cinema2=RunCimeatica2(screenWidth, screenHeight,ToggleMusic);
+                cinema2 = RunCimeatica2(screenWidth, screenHeight, ToggleMusic);
             }
 
             if (ToggleMusic)
@@ -278,7 +292,7 @@ int main(void)
                     ClearBackground(BROWN);
                     DrawElement(&room2.tileset, (Vector2){0, TILE_SIZE * 22});
 
-                    fishishedLevel = UpdateRoom2NPCs();
+                    finishedLevel = UpdateRoom2NPCs();
 
                     if (debug)
                     {
@@ -314,6 +328,24 @@ int main(void)
                 // Pintar pantalla (textura)
                 DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
 
+                if (showHint)
+                {
+                    // Show hint at the middle-top of the screen
+                    DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
+
+                    if (finishedLevel)
+                    {
+                        hintText = "Encuentra la salida";
+                    }
+                    else
+                    {
+                        hintText = "Reúne armamento y colócalo en los sacos";
+                    }
+
+                    // "Entrega el armamento a los soldados"
+                    DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
+                }
+
                 if (isInteracting)
                 {
                     DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
@@ -326,7 +358,7 @@ int main(void)
             }
             EndDrawing();
 
-            if (fishishedLevel && !isInteracting)
+            if (finishedLevel && !isInteracting)
             {
                 InitRoom3Objects();
                 player.position.x = REL_TILE_SIZE * 4;
@@ -340,7 +372,9 @@ int main(void)
             break;
 
         case SCENE3:
-            if(cinema3==false)
+            player.isDead = false;
+
+            if (cinema3 == false)
             {
                 cinema3=RunCimeatica3(screenWidth, screenHeight,ToggleMusic);
             }
@@ -368,6 +402,7 @@ int main(void)
                     DrawElement(&room3.tileset, (Vector2){0, TILE_SIZE * 44});
 
                     CheckRoom3Objects(&player);
+                    UpdateEnemys();
 
                     if (debug)
                     {
@@ -401,6 +436,17 @@ int main(void)
                 // Pintar pantalla (textura)
                 DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
 
+                if (showHint)
+                {
+                    // Show hint at the middle-top of the screen
+                    DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
+
+                    hintText = "Llega a la salida!";
+
+                    // "Entrega el armamento a los soldados"
+                    DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
+                }
+
                 if (isInteracting)
                 {
                     DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
@@ -412,6 +458,22 @@ int main(void)
                 DrawFPS(GetScreenWidth() - 95, 10);
             }
             EndDrawing();
+
+            if (player.isDead)
+            {
+                InitRoom3Objects();
+                player.position.x = REL_TILE_SIZE * 4;
+                player.position.y = REL_TILE_SIZE * 49;
+                player.hitbox.x = player.position.x + (REL_TILE_SIZE / 4);
+                player.hitbox.y = player.position.y;
+
+                player.heldItem = NONE;
+
+                currentScene = SCENE3;
+                menu.prevState = menu.state;
+                menu.state = currentScene;
+            }
+
             break;
 
         case OPTIONS:

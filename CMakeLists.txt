@@ -32,7 +32,8 @@ src/headers/menu.h src/components/menu.c
 src/headers/sound.h src/components/sound.c
 src/headers/npc.h src/components/npc.c
 src/headers/object.h src/components/object.c
-src/headers/cine.h src/components/cine.c)
+src/headers/cine.h src/components/cine.c
+src/headers/enemy.h src/components/enemy.c)
 
 target_link_libraries(raylib_template PUBLIC raylib)
 target_compile_definitions(raylib_template PUBLIC ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets/" AUDIO_PATH="${CMAKE_CURRENT_SOURCE_DIR}/audio/")

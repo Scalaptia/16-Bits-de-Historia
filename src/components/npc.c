@@ -24,6 +24,13 @@ NPC saco8;
 NPC saco9;
 NPC saco10;
 
+NPC mexicano1;
+NPC mexicano2;
+NPC mexicano3;
+NPC mexicano4;
+NPC mexicano5;
+NPC mexicano6;
+
 void InitNPCs()
 {
     // *** Room 1 ***
@@ -51,6 +58,13 @@ void InitNPCs()
     InitNPC(&saco8, (Vector2){24, 10 + 22}, 1, "", "", "", SACO);
     InitNPC(&saco9, (Vector2){27, 18 + 22}, 1, "", "", "", SACO);
     InitNPC(&saco10, (Vector2){28, 17 + 22}, 1, "", "", "", SACO);
+
+    InitNPC(&mexicano1, (Vector2){6, 9 + 22}, 1, "", "", "", NONE);
+    InitNPC(&mexicano2, (Vector2){13, 14 + 22}, -1, "", "", "", NONE);
+    InitNPC(&mexicano3, (Vector2){21, 4 + 22}, 1, "", "", "", NONE);
+    InitNPC(&mexicano4, (Vector2){23, 4 + 22}, -1, "", "", "", NONE);
+    InitNPC(&mexicano5, (Vector2){28, 16 + 22}, -1, "", "", "", NONE);
+    InitNPC(&mexicano6, (Vector2){3, 14 + 22}, 1, "", "", "", NONE);
 }
 
 void InitNPC(NPC *npc, Vector2 position, int direction, char *name, char *dialogue, char *happyDialogue, enum Item requiredItem)
@@ -276,6 +290,13 @@ bool UpdateRoom2NPCs()
     else
         saco10.sprite = npcSaco1Sprite;
 
+    mexicano1.sprite = npcMexicano1Sprite;
+    mexicano2.sprite = npcMexicano2Sprite;
+    mexicano3.sprite = npcMexicano3Sprite;
+    mexicano4.sprite = npcMexicano4Sprite;
+    mexicano5.sprite = npcMexicano1Sprite;
+    mexicano6.sprite = npcMexicano2Sprite;
+
     DrawSpriteFrame(&saco1.sprite, saco1.position, SCALE, saco1.color, saco1.direction, true);
     DrawSpriteFrame(&saco2.sprite, saco2.position, SCALE, saco2.color, saco2.direction, true);
     DrawSpriteFrame(&saco3.sprite, saco3.position, SCALE, saco3.color, saco3.direction, true);
@@ -286,6 +307,13 @@ bool UpdateRoom2NPCs()
     DrawSpriteFrame(&saco8.sprite, saco8.position, SCALE, saco8.color, saco8.direction, true);
     DrawSpriteFrame(&saco9.sprite, saco9.position, SCALE, saco9.color, saco9.direction, true);
     DrawSpriteFrame(&saco10.sprite, saco10.position, SCALE, saco10.color, saco10.direction, true);
+
+    DrawSpriteFrame(&mexicano1.sprite, mexicano1.position, SCALE, mexicano1.color, mexicano1.direction, true);
+    DrawSpriteFrame(&mexicano2.sprite, mexicano2.position, SCALE, mexicano2.color, mexicano2.direction, true);
+    DrawSpriteFrame(&mexicano3.sprite, mexicano3.position, SCALE, mexicano3.color, mexicano3.direction, true);
+    DrawSpriteFrame(&mexicano4.sprite, mexicano4.position, SCALE, mexicano4.color, mexicano4.direction, true);
+    DrawSpriteFrame(&mexicano5.sprite, mexicano5.position, SCALE, mexicano5.color, mexicano5.direction, true);
+    DrawSpriteFrame(&mexicano6.sprite, mexicano6.position, SCALE, mexicano6.color, mexicano6.direction, true);
 
     if (i >= room2.NPCCount)
     {
