@@ -34,7 +34,7 @@ void InitEnemys()
     InitEnemy(&enemy6, (Vector2){1, 18 + 44}, 1, &enemy2Sprite, 10, 7, RIGHT);
     InitEnemy(&enemy7, (Vector2){47, 17 + 44}, -1, &enemy3Sprite, 10, 7, LEFT);
     InitEnemy(&enemy8, (Vector2){40, 12 + 44}, 1, &enemy4Sprite, 10, 7, RIGHT);
-    InitEnemy(&enemy9, (Vector2){48, 9 + 44}, 1, &enemy1Sprite, 10, 7, RIGHT);
+    InitEnemy(&enemy9, (Vector2){48, 9 + 44}, -1, &enemy1Sprite, 10, 7, LEFT);
     InitEnemy(&enemy10, (Vector2){46, 1 + 44}, -1, &enemy2Sprite, 10, 7, DOWN);
 }
 

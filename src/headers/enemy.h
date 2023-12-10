@@ -58,7 +58,7 @@ extern Enemy enemy5;  // 27, 20 UP
 extern Enemy enemy6;  // 1, 18 RIGHT
 extern Enemy enemy7;  // 47, 17 LEFT
 extern Enemy enemy8;  // 40, 12 RIGHT
-extern Enemy enemy9;  // 48, 9 RIGHT
+extern Enemy enemy9;  // 48, 9 LEFT
 extern Enemy enemy10; // 46, 1 DOWN
 
 #endif

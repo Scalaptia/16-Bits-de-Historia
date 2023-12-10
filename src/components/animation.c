@@ -12,6 +12,10 @@ Sprite npcRecargado1Sprite;
 Sprite npcRecargado2Sprite;
 Sprite npcSaco1Sprite;
 Sprite npcSaco2Sprite;
+Sprite npcMexicano1Sprite;
+Sprite npcMexicano2Sprite;
+Sprite npcMexicano3Sprite;
+Sprite npcMexicano4Sprite;
 
 // Enemys
 Sprite bulletSprite;
@@ -73,6 +77,10 @@ void UpdateSpritesFrame()
     UpdateSpriteFrame(&enemy2Sprite);
     UpdateSpriteFrame(&enemy3Sprite);
     UpdateSpriteFrame(&enemy4Sprite);
+    UpdateSpriteFrame(&npcMexicano1Sprite);
+    UpdateSpriteFrame(&npcMexicano2Sprite);
+    UpdateSpriteFrame(&npcMexicano3Sprite);
+    UpdateSpriteFrame(&npcMexicano4Sprite);
 }
 
 void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction, bool isAnimated)
@@ -120,6 +128,10 @@ void InitSprites()
     strcpy(enemy2Sprite.path, "Enemigos/E2/");
     strcpy(enemy3Sprite.path, "Enemigos/E3/");
     strcpy(enemy4Sprite.path, "Enemigos/E4/");
+    strcpy(npcMexicano1Sprite.path, "NPCs/Mexicano/M1/");
+    strcpy(npcMexicano2Sprite.path, "NPCs/Mexicano/M2/");
+    strcpy(npcMexicano3Sprite.path, "NPCs/Mexicano/M3/");
+    strcpy(npcMexicano4Sprite.path, "NPCs/Mexicano/M4/");
 
     charSprite.frameTime = ANIMATION_SPEED;
     InitSprite(&charSprite, 4);
@@ -158,6 +170,11 @@ void InitSprites()
 
     enemy4Sprite.frameTime = ANIMATION_SPEED * 2;
     InitSprite(&enemy4Sprite, 2);
+
+    InitSprite(&npcMexicano1Sprite, 1);
+    InitSprite(&npcMexicano2Sprite, 1);
+    InitSprite(&npcMexicano3Sprite, 1);
+    InitSprite(&npcMexicano4Sprite, 1);
 }
 
 void UnloadSprites()
@@ -177,4 +194,8 @@ void UnloadSprites()
     UnloadSprite(&enemy2Sprite);
     UnloadSprite(&enemy3Sprite);
     UnloadSprite(&enemy4Sprite);
+    UnloadSprite(&npcMexicano1Sprite);
+    UnloadSprite(&npcMexicano2Sprite);
+    UnloadSprite(&npcMexicano3Sprite);
+    UnloadSprite(&npcMexicano4Sprite);
 }

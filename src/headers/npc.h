@@ -58,4 +58,11 @@ extern NPC saco8;
 extern NPC saco9;
 extern NPC saco10;
 
+extern NPC mexicano1;
+extern NPC mexicano2;
+extern NPC mexicano3;
+extern NPC mexicano4;
+extern NPC mexicano5;
+extern NPC mexicano6;
+
 #endif

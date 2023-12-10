@@ -343,9 +343,9 @@ int main(void)
         case SCENE3:
             player.isDead = false;
 
-            if (cinema2 == false)
+            if (cinema3 == false)
             {
-                cinema2 = RunCimeatica3(screenWidth, screenHeight, ToggleMusic);
+                cinema3 = RunCimeatica3(screenWidth, screenHeight, ToggleMusic);
             }
             if (ToggleMusic)
                 PlayMusic(GameMusic);
