@@ -299,6 +299,9 @@ bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
 
     while (!exitbucle)
     {
+        if (togle)
+            SetMusicVolume(C1M_F, 0.5f);
+        PlayMusic(C2M_F);
         BeginDrawing();
         {
             ClearBackground(BLACK);
@@ -435,6 +438,9 @@ bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle)
 
     while (!exitbucle)
     {
+        if (togle)
+            SetMusicVolume(C1M_F, 0.5f);
+        PlayMusic(C3M_F);
         BeginDrawing();
         {
             //----------------------------------------------Escena 1-----------------------------------------------
@@ -470,10 +476,11 @@ bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle)
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && current_esc == C3_e2)
             {
                 PlaySound(fxButton);
+                exitbucle = true;
                 EndDrawing();
-                exitbucle=true;
             }
         }
         EndDrawing();
     }
+    return true;
 }

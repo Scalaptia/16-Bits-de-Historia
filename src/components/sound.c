@@ -8,6 +8,8 @@ Sound fxButton;
 Music fxPasosGrava;
 
 Music C1M_F;
+Music C2M_F;
+Music C3M_F;
 
 void InitSounds()
 {
@@ -15,6 +17,8 @@ void InitSounds()
     GameMusic = LoadMusicStream(AUDIO_PATH "Music/N64.mp3");
     MenuMusic = LoadMusicStream(AUDIO_PATH "Music/gerudo.mp3");
     C1M_F = LoadMusicStream(AUDIO_PATH "Music/Arena.mp3");
+    C2M_F = LoadMusicStream(AUDIO_PATH "Music/N642.mp3");
+    C3M_F = LoadMusicStream(AUDIO_PATH "Music/Fortess.mp3");
 
     fxButton = LoadSound(AUDIO_PATH "SoundEffects/Mine_button.mp3");
     fxPasosGrava = LoadMusicStream(AUDIO_PATH "SoundEffects/Pasos_Grava/MP1.mp3");
