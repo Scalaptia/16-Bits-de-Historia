@@ -28,6 +28,8 @@ typedef struct Player
     bool isAnimated;
     enum Item heldItem;
     Texture2D heldTexture;
+    bool isDead;
+    Rectangle hitbox;
 } Player;
 
 #define TILE_SIZE 16

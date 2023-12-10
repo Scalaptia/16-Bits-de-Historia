@@ -28,6 +28,7 @@ void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
     player.color = WHITE;
     player.direction = 1;
     player.heldItem = NONE;
+    player.hitbox = (Rectangle){player.position.x + (REL_TILE_SIZE / 4), player.position.y, REL_TILE_SIZE / 2, REL_TILE_SIZE};
 
     camera.target = (Vector2){player.position.x, player.position.y};
     camera.offset = (Vector2){(screen.width / 2) - (TILE_SIZE * 2), (screen.height / 2) - (TILE_SIZE * 2)};
@@ -104,22 +105,20 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
 
         bool collision_x = false;
         bool collision_y = false;
-        Vector2 new_position;
-
-        new_position.x = player->position.x + direction.x * player->speed * GetFrameTime();
-        new_position.y = player->position.y + direction.y * player->speed * GetFrameTime();
+        Vector2 new_position = {player->position.x + direction.x * player->speed * GetFrameTime(), player->position.y + direction.y * player->speed * GetFrameTime()};
+        Rectangle new_hitbox = {new_position.x + (REL_TILE_SIZE / 4), new_position.y, REL_TILE_SIZE / 2, REL_TILE_SIZE};
 
         // Check for collisions in the x direction
         for (int i = 0; i < room.wallsCount; i++)
         {
             if (IsRectangleOnCamera((Rectangle){0, 0, room.walls[i].x, room.walls[i].y}, camera))
             {
-                if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
+                if (CheckCollisionRecs((Rectangle){new_hitbox.x, player->hitbox.y, player->hitbox.width, player->hitbox.height}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
                 {
                     collision_x = true;
                 }
 
-                if (CheckCollisionRecs((Rectangle){player->position.x, new_position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
+                if (CheckCollisionRecs((Rectangle){player->hitbox.x, new_hitbox.y, player->hitbox.width, player->hitbox.height}, (Rectangle){room.walls[i].x, room.walls[i].y, REL_TILE_SIZE, REL_TILE_SIZE}))
                 {
                     collision_y = true;
                 }
@@ -131,12 +130,12 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
         {
             if (IsRectangleOnCamera(room.objects[i], camera))
             {
-                if (CheckCollisionRecs((Rectangle){new_position.x, player->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, room.objects[i]))
+                if (CheckCollisionRecs((Rectangle){new_hitbox.x, player->hitbox.y, player->hitbox.width, player->hitbox.height}, room.objects[i]))
                 {
                     collision_x = true;
                 }
 
-                if (CheckCollisionRecs((Rectangle){player->position.x, new_position.y, REL_TILE_SIZE, REL_TILE_SIZE}, room.objects[i]))
+                if (CheckCollisionRecs((Rectangle){player->hitbox.x, new_hitbox.y, player->hitbox.width, player->hitbox.height}, room.objects[i]))
                 {
                     collision_y = true;
                 }
@@ -146,10 +145,12 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
         if (!collision_x)
         {
             player->position.x = new_position.x;
+            player->hitbox.x = new_hitbox.x;
         }
         if (!collision_y)
         {
             player->position.y = new_position.y;
+            player->hitbox.y = new_hitbox.y;
         }
 
         if (old_x != player->position.x || old_y != player->position.y)

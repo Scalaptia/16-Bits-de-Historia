@@ -60,7 +60,7 @@ int main(void)
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     //------------------------
-    SetTargetFPS(144);
+    SetTargetFPS(60);
 
     currentScene = SCENE1;
     menu.state = MENU; // DEBERÍA SER LOADING
@@ -332,6 +332,8 @@ int main(void)
             break;
 
         case SCENE3:
+            player.isDead = false;
+
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------
@@ -400,6 +402,22 @@ int main(void)
                 DrawFPS(GetScreenWidth() - 95, 10);
             }
             EndDrawing();
+
+            if (player.isDead)
+            {
+                InitRoom3Objects();
+                player.position.x = REL_TILE_SIZE * 4;
+                player.position.y = REL_TILE_SIZE * 49;
+                player.hitbox.x = player.position.x + (REL_TILE_SIZE / 4);
+                player.hitbox.y = player.position.y;
+
+                player.heldItem = NONE;
+
+                currentScene = SCENE3;
+                menu.prevState = menu.state;
+                menu.state = currentScene;
+            }
+
             break;
 
         case OPTIONS:
