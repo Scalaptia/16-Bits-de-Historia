@@ -25,8 +25,9 @@ Object objLanza10;
 void InitRoom1Objects()
 {
     InitObject(&objComida1, itemFoodTexture, (Vector2){7, 1}, FOOD);
-    InitObject(&objMachete2, itemMacheteTexture, (Vector2){2, 20}, MACHETE);
-    InitObject(&objMachete3, itemMacheteTexture, (Vector2){18, 1}, MACHETE);
+    InitObject(&objMachete1, itemMacheteTexture, (Vector2){2, 20}, MACHETE);
+    InitObject(&objMachete2, itemMacheteTexture, (Vector2){18, 1}, MACHETE);
+    InitObject(&objMachete3, itemMachete2Texture, (Vector2){9, 13}, MACHETE);
     InitObject(&objMachete4, itemMachete2Texture, (Vector2){30, 2}, MACHETE);
     InitObject(&objLanza1, itemLanzaTexture, (Vector2){1, 11}, LANZA);
     InitObject(&objLanza2, itemLanzaTexture, (Vector2){1, 19}, LANZA);

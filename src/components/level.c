@@ -12,158 +12,29 @@ void ScaleRec(Rectangle *rec)
     rec->height *= SCALE;
 }
 
-void InitRoom1Collisions()
+void InitRoomCollisions(LevelData *room, Vector2 position, Vector2 size, char *fileName)
 {
-    Vector2 position = {0, 0};
+    int i, objectsCount = 0;
+    int x, y, width, height;
 
-    CreateCollisionWalls(position, (Vector2){32, 22}, &room1.wallsCount, &room1.walls);
+    CreateCollisionWalls(position, size, &room->wallsCount, &room->walls);
 
-    // *** Walls ***
-    // 1, 1 - 6, 2
-    CreateCollisionObject((Vector2){position.x + 1, position.y + 1}, (Vector2){6, 2}, &room1.objectsCount, &room1.objects);
+    FILE *file = fopen(fileName, "r");
+    if (file == NULL)
+    {
+        printf("Error opening file!\n");
+        exit(1);
+    }
 
-    // 1, 8 - 6, 3
-    CreateCollisionObject((Vector2){position.x + 1, position.y + 8}, (Vector2){6, 3}, &room1.objectsCount, &room1.objects);
+    fscanf(file, "%d", &objectsCount);
 
-    // 8, 14 - 2, 6
-    CreateCollisionObject((Vector2){position.x + 8, position.y + 14}, (Vector2){2, 6}, &room1.objectsCount, &room1.objects);
+    for (i = 0; i < objectsCount; i++)
+    {
+        fscanf(file, "%d %d %d %d", &x, &y, &width, &height);
+        CreateCollisionObject((Vector2){x, y}, (Vector2){width, height}, &room->objectsCount, &room->objects);
+    }
 
-    // 17, 17 - 1, 4
-    CreateCollisionObject((Vector2){position.x + 17, position.y + 17}, (Vector2){1, 4}, &room1.objectsCount, &room1.objects);
-
-    // 18, 17 - 5, 1
-    CreateCollisionObject((Vector2){position.x + 18, position.y + 17}, (Vector2){5, 1}, &room1.objectsCount, &room1.objects);
-
-    // 25, 17 - 4, 1
-    CreateCollisionObject((Vector2){position.x + 25, position.y + 17}, (Vector2){4, 1}, &room1.objectsCount, &room1.objects);
-
-    // 28, 12 - 1, 5
-    CreateCollisionObject((Vector2){position.x + 28, position.y + 12}, (Vector2){1, 5}, &room1.objectsCount, &room1.objects);
-
-    // 29, 12 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 29, position.y + 12}, (Vector2){2, 1}, &room1.objectsCount, &room1.objects);
-
-    // 17, 1 - 1, 5
-    CreateCollisionObject((Vector2){position.x + 17, position.y + 1}, (Vector2){1, 5}, &room1.objectsCount, &room1.objects);
-
-    // 17, 8 - 1, 2
-    CreateCollisionObject((Vector2){position.x + 17, position.y + 8}, (Vector2){1, 2}, &room1.objectsCount, &room1.objects);
-
-    // 18, 9 - 10, 1
-    CreateCollisionObject((Vector2){position.x + 18, position.y + 9}, (Vector2){10, 1}, &room1.objectsCount, &room1.objects);
-
-    // 27, 7 - 1, 2
-    CreateCollisionObject((Vector2){position.x + 27, position.y + 7}, (Vector2){1, 2}, &room1.objectsCount, &room1.objects);
-
-    // 28, 7 - 3, 1
-    CreateCollisionObject((Vector2){position.x + 28, position.y + 7}, (Vector2){3, 1}, &room1.objectsCount, &room1.objects);
-
-    // *** Objects ***
-    // 1, 7
-    CreateCollisionObject((Vector2){position.x + 1, position.y + 7}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 1, 11
-    CreateCollisionObject((Vector2){position.x + 1, position.y + 11}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 1, 19
-    CreateCollisionObject((Vector2){position.x + 1, position.y + 19}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 2, 20
-    CreateCollisionObject((Vector2){position.x + 2, position.y + 20}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 7, 1
-    CreateCollisionObject((Vector2){position.x + 7, position.y + 1}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 8, 13 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 8, position.y + 13}, (Vector2){2, 1}, &room1.objectsCount, &room1.objects);
-
-    // 16, 1
-    CreateCollisionObject((Vector2){position.x + 16, position.y + 1}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 18, 1
-    CreateCollisionObject((Vector2){position.x + 18, position.y + 1}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 18, 18 - 1, 3
-    CreateCollisionObject((Vector2){position.x + 18, position.y + 18}, (Vector2){1, 3}, &room1.objectsCount, &room1.objects);
-
-    // 28, 8 - 3, 1
-    CreateCollisionObject((Vector2){position.x + 28, position.y + 8}, (Vector2){3, 1}, &room1.objectsCount, &room1.objects);
-
-    // 30, 9
-    CreateCollisionObject((Vector2){position.x + 30, position.y + 9}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 29, 1
-    CreateCollisionObject((Vector2){position.x + 29, position.y + 1}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 30, 2
-    CreateCollisionObject((Vector2){position.x + 30, position.y + 2}, (Vector2){1, 1}, &room1.objectsCount, &room1.objects);
-
-    // 29, 13 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 29, position.y + 13}, (Vector2){2, 1}, &room1.objectsCount, &room1.objects);
-}
-
-void InitRoom2Collisions()
-{
-    Vector2 position = {2, 24};
-    CreateCollisionWalls(position, (Vector2){28, 18}, &room2.wallsCount, &room2.walls);
-
-    // *** Objects ***
-    // 4, 3
-    CreateCollisionObject((Vector2){position.x + 2, position.y + 1}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
-
-    // 3, 4
-    CreateCollisionObject((Vector2){position.x + 1, position.y + 2}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
-
-    // 6, 5
-    CreateCollisionObject((Vector2){position.x + 4, position.y + 3}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
-
-    // 5, 5 - 3, 1
-    CreateCollisionObject((Vector2){position.x + 3, position.y + 3}, (Vector2){3, 1}, &room2.objectsCount, &room2.objects);
-
-    // 5, 6
-    CreateCollisionObject((Vector2){position.x + 3, position.y + 4}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
-
-    // 9, 5
-    CreateCollisionObject((Vector2){position.x + 7, position.y + 3}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
-
-    // 7, 2 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 5, position.y + 0}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
-
-    // 3, 17 - 1, 2
-    CreateCollisionObject((Vector2){position.x + 1, position.y + 15}, (Vector2){1, 2}, &room2.objectsCount, &room2.objects);
-
-    // 4, 18 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 2, position.y + 16}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
-
-    // 7, 10 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 5, position.y + 8}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
-
-    // 14, 14
-    CreateCollisionObject((Vector2){position.x + 12, position.y + 12}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
-
-    // 19, 13 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 17, position.y + 11}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
-
-    // 23, 10 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 21, position.y + 8}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
-
-    // 27, 18 - 2, 1
-    CreateCollisionObject((Vector2){position.x + 25, position.y + 16}, (Vector2){2, 1}, &room2.objectsCount, &room2.objects);
-
-    // 28, 17
-    CreateCollisionObject((Vector2){position.x + 26, position.y + 15}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
-
-    // 22, 3
-    CreateCollisionObject((Vector2){position.x + 20, position.y + 1}, (Vector2){1, 1}, &room2.objectsCount, &room2.objects);
-
-    // 27, 3 - 2, 2
-    CreateCollisionObject((Vector2){position.x + 25, position.y + 1}, (Vector2){2, 2}, &room2.objectsCount, &room2.objects);
-}
-
-void InitRoom3Collisions()
-{
-    Vector2 position = {0, 44};
-    CreateCollisionWalls(position, (Vector2){52, 22}, &room3.wallsCount, &room3.walls);
+    fclose(file);
 }
 
 void InitRoom(LevelData *room, int roomNumber)
@@ -173,16 +44,18 @@ void InitRoom(LevelData *room, int roomNumber)
     switch (roomNumber)
     {
     case 1:
+        room1.NPCCount = 10;
         path = ASSETS_PATH "Escenarios/Escena1.png";
-        InitRoom1Collisions();
+        InitRoomCollisions(&room1, (Vector2){0, 0}, (Vector2){32, 22}, ASSETS_PATH "Collisions/col_room1.txt");
         break;
     case 2:
+        room2.NPCCount = 10;
         path = ASSETS_PATH "Escenarios/Escena2.png";
-        InitRoom2Collisions();
+        InitRoomCollisions(&room2, (Vector2){2, 24}, (Vector2){28, 18}, ASSETS_PATH "Collisions/col_room2.txt");
         break;
     case 3:
         path = ASSETS_PATH "Escenarios/Escena3.png";
-        InitRoom3Collisions();
+        InitRoomCollisions(&room3, (Vector2){0, 44}, (Vector2){52, 22}, ASSETS_PATH "Collisions/col_room3.txt");
         break;
     }
 
@@ -251,6 +124,7 @@ void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Re
     *objects = realloc(*objects, sizeof(Rectangle) * (*objectsCount + newObjectsCount));
 
     int offset = *objectsCount;
+
     for (i = 0; i < size.x; i++)
     {
         for (j = 0; j < size.y; j++)

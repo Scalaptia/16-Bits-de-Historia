@@ -25,14 +25,13 @@ typedef struct LevelData
     int wallsCount;
     Rectangle *objects;
     int objectsCount;
+    int NPCCount;
 } LevelData;
 
 /* PROTOTIPOS*/
 
 void DrawElement(GraphicsData *tileset, Vector2 position);
-void InitRoom1Collisions();
-void InitRoom2Collisions();
-void InitRoom3Collisions();
+void InitRoomCollisions(LevelData *room, Vector2 position, Vector2 size, char *fileName);
 
 void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vector2 **walls);
 void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Rectangle **objects);
