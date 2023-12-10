@@ -63,7 +63,7 @@ int main(void)
     SetTargetFPS(60);
 
     currentScene = SCENE1;
-    menu.state = MENU; // DEBERÍA SER LOADING
+    menu.state = SCENE3; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -346,6 +346,7 @@ int main(void)
             }
             if (ToggleMusic)
                 PlayMusic(lv3);
+            SetMusicVolume(lv3,0.5f);
             //-----------------------------------------------------------
 
             if (!isInteracting)
