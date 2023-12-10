@@ -61,7 +61,7 @@ int main(void)
     SetTargetFPS(144);
 
     currentScene = SCENE1;
-    menu.state = MENU; // DEBERÍA SER LOADING
+    menu.state = SCENE1; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
