@@ -26,16 +26,16 @@ void InitEnemy(Enemy *enemy, Vector2 position, int direction, Sprite *sprite, in
 
 void InitEnemys()
 {
-    InitEnemy(&enemy1, (Vector2){1, 4 + 44}, 1, &enemy1Sprite, 20, 7, RIGHT);
-    InitEnemy(&enemy2, (Vector2){23, 9 + 44}, -1, &enemy2Sprite, 20, 7, LEFT);
-    InitEnemy(&enemy3, (Vector2){16, 12 + 44}, -1, &enemy3Sprite, 20, 7, UP);
-    InitEnemy(&enemy4, (Vector2){30, 2 + 44}, -1, &enemy4Sprite, 20, 7, LEFT);
-    InitEnemy(&enemy5, (Vector2){27, 20 + 44}, -1, &enemy1Sprite, 20, 7, UP);
-    InitEnemy(&enemy6, (Vector2){1, 18 + 44}, 1, &enemy2Sprite, 20, 7, RIGHT);
-    InitEnemy(&enemy7, (Vector2){47, 17 + 44}, -1, &enemy3Sprite, 20, 7, LEFT);
-    InitEnemy(&enemy8, (Vector2){40, 12 + 44}, 1, &enemy4Sprite, 20, 7, RIGHT);
-    InitEnemy(&enemy9, (Vector2){48, 9 + 44}, 1, &enemy1Sprite, 20, 7, RIGHT);
-    InitEnemy(&enemy10, (Vector2){46, 1 + 44}, -1, &enemy2Sprite, 20, 7, DOWN);
+    InitEnemy(&enemy1, (Vector2){1, 4 + 44}, 1, &enemy1Sprite, 10, 7, RIGHT);
+    InitEnemy(&enemy2, (Vector2){23, 9 + 44}, -1, &enemy2Sprite, 10, 7, LEFT);
+    InitEnemy(&enemy3, (Vector2){16, 12 + 44}, -1, &enemy3Sprite, 10, 7, UP);
+    InitEnemy(&enemy4, (Vector2){30, 2 + 44}, -1, &enemy4Sprite, 10, 7, LEFT);
+    InitEnemy(&enemy5, (Vector2){27, 20 + 44}, -1, &enemy1Sprite, 10, 7, UP);
+    InitEnemy(&enemy6, (Vector2){1, 18 + 44}, 1, &enemy2Sprite, 10, 7, RIGHT);
+    InitEnemy(&enemy7, (Vector2){47, 17 + 44}, -1, &enemy3Sprite, 10, 7, LEFT);
+    InitEnemy(&enemy8, (Vector2){40, 12 + 44}, 1, &enemy4Sprite, 10, 7, RIGHT);
+    InitEnemy(&enemy9, (Vector2){48, 9 + 44}, 1, &enemy1Sprite, 10, 7, RIGHT);
+    InitEnemy(&enemy10, (Vector2){46, 1 + 44}, -1, &enemy2Sprite, 10, 7, DOWN);
 }
 
 void UpdateEnemy(Enemy *enemy)
