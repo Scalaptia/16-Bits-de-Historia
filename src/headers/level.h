@@ -25,6 +25,7 @@ typedef struct LevelData
     int wallsCount;
     Rectangle *objects;
     int objectsCount;
+    int NPCCount;
 } LevelData;
 
 /* PROTOTIPOS*/

@@ -68,58 +68,90 @@ void InitNPC(NPC *npc, Vector2 position, int direction, char *name, char *dialog
     npc->requiredItem = requiredItem;
 }
 
-void UpdateRoom1NPCs()
+bool UpdateRoom1NPCs()
 {
+    int i = 0;
+
     // *** Enojados ***
     if (enojado1.status)
+    {
         enojado1.sprite = npcEnojado2Sprite;
+        i++;
+    }
     else
         enojado1.sprite = npcEnojado1Sprite;
 
     if (enojado2.status)
+    {
         enojado2.sprite = npcEnojado2Sprite;
+        i++;
+    }
     else
         enojado2.sprite = npcEnojado1Sprite;
 
     if (enojado3.status)
+    {
         enojado3.sprite = npcEnojado2Sprite;
+        i++;
+    }
     else
         enojado3.sprite = npcEnojado1Sprite;
 
     if (enojado4.status)
+    {
         enojado4.sprite = npcEnojado2Sprite;
+        i++;
+    }
     else
         enojado4.sprite = npcEnojado1Sprite;
 
     // *** Tirados ***
     if (tirado1.status)
+    {
         tirado1.sprite = npcTirado2Sprite;
+        i++;
+    }
     else
         tirado1.sprite = npcTirado1Sprite;
 
     // *** Recargados ***
     if (recargado1.status)
+    {
         recargado1.sprite = npcRecargado2Sprite;
+        i++;
+    }
     else
         recargado1.sprite = npcRecargado1Sprite;
 
     if (recargado2.status)
+    {
         recargado2.sprite = npcRecargado2Sprite;
+        i++;
+    }
     else
         recargado2.sprite = npcRecargado1Sprite;
 
     if (recargado3.status)
+    {
         recargado3.sprite = npcRecargado2Sprite;
+        i++;
+    }
     else
         recargado3.sprite = npcRecargado1Sprite;
 
     if (recargado4.status)
+    {
         recargado4.sprite = npcRecargado2Sprite;
+        i++;
+    }
     else
         recargado4.sprite = npcRecargado1Sprite;
 
     if (recargado5.status)
+    {
         recargado5.sprite = npcRecargado2Sprite;
+        i++;
+    }
     else
         recargado5.sprite = npcRecargado1Sprite;
 
@@ -135,6 +167,13 @@ void UpdateRoom1NPCs()
     DrawSpriteFrame(&recargado3.sprite, recargado3.position, SCALE, recargado3.color, recargado3.direction, true);
     DrawSpriteFrame(&recargado4.sprite, recargado4.position, SCALE, recargado4.color, recargado4.direction, true);
     DrawSpriteFrame(&recargado5.sprite, recargado5.position, SCALE, recargado5.color, recargado5.direction, true);
+
+    if (i >= room1.NPCCount)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 void CheckRoom1NPCs(Player *player)
@@ -153,55 +192,87 @@ void CheckRoom1NPCs(Player *player)
     CheckNPC(player, &recargado5);
 }
 
-void UpdateRoom2NPCs()
+bool UpdateRoom2NPCs()
 {
+    int i = 0;
+
     if (saco1.status)
+    {
         saco1.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco1.sprite = npcSaco1Sprite;
 
     if (saco2.status)
+    {
         saco2.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco2.sprite = npcSaco1Sprite;
 
     if (saco3.status)
+    {
         saco3.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco3.sprite = npcSaco1Sprite;
 
     if (saco4.status)
+    {
         saco4.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco4.sprite = npcSaco1Sprite;
 
     if (saco5.status)
+    {
         saco5.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco5.sprite = npcSaco1Sprite;
 
     if (saco6.status)
+    {
         saco6.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco6.sprite = npcSaco1Sprite;
 
     if (saco7.status)
+    {
         saco7.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco7.sprite = npcSaco1Sprite;
 
     if (saco8.status)
+    {
         saco8.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco8.sprite = npcSaco1Sprite;
 
     if (saco9.status)
+    {
         saco9.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco9.sprite = npcSaco1Sprite;
 
     if (saco10.status)
+    {
         saco10.sprite = npcSaco2Sprite;
+        i++;
+    }
     else
         saco10.sprite = npcSaco1Sprite;
 
@@ -215,6 +286,13 @@ void UpdateRoom2NPCs()
     DrawSpriteFrame(&saco8.sprite, saco8.position, SCALE, saco8.color, saco8.direction, true);
     DrawSpriteFrame(&saco9.sprite, saco9.position, SCALE, saco9.color, saco9.direction, true);
     DrawSpriteFrame(&saco10.sprite, saco10.position, SCALE, saco10.color, saco10.direction, true);
+
+    if (i >= room2.NPCCount)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 void CheckRoom2NPCs(Player *player)
@@ -229,14 +307,6 @@ void CheckRoom2NPCs(Player *player)
     CheckNPC(player, &saco8);
     CheckNPC(player, &saco9);
     CheckNPC(player, &saco10);
-}
-
-void UpdateRoom3NPCs()
-{
-}
-
-void CheckRoom3NPCs(Player *player)
-{
 }
 
 void CheckNPC(Player *player, NPC *npc)

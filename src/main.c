@@ -28,6 +28,7 @@ int main(void)
     bool pause = false;
     bool exitWindow = false;
     bool ToggleMusic = false; // Should be true
+    bool fishishedLevel = false;
     char path[100];
 
     // Config -----------------------------------------
@@ -151,8 +152,6 @@ int main(void)
             break;
 
         case SCENE1:
-            RunCimeatica1(screenWidth,screenHeight);
-
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------
@@ -175,7 +174,7 @@ int main(void)
                     ClearBackground(BLACK);
                     DrawElement(&room1.tileset, (Vector2){0, 0});
 
-                    UpdateRoom1NPCs();
+                    fishishedLevel = UpdateRoom1NPCs();
 
                     if (debug)
                     {
@@ -223,6 +222,18 @@ int main(void)
             }
             EndDrawing();
 
+            if (fishishedLevel && !isInteracting)
+            {
+                InitRoom2Objects();
+                player.position.x = REL_TILE_SIZE * 4;
+                player.position.y = REL_TILE_SIZE * 27;
+                player.heldItem = NONE;
+
+                currentScene = SCENE2;
+                menu.prevState = menu.state;
+                menu.state = currentScene;
+            }
+
             break;
 
         case SCENE2:
@@ -248,9 +259,7 @@ int main(void)
                     ClearBackground(BROWN);
                     DrawElement(&room2.tileset, (Vector2){0, TILE_SIZE * 22});
 
-                    UpdateRoom2NPCs();
-                    CheckRoom2NPCs(&player);
-                    CheckRoom2Objects(&player);
+                    fishishedLevel = UpdateRoom2NPCs();
 
                     if (debug)
                     {
@@ -259,6 +268,8 @@ int main(void)
                     else
                     {
                         DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+                        CheckRoom2NPCs(&player);
+                        CheckRoom2Objects(&player);
 
                         // Draw held item
                         if (player.heldItem != NONE)
@@ -295,6 +306,18 @@ int main(void)
                 DrawFPS(GetScreenWidth() - 95, 10);
             }
             EndDrawing();
+
+            if (fishishedLevel && !isInteracting)
+            {
+                InitRoom3Objects();
+                player.position.x = REL_TILE_SIZE * 4;
+                player.position.y = REL_TILE_SIZE * 49;
+                player.heldItem = NONE;
+
+                currentScene = SCENE3;
+                menu.prevState = menu.state;
+                menu.state = currentScene;
+            }
             break;
 
         case SCENE3:
@@ -320,8 +343,6 @@ int main(void)
                     ClearBackground(DARKBROWN);
                     DrawElement(&room3.tileset, (Vector2){0, TILE_SIZE * 44});
 
-                    UpdateRoom3NPCs();
-                    CheckRoom3NPCs(&player);
                     CheckRoom3Objects(&player);
 
                     if (debug)

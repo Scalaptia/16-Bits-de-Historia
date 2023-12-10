@@ -44,10 +44,12 @@ void InitRoom(LevelData *room, int roomNumber)
     switch (roomNumber)
     {
     case 1:
+        room1.NPCCount = 10;
         path = ASSETS_PATH "Escenarios/Escena1.png";
         InitRoomCollisions(&room1, (Vector2){0, 0}, (Vector2){32, 22}, ASSETS_PATH "Collisions/col_room1.txt");
         break;
     case 2:
+        room2.NPCCount = 10;
         path = ASSETS_PATH "Escenarios/Escena2.png";
         InitRoomCollisions(&room2, (Vector2){2, 24}, (Vector2){28, 18}, ASSETS_PATH "Collisions/col_room2.txt");
         break;
