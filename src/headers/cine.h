@@ -5,6 +5,8 @@
 
 enum escenas
 {
+    INTRODUCCION,
+    MEXICO,
     PRIMER_ESCENARIO,
     SEGUNDO_ESCENARIO,
     TERCER_ESCENARIO
@@ -17,6 +19,10 @@ typedef struct cinestruct
 
 }CINE;
 
+//variables Externas
+extern CINE M_F;
+extern CINE M_B;
+
 extern CINE C1_Per;
 extern CINE C1_Fondo;
 
@@ -24,8 +30,8 @@ extern CINE C2_Per;
 
 extern CINE C3_Per;
 
-
+//Prototipos--------
 void InitCinematica ();
-void RunCimeatica1(int p_limite_x,int p_limite_y);
+bool RunCimeatica1(int p_limite_x,int p_limite_y);
 
 #endif

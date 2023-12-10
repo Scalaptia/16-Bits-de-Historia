@@ -30,6 +30,8 @@ int main(void)
     bool ToggleMusic = false; // Should be true
     char path[100];
 
+    bool cinema = false;
+
     // Config -----------------------------------------
 
     Rectangle window = {0, 0, screenWidth, screenHeight};
@@ -148,8 +150,12 @@ int main(void)
             break;
 
         case SCENE1:
-            RunCimeatica1(screenWidth,screenHeight);
 
+            if(cinema==false)
+            {
+                cinema = RunCimeatica1(screenWidth,screenHeight);
+            }
+            
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------
@@ -164,6 +170,7 @@ int main(void)
 
             // Draw
             //----------------------------------------------------------------------------------
+
             UpdateSpritesFrame();
             BeginTextureMode(screenCam);
             {
