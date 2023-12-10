@@ -14,6 +14,7 @@ Sprite npcSaco1Sprite;
 Sprite npcSaco2Sprite;
 
 // Enemys
+Sprite bulletSprite;
 Sprite enemy1Sprite;
 Sprite enemy2Sprite;
 Sprite enemy3Sprite;
@@ -67,6 +68,7 @@ void UpdateSpritesFrame()
     UpdateSpriteFrame(&npcSaco1Sprite);
     UpdateSpriteFrame(&npcSaco2Sprite);
 
+    UpdateSpriteFrame(&bulletSprite);
     UpdateSpriteFrame(&enemy1Sprite);
     UpdateSpriteFrame(&enemy2Sprite);
     UpdateSpriteFrame(&enemy3Sprite);
@@ -113,6 +115,7 @@ void InitSprites()
     strcpy(npcRecargado2Sprite.path, "NPCs/Recargado/Feliz/");
     strcpy(npcSaco1Sprite.path, "NPCs/Saco/Triste/");
     strcpy(npcSaco2Sprite.path, "NPCs/Saco/Feliz/");
+    strcpy(bulletSprite.path, "Enemigos/Bala/");
     strcpy(enemy1Sprite.path, "Enemigos/E1/");
     strcpy(enemy2Sprite.path, "Enemigos/E2/");
     strcpy(enemy3Sprite.path, "Enemigos/E3/");
@@ -142,6 +145,8 @@ void InitSprites()
     InitSprite(&npcSaco1Sprite, 1);
     InitSprite(&npcSaco2Sprite, 1);
 
+    InitSprite(&bulletSprite, 1);
+
     enemy1Sprite.frameTime = ANIMATION_SPEED * 2;
     InitSprite(&enemy1Sprite, 2);
 
@@ -167,6 +172,7 @@ void UnloadSprites()
     UnloadSprite(&npcRecargado2Sprite);
     UnloadSprite(&npcSaco1Sprite);
     UnloadSprite(&npcSaco2Sprite);
+    UnloadSprite(&bulletSprite);
     UnloadSprite(&enemy1Sprite);
     UnloadSprite(&enemy2Sprite);
     UnloadSprite(&enemy3Sprite);
