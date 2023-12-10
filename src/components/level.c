@@ -164,6 +164,161 @@ void InitRoom3Collisions()
 {
     Vector2 position = {0, 44};
     CreateCollisionWalls(position, (Vector2){52, 22}, &room3.wallsCount, &room3.walls);
+
+    // *** WALLS ***
+    // 1, 7 - 14, 8
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 7}, (Vector2){14, 2}, &room3.objectsCount, &room3.objects);
+
+    // 18, 5 - 26, 8
+    CreateCollisionObject((Vector2){position.x + 18, position.y + 5}, (Vector2){9, 4}, &room3.objectsCount, &room3.objects);
+
+    // 26, 9 - 26, 14
+    CreateCollisionObject((Vector2){position.x + 26, position.y + 9}, (Vector2){1, 6}, &room3.objectsCount, &room3.objects);
+
+    // 1, 13 - 25, 14
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 13}, (Vector2){25, 2}, &room3.objectsCount, &room3.objects);
+
+    // *** OBJECTS ***
+    // 1, 1
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 1}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 4, 3
+    CreateCollisionObject((Vector2){position.x + 4, position.y + 3}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 1, 6
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 6}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 11, 1
+    CreateCollisionObject((Vector2){position.x + 11, position.y + 1}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 16, 3
+    CreateCollisionObject((Vector2){position.x + 16, position.y + 3}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 26, 3
+    CreateCollisionObject((Vector2){position.x + 26, position.y + 3}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 3, 9
+    CreateCollisionObject((Vector2){position.x + 3, position.y + 9}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 2, 12
+    CreateCollisionObject((Vector2){position.x + 2, position.y + 12}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 9, 10
+    CreateCollisionObject((Vector2){position.x + 9, position.y + 10}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 14, 11
+    CreateCollisionObject((Vector2){position.x + 14, position.y + 11}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 1, 15 - 3, 15
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 15}, (Vector2){3, 1}, &room3.objectsCount, &room3.objects);
+
+    // 1, 16
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 16}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 1, 19 - 1, 20
+    CreateCollisionObject((Vector2){position.x + 1, position.y + 19}, (Vector2){1, 2}, &room3.objectsCount, &room3.objects);
+
+    // 2, 20
+    CreateCollisionObject((Vector2){position.x + 2, position.y + 20}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 8, 20
+    CreateCollisionObject((Vector2){position.x + 8, position.y + 20}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 17, 19
+    CreateCollisionObject((Vector2){position.x + 17, position.y + 19}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 15, 17 - 29. 18
+    CreateCollisionObject((Vector2){position.x + 15, position.y + 17}, (Vector2){15, 2}, &room3.objectsCount, &room3.objects);
+
+    // 21, 11
+    CreateCollisionObject((Vector2){position.x + 21, position.y + 11}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 25, 9 - 25, 10
+    CreateCollisionObject((Vector2){position.x + 25, position.y + 9}, (Vector2){1, 2}, &room3.objectsCount, &room3.objects);
+
+    // 31, 1 - 31, 2
+    CreateCollisionObject((Vector2){position.x + 31, position.y + 1}, (Vector2){1, 2}, &room3.objectsCount, &room3.objects);
+
+    // 32, 2 - 32, 6
+    CreateCollisionObject((Vector2){position.x + 32, position.y + 2}, (Vector2){1, 5}, &room3.objectsCount, &room3.objects);
+
+    // 31, 5 - 31, 15
+    CreateCollisionObject((Vector2){position.x + 31, position.y + 5}, (Vector2){1, 9}, &room3.objectsCount, &room3.objects);
+
+    // 30, 7 - 30, 8
+    CreateCollisionObject((Vector2){position.x + 30, position.y + 7}, (Vector2){1, 2}, &room3.objectsCount, &room3.objects);
+
+    // 30, 13 - 30, 17
+    CreateCollisionObject((Vector2){position.x + 30, position.y + 13}, (Vector2){1, 5}, &room3.objectsCount, &room3.objects);
+
+    // 31, 18
+    CreateCollisionObject((Vector2){position.x + 31, position.y + 18}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 32, 8 - 40, 8
+    CreateCollisionObject((Vector2){position.x + 32, position.y + 8}, (Vector2){9, 1}, &room3.objectsCount, &room3.objects);
+
+    // 40, 4 - 40, 7
+    CreateCollisionObject((Vector2){position.x + 40, position.y + 4}, (Vector2){1, 4}, &room3.objectsCount, &room3.objects);
+
+    // 37, 4 - 39, 4
+    CreateCollisionObject((Vector2){position.x + 37, position.y + 4}, (Vector2){3, 1}, &room3.objectsCount, &room3.objects);
+
+    // 38, 1 - 38, 3
+    CreateCollisionObject((Vector2){position.x + 38, position.y + 1}, (Vector2){1, 3}, &room3.objectsCount, &room3.objects);
+
+    // 39, 3
+    CreateCollisionObject((Vector2){position.x + 39, position.y + 3}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 34, 5
+    CreateCollisionObject((Vector2){position.x + 34, position.y + 5}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 32, 13 - 38, 13
+    CreateCollisionObject((Vector2){position.x + 32, position.y + 13}, (Vector2){7, 1}, &room3.objectsCount, &room3.objects);
+
+    // 39, 13 - 43, 14
+    CreateCollisionObject((Vector2){position.x + 39, position.y + 13}, (Vector2){5, 2}, &room3.objectsCount, &room3.objects);
+
+    // 39, 16
+    CreateCollisionObject((Vector2){position.x + 39, position.y + 16}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 39, 20
+    CreateCollisionObject((Vector2){position.x + 39, position.y + 20}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 48, 17
+    CreateCollisionObject((Vector2){position.x + 48, position.y + 17}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 47, 20
+    CreateCollisionObject((Vector2){position.x + 47, position.y + 20}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 47, 13 - 50, 14
+    CreateCollisionObject((Vector2){position.x + 47, position.y + 13}, (Vector2){4, 2}, &room3.objectsCount, &room3.objects);
+
+    // 37, 9 - 37, 10
+    CreateCollisionObject((Vector2){position.x + 37, position.y + 9}, (Vector2){1, 2}, &room3.objectsCount, &room3.objects);
+
+    // 38, 11 - 39, 11
+    CreateCollisionObject((Vector2){position.x + 38, position.y + 11}, (Vector2){2, 1}, &room3.objectsCount, &room3.objects);
+
+    // 39, 12
+    CreateCollisionObject((Vector2){position.x + 39, position.y + 12}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 40, 10
+    CreateCollisionObject((Vector2){position.x + 40, position.y + 10}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 47, 9
+    CreateCollisionObject((Vector2){position.x + 47, position.y + 9}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 48, 10
+    CreateCollisionObject((Vector2){position.x + 48, position.y + 10}, (Vector2){1, 1}, &room3.objectsCount, &room3.objects);
+
+    // 49, 11 - 49, 12
+    CreateCollisionObject((Vector2){position.x + 49, position.y + 11}, (Vector2){1, 2}, &room3.objectsCount, &room3.objects);
+
+    // 44, 5 - 50, 8
+    CreateCollisionObject((Vector2){position.x + 44, position.y + 5}, (Vector2){7, 4}, &room3.objectsCount, &room3.objects);
+
+    // 42, 1 - 43, 1
+    CreateCollisionObject((Vector2){position.x + 42, position.y + 1}, (Vector2){2, 1}, &room3.objectsCount, &room3.objects);
 }
 
 void InitRoom(LevelData *room, int roomNumber)
@@ -241,6 +396,13 @@ void CreateCollisionWalls(Vector2 position, Vector2 size, int *wallsCount, Vecto
 void CreateCollisionObject(Vector2 position, Vector2 size, int *objectsCount, Rectangle **objects)
 {
     int i, j;
+
+    // Write collision data to file
+    FILE *file = fopen("collisionroom1_col.txt", "a");
+
+    fprintf(file, "%d %d %d %d\n", (int)position.x, (int)position.y, (int)size.x, (int)size.y);
+
+    fclose(file);
 
     position.x *= REL_TILE_SIZE;
     position.y *= REL_TILE_SIZE;

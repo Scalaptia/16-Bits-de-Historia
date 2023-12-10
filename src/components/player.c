@@ -4,6 +4,7 @@ Controls controls = {.UP_KEY = KEY_W,
                      .DOWN_KEY = KEY_S,
                      .LEFT_KEY = KEY_A,
                      .RIGHT_KEY = KEY_D,
+                     .RUN_KEY = KEY_LEFT_SHIFT,
                      .GRAB_KEY = KEY_SPACE};
 
 Player player;
@@ -90,6 +91,11 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
     {
         direction.x += 1.0f;
         player->direction = 1;
+    }
+
+    if (IsKeyDown(controls.RUN_KEY))
+    {
+        player->speed += 300.0f;
     }
 
     if (Vector2Length(direction) > 0.0f)

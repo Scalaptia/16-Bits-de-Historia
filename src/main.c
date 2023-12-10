@@ -72,6 +72,7 @@ int main(void)
             InitRoom1Objects();
             player.position.x = REL_TILE_SIZE * 2;
             player.position.y = REL_TILE_SIZE * 4;
+            player.heldItem = NONE;
 
             currentScene = SCENE1;
             menu.prevState = menu.state;
@@ -83,6 +84,7 @@ int main(void)
             InitRoom2Objects();
             player.position.x = REL_TILE_SIZE * 4;
             player.position.y = REL_TILE_SIZE * 27;
+            player.heldItem = NONE;
 
             currentScene = SCENE2;
             menu.prevState = menu.state;
@@ -94,6 +96,7 @@ int main(void)
             InitRoom3Objects();
             player.position.x = REL_TILE_SIZE * 4;
             player.position.y = REL_TILE_SIZE * 49;
+            player.heldItem = NONE;
 
             currentScene = SCENE3;
             menu.prevState = menu.state;
@@ -310,7 +313,7 @@ int main(void)
             {
                 BeginMode2D(camera);
                 {
-                    ClearBackground(DARKGRAY);
+                    ClearBackground(DARKBROWN);
                     DrawElement(&room3.tileset, (Vector2){0, TILE_SIZE * 44});
 
                     UpdateRoom3NPCs();
