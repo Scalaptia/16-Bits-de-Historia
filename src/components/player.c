@@ -28,6 +28,7 @@ void InitPlayer(Sprite *sprite, Sprite *actSprite, Rectangle screen)
     player.color = WHITE;
     player.direction = 1;
     player.heldItem = NONE;
+    player.hitbox = (Rectangle){player.position.x + (REL_TILE_SIZE / 4), player.position.y, REL_TILE_SIZE / 2, REL_TILE_SIZE};
 
     camera.target = (Vector2){player.position.x, player.position.y};
     camera.offset = (Vector2){(screen.width / 2) - (TILE_SIZE * 2), (screen.height / 2) - (TILE_SIZE * 2)};
@@ -146,10 +147,12 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
         if (!collision_x)
         {
             player->position.x = new_position.x;
+            player->hitbox.x = player->position.x + (REL_TILE_SIZE / 4);
         }
         if (!collision_y)
         {
             player->position.y = new_position.y;
+            player->hitbox.y = player->position.y;
         }
 
         if (old_x != player->position.x || old_y != player->position.y)

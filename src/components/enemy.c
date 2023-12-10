@@ -20,10 +20,10 @@ void InitEnemy(Enemy *enemy, Vector2 position, int direction, Sprite *sprite, in
 
 void InitEnemys()
 {
-    InitEnemy(&enemy1, (Vector2){8, 4 + 44}, -1, &enemy1Sprite, 4, 7, UP);
-    InitEnemy(&enemy2, (Vector2){8, 5 + 44}, -1, &enemy2Sprite, 4, 7, DOWN);
-    InitEnemy(&enemy3, (Vector2){9, 4 + 44}, 1, &enemy3Sprite, 4, 7, LEFT);
-    InitEnemy(&enemy4, (Vector2){9, 5 + 44}, 1, &enemy4Sprite, 4, 7, RIGHT);
+    InitEnemy(&enemy1, (Vector2){8, 4 + 44}, -1, &enemy1Sprite, 20, 7, UP);
+    InitEnemy(&enemy2, (Vector2){8, 5 + 44}, -1, &enemy2Sprite, 20, 7, DOWN);
+    InitEnemy(&enemy3, (Vector2){9, 4 + 44}, 1, &enemy3Sprite, 20, 7, LEFT);
+    InitEnemy(&enemy4, (Vector2){9, 5 + 44}, 1, &enemy4Sprite, 20, 7, RIGHT);
 }
 
 void UpdateEnemy(Enemy *enemy)
@@ -36,6 +36,7 @@ void UpdateEnemy(Enemy *enemy)
     }
 
     UpdateBullets(enemy);
+    CheckPlayerHit(&player, enemy);
 }
 
 void UpdateEnemys()
@@ -48,14 +49,15 @@ void UpdateEnemys()
 
 void ShootBullet(Enemy *enemy)
 {
-    if (enemy->bulletCount >= 5)
+    if (enemy->bulletCount >= 6)
     {
         enemy->bullets[0] = enemy->bullets[1];
         enemy->bullets[1] = enemy->bullets[2];
         enemy->bullets[2] = enemy->bullets[3];
         enemy->bullets[3] = enemy->bullets[4];
+        enemy->bullets[4] = enemy->bullets[5];
 
-        enemy->bulletCount = 4;
+        enemy->bulletCount = 5;
     }
 
     Bullet bullet = {
@@ -85,7 +87,6 @@ void UpdateBullets(Enemy *enemy)
         case DOWN:
             bullet->position.y += bullet->speed;
             break;
-
         case LEFT:
             bullet->position.x -= bullet->speed;
             break;
@@ -98,7 +99,7 @@ void UpdateBullets(Enemy *enemy)
         bullet->hitbox.y = bullet->position.y + (REL_TILE_SIZE / 4);
 
         DrawTexturePro(bullet->sprite.textures[0], (Rectangle){0, 0, TILE_SIZE, TILE_SIZE}, (Rectangle){bullet->position.x, bullet->position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
-        DrawRectangleLinesEx((Rectangle){bullet->hitbox.x, bullet->hitbox.y, bullet->hitbox.width, bullet->hitbox.height}, 1, RED);
+        // DrawRectangleLinesEx((Rectangle){bullet->hitbox.x, bullet->hitbox.y, bullet->hitbox.width, bullet->hitbox.height}, 1, RED);
     }
 }
 
@@ -132,4 +133,23 @@ Sprite RotateBullet(enum ShootDirection direction)
     UnloadImage(image);
 
     return sprite;
+}
+
+void CheckPlayerHit(Player *player, Enemy *enemy)
+{
+    int i;
+
+    for (i = 0; i < enemy->bulletCount; i++)
+    {
+        Bullet *bullet = &enemy->bullets[i];
+        if (CheckCollisionRecs(player->hitbox, bullet->hitbox))
+        {
+            printf("Player hit!\n");
+            player->isDead = true;
+            enemy1.bulletCount = 0;
+            enemy2.bulletCount = 0;
+            enemy3.bulletCount = 0;
+            enemy4.bulletCount = 0;
+        }
+    }
 }

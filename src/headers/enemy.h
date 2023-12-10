@@ -32,7 +32,7 @@ typedef struct Enemy
     int attackSpeed;
     int bulletSpeed;
     int bulletCount;
-    Bullet bullets[5];
+    Bullet bullets[6];
 } Enemy;
 
 #define TILE_SIZE 16
@@ -48,6 +48,7 @@ void UpdateEnemys();
 void ShootBullet(Enemy *enemy);
 void UpdateBullets(Enemy *enemy);
 Sprite RotateBullet(enum ShootDirection direction);
+void CheckPlayerHit(Player *player, Enemy *enemy);
 
 extern Enemy enemy1;
 extern Enemy enemy2;
