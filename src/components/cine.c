@@ -3,6 +3,7 @@
 //Mexico----------------
 CINE M_F;
 CINE M_B;
+CINE M2_F;
 
 //Escena 1---------------
 CINE C1_Per;
@@ -22,14 +23,18 @@ void InitCinematica ()
     Image M_BI = LoadImage(ASSETS_PATH "Cinematicas/Banderas/mexico.png");
     Image M_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/MFondo.png");
     
+    Image M2_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/B3.png");
+    
     C1_Per.TexturaC = LoadTextureFromImage(C1_PerI);
     C1_Fondo.TexturaC = LoadTextureFromImage(C1_FondoI);
 
     M_B.TexturaC = LoadTextureFromImage(M_BI);
     M_F.TexturaC = LoadTextureFromImage(M_FI);
+    M2_F.TexturaC = LoadTextureFromImage(M2_FI);
 
     UnloadImage(M_FI);
     UnloadImage(M_BI);
+    UnloadImage(M2_FI);
 
     UnloadImage(C1_PerI);
     UnloadImage(C1_FondoI);
@@ -72,7 +77,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
                 EndDrawing();
             }
             
-            //---------------------------------Mexico Ip2-------------------------------------
+            //---------------------------------Mexico Ip1-------------------------------------
             if(Esc_run==MEXICO)
             {
                 //Fondo
@@ -91,6 +96,49 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
 
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO)
+            {
+                Esc_run=MEXICO1;
+                EndDrawing();
+            }
+
+            //---------------------------------Mexico1 Ip2-------------------------------------
+            if(Esc_run==MEXICO1)
+            {
+                //fondo
+                DrawTextureEx(M2_F.TexturaC , M2_F.Posicion , 0.0f , 0.73f , WHITE);
+
+                //Rectangulo de texto
+                Color bloque = Fade(WHITE, 0.8f);
+                Rectangle TxtFondo = {160 ,p_limite_y - 500, 1050, 300};
+                DrawRectangleRec(TxtFondo,bloque);
+                
+                //texto
+                DrawText("Los demás países quedaron en ver como toman el dinero de vuelta\ndecidieronarmar un ejército cada país, españa con 5,789 soldados\nfrancia con 3,000 soldados y reino unido con\n700 marines británicos", 180 , p_limite_y - 450, 30 ,BLACK);
+
+            }
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO1)
+            {
+                Esc_run=MEXICO2;
+                EndDrawing();
+            }
+
+            //---------------------------------Mexico2 Ip3-------------------------------------
+            if(Esc_run==MEXICO2)
+            {
+
+            }
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO2)
+            {
+                Esc_run=MEXICO3;
+                EndDrawing();
+            }
+
+            //---------------------------------Mexico3 Ip4-------------------------------------
+            if(Esc_run==MEXICO3)
+            {
+
+            }
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO3)
             {
                 Esc_run=PRIMER_ESCENARIO;
                 EndDrawing();

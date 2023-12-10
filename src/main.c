@@ -60,7 +60,7 @@ int main(void)
     SetTargetFPS(144);
 
     currentScene = SCENE1;
-    menu.state = SCENE1; // DEBERÍA SER LOADING
+    menu.state = MENU; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -151,11 +151,13 @@ int main(void)
 
         case SCENE1:
 
+            //Cinematica------------------------------
             if(cinema==false)
             {
+
                 cinema = RunCimeatica1(screenWidth,screenHeight);
             }
-            
+            //Music
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------

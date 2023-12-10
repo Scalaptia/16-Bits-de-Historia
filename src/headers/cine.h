@@ -7,6 +7,9 @@ enum escenas
 {
     INTRODUCCION,
     MEXICO,
+    MEXICO1,
+    MEXICO2,
+    MEXICO3,
     PRIMER_ESCENARIO,
     SEGUNDO_ESCENARIO,
     TERCER_ESCENARIO
@@ -22,6 +25,7 @@ typedef struct cinestruct
 //variables Externas
 extern CINE M_F;
 extern CINE M_B;
+extern CINE M2_F;
 
 extern CINE C1_Per;
 extern CINE C1_Fondo;
