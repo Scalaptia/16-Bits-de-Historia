@@ -16,7 +16,9 @@ enum escenas
     SEGUNDO_ESCENARIO,
     
     C2_e1,
-    C2_e2
+    C2_e2,
+    C2_e3,
+    C2_e4
 };
 
 typedef struct cinestruct
@@ -27,6 +29,11 @@ typedef struct cinestruct
 }CINE;
 
 //variables Externas-------------------------
+/*
+    Funciona sin necesidad de las vairables externas
+*/
+extern CINE vineta;
+
 //Escena 1
 extern CINE M_F;
 extern CINE M_B;

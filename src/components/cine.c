@@ -1,5 +1,11 @@
 #include "../headers/cine.h"
 
+CINE vineta;
+
+//Personajes
+CINE Por;
+CINE Ign;
+
 //Escena 1----------------
 CINE M_F;
 CINE M_B;
@@ -12,11 +18,20 @@ CINE C1_Per;
 CINE C1_Fondo;
 
 //Escena 2----------------
-CINE C2_F;
+CINE C2_F1;
+CINE C2_F2;
+CINE C2_F3;
+CINE C2_F4;
 
 
 void InitCinematica ()
 {
+    Image vinetai = LoadImage(ASSETS_PATH "Cinematicas/vineta.png");
+    vineta.TexturaC = LoadTextureFromImage(vinetai);
+
+    Image PorI = LoadImage(ASSETS_PATH "");
+    Image IgnI = LoadImage(ASSETS_PATH "");
+
     //Escena 1----
         Image C1_PerI = LoadImage(ASSETS_PATH "Personaje/char1.png");
         Image C1_FondoI = LoadImage(ASSETS_PATH "Cinematicas/Fondo1.png");
@@ -37,13 +52,22 @@ void InitCinematica ()
         M5_F.TexturaC = LoadTextureFromImage(M5_FI);
     
     //Escena 2----
-        Image C2_FI = LoadImage(ASSETS_PATH "Cinematicas/C2/fortaleza.png");
+        Image C2_F1I = LoadImage(ASSETS_PATH "Cinematicas/C2/fortaleza.png");
+        Image C2_F2I = LoadImage(ASSETS_PATH "Cinematicas/C2/fuerzas.png");
+        Image C2_F3I = LoadImage(ASSETS_PATH "Cinematicas/C2/guadalupe.png");
+        Image C2_F4I = LoadImage(ASSETS_PATH "Cinematicas/C2/defensa.png");
 
-        C2_F.TexturaC= LoadTextureFromImage(C2_FI);
+        C2_F1.TexturaC= LoadTextureFromImage(C2_F1I);
+        C2_F2.TexturaC =LoadTextureFromImage(C2_F2I);
+        C2_F3.TexturaC = LoadTextureFromImage(C2_F3I);
+        C2_F4.TexturaC = LoadTextureFromImage(C2_F4I);
     
 
     //Descarga de imagenes
-    UnloadImage(C2_FI);
+    UnloadImage(C2_F1I);
+    UnloadImage(C2_F2I);
+    UnloadImage(C2_F3I);
+    UnloadImage(C2_F4I);
 
     UnloadImage(M_FI);
     UnloadImage(M_BI);
@@ -53,6 +77,10 @@ void InitCinematica ()
     UnloadImage(M5_FI);
     UnloadImage(C1_PerI);
     UnloadImage(C1_FondoI);
+
+    UnloadImage(vinetai);
+    UnloadImage(PorI);
+    UnloadImage(IgnI);
 }
 
 bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle)
@@ -270,7 +298,8 @@ bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
             if(run_esc == C2_e1)
             {
                 // Fondo
-                DrawTextureEx(C2_F.TexturaC,C2_F.Posicion,0.0f,10.0f,WHITE);
+                DrawTextureEx(C2_F1.TexturaC,C2_F1.Posicion,0.0f,10.0f,WHITE);
+                DrawTextureEx(vineta.TexturaC,vineta.Posicion,0.0f,0.9f,WHITE);
                 
                 // Ignacio
                 C1_Per.Posicion.x=250;
@@ -282,7 +311,7 @@ bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
                 DrawRectangleRec(block,b_colorgray);
 
                 //Texto
-                DrawText("La defensa organizada por el general Zaragoza\nen Pueblaconsistió en fortificar la ciudad ante el\ninminente ataque francés\n", 300 , (p_limite_y/2) - 50 , 30 , BLACK);
+                DrawText("La defensa organizada por el general Zaragoza\nen Puebla consistió en fortificar la ciudad ante el\ninminente ataque francés\n", 300 , (p_limite_y/2) - 50 , 30 , WHITE);
             }
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e1)
             {
@@ -293,8 +322,77 @@ bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
             //---------------------------Escena 2---------------------------
             if(run_esc == C2_e2)
             {
+                //Fondo
+                DrawTextureEx(C2_F2.TexturaC,C2_F2.Posicion,0.0f,10.0f,WHITE);
+                DrawTextureEx(vineta.TexturaC,vineta.Posicion,0.0f,0.9f,WHITE);
+
+                //Ingacio
+                C1_Per.Posicion.x= -150;
+                C1_Per.Posicion.y=(p_limite_y / 2) - 100 ; 
+                DrawTextureEx(C1_Per.TexturaC,C1_Per.Posicion,0.0f,40.0f,WHITE);
+
+                //Rectangulo
+                Rectangle block2 = {450, (p_limite_y/2) - 80 , 900 , 300};
+                DrawRectangleRec(block2,b_colorgray);
+
+                //texto
+                DrawText("Se instaló un cuartel a unos metros\ndel frente de batallay las tropas mexicanas\n(que recibieron el nombre de Ejército de Oriente)\nSe prepararon para repeler a los invasores\nantes de que alcanzaran el área urbana.",500,(p_limite_y/2)-50,30,WHITE);
+            }
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e2)
+            {
+                PlaySound(fxButton);
+                run_esc = C2_e3;
+                EndDrawing();
+            }
+            //---------------------------Escena 3---------------------------
+            if(run_esc == C2_e3)
+            {
+                //Fondo
+                DrawTextureEx(C2_F3.TexturaC,C2_F3.Posicion,0.0f,10.0f,WHITE);
+
+                //Tropas------------------------------------------------------------------------------------PENDIENTE
+
+                //Rectangulo
+                Rectangle block3 = {50, (p_limite_y/2) - 70 , 600 , 400};
+                DrawRectangleRec(block3,b_colorwhite);
+
+                //Texto
+                DrawText("Dos baterías de artillería\nY 1200 hombres defendían\nLos fuertes Guadalupe\nY Loreto ubicados\nEn sendos cerros al\nnorte de la ciudad",70,(p_limite_y/2)-50 , 40, BLACK);
 
             }
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e3)
+            {
+                PlaySound(fxButton);
+                run_esc = C2_e4;
+                EndDrawing();
+            }
+            //---------------------------Escena 4---------------------------
+            if(run_esc == C2_e4)
+            {
+                //Fondo
+                DrawTextureEx(C2_F4.TexturaC,C2_F4.Posicion,0.0f,10.0f,WHITE);
+
+                //Porfirio ----------------------------------------------------------------------------------CREAR IMAGEN
+                
+                DrawTextureEx(C1_Per.TexturaC,C1_Per.Posicion,0.0f,1.0f,WHITE);
+
+                //Tropas------------------------------------------------------------------------------------PENDIENTE
+
+                //Rectangulo
+                Rectangle block3 = {50, (p_limite_y/2) - 220 , 600 , 400};
+                DrawRectangleRec(block3,b_colorgray);
+
+                //Texto
+                DrawText("Mientras que 3500 soldados\nDe infantería y una brigada\nDe caballería se distribuyeron\nEn distintas posiciones \ndefensivas\nUna de ellas la comandaba por\nPorfirio Díaz",70,(p_limite_y/2) - 200 , 35, BLACK);
+
+            }
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e4)
+            {
+                PlaySound(fxButton);
+                run_esc = C2_e4;
+                EndDrawing();
+            }
+
         }
 
         EndDrawing();
