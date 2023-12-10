@@ -46,10 +46,11 @@ void InitCinematica ()
     UnloadImage(C1_FondoI);
 }
 
-bool RunCimeatica1(int p_limite_x,int p_limite_y)
+bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle)
 {
     enum escenas Esc_run = INTRODUCCION;
     bool exitbucle = false;
+    bool finish = false;
     //Escena 1------------------------------
     {
         //Personaje------------
@@ -68,6 +69,9 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
 
     while(exitbucle == false)
     {
+        if(togle)
+            SetMusicVolume(C1M_F, 0.5f);
+            PlayMusic(C1M_F);
         BeginDrawing();
         {
             ClearBackground(BLACK);
@@ -79,6 +83,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==INTRODUCCION)
             {
+                PlaySound(fxButton);
                 Esc_run=MEXICO;
                 EndDrawing();
             }
@@ -103,6 +108,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO)
             {
+                PlaySound(fxButton);
                 Esc_run=MEXICO1;
                 EndDrawing();
             }
@@ -124,6 +130,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO1)
             {
+                PlaySound(fxButton);
                 Esc_run=MEXICO2;
                 EndDrawing();
             }
@@ -144,6 +151,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO2)
             {
+                PlaySound(fxButton);
                 Esc_run=MEXICO3;
                 EndDrawing();
             }
@@ -165,6 +173,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO3)
             {
+                PlaySound(fxButton);
                 Esc_run=MEXICO4;
                 EndDrawing();
             }
@@ -186,6 +195,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO4)
             {
+                PlaySound(fxButton);
                 Esc_run=PRIMER_ESCENARIO;
                 EndDrawing();
             }
@@ -202,7 +212,11 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
 
                 if(C1_Per.Posicion.x < p_limite_x/2 -270 )
                 {
-                    C1_Per.Posicion.x += 3;
+                    C1_Per.Posicion.x += 4;
+                }
+                if(C1_Per.Posicion.x >= p_limite_x/2 -270 )
+                {
+                    finish = true;
                 }
 
                 //Rectangulo de texto
@@ -213,9 +227,9 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
                 //Texto
                 DrawText("Entre ellos\nIgnacio zaragoza", 520 , p_limite_y - 100, 30 ,BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==PRIMER_ESCENARIO)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && finish == true)
             {
-                
+                PlaySound(fxButton);
                 EndDrawing();
                 exitbucle = true;
             }

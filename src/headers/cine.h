@@ -2,6 +2,7 @@
 #define CINE_H
 
 #include "raylib.h"
+#include "../headers/sound.h"
 
 enum escenas
 {
@@ -35,6 +36,6 @@ extern CINE C1_Fondo;
 
 //Prototipos--------
 void InitCinematica ();
-bool RunCimeatica1(int p_limite_x,int p_limite_y);
+bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle);
 
 #endif

@@ -27,7 +27,7 @@ int main(void)
     bool debug = false;
     bool pause = false;
     bool exitWindow = false;
-    bool ToggleMusic = false; // Should be true
+    bool ToggleMusic = true; // Should be true
     bool fishishedLevel = false;
     char path[100];
 
@@ -61,7 +61,7 @@ int main(void)
     SetTargetFPS(60);
 
     currentScene = SCENE1;
-    menu.state = SCENE1; // DEBERÍA SER LOADING
+    menu.state = MENU; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -153,13 +153,14 @@ int main(void)
 
             break;
 
-        case SCENE1:
-
+        case SCENE1:     
+            //Cinematica-------------------------------------------------           
             if (cinema == false)
             {
-                cinema = RunCimeatica1(screenWidth, screenHeight);
+                cinema = RunCimeatica1(screenWidth, screenHeight,ToggleMusic);
             }
 
+            //Nivel-------------------------------------------------------
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------
