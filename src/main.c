@@ -11,6 +11,7 @@
 #include "./headers/sound.h"
 #include "./headers/npc.h"
 #include "./headers/object.h"
+#include "./headers/cine.h"
 
 //----------------------------------------------------------------------------------
 // Código
@@ -41,6 +42,7 @@ int main(void)
     InitPlayer(&charSprite, &charPickSprite, window);
     InitNPCs();
     InitRoom1Objects();
+    InitCinematica();
 
     // InitLoadingScreen();
     InitBackground();
@@ -149,6 +151,8 @@ int main(void)
             break;
 
         case SCENE1:
+            RunCimeatica1(screenWidth,screenHeight);
+
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------

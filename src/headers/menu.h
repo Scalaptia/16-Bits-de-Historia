@@ -9,6 +9,7 @@ enum GameState
 {
     LOADING,
     MENU,
+    CINE1,
     SCENE1,
     SCENE2,
     SCENE3,
