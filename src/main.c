@@ -408,6 +408,9 @@ int main(void)
                 InitRoom3Objects();
                 player.position.x = REL_TILE_SIZE * 4;
                 player.position.y = REL_TILE_SIZE * 49;
+                player.hitbox.x = player.position.x + (REL_TILE_SIZE / 4);
+                player.hitbox.y = player.position.y;
+
                 player.heldItem = NONE;
 
                 currentScene = SCENE3;
