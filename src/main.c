@@ -12,6 +12,7 @@
 #include "./headers/npc.h"
 #include "./headers/object.h"
 #include "./headers/cine.h"
+#include "./headers/enemy.h"
 
 //----------------------------------------------------------------------------------
 // Código
@@ -44,6 +45,7 @@ int main(void)
     InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
     InitNPCs();
+    InitEnemys();
     InitRoom1Objects();
     InitCinematica();
 
@@ -61,7 +63,7 @@ int main(void)
     SetTargetFPS(144);
 
     currentScene = SCENE1;
-    menu.state = SCENE1; // DEBERÍA SER LOADING
+    menu.state = MENU; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -353,6 +355,7 @@ int main(void)
                     DrawElement(&room3.tileset, (Vector2){0, TILE_SIZE * 44});
 
                     CheckRoom3Objects(&player);
+                    UpdateEnemys();
 
                     if (debug)
                     {
