@@ -22,6 +22,7 @@ CINE C2_F1;
 CINE C2_F2;
 CINE C2_F3;
 CINE C2_F4;
+CINE C2_F5;
 
 
 void InitCinematica ()
@@ -56,11 +57,13 @@ void InitCinematica ()
         Image C2_F2I = LoadImage(ASSETS_PATH "Cinematicas/C2/fuerzas.png");
         Image C2_F3I = LoadImage(ASSETS_PATH "Cinematicas/C2/guadalupe.png");
         Image C2_F4I = LoadImage(ASSETS_PATH "Cinematicas/C2/defensa.png");
+        Image C2_F5I = LoadImage(ASSETS_PATH "Cinematicas/C2/run.png");
 
         C2_F1.TexturaC= LoadTextureFromImage(C2_F1I);
         C2_F2.TexturaC =LoadTextureFromImage(C2_F2I);
         C2_F3.TexturaC = LoadTextureFromImage(C2_F3I);
         C2_F4.TexturaC = LoadTextureFromImage(C2_F4I);
+        C2_F5.TexturaC = LoadTextureFromImage(C2_F5I);
     
 
     //Descarga de imagenes
@@ -68,6 +71,7 @@ void InitCinematica ()
     UnloadImage(C2_F2I);
     UnloadImage(C2_F3I);
     UnloadImage(C2_F4I);
+    UnloadImage(C2_F5I);
 
     UnloadImage(M_FI);
     UnloadImage(M_BI);
@@ -298,7 +302,7 @@ bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
             if(run_esc == C2_e1)
             {
                 // Fondo
-                DrawTextureEx(C2_F1.TexturaC,C2_F1.Posicion,0.0f,10.0f,WHITE);
+                DrawTextureEx(C2_F1.TexturaC,C2_F1.Posicion,0.0f,8.0f,WHITE);
                 DrawTextureEx(vineta.TexturaC,vineta.Posicion,0.0f,0.9f,WHITE);
                 
                 // Ignacio
@@ -323,7 +327,7 @@ bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
             if(run_esc == C2_e2)
             {
                 //Fondo
-                DrawTextureEx(C2_F2.TexturaC,C2_F2.Posicion,0.0f,10.0f,WHITE);
+                DrawTextureEx(C2_F2.TexturaC,C2_F2.Posicion,0.0f,8.0f,WHITE);
                 DrawTextureEx(vineta.TexturaC,vineta.Posicion,0.0f,0.9f,WHITE);
 
                 //Ingacio
@@ -348,7 +352,7 @@ bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
             if(run_esc == C2_e3)
             {
                 //Fondo
-                DrawTextureEx(C2_F3.TexturaC,C2_F3.Posicion,0.0f,10.0f,WHITE);
+                DrawTextureEx(C2_F3.TexturaC,C2_F3.Posicion,0.0f,8.0f,WHITE);
 
                 //Tropas------------------------------------------------------------------------------------PENDIENTE
 
@@ -370,10 +374,11 @@ bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
             if(run_esc == C2_e4)
             {
                 //Fondo
-                DrawTextureEx(C2_F4.TexturaC,C2_F4.Posicion,0.0f,10.0f,WHITE);
+                DrawTextureEx(C2_F4.TexturaC,C2_F4.Posicion,0.0f,8.0f,WHITE);
 
                 //Porfirio ----------------------------------------------------------------------------------CREAR IMAGEN
-                
+                C1_Per.Posicion.x=0;
+                C1_Per.Posicion.y=(p_limite_y / 2) + 200;
                 DrawTextureEx(C1_Per.TexturaC,C1_Per.Posicion,0.0f,1.0f,WHITE);
 
                 //Tropas------------------------------------------------------------------------------------PENDIENTE
@@ -389,14 +394,31 @@ bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e4)
             {
                 PlaySound(fxButton);
-                run_esc = C2_e4;
+                run_esc = C2_e5;
                 EndDrawing();
             }
+            //---------------------------Escena 5---------------------------
+            if(run_esc==C2_e5)
+            {
+                //Fondo
+                DrawTextureEx(C2_F5.TexturaC,C2_F5.Posicion,0.0f,8.0f,WHITE);
 
+                //Rectangulo
+                Rectangle block3 = {70, 50 , 1200 , 200};
+                DrawRectangleRec(block3,b_colorgray);
+
+                //Texto
+                DrawText("Los franceses salieron de Amozoc hacia Puebla y dividieron sus tropas\nuna primera columna de alrededor de 4000 hombres protegida por la \nartillería avanzó sobre los fuertes, en los que el ejército mexicano era\nmás fuertela columna restante permaneció en la reserva",90,70,30,WHITE);
+
+            }
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e5)
+            {
+                PlaySound(fxButton);
+                exitbucle=true;
+                EndDrawing();
+            }
         }
-
         EndDrawing();
     }
-
     return true;
 }
