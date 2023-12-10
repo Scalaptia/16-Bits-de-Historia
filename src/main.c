@@ -339,6 +339,10 @@ int main(void)
             break;
 
         case SCENE3:
+            if(cinema2==false)
+            {
+                cinema2=RunCimeatica3(screenWidth, screenHeight,ToggleMusic);
+            }
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------

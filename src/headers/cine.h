@@ -20,7 +20,10 @@ enum escenas
     C2_e3,
     C2_e4,
     C2_e5,
-    C2_e6
+
+    C3_e1,
+    C3_e2,
+    C3_e3,
 };
 
 typedef struct cinestruct
@@ -56,5 +59,6 @@ extern CINE C1_Fondo;
 void InitCinematica ();
 bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle);
 bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle);
+bool RunCimeatica3(int p_limite_x,int p_limite_y,bool togle);
 
 #endif

@@ -1,12 +1,13 @@
 #include "../headers/cine.h"
 
 CINE vineta;
+CINE negro;
 
-//Personajes
+// Personajes
 CINE Por;
 CINE Ign;
 
-//Escena 1----------------
+// Escena 1----------------
 CINE M_F;
 CINE M_B;
 CINE M2_F;
@@ -17,15 +18,18 @@ CINE M5_F;
 CINE C1_Per;
 CINE C1_Fondo;
 
-//Escena 2----------------
+// Escena 2----------------
 CINE C2_F1;
 CINE C2_F2;
 CINE C2_F3;
 CINE C2_F4;
 CINE C2_F5;
 
+// Escena 3----------------
+CINE C3_F1;
+CINE C3_F2;
 
-void InitCinematica ()
+void InitCinematica()
 {
     Image vinetai = LoadImage(ASSETS_PATH "Cinematicas/vineta.png");
     vineta.TexturaC = LoadTextureFromImage(vinetai);
@@ -33,40 +37,49 @@ void InitCinematica ()
     Image PorI = LoadImage(ASSETS_PATH "");
     Image IgnI = LoadImage(ASSETS_PATH "");
 
-    //Escena 1----
-        Image C1_PerI = LoadImage(ASSETS_PATH "Personaje/char1.png");
-        Image C1_FondoI = LoadImage(ASSETS_PATH "Cinematicas/Fondo1.png");
-        Image M_BI = LoadImage(ASSETS_PATH "Cinematicas/Banderas/mexico.png");
-        Image M_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/MFondo.png");    
-        Image M2_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/B3.png");
-        Image M3_FI =LoadImage(ASSETS_PATH "Cinematicas/Bases/Hands.png");
-        Image M4_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/Contra.png");
-        Image M5_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/colonias.png");
+    // Escena 1----
+    Image C1_PerI = LoadImage(ASSETS_PATH "Personaje/char1.png");
+    Image C1_FondoI = LoadImage(ASSETS_PATH "Cinematicas/Fondo1.png");
+    Image M_BI = LoadImage(ASSETS_PATH "Cinematicas/Banderas/mexico.png");
+    Image M_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/MFondo.png");
+    Image M2_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/B3.png");
+    Image M3_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/Hands.png");
+    Image M4_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/Contra.png");
+    Image M5_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/colonias.png");
 
-        C1_Per.TexturaC = LoadTextureFromImage(C1_PerI);
-        C1_Fondo.TexturaC = LoadTextureFromImage(C1_FondoI);
-        M_B.TexturaC = LoadTextureFromImage(M_BI);
-        M_F.TexturaC = LoadTextureFromImage(M_FI);
-        M2_F.TexturaC = LoadTextureFromImage(M2_FI);
-        M3_F.TexturaC = LoadTextureFromImage(M3_FI);
-        M4_F.TexturaC = LoadTextureFromImage(M4_FI);
-        M5_F.TexturaC = LoadTextureFromImage(M5_FI);
-    
-    //Escena 2----
-        Image C2_F1I = LoadImage(ASSETS_PATH "Cinematicas/C2/fortaleza.png");
-        Image C2_F2I = LoadImage(ASSETS_PATH "Cinematicas/C2/fuerzas.png");
-        Image C2_F3I = LoadImage(ASSETS_PATH "Cinematicas/C2/guadalupe.png");
-        Image C2_F4I = LoadImage(ASSETS_PATH "Cinematicas/C2/defensa.png");
-        Image C2_F5I = LoadImage(ASSETS_PATH "Cinematicas/C2/run.png");
+    C1_Per.TexturaC = LoadTextureFromImage(C1_PerI);
+    C1_Fondo.TexturaC = LoadTextureFromImage(C1_FondoI);
+    M_B.TexturaC = LoadTextureFromImage(M_BI);
+    M_F.TexturaC = LoadTextureFromImage(M_FI);
+    M2_F.TexturaC = LoadTextureFromImage(M2_FI);
+    M3_F.TexturaC = LoadTextureFromImage(M3_FI);
+    M4_F.TexturaC = LoadTextureFromImage(M4_FI);
+    M5_F.TexturaC = LoadTextureFromImage(M5_FI);
 
-        C2_F1.TexturaC= LoadTextureFromImage(C2_F1I);
-        C2_F2.TexturaC =LoadTextureFromImage(C2_F2I);
-        C2_F3.TexturaC = LoadTextureFromImage(C2_F3I);
-        C2_F4.TexturaC = LoadTextureFromImage(C2_F4I);
-        C2_F5.TexturaC = LoadTextureFromImage(C2_F5I);
-    
+    // Escena 2----
+    Image C2_F1I = LoadImage(ASSETS_PATH "Cinematicas/C2/fortaleza.png");
+    Image C2_F2I = LoadImage(ASSETS_PATH "Cinematicas/C2/fuerzas.png");
+    Image C2_F3I = LoadImage(ASSETS_PATH "Cinematicas/C2/guadalupe.png");
+    Image C2_F4I = LoadImage(ASSETS_PATH "Cinematicas/C2/defensa.png");
+    Image C2_F5I = LoadImage(ASSETS_PATH "Cinematicas/C2/run.png");
 
-    //Descarga de imagenes
+    C2_F1.TexturaC = LoadTextureFromImage(C2_F1I);
+    C2_F2.TexturaC = LoadTextureFromImage(C2_F2I);
+    C2_F3.TexturaC = LoadTextureFromImage(C2_F3I);
+    C2_F4.TexturaC = LoadTextureFromImage(C2_F4I);
+    C2_F5.TexturaC = LoadTextureFromImage(C2_F5I);
+
+    // Escena 3----
+    Image C3_F1I = LoadImage(ASSETS_PATH "Cinematicas/C3/preparados.png");
+    Image C3_F2I = LoadImage(ASSETS_PATH "Cinematicas/C3/ataquen.png");
+
+    C3_F1.TexturaC = LoadTextureFromImage(C3_F1I);
+    C3_F2.TexturaC = LoadTextureFromImage(C3_F2I);
+
+    // Descarga de imagenes
+    UnloadImage(C3_F1I);
+    UnloadImage(C3_F2I);
+
     UnloadImage(C2_F1I);
     UnloadImage(C2_F2I);
     UnloadImage(C2_F3I);
@@ -87,187 +100,181 @@ void InitCinematica ()
     UnloadImage(IgnI);
 }
 
-bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle)
+bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
 {
-    //Reducir texto en escenas, osea dar 2 clicks para seguir el texto
+    // Reducir texto en escenas, osea dar 2 clicks para seguir el texto
     enum escenas Esc_run = INTRODUCCION;
     bool exitbucle = false;
     bool finish = false;
-    //Escena 1------------------------------
+    // Escena 1------------------------------
     {
-        //Personaje------------
+        // Personaje------------
         C1_Per.Posicion.x = -100;
-        C1_Per.Posicion.y = 250 ;
+        C1_Per.Posicion.y = 250;
 
-        //Fondo-----------------
+        // Fondo-----------------
         C1_Fondo.Posicion.x = 0;
         C1_Fondo.Posicion.y = 0;
 
-        //Bandera E-Mexico
-        M_B.Posicion.x=15;
-        M_B.Posicion.y=15;
-
+        // Bandera E-Mexico
+        M_B.Posicion.x = 15;
+        M_B.Posicion.y = 15;
     }
 
-    while(exitbucle == false)
+    while (exitbucle == false)
     {
-        if(togle)
+        if (togle)
             SetMusicVolume(C1M_F, 0.5f);
-            PlayMusic(C1M_F);
+        PlayMusic(C1M_F);
         BeginDrawing();
         {
             ClearBackground(BLACK);
 
             //----------------------------------PRE Escenario----------------------------------
-            if(Esc_run==INTRODUCCION)
+            if (Esc_run == INTRODUCCION)
             {
-                DrawText("LA BATALLA DE PUEBLA", (p_limite_x / 2) - 500 , (p_limite_y / 2)-50, 80 ,WHITE);
+                DrawText("LA BATALLA DE PUEBLA", (p_limite_x / 2) - 500, (p_limite_y / 2) - 50, 80, WHITE);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==INTRODUCCION)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == INTRODUCCION)
             {
                 PlaySound(fxButton);
-                Esc_run=MEXICO;
+                Esc_run = MEXICO;
                 EndDrawing();
             }
-            
+
             //---------------------------------Mexico Ip1-------------------------------------
-            if(Esc_run==MEXICO)
+            if (Esc_run == MEXICO)
             {
-                //Fondo
-                DrawTextureEx(M_F.TexturaC , M_F.Posicion , 0.0f , 1.2f , WHITE);
-                
-                //Bandera
-                DrawTextureEx(M_B.TexturaC , M_B.Posicion , 0.0f , 5.0f , WHITE);
+                // Fondo
+                DrawTextureEx(M_F.TexturaC, M_F.Posicion, 0.0f, 1.2f, WHITE);
 
-                //Rectangulo de texto
+                // Bandera
+                DrawTextureEx(M_B.TexturaC, M_B.Posicion, 0.0f, 5.0f, WHITE);
+
+                // Rectangulo de texto
                 Color bloque = Fade(BLACK, 0.5f);
-                Rectangle TxtFondo = {160 ,p_limite_y - 500, 1050, 300};
-                DrawRectangleRec(TxtFondo,bloque);
+                Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
+                DrawRectangleRec(TxtFondo, bloque);
 
-                //Texto
-                DrawText("En la década de 1860, méxico debía dinero por prestaciones que hacía a españa\nReino unido y francia, debía 80 millones de pesos, pero en ese tiempo \nméxico estaba en tiempos dificiles economicamente debido a la independencia\nEn 1861 el presidente Benito Juárez\nDecretó la suspensión de pagos de la deuda externa del país.", 190 , p_limite_y - 450, 25 ,WHITE);
-
+                // Texto
+                DrawText("En la década de 1860, méxico debía dinero por prestaciones que hacía a españa\nReino unido y francia, debía 80 millones de pesos, pero en ese tiempo \nméxico estaba en tiempos dificiles economicamente debido a la independencia\nEn 1861 el presidente Benito Juárez\nDecretó la suspensión de pagos de la deuda externa del país.", 190, p_limite_y - 450, 25, WHITE);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO)
             {
                 PlaySound(fxButton);
-                Esc_run=MEXICO1;
+                Esc_run = MEXICO1;
                 EndDrawing();
             }
 
             //---------------------------------Mexico1 Ip2-------------------------------------
-            if(Esc_run==MEXICO1)
+            if (Esc_run == MEXICO1)
             {
-                //fondo
-                DrawTextureEx(M2_F.TexturaC , M2_F.Posicion , 0.0f , 0.73f , WHITE);
+                // fondo
+                DrawTextureEx(M2_F.TexturaC, M2_F.Posicion, 0.0f, 0.73f, WHITE);
 
-                //Rectangulo de texto
+                // Rectangulo de texto
                 Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {160 ,p_limite_y - 500, 1050, 300};
-                DrawRectangleRec(TxtFondo,bloque);
-                
-                //texto
-                DrawText("Los demás países quedaron en ver como toman el dinero de vuelta\ndecidieronarmar un ejército cada país, españa con 5,789 soldados\nfrancia con 3,000 soldados y reino unido con\n700 marines británicos", 180 , p_limite_y - 450, 30 ,BLACK);
+                Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
+                DrawRectangleRec(TxtFondo, bloque);
 
+                // texto
+                DrawText("Los demás países quedaron en ver como toman el dinero de vuelta\ndecidieronarmar un ejército cada país, españa con 5,789 soldados\nfrancia con 3,000 soldados y reino unido con\n700 marines británicos", 180, p_limite_y - 450, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO1)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO1)
             {
                 PlaySound(fxButton);
-                Esc_run=MEXICO2;
+                Esc_run = MEXICO2;
                 EndDrawing();
             }
 
             //---------------------------------Mexico2 Ip3-------------------------------------
-            if(Esc_run==MEXICO2)
+            if (Esc_run == MEXICO2)
             {
-                //fondo
-                DrawTextureEx(M3_F.TexturaC , M3_F.Posicion , 0.0f , 2.5f , WHITE);
+                // fondo
+                DrawTextureEx(M3_F.TexturaC, M3_F.Posicion, 0.0f, 2.5f, WHITE);
 
-                //Rectangulo de texto
+                // Rectangulo de texto
                 Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {160 ,p_limite_y - 500, 1050, 300};
-                DrawRectangleRec(TxtFondo,bloque);
+                Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
+                DrawRectangleRec(TxtFondo, bloque);
 
-                //Fondo
-                DrawText("Sin embargo, gracias a la diplomacia mexicana, méxico consiguió\nconvencer a españa y reino unido de que les pagaría después\ny estos 2 se retiraron, Además de que francian\nno solo quería su dinero de vuelta\nsi no que también quería hacer de México su protectorado",180,p_limite_y -450, 30, BLACK);
+                // Fondo
+                DrawText("Sin embargo, gracias a la diplomacia mexicana, méxico consiguió\nconvencer a españa y reino unido de que les pagaría después\ny estos 2 se retiraron, Además de que francian\nno solo quería su dinero de vuelta\nsi no que también quería hacer de México su protectorado", 180, p_limite_y - 450, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO2)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO2)
             {
                 PlaySound(fxButton);
-                Esc_run=MEXICO3;
+                Esc_run = MEXICO3;
                 EndDrawing();
             }
 
             //---------------------------------Mexico3 Ip4-------------------------------------
-            if(Esc_run==MEXICO3)
+            if (Esc_run == MEXICO3)
             {
-                //Fondo
-                DrawTextureEx(M4_F.TexturaC , M4_F.Posicion , 0.0f , 0.8f , WHITE);
-                
-                //Rectangulo de texto
+                // Fondo
+                DrawTextureEx(M4_F.TexturaC, M4_F.Posicion, 0.0f, 0.8f, WHITE);
+
+                // Rectangulo de texto
                 Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {160 ,p_limite_y - 500, 1050, 300};
-                DrawRectangleRec(TxtFondo,bloque);
+                Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
+                DrawRectangleRec(TxtFondo, bloque);
 
-                //Fondo
-                DrawText("Imponiendo una monarquía en el país, dejando de lado\na sus compañeros creyó que conseguiría por sí solo la victoria\nya que llevaban una racha de 50 años sin perder una batalla\nAl final Francia terminó con 6m soldados y méxico\nse preparó con 6m hombres,la cual francia contaba\ncon fuerzas de elite (zuavos) y méxico.",180,p_limite_y -480, 30, BLACK);
-
+                // Fondo
+                DrawText("Imponiendo una monarquía en el país, dejando de lado\na sus compañeros creyó que conseguiría por sí solo la victoria\nya que llevaban una racha de 50 años sin perder una batalla\nAl final Francia terminó con 6m soldados y méxico\nse preparó con 6m hombres,la cual francia contaba\ncon fuerzas de elite (zuavos) y méxico.", 180, p_limite_y - 480, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO3)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO3)
             {
                 PlaySound(fxButton);
-                Esc_run=MEXICO4;
+                Esc_run = MEXICO4;
                 EndDrawing();
             }
 
             //---------------------------------Mexico4 Ip5-------------------------------------
-            if(Esc_run==MEXICO4)
+            if (Esc_run == MEXICO4)
             {
-                //Fondo
-                DrawTextureEx(M5_F.TexturaC , M5_F.Posicion , 0.0f , 1.0f , WHITE);
-                
-                //Rectangulo de texto
+                // Fondo
+                DrawTextureEx(M5_F.TexturaC, M5_F.Posicion, 0.0f, 1.0f, WHITE);
+
+                // Rectangulo de texto
                 Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {230 ,p_limite_y - 450, 900, 200};
-                DrawRectangleRec(TxtFondo,bloque);
+                Rectangle TxtFondo = {230, p_limite_y - 450, 900, 200};
+                DrawRectangleRec(TxtFondo, bloque);
 
-                //Fondo
-                DrawText("México reclutó en su mayoría personas forzadas\nEs decir sin experiencia en el campo de batalla\ny no muy bien tratados, lo único sobresaliente de méxico\neran sus oficiales jóvenes bien experimentados\n",250, p_limite_y -440, 30, BLACK);
-
+                // Fondo
+                DrawText("México reclutó en su mayoría personas forzadas\nEs decir sin experiencia en el campo de batalla\ny no muy bien tratados, lo único sobresaliente de méxico\neran sus oficiales jóvenes bien experimentados\n", 250, p_limite_y - 440, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO4)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO4)
             {
                 PlaySound(fxButton);
-                Esc_run=PRIMER_ESCENARIO;
+                Esc_run = PRIMER_ESCENARIO;
                 EndDrawing();
             }
 
-
             //----------------------------------Escenario 1 ----------------------------------
-            if(Esc_run == PRIMER_ESCENARIO)
+            if (Esc_run == PRIMER_ESCENARIO)
             {
-                //Fondo
-                DrawTextureEx(C1_Fondo.TexturaC , C1_Fondo.Posicion , 0.0f , 5.0f , WHITE);
+                // Fondo
+                DrawTextureEx(C1_Fondo.TexturaC, C1_Fondo.Posicion, 0.0f, 5.0f, WHITE);
 
-                //Personaje
-                DrawTextureEx(C1_Per.TexturaC , C1_Per.Posicion , 0.0f , 40.0f , WHITE);
+                // Personaje
+                DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 40.0f, WHITE);
 
-                if(C1_Per.Posicion.x < p_limite_x/2 -360 )
+                if (C1_Per.Posicion.x < p_limite_x / 2 - 360)
                 {
                     C1_Per.Posicion.x += 4;
                 }
-                if(C1_Per.Posicion.x >= p_limite_x/2 -360 )
+                if (C1_Per.Posicion.x >= p_limite_x / 2 - 360)
                 {
                     finish = true;
                 }
 
-                //Rectangulo de texto
+                // Rectangulo de texto
                 Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {500 ,p_limite_y - 100, 300, 80};
-                DrawRectangleRec(TxtFondo,bloque);
+                Rectangle TxtFondo = {500, p_limite_y - 100, 300, 80};
+                DrawRectangleRec(TxtFondo, bloque);
 
-                //Texto
-                DrawText("Entre ellos\nIgnacio zaragoza", 520 , p_limite_y - 100, 30 ,BLACK);
+                // Texto
+                DrawText("Entre ellos\nIgnacio zaragoza", 520, p_limite_y - 100, 30, BLACK);
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && finish == true)
             {
@@ -276,149 +283,197 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle)
                 exitbucle = true;
             }
         }
-        EndDrawing(); 
+        EndDrawing();
     }
     return true;
 }
 
-bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
+bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
 {
     enum escenas run_esc = C2_e1;
     bool exitbucle = false;
-    //Colores
-    
-        Color b_colorgray = Fade (GRAY, 0.7f);
-        Color b_colorwhite = Fade (WHITE,0.7f);
-        Color b_colorblack = Fade (BLACK,0.7f);
-    
-    
+    // Colores
+        Color b_colorgray = Fade(GRAY, 0.7f);
+        Color b_colorwhite = Fade(WHITE, 0.7f);
+        Color b_colorblack = Fade(BLACK, 0.7f);
 
-    while(!exitbucle)
+    while (!exitbucle)
     {
         BeginDrawing();
         {
             ClearBackground(BLACK);
             //---------------------------Escena 1---------------------------
-            if(run_esc == C2_e1)
+            if (run_esc == C2_e1)
             {
                 // Fondo
-                DrawTextureEx(C2_F1.TexturaC,C2_F1.Posicion,0.0f,8.0f,WHITE);
-                DrawTextureEx(vineta.TexturaC,vineta.Posicion,0.0f,0.9f,WHITE);
-                
+                DrawTextureEx(C2_F1.TexturaC, C2_F1.Posicion, 0.0f, 8.0f, WHITE);
+                DrawTextureEx(vineta.TexturaC, vineta.Posicion, 0.0f, 0.9f, WHITE);
+
                 // Ignacio
-                C1_Per.Posicion.x=250;
-                C1_Per.Posicion.y=(p_limite_y / 2) - 250 ; 
-                DrawTextureEx(C1_Per.TexturaC,C1_Per.Posicion,0.0f,15.0f,WHITE);
+                C1_Per.Posicion.x = 250;
+                C1_Per.Posicion.y = (p_limite_y / 2) - 250;
+                DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 15.0f, WHITE);
 
-                //rectangulo
-                Rectangle block = {250, (p_limite_y/2) - 80 , 900 , 200};
-                DrawRectangleRec(block,b_colorgray);
+                // rectangulo
+                Rectangle block = {250, (p_limite_y / 2) - 80, 900, 200};
+                DrawRectangleRec(block, b_colorgray);
 
-                //Texto
-                DrawText("La defensa organizada por el general Zaragoza\nen Puebla consistió en fortificar la ciudad ante el\ninminente ataque francés\n", 300 , (p_limite_y/2) - 50 , 30 , WHITE);
+                // Texto
+                DrawText("La defensa organizada por el general Zaragoza\nen Puebla consistió en fortificar la ciudad ante el\ninminente ataque francés\n", 300, (p_limite_y / 2) - 50, 30, WHITE);
             }
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e1)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e1)
             {
                 PlaySound(fxButton);
                 run_esc = C2_e2;
                 EndDrawing();
             }
             //---------------------------Escena 2---------------------------
-            if(run_esc == C2_e2)
+            if (run_esc == C2_e2)
             {
-                //Fondo
-                DrawTextureEx(C2_F2.TexturaC,C2_F2.Posicion,0.0f,8.0f,WHITE);
-                DrawTextureEx(vineta.TexturaC,vineta.Posicion,0.0f,0.9f,WHITE);
+                // Fondo
+                DrawTextureEx(C2_F2.TexturaC, C2_F2.Posicion, 0.0f, 8.0f, WHITE);
+                DrawTextureEx(vineta.TexturaC, vineta.Posicion, 0.0f, 0.9f, WHITE);
 
-                //Ingacio
-                C1_Per.Posicion.x= -150;
-                C1_Per.Posicion.y=(p_limite_y / 2) - 100 ; 
-                DrawTextureEx(C1_Per.TexturaC,C1_Per.Posicion,0.0f,40.0f,WHITE);
+                // Ingacio
+                C1_Per.Posicion.x = -150;
+                C1_Per.Posicion.y = (p_limite_y / 2) - 100;
+                DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 40.0f, WHITE);
 
-                //Rectangulo
-                Rectangle block2 = {450, (p_limite_y/2) - 80 , 900 , 300};
-                DrawRectangleRec(block2,b_colorgray);
+                // Rectangulo
+                Rectangle block2 = {450, (p_limite_y / 2) - 80, 900, 300};
+                DrawRectangleRec(block2, b_colorgray);
 
-                //texto
-                DrawText("Se instaló un cuartel a unos metros\ndel frente de batallay las tropas mexicanas\n(que recibieron el nombre de Ejército de Oriente)\nSe prepararon para repeler a los invasores\nantes de que alcanzaran el área urbana.",500,(p_limite_y/2)-50,30,WHITE);
+                // texto
+                DrawText("Se instaló un cuartel a unos metros\ndel frente de batallay las tropas mexicanas\n(que recibieron el nombre de Ejército de Oriente)\nSe prepararon para repeler a los invasores\nantes de que alcanzaran el área urbana.", 500, (p_limite_y / 2) - 50, 30, WHITE);
             }
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e2)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e2)
             {
                 PlaySound(fxButton);
                 run_esc = C2_e3;
                 EndDrawing();
             }
             //---------------------------Escena 3---------------------------
-            if(run_esc == C2_e3)
+            if (run_esc == C2_e3)
             {
-                //Fondo
-                DrawTextureEx(C2_F3.TexturaC,C2_F3.Posicion,0.0f,8.0f,WHITE);
+                // Fondo
+                DrawTextureEx(C2_F3.TexturaC, C2_F3.Posicion, 0.0f, 8.0f, WHITE);
 
-                //Tropas------------------------------------------------------------------------------------PENDIENTE
+                // Tropas------------------------------------------------------------------------------------PENDIENTE
 
-                //Rectangulo
-                Rectangle block3 = {50, (p_limite_y/2) - 70 , 600 , 400};
-                DrawRectangleRec(block3,b_colorwhite);
+                // Rectangulo
+                Rectangle block3 = {50, (p_limite_y / 2) - 70, 600, 400};
+                DrawRectangleRec(block3, b_colorwhite);
 
-                //Texto
-                DrawText("Dos baterías de artillería\nY 1200 hombres defendían\nLos fuertes Guadalupe\nY Loreto ubicados\nEn sendos cerros al\nnorte de la ciudad",70,(p_limite_y/2)-50 , 40, BLACK);
-
+                // Texto
+                DrawText("Dos baterías de artillería\nY 1200 hombres defendían\nLos fuertes Guadalupe\nY Loreto ubicados\nEn sendos cerros al\nnorte de la ciudad", 70, (p_limite_y / 2) - 50, 40, BLACK);
             }
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e3)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e3)
             {
                 PlaySound(fxButton);
                 run_esc = C2_e4;
                 EndDrawing();
             }
             //---------------------------Escena 4---------------------------
-            if(run_esc == C2_e4)
+            if (run_esc == C2_e4)
             {
-                //Fondo
-                DrawTextureEx(C2_F4.TexturaC,C2_F4.Posicion,0.0f,8.0f,WHITE);
+                // Fondo
+                DrawTextureEx(C2_F4.TexturaC, C2_F4.Posicion, 0.0f, 8.0f, WHITE);
 
-                //Porfirio ----------------------------------------------------------------------------------CREAR IMAGEN
-                C1_Per.Posicion.x=0;
-                C1_Per.Posicion.y=(p_limite_y / 2) + 200;
-                DrawTextureEx(C1_Per.TexturaC,C1_Per.Posicion,0.0f,1.0f,WHITE);
+                // Porfirio ----------------------------------------------------------------------------------CREAR IMAGEN
+                C1_Per.Posicion.x = 0;
+                C1_Per.Posicion.y = (p_limite_y / 2) + 200;
+                DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 1.0f, WHITE);
 
-                //Tropas------------------------------------------------------------------------------------PENDIENTE
+                // Tropas------------------------------------------------------------------------------------PENDIENTE
 
-                //Rectangulo
-                Rectangle block3 = {50, (p_limite_y/2) - 220 , 600 , 400};
-                DrawRectangleRec(block3,b_colorgray);
+                // Rectangulo
+                Rectangle block3 = {50, (p_limite_y / 2) - 220, 600, 400};
+                DrawRectangleRec(block3, b_colorgray);
 
-                //Texto
-                DrawText("Mientras que 3500 soldados\nDe infantería y una brigada\nDe caballería se distribuyeron\nEn distintas posiciones \ndefensivas\nUna de ellas la comandaba por\nPorfirio Díaz",70,(p_limite_y/2) - 200 , 35, BLACK);
-
+                // Texto
+                DrawText("Mientras que 3500 soldados\nDe infantería y una brigada\nDe caballería se distribuyeron\nEn distintas posiciones \ndefensivas\nUna de ellas la comandaba por\nPorfirio Díaz", 70, (p_limite_y / 2) - 200, 35, BLACK);
             }
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e4)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e4)
             {
                 PlaySound(fxButton);
                 run_esc = C2_e5;
                 EndDrawing();
             }
             //---------------------------Escena 5---------------------------
-            if(run_esc==C2_e5)
+            if (run_esc == C2_e5)
             {
-                //Fondo
-                DrawTextureEx(C2_F5.TexturaC,C2_F5.Posicion,0.0f,8.0f,WHITE);
+                // Fondo
+                DrawTextureEx(C2_F5.TexturaC, C2_F5.Posicion, 0.0f, 8.0f, WHITE);
 
-                //Rectangulo
-                Rectangle block3 = {70, 50 , 1200 , 200};
-                DrawRectangleRec(block3,b_colorgray);
+                // Rectangulo
+                Rectangle block3 = {70, 50, 1200, 200};
+                DrawRectangleRec(block3, b_colorgray);
 
-                //Texto
-                DrawText("Los franceses salieron de Amozoc hacia Puebla y dividieron sus tropas\nuna primera columna de alrededor de 4000 hombres protegida por la \nartillería avanzó sobre los fuertes, en los que el ejército mexicano era\nmás fuertela columna restante permaneció en la reserva",90,70,30,WHITE);
-
+                // Texto
+                DrawText("Los franceses salieron de Amozoc hacia Puebla y dividieron sus tropas\nuna primera columna de alrededor de 4000 hombres protegida por la \nartillería avanzó sobre los fuertes, en los que el ejército mexicano era\nmás fuertela columna restante permaneció en la reserva", 90, 70, 30, WHITE);
             }
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e5)
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e5)
             {
                 PlaySound(fxButton);
-                exitbucle=true;
+                exitbucle = true;
                 EndDrawing();
             }
         }
         EndDrawing();
     }
     return true;
+}
+
+bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle)
+{
+    bool exitbucle = false;
+    enum escenas current_esc = C3_e1;
+    // Colores
+        Color b_colorgray = Fade(GRAY, 0.7f);
+        Color b_colorwhite = Fade(WHITE, 0.7f);
+        Color b_colorblack = Fade(BLACK, 0.7f);
+
+    while (!exitbucle)
+    {
+        BeginDrawing();
+        {
+            //----------------------------------------------Escena 1-----------------------------------------------
+            if (current_esc == C3_e1)
+            {
+                //fondo
+                DrawTextureEx(C3_F1.TexturaC,C3_F1.Posicion,0.0f,8.0f,WHITE);
+
+                //Rectangulo
+                Rectangle block5 = {p_limite_x - 520 ,180, 500, 270};
+                DrawRectangleRec(block5,b_colorblack);
+
+                //texto
+                DrawText("Una vez todas\nlas tropas armadas en posición\nEstaban todos listos para\nLa batalla",p_limite_x - 500, 200,30,WHITE);
+            }
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && current_esc == C3_e1)
+            {
+                PlaySound(fxButton);
+                current_esc=C3_e2;
+                EndDrawing();
+            }
+            //----------------------------------------------Escena 2-----------------------------------------------
+            if (current_esc == C3_e2)
+            {
+                //fondo
+                ClearBackground(BLACK);
+
+                //texto
+                DrawText("La batalla comenzó a las", (p_limite_x / 2) - 500, (p_limite_y / 2) - 150, 80, WHITE);
+                DrawText("11:15 AM", (p_limite_x / 2)-120, (p_limite_y / 2) - 70, 80, RED);
+                DrawText("5 de mayo", (p_limite_x / 2)-180, (p_limite_y / 2), 80, RED);
+            }
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && current_esc == C3_e2)
+            {
+                PlaySound(fxButton);
+                EndDrawing();
+                exitbucle=true;
+            }
+        }
+        EndDrawing();
+    }
 }
