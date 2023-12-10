@@ -5,6 +5,7 @@
 #include "raymath.h"
 #include "../headers/player.h"
 #include "../headers/animation.h"
+#include "../headers/menu.h"
 
 typedef struct Object
 {
@@ -28,6 +29,8 @@ void CheckRoom1Objects(Player *player);
 void CheckRoom2Objects(Player *player);
 void CheckRoom3Objects(Player *player);
 void InteractObject(Object *object, Player *player);
+
+void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu, enum GameState *currentScene);
 
 extern Object objComida1;
 
