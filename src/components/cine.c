@@ -1,6 +1,6 @@
 #include "../headers/cine.h"
 
-//Mexico----------------
+//Escena 1----------------
 CINE M_F;
 CINE M_B;
 CINE M2_F;
@@ -8,32 +8,42 @@ CINE M3_F;
 CINE M4_F;
 CINE M5_F;
 
-//Escena 1---------------
 CINE C1_Per;
 CINE C1_Fondo;
+
+//Escena 2----------------
+CINE C2_F;
 
 
 void InitCinematica ()
 {
-    Image C1_PerI = LoadImage(ASSETS_PATH "Personaje/char1.png");
-    Image C1_FondoI = LoadImage(ASSETS_PATH "Cinematicas/Fondo1.png");
+    //Escena 1----
+        Image C1_PerI = LoadImage(ASSETS_PATH "Personaje/char1.png");
+        Image C1_FondoI = LoadImage(ASSETS_PATH "Cinematicas/Fondo1.png");
+        Image M_BI = LoadImage(ASSETS_PATH "Cinematicas/Banderas/mexico.png");
+        Image M_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/MFondo.png");    
+        Image M2_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/B3.png");
+        Image M3_FI =LoadImage(ASSETS_PATH "Cinematicas/Bases/Hands.png");
+        Image M4_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/Contra.png");
+        Image M5_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/colonias.png");
 
-    Image M_BI = LoadImage(ASSETS_PATH "Cinematicas/Banderas/mexico.png");
-    Image M_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/MFondo.png");    
-    Image M2_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/B3.png");
-    Image M3_FI =LoadImage(ASSETS_PATH "Cinematicas/Bases/Hands.png");
-    Image M4_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/Contra.png");
-    Image M5_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/colonias.png");
+        C1_Per.TexturaC = LoadTextureFromImage(C1_PerI);
+        C1_Fondo.TexturaC = LoadTextureFromImage(C1_FondoI);
+        M_B.TexturaC = LoadTextureFromImage(M_BI);
+        M_F.TexturaC = LoadTextureFromImage(M_FI);
+        M2_F.TexturaC = LoadTextureFromImage(M2_FI);
+        M3_F.TexturaC = LoadTextureFromImage(M3_FI);
+        M4_F.TexturaC = LoadTextureFromImage(M4_FI);
+        M5_F.TexturaC = LoadTextureFromImage(M5_FI);
     
-    C1_Per.TexturaC = LoadTextureFromImage(C1_PerI);
-    C1_Fondo.TexturaC = LoadTextureFromImage(C1_FondoI);
+    //Escena 2----
+        Image C2_FI = LoadImage(ASSETS_PATH "Cinematicas/C2/fortaleza.png");
 
-    M_B.TexturaC = LoadTextureFromImage(M_BI);
-    M_F.TexturaC = LoadTextureFromImage(M_FI);
-    M2_F.TexturaC = LoadTextureFromImage(M2_FI);
-    M3_F.TexturaC = LoadTextureFromImage(M3_FI);
-    M4_F.TexturaC = LoadTextureFromImage(M4_FI);
-    M5_F.TexturaC = LoadTextureFromImage(M5_FI);
+        C2_F.TexturaC= LoadTextureFromImage(C2_FI);
+    
+
+    //Descarga de imagenes
+    UnloadImage(C2_FI);
 
     UnloadImage(M_FI);
     UnloadImage(M_BI);
@@ -41,13 +51,13 @@ void InitCinematica ()
     UnloadImage(M3_FI);
     UnloadImage(M4_FI);
     UnloadImage(M5_FI);
-
     UnloadImage(C1_PerI);
     UnloadImage(C1_FondoI);
 }
 
 bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle)
 {
+    //Reducir texto en escenas, osea dar 2 clicks para seguir el texto
     enum escenas Esc_run = INTRODUCCION;
     bool exitbucle = false;
     bool finish = false;
@@ -55,7 +65,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle)
     {
         //Personaje------------
         C1_Per.Posicion.x = -100;
-        C1_Per.Posicion.y = p_limite_y / 2;
+        C1_Per.Posicion.y = 250 ;
 
         //Fondo-----------------
         C1_Fondo.Posicion.x = 0;
@@ -208,13 +218,13 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle)
                 DrawTextureEx(C1_Fondo.TexturaC , C1_Fondo.Posicion , 0.0f , 5.0f , WHITE);
 
                 //Personaje
-                DrawTextureEx(C1_Per.TexturaC , C1_Per.Posicion , 0.0f , 30.0f , WHITE);
+                DrawTextureEx(C1_Per.TexturaC , C1_Per.Posicion , 0.0f , 40.0f , WHITE);
 
-                if(C1_Per.Posicion.x < p_limite_x/2 -270 )
+                if(C1_Per.Posicion.x < p_limite_x/2 -360 )
                 {
                     C1_Per.Posicion.x += 4;
                 }
-                if(C1_Per.Posicion.x >= p_limite_x/2 -270 )
+                if(C1_Per.Posicion.x >= p_limite_x/2 -360 )
                 {
                     finish = true;
                 }
@@ -236,5 +246,59 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle)
         }
         EndDrawing(); 
     }
+    return true;
+}
+
+bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle)
+{
+    enum escenas run_esc = C2_e1;
+    bool exitbucle = false;
+    //Colores
+    
+        Color b_colorgray = Fade (GRAY, 0.7f);
+        Color b_colorwhite = Fade (WHITE,0.7f);
+        Color b_colorblack = Fade (BLACK,0.7f);
+    
+    
+
+    while(!exitbucle)
+    {
+        BeginDrawing();
+        {
+            ClearBackground(BLACK);
+            //---------------------------Escena 1---------------------------
+            if(run_esc == C2_e1)
+            {
+                // Fondo
+                DrawTextureEx(C2_F.TexturaC,C2_F.Posicion,0.0f,10.0f,WHITE);
+                
+                // Ignacio
+                C1_Per.Posicion.x=250;
+                C1_Per.Posicion.y=(p_limite_y / 2) - 250 ; 
+                DrawTextureEx(C1_Per.TexturaC,C1_Per.Posicion,0.0f,15.0f,WHITE);
+
+                //rectangulo
+                Rectangle block = {250, (p_limite_y/2) - 80 , 900 , 200};
+                DrawRectangleRec(block,b_colorgray);
+
+                //Texto
+                DrawText("La defensa organizada por el general Zaragoza\nen Pueblaconsistió en fortificar la ciudad ante el\ninminente ataque francés\n", 300 , (p_limite_y/2) - 50 , 30 , BLACK);
+            }
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e1)
+            {
+                PlaySound(fxButton);
+                run_esc = C2_e2;
+                EndDrawing();
+            }
+            //---------------------------Escena 2---------------------------
+            if(run_esc == C2_e2)
+            {
+
+            }
+        }
+
+        EndDrawing();
+    }
+
     return true;
 }
