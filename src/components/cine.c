@@ -4,6 +4,7 @@
 CINE M_F;
 CINE M_B;
 CINE M2_F;
+CINE M3_F;
 
 //Escena 1---------------
 CINE C1_Per;
@@ -24,6 +25,8 @@ void InitCinematica ()
     Image M_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/MFondo.png");
     
     Image M2_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/B3.png");
+
+    Image M3_FI =LoadImage(ASSETS_PATH "Cinematicas/Bases/Hands.png");
     
     C1_Per.TexturaC = LoadTextureFromImage(C1_PerI);
     C1_Fondo.TexturaC = LoadTextureFromImage(C1_FondoI);
@@ -31,10 +34,12 @@ void InitCinematica ()
     M_B.TexturaC = LoadTextureFromImage(M_BI);
     M_F.TexturaC = LoadTextureFromImage(M_FI);
     M2_F.TexturaC = LoadTextureFromImage(M2_FI);
+    M3_F.TexturaC = LoadTextureFromImage(M3_FI);
 
     UnloadImage(M_FI);
     UnloadImage(M_BI);
     UnloadImage(M2_FI);
+    UnloadImage(M3_FI);
 
     UnloadImage(C1_PerI);
     UnloadImage(C1_FondoI);
@@ -125,7 +130,16 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             //---------------------------------Mexico2 Ip3-------------------------------------
             if(Esc_run==MEXICO2)
             {
+                //fondo
+                DrawTextureEx(M3_F.TexturaC , M3_F.Posicion , 0.0f , 2.5f , WHITE);
 
+                //Rectangulo de texto
+                Color bloque = Fade(WHITE, 0.8f);
+                Rectangle TxtFondo = {160 ,p_limite_y - 500, 1050, 300};
+                DrawRectangleRec(TxtFondo,bloque);
+
+                //Fondo
+                DrawText("Sin embargo, gracias a la diplomacia mexicana, méxico consiguió\nconvencer a españa y reino unido de que les pagaría después\ny estos 2 se retiraron, Además de que francian\nno solo quería su dinero de vuelta\nsi no que también quería hacer de México su protectorado",180,p_limite_y -450, 30, BLACK);
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO2)
             {
@@ -136,7 +150,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             //---------------------------------Mexico3 Ip4-------------------------------------
             if(Esc_run==MEXICO3)
             {
-
+                
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO3)
             {

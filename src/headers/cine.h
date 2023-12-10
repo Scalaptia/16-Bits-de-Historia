@@ -26,6 +26,7 @@ typedef struct cinestruct
 extern CINE M_F;
 extern CINE M_B;
 extern CINE M2_F;
+extern CINE M3_F;
 
 extern CINE C1_Per;
 extern CINE C1_Fondo;
