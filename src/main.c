@@ -28,11 +28,13 @@ int main(void)
     bool debug = false;
     bool pause = false;
     bool exitWindow = false;
-    bool ToggleMusic = false; // Should be true
+    bool ToggleMusic = true; // Should be true
     bool fishishedLevel = false;
     char path[100];
 
     bool cinema = false;
+    bool cinema2 = false;
+    bool cinema3 = false;
 
     // Config -----------------------------------------
 
@@ -156,12 +158,13 @@ int main(void)
             break;
 
         case SCENE1:
-
+            // Cinematica-------------------------------------------------
             if (cinema == false)
             {
-                cinema = RunCimeatica1(screenWidth, screenHeight);
+                cinema = RunCimeatica1(screenWidth, screenHeight, ToggleMusic);
             }
 
+            // Nivel-------------------------------------------------------
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------
@@ -248,6 +251,12 @@ int main(void)
             break;
 
         case SCENE2:
+            // Cinematica
+            if (cinema2 == false)
+            {
+                cinema2 = RunCimeatica2(screenWidth, screenHeight, ToggleMusic);
+            }
+
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------
@@ -334,6 +343,10 @@ int main(void)
         case SCENE3:
             player.isDead = false;
 
+            if (cinema2 == false)
+            {
+                cinema2 = RunCimeatica3(screenWidth, screenHeight, ToggleMusic);
+            }
             if (ToggleMusic)
                 PlayMusic(GameMusic);
             //-----------------------------------------------------------

@@ -18,6 +18,10 @@ extern float timePlayed;
 extern Music MenuMusic;
 extern float timePlayedMenu;
 
+//Musica escena 1 - 2 - 3 ---
+extern Music C1M_F;
+extern Music C2M_F;
+extern Music C3M_F;
 // Button Sound-----------------
 extern Sound fxButton;
 
