@@ -241,6 +241,7 @@ int main(void)
                 player.position.y = REL_TILE_SIZE * 27;
                 player.heldItem = NONE;
 
+                StopMusicStream(GameMusic);
                 currentScene = SCENE2;
                 menu.prevState = menu.state;
                 menu.state = currentScene;
@@ -256,7 +257,7 @@ int main(void)
             }
 
             if (ToggleMusic)
-                PlayMusic(GameMusic);
+                PlayMusic(lv2);
             //-----------------------------------------------------------
 
             if (!isInteracting)
@@ -339,12 +340,12 @@ int main(void)
             break;
 
         case SCENE3:
-            if(cinema2==false)
+            if(cinema3==false)
             {
-                cinema2=RunCimeatica3(screenWidth, screenHeight,ToggleMusic);
+                cinema3=RunCimeatica3(screenWidth, screenHeight,ToggleMusic);
             }
             if (ToggleMusic)
-                PlayMusic(GameMusic);
+                PlayMusic(lv3);
             //-----------------------------------------------------------
 
             if (!isInteracting)
