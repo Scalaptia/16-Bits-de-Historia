@@ -10,9 +10,9 @@ enum escenas
     MEXICO1,
     MEXICO2,
     MEXICO3,
+    MEXICO4,
     PRIMER_ESCENARIO,
     SEGUNDO_ESCENARIO,
-    TERCER_ESCENARIO
 };
 
 typedef struct cinestruct
@@ -26,13 +26,12 @@ typedef struct cinestruct
 extern CINE M_F;
 extern CINE M_B;
 extern CINE M2_F;
+extern CINE M3_F;
+extern CINE M4_F;
+extern CINE M5_F;
 
 extern CINE C1_Per;
 extern CINE C1_Fondo;
-
-extern CINE C2_Per;
-
-extern CINE C3_Per;
 
 //Prototipos--------
 void InitCinematica ();
