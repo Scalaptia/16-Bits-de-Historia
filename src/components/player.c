@@ -12,10 +12,14 @@ Camera2D camera;
 
 Texture2D itemFoodTexture;
 Texture2D itemRifleTexture;
+
 Texture2D itemMacheteTexture;
 Texture2D itemMachete2Texture;
+Texture2D itemHoldMacheteTexture;
+
 Texture2D itemLanzaTexture;
 Texture2D itemLanza2Texture;
+Texture2D itemHoldLanzaTexture;
 
 bool isInteracting = false;
 char *currentDialogue = "Placeholder Text";
@@ -184,10 +188,10 @@ void playerHold(Player *player)
             player->heldTexture = itemRifleTexture;
             break;
         case MACHETE:
-            player->heldTexture = itemMacheteTexture;
+            player->heldTexture = itemHoldMacheteTexture;
             break;
         case LANZA:
-            player->heldTexture = itemLanzaTexture;
+            player->heldTexture = itemHoldLanzaTexture;
             break;
         }
 
@@ -207,22 +211,28 @@ void InitItemTextures()
     Image itemRifleImage = LoadImage(ASSETS_PATH "Items/Rifle.png");
     Image itemMacheteImage = LoadImage(ASSETS_PATH "Items/Machete.png");
     Image itemMachete2Image = LoadImage(ASSETS_PATH "Items/Machete2.png");
+    Image itemHoldMacheteImage = LoadImage(ASSETS_PATH "Items/smachete.png");
     Image itemLanzaImage = LoadImage(ASSETS_PATH "Items/Lanza.png");
     Image itemLanza2Image = LoadImage(ASSETS_PATH "Items/Lanza2.png");
+    Image itemHoldLanzaImage = LoadImage(ASSETS_PATH "Items/slanza.png");
 
     // Load textures
     itemFoodTexture = LoadTextureFromImage(itemFoodImage);
     itemRifleTexture = LoadTextureFromImage(itemRifleImage);
     itemMacheteTexture = LoadTextureFromImage(itemMacheteImage);
     itemMachete2Texture = LoadTextureFromImage(itemMachete2Image);
+    itemHoldMacheteTexture = LoadTextureFromImage(itemHoldMacheteImage);
     itemLanzaTexture = LoadTextureFromImage(itemLanzaImage);
     itemLanza2Texture = LoadTextureFromImage(itemLanza2Image);
+    itemHoldLanzaTexture = LoadTextureFromImage(itemHoldLanzaImage);
 
     // Unload images
     UnloadImage(itemFoodImage);
     UnloadImage(itemRifleImage);
     UnloadImage(itemMacheteImage);
     UnloadImage(itemMachete2Image);
+    UnloadImage(itemHoldLanzaImage);
+    UnloadImage(itemHoldMacheteImage);
     UnloadImage(itemLanzaImage);
     UnloadImage(itemLanza2Image);
 }
