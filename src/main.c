@@ -58,7 +58,7 @@ int main(void)
     RenderTexture screenCam = LoadRenderTexture(screenWidth, screenHeight);
 
     //------------------------
-    SetTargetFPS(144);
+    SetTargetFPS(60);
 
     currentScene = SCENE1;
     menu.state = SCENE1; // DEBERÍA SER LOADING

@@ -5,28 +5,25 @@ CINE M_F;
 CINE M_B;
 CINE M2_F;
 CINE M3_F;
+CINE M4_F;
+CINE M5_F;
 
 //Escena 1---------------
 CINE C1_Per;
 CINE C1_Fondo;
 
-//Escena 2---------------
-CINE C2_Per;
-
-//Escena 3---------------
-CINE CINEMATICA3;
 
 void InitCinematica ()
 {
-    Image C1_PerI = LoadImage(ASSETS_PATH "NPCs/Enojado/Feliz/1.png");
+    Image C1_PerI = LoadImage(ASSETS_PATH "Personaje/char1.png");
     Image C1_FondoI = LoadImage(ASSETS_PATH "Cinematicas/Fondo1.png");
 
     Image M_BI = LoadImage(ASSETS_PATH "Cinematicas/Banderas/mexico.png");
-    Image M_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/MFondo.png");
-    
+    Image M_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/MFondo.png");    
     Image M2_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/B3.png");
-
     Image M3_FI =LoadImage(ASSETS_PATH "Cinematicas/Bases/Hands.png");
+    Image M4_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/Contra.png");
+    Image M5_FI = LoadImage(ASSETS_PATH "Cinematicas/Bases/colonias.png");
     
     C1_Per.TexturaC = LoadTextureFromImage(C1_PerI);
     C1_Fondo.TexturaC = LoadTextureFromImage(C1_FondoI);
@@ -35,11 +32,15 @@ void InitCinematica ()
     M_F.TexturaC = LoadTextureFromImage(M_FI);
     M2_F.TexturaC = LoadTextureFromImage(M2_FI);
     M3_F.TexturaC = LoadTextureFromImage(M3_FI);
+    M4_F.TexturaC = LoadTextureFromImage(M4_FI);
+    M5_F.TexturaC = LoadTextureFromImage(M5_FI);
 
     UnloadImage(M_FI);
     UnloadImage(M_BI);
     UnloadImage(M2_FI);
     UnloadImage(M3_FI);
+    UnloadImage(M4_FI);
+    UnloadImage(M5_FI);
 
     UnloadImage(C1_PerI);
     UnloadImage(C1_FondoI);
@@ -52,7 +53,7 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
     //Escena 1------------------------------
     {
         //Personaje------------
-        C1_Per.Posicion.x = p_limite_x - 100;
+        C1_Per.Posicion.x = -100;
         C1_Per.Posicion.y = p_limite_y / 2;
 
         //Fondo-----------------
@@ -150,13 +151,45 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
             //---------------------------------Mexico3 Ip4-------------------------------------
             if(Esc_run==MEXICO3)
             {
+                //Fondo
+                DrawTextureEx(M4_F.TexturaC , M4_F.Posicion , 0.0f , 0.8f , WHITE);
                 
+                //Rectangulo de texto
+                Color bloque = Fade(WHITE, 0.8f);
+                Rectangle TxtFondo = {160 ,p_limite_y - 500, 1050, 300};
+                DrawRectangleRec(TxtFondo,bloque);
+
+                //Fondo
+                DrawText("Imponiendo una monarquía en el país, dejando de lado\na sus compañeros creyó que conseguiría por sí solo la victoria\nya que llevaban una racha de 50 años sin perder una batalla\nAl final Francia terminó con 6m soldados y méxico\nse preparó con 6m hombres,la cual francia contaba\ncon fuerzas de elite (zuavos) y méxico.",180,p_limite_y -480, 30, BLACK);
+
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO3)
+            {
+                Esc_run=MEXICO4;
+                EndDrawing();
+            }
+
+            //---------------------------------Mexico4 Ip5-------------------------------------
+            if(Esc_run==MEXICO4)
+            {
+                //Fondo
+                DrawTextureEx(M5_F.TexturaC , M5_F.Posicion , 0.0f , 1.0f , WHITE);
+                
+                //Rectangulo de texto
+                Color bloque = Fade(WHITE, 0.8f);
+                Rectangle TxtFondo = {230 ,p_limite_y - 450, 900, 200};
+                DrawRectangleRec(TxtFondo,bloque);
+
+                //Fondo
+                DrawText("México reclutó en su mayoría personas forzadas\nEs decir sin experiencia en el campo de batalla\ny no muy bien tratados, lo único sobresaliente de méxico\neran sus oficiales jóvenes bien experimentados\n",250, p_limite_y -440, 30, BLACK);
+
+            }
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==MEXICO4)
             {
                 Esc_run=PRIMER_ESCENARIO;
                 EndDrawing();
             }
+
 
             //----------------------------------Escenario 1 ----------------------------------
             if(Esc_run == PRIMER_ESCENARIO)
@@ -167,29 +200,24 @@ bool RunCimeatica1(int p_limite_x,int p_limite_y)
                 //Personaje
                 DrawTextureEx(C1_Per.TexturaC , C1_Per.Posicion , 0.0f , 30.0f , WHITE);
 
-                if(C1_Per.Posicion.x > ((p_limite_x / 2) - (C1_Per.TexturaC.width/2) - 300 ))
+                if(C1_Per.Posicion.x < p_limite_x/2 -270 )
                 {
-                    C1_Per.Posicion.x -= 1;
+                    C1_Per.Posicion.x += 3;
                 }
 
                 //Rectangulo de texto
-                Rectangle TxtFondo = {180 ,p_limite_y - 100, 1050, 100};
-                DrawRectangleRec(TxtFondo,WHITE);
+                Color bloque = Fade(WHITE, 0.8f);
+                Rectangle TxtFondo = {500 ,p_limite_y - 100, 300, 80};
+                DrawRectangleRec(TxtFondo,bloque);
 
                 //Texto
-                DrawText("AAAAA", 200 , p_limite_y - 100, 30 ,BLACK);
+                DrawText("Entre ellos\nIgnacio zaragoza", 520 , p_limite_y - 100, 30 ,BLACK);
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run==PRIMER_ESCENARIO)
             {
-                Esc_run = SEGUNDO_ESCENARIO;
-                EndDrawing();
-            }
-            //----------------------------------Escenario 2 ----------------------------------
-            if (Esc_run == SEGUNDO_ESCENARIO)
-            {
-                DrawTexture(C2_Per.TexturaC,0,0,WHITE);
-                exitbucle = true;
                 
+                EndDrawing();
+                exitbucle = true;
             }
         }
         EndDrawing(); 
