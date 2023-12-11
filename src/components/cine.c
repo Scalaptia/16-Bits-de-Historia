@@ -31,6 +31,10 @@ CINE C2_F5;
 CINE C3_F1;
 CINE C3_F2;
 
+//final
+CINE C4_F1;
+CINE C4_F2;
+
 void InitCinematica()
 {
     Image vinetai = LoadImage(ASSETS_PATH "Cinematicas/vineta.png");
@@ -86,7 +90,17 @@ void InitCinematica()
     C3_F1.TexturaC = LoadTextureFromImage(C3_F1I);
     C3_F2.TexturaC = LoadTextureFromImage(C3_F2I);
 
+    //Final
+    Image C4_F1I = LoadImage (ASSETS_PATH "Cinematicas/C4/retirada.png");
+    Image C4_F2I = LoadImage (ASSETS_PATH "Cinematicas/C4/final.png");
+
+    C4_F1.TexturaC = LoadTextureFromImage(C4_F1I);
+    C4_F2.TexturaC = LoadTextureFromImage(C4_F2I);
+
     // Descarga de imagenes
+    UnloadImage(C4_F1I);
+    UnloadImage(C4_F2I);
+
     UnloadImage(C3_F1I);
     UnloadImage(C3_F2I);
 
@@ -506,10 +520,65 @@ bool finalCinematica(int p_limite_x, int p_limite_y, bool togle)
 {
     bool exitbucle = false;
     enum escenas current_esc = C4_e1;
+    
+    float mitady = p_limite_y/2;
+    float mitadx = p_limite_x/2;
+    
+    //Colores
+        Color b_colorgray = Fade(GRAY, 0.7f);
+        Color b_colorwhite = Fade(WHITE, 0.7f);
+        Color b_colorblack = Fade(BLACK, 0.7f);
 
     while(!exitbucle)
     {
-        
-    }
+        BeginDrawing();
+        {
+            ClearBackground(BLACK);
+            //Escena 1----------------------------
+            if(current_esc==C4_e1)
+            {
+                DrawTextureEx(C4_F1.TexturaC,C4_F1.Posicion,0.0f,1.5f,WHITE);
 
+                Rectangle block = {100,100,480,500};
+                DrawRectangleRec(block,b_colorgray);
+
+                DrawText("El ataque de las tropas\nde Lorencez fue repelido\npor la infantería la\nartillería y la caballería\nmexicanas, los franceses\nno lograron avanzar\nretrocedieron a los Álamos\ndesde donde se\nretiraron hacia Amozoc",120,120,30,WHITE);
+
+            }
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && current_esc == C4_e1)
+            {
+                current_esc=C4_e2;
+                EndDrawing();
+            }
+
+            //Escena 2-----------------------------
+            if(current_esc==C4_e2)
+            {
+                DrawText("La batalla terminó a las 5:49PM",mitadx - 230 , mitady - 70,30,WHITE);
+                DrawText("Con la victoria de mexico",mitadx -300 , mitady,50,GREEN);
+            }
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && current_esc == C4_e2)
+            {
+                current_esc=C4_e3;
+                EndDrawing();
+            }
+
+            //Escena 3----------------------
+            if(current_esc==C4_e3)
+            {
+                DrawTextureEx(C4_F2.TexturaC,C4_F2.Posicion,0.0f,1.3f,WHITE);
+
+                DrawText("MUCHAS GRACIAS POR JUGAR",200,120,50,WHITE);
+                DrawText("Programadores\nFernando Haro Calvo\nAdan Gonzalez Ceseña\nGrupo : 932\nCrado con raylib en C",200,200,30,WHITE);
+
+            }
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && current_esc == C4_e3)
+            {   
+                exitbucle = true;
+                EndDrawing();
+            }
+        }
+        EndDrawing();
+    }
+    return true;
 }

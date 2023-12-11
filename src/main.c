@@ -35,6 +35,7 @@ int main(void)
     bool cinema = false;
     bool cinema2 = false;
     bool cinema3 = false;
+    bool finalband = false;
 
     bool showHint = true;
     char *hintText;
@@ -473,10 +474,20 @@ int main(void)
                 player.heldItem = NONE;
 
                 currentScene = SCENE3;
+                finalband=true;
                 menu.prevState = menu.state;
                 menu.state = currentScene;
             }
+            
+            if (finalband == true)
+            {
+                if (ToggleMusic)
+                    PlayMusic(finalm);
 
+                SetMusicVolume(lv2,0.5f);
+                cinema3=finalCinematica(screenWidth, screenHeight,ToggleMusic);
+            }
+            
             break;
 
         case OPTIONS:
