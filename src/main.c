@@ -17,6 +17,8 @@
 //----------------------------------------------------------------------------------
 // Código
 //----------------------------------------------------------------------------------
+void writeSaveFile(bool ToggleMusic, float masterVolume);
+void readSaveFile(bool *ToggleMusic, float *masterVolume);
 
 int main(void)
 {
@@ -28,7 +30,7 @@ int main(void)
     bool debug = false;
     bool pause = false;
     bool exitWindow = false;
-    bool ToggleMusic = true; // Should be true
+    bool ToggleMusic = true;
     bool finishedLevel = false;
     char path[100];
 
@@ -69,8 +71,7 @@ int main(void)
 
     //------------------------
     SetTargetFPS(60);
-
-    currentScene = SCENE1;
+    readSaveFile(&ToggleMusic, &masterVolume);
     menu.state = MENU; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
@@ -82,41 +83,47 @@ int main(void)
             menu.state = MENU;
         }
 
-        if (IsKeyPressed(KEY_F1))
-        {
-            InitRoom1Objects();
-            player.position.x = REL_TILE_SIZE * 2;
-            player.position.y = REL_TILE_SIZE * 4;
-            player.heldItem = NONE;
+        // if (IsKeyPressed(KEY_F1))
+        // {
+        //     InitRoom1Objects();
+        //     player.position.x = REL_TILE_SIZE * 2;
+        //     player.position.y = REL_TILE_SIZE * 4;
+        //     player.heldItem = NONE;
 
-            currentScene = SCENE1;
-            menu.prevState = menu.state;
-            menu.state = currentScene;
-        }
+        //     currentScene = SCENE1;
+        //     menu.prevState = menu.state;
+        //     menu.state = currentScene;
 
-        if (IsKeyPressed(KEY_F2))
-        {
-            InitRoom2Objects();
-            player.position.x = REL_TILE_SIZE * 4;
-            player.position.y = REL_TILE_SIZE * 27;
-            player.heldItem = NONE;
+        //     writeSaveFile(ToggleMusic, masterVolume);
+        // }
 
-            currentScene = SCENE2;
-            menu.prevState = menu.state;
-            menu.state = currentScene;
-        }
+        // if (IsKeyPressed(KEY_F2))
+        // {
+        //     InitRoom2Objects();
+        //     player.position.x = REL_TILE_SIZE * 4;
+        //     player.position.y = REL_TILE_SIZE * 27;
+        //     player.heldItem = NONE;
 
-        if (IsKeyPressed(KEY_F3))
-        {
-            InitRoom3Objects();
-            player.position.x = REL_TILE_SIZE * 2;
-            player.position.y = REL_TILE_SIZE * 55;
-            player.heldItem = NONE;
+        //     currentScene = SCENE2;
+        //     menu.prevState = menu.state;
+        //     menu.state = currentScene;
 
-            currentScene = SCENE3;
-            menu.prevState = menu.state;
-            menu.state = currentScene;
-        }
+        //     writeSaveFile(ToggleMusic, masterVolume);
+        // }
+
+        // if (IsKeyPressed(KEY_F3))
+        // {
+        //     InitRoom3Objects();
+        //     player.position.x = REL_TILE_SIZE * 2;
+        //     player.position.y = REL_TILE_SIZE * 55;
+        //     player.heldItem = NONE;
+
+        //     currentScene = SCENE3;
+        //     menu.prevState = menu.state;
+        //     menu.state = currentScene;
+
+        //     writeSaveFile(ToggleMusic, masterVolume);
+        // }
 
         switch (menu.state)
         {
@@ -155,7 +162,7 @@ int main(void)
             break;
 
         case SCENE1:
-
+            debug = false;
             // Cinematica-------------------------------------------------
             if (cinema == false)
             {
@@ -261,11 +268,15 @@ int main(void)
             EndDrawing();
 
             if (finishedLevel && !isInteracting)
+            {
                 CheckTeleportTile(&player, 1, 4, 2, &menu, &currentScene);
+                writeSaveFile(ToggleMusic, masterVolume);
+            }
 
             break;
 
         case SCENE2:
+            debug = false;
             // Cinematica
             if (cinema2 == false)
             {
@@ -367,12 +378,15 @@ int main(void)
             EndDrawing();
 
             if (finishedLevel && !isInteracting)
+            {
                 CheckTeleportTile(&player, 16, 18 + 22, 3, &menu, &currentScene);
+                writeSaveFile(ToggleMusic, masterVolume);
+            }
 
             break;
 
         case SCENE3:
-
+            debug = false;
             player.isDead = false;
 
             if (cinema3 == false)
@@ -497,6 +511,7 @@ int main(void)
                 PlayMusic(MenuMusic);
 
             CheckOptionsButtons(fxButton, MenuMusic, &masterVolume, &ToggleMusic);
+            writeSaveFile(ToggleMusic, masterVolume);
 
             BeginDrawing();
             {
@@ -530,6 +545,7 @@ int main(void)
             }
             EndDrawing();
 
+            writeSaveFile(ToggleMusic, masterVolume);
             break;
         }
     }
@@ -551,4 +567,60 @@ int main(void)
     //--------------------------------------------------------------------------------------
 
     return 0;
+}
+
+void writeSaveFile(bool ToggleMusic, float masterVolume)
+{
+    FILE *file = fopen("save.bin", "wb");
+    fwrite(&currentScene, sizeof(currentScene), 1, file);
+    fwrite(&ToggleMusic, sizeof(ToggleMusic), 1, file);
+    fwrite(&masterVolume, sizeof(masterVolume), 1, file);
+
+    fclose(file);
+}
+
+void readSaveFile(bool *ToggleMusic, float *masterVolume)
+{
+    FILE *file = fopen("save.bin", "rb");
+
+    fread(&currentScene, sizeof(currentScene), 1, file);
+    fread(ToggleMusic, sizeof(ToggleMusic), 1, file);
+    fread(masterVolume, sizeof(masterVolume), 1, file);
+
+    fclose(file);
+
+    if (file != NULL)
+    {
+        fread(&currentScene, sizeof(currentScene), 1, file);
+        fclose(file);
+
+        switch (currentScene)
+        {
+        case SCENE1:
+            InitRoom1Objects();
+            player.position.x = REL_TILE_SIZE * 2;
+            player.position.y = REL_TILE_SIZE * 4;
+            break;
+
+        case SCENE2:
+            InitRoom2Objects();
+            player.position.x = REL_TILE_SIZE * 4;
+            player.position.y = REL_TILE_SIZE * 27;
+            break;
+
+        case SCENE3:
+            InitRoom3Objects();
+            player.position.x = REL_TILE_SIZE * 2;
+            player.position.y = REL_TILE_SIZE * 55;
+            break;
+        }
+    }
+    else
+    {
+        currentScene = SCENE1;
+        *ToggleMusic = true;
+        *masterVolume = 1.0f;
+    }
+
+    player.heldItem = NONE;
 }
