@@ -5,7 +5,9 @@ CINE negro;
 
 // Personajes
 CINE Por;
+CINE Por2;
 CINE Ign;
+CINE Ign2;
 
 // Escena 1----------------
 CINE M_F;
@@ -34,8 +36,16 @@ void InitCinematica()
     Image vinetai = LoadImage(ASSETS_PATH "Cinematicas/vineta.png");
     vineta.TexturaC = LoadTextureFromImage(vinetai);
 
-    Image PorI = LoadImage(ASSETS_PATH "");
-    Image IgnI = LoadImage(ASSETS_PATH "");
+    Image PorI = LoadImage(ASSETS_PATH "capi/Porfirio1.png");
+    Image PorI2 = LoadImage(ASSETS_PATH "capi/Porfirio2.png");
+    Image IgnI = LoadImage(ASSETS_PATH "capi/ignacio.png");
+    Image IgnI2 = LoadImage(ASSETS_PATH "capi/ignacio2.png");
+
+    Por.TexturaC = LoadTextureFromImage(PorI);
+    Por2.TexturaC = LoadTextureFromImage(PorI2);
+    Ign.TexturaC = LoadTextureFromImage(IgnI);
+    Ign2.TexturaC = LoadTextureFromImage(IgnI2);
+
 
     // Escena 1----
     Image C1_PerI = LoadImage(ASSETS_PATH "Personaje/char1.png");
@@ -97,7 +107,9 @@ void InitCinematica()
 
     UnloadImage(vinetai);
     UnloadImage(PorI);
+    UnloadImage(PorI2);
     UnloadImage(IgnI);
+    UnloadImage(IgnI2);
 }
 
 bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
@@ -109,12 +121,12 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
     // Escena 1------------------------------
     {
         // Personaje------------
-        C1_Per.Posicion.x = -100;
-        C1_Per.Posicion.y = 250;
+        Ign.Posicion.x = -100;
+        Ign.Posicion.y = 250;
 
         // Fondo-----------------
         C1_Fondo.Posicion.x = 0;
-        C1_Fondo.Posicion.y = 0;
+        C1_Fondo.Posicion.y = -200;
 
         // Bandera E-Mexico
         M_B.Posicion.x = 15;
@@ -257,13 +269,13 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
                 DrawTextureEx(C1_Fondo.TexturaC, C1_Fondo.Posicion, 0.0f, 5.0f, WHITE);
 
                 // Personaje
-                DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 40.0f, WHITE);
+                DrawTextureEx(Ign.TexturaC, Ign.Posicion, 0.0f, 40.0f, WHITE);
 
-                if (C1_Per.Posicion.x < p_limite_x / 2 - 360)
+                if (Ign.Posicion.x < p_limite_x / 2 - 360)
                 {
-                    C1_Per.Posicion.x += 4;
+                    Ign.Posicion.x += 4;
                 }
-                if (C1_Per.Posicion.x >= p_limite_x / 2 - 360)
+                if (Ign.Posicion.x >= p_limite_x / 2 - 360)
                 {
                     finish = true;
                 }
@@ -383,9 +395,9 @@ bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
                 DrawTextureEx(C2_F4.TexturaC, C2_F4.Posicion, 0.0f, 8.0f, WHITE);
 
                 // Porfirio ----------------------------------------------------------------------------------CREAR IMAGEN
-                C1_Per.Posicion.x = 0;
-                C1_Per.Posicion.y = (p_limite_y / 2) + 200;
-                DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 1.0f, WHITE);
+                Por.Posicion.x = 200;
+                Por.Posicion.y = (p_limite_y / 2) + 200;
+                DrawTextureEx(Por.TexturaC, Por.Posicion, 0.0f, 15.0f, WHITE);
 
                 // Tropas------------------------------------------------------------------------------------PENDIENTE
 
@@ -407,6 +419,11 @@ bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
             {
                 // Fondo
                 DrawTextureEx(C2_F5.TexturaC, C2_F5.Posicion, 0.0f, 8.0f, WHITE);
+
+                //Porifirio
+                Por.Posicion.x = 200;
+                Por.Posicion.y = (p_limite_y / 2) +100;
+                DrawTextureEx(Por.TexturaC, Por.Posicion, 0.0f, 20.0f, WHITE);
 
                 // Rectangulo
                 Rectangle block3 = {70, 50, 1200, 200};
