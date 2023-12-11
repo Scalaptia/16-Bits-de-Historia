@@ -36,6 +36,8 @@ int main(void)
     bool cinema2 = false;
     bool cinema3 = false;
 
+    bool hasFadedIn = false;
+
     bool showHint = true;
     char hintText[50];
 
@@ -165,6 +167,7 @@ int main(void)
             if (cinema == false)
             {
                 cinema = RunCimeatica1(screenWidth, screenHeight, ToggleMusic);
+                hasFadedIn = false;
             }
 
             // Nivel-------------------------------------------------------
@@ -274,6 +277,7 @@ int main(void)
             if (cinema2 == false)
             {
                 cinema2 = RunCimeatica2(screenWidth, screenHeight, ToggleMusic);
+                hasFadedIn = false;
             }
 
             if (ToggleMusic)
@@ -381,7 +385,9 @@ int main(void)
             if (cinema3 == false)
             {
                 cinema3 = RunCimeatica3(screenWidth, screenHeight, ToggleMusic);
+                hasFadedIn = false;
             }
+
             if (ToggleMusic)
                 PlayMusic(lv3);
             SetMusicVolume(lv3, 0.5f);

@@ -152,6 +152,8 @@ void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
 
     if (CheckCollisionRecs(player->hitbox, teleportHB))
     {
+        FadeToBlack();
+
         switch (roomNumber)
         {
         case 1:
@@ -163,6 +165,7 @@ void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
             player->heldItem = NONE;
 
             *currentScene = SCENE1;
+
             break;
 
         case 2:
@@ -172,6 +175,7 @@ void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
             player->heldItem = NONE;
 
             *currentScene = SCENE2;
+
             break;
 
         case 3:
@@ -184,10 +188,25 @@ void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
             break;
 
         case 4:
+
             *currentScene = MENU;
         }
 
         menu->prevState = menu->state;
         menu->state = *currentScene;
+    }
+}
+
+void FadeToBlack()
+{
+    float fadeAlpha;
+    int screenWidth = GetScreenWidth();
+    int screenHeight = GetScreenHeight();
+
+    for (fadeAlpha = 0; fadeAlpha < 1.0; fadeAlpha += 0.01)
+    {
+        BeginDrawing();
+        DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, fadeAlpha));
+        EndDrawing();
     }
 }

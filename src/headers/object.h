@@ -31,6 +31,7 @@ void CheckRoom3Objects(Player *player);
 void InteractObject(Object *object, Player *player);
 
 void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu, enum GameState *currentScene);
+void FadeToBlack();
 
 extern Object objComida1;
 
