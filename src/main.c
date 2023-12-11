@@ -484,12 +484,11 @@ int main(void)
                 player.heldItem = NONE;
 
                 currentScene = SCENE3;
-                finalband = true;
                 menu.prevState = menu.state;
                 menu.state = currentScene;
             }
 
-            if (finalband == true)
+            if (CheckTeleportTile(&player, 50, 2 + 44, 4, &menu, &currentScene))
             {
                 if (ToggleMusic)
                     PlayMusic(finalm);
@@ -497,8 +496,6 @@ int main(void)
                 SetMusicVolume(lv2, 0.5f);
                 cinema3 = finalCinematica(screenWidth, screenHeight, ToggleMusic);
             }
-
-            CheckTeleportTile(&player, 50, 2 + 44, 4, &menu, &currentScene);
 
             break;
 

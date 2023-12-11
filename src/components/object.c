@@ -146,7 +146,7 @@ void InteractObject(Object *object, Player *player)
     player->heldItem = object->givenItem;
 }
 
-void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu, enum GameState *currentScene)
+bool CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu, enum GameState *currentScene)
 {
     Rectangle teleportHB = {x * REL_TILE_SIZE, y * REL_TILE_SIZE, REL_TILE_SIZE, REL_TILE_SIZE};
 
@@ -169,7 +169,7 @@ void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
             break;
 
         case 2:
-            
+
             InitRoom2Objects();
             player->position.x = REL_TILE_SIZE * 4;
             player->position.y = REL_TILE_SIZE * 27;
@@ -192,8 +192,11 @@ void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
 
             *currentScene = MENU;
         }
+
         menu->prevState = menu->state;
         menu->state = *currentScene;
+
+        return true;
     }
 }
 
