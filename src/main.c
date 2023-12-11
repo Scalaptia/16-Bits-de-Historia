@@ -259,7 +259,10 @@ int main(void)
             EndDrawing();
 
             if (finishedLevel && !isInteracting)
+            {
+                
                 CheckTeleportTile(&player, 3, 3, 2, &menu, &currentScene);
+            }
 
             break;
 
