@@ -57,7 +57,6 @@ int main(void)
     InitRoom1Objects();
     InitCinematica();
 
-    // InitLoadingScreen();
     InitBackground();
     InitMenuButtons(window);
     InitRooms();
@@ -120,32 +119,6 @@ int main(void)
 
         switch (menu.state)
         {
-        case LOADING:
-            PlaySound(IntroSound);
-            while (loadingScreen.frameCurrent < loadingScreen.frameCount)
-            {
-                BeginDrawing();
-                {
-                    ClearBackground(BLACK);
-
-                    loadingScreen.currentTime += GetFrameTime();
-
-                    if (loadingScreen.currentTime >= loadingScreen.frameTime)
-                    {
-                        loadingScreen.currentTime = 0.0f;
-                        loadingScreen.frameCurrent++;
-                    }
-
-                    DrawTexturePro(loadingScreen.textures[loadingScreen.frameCurrent], (Rectangle){0, 0, 800, 450}, (Rectangle){0, 0, screenWidth, screenHeight}, (Vector2){0, 0}, 0, WHITE);
-                }
-                EndDrawing();
-            }
-
-            UnloadLoadingScreen();
-            menu.state = MENU;
-            menu.prevState = MENU;
-            break;
-
         case MENU:
             if (ToggleMusic)
                 PlayMusic(MenuMusic);

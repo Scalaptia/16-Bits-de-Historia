@@ -1,6 +1,5 @@
 #include "../headers/menu.h"
 
-Sprite loadingScreen;
 Sprite menuBackground;
 
 Color selectedColor = {0, 0, 0, 255};
@@ -23,27 +22,6 @@ MenuButton backButton;
 Menu menu;
 
 enum GameState currentScene;
-
-void InitLoadingScreen()
-{
-    char path[100];
-    Image frameImage;
-
-    loadingScreen.frameCount = 248;
-    loadingScreen.frameCurrent = 0;
-    loadingScreen.frameTime = 0.03f;
-
-    loadingScreen.textures = (Texture2D *)malloc(sizeof(Texture2D) * loadingScreen.frameCount);
-
-    for (int i = 0; i < loadingScreen.frameCount; i++)
-    {
-        sprintf(path, ASSETS_PATH "LoadingScreen/frame%04d.png", i + 1);
-
-        frameImage = LoadImage(path);
-        loadingScreen.textures[i] = LoadTextureFromImage(frameImage);
-        UnloadImage(frameImage);
-    }
-}
 
 void InitBackground()
 {
@@ -283,14 +261,4 @@ void UnloadBackground()
     }
 
     free(menuBackground.textures);
-}
-
-void UnloadLoadingScreen()
-{
-    for (int i = 0; i < loadingScreen.frameCount; i++)
-    {
-        UnloadTexture(loadingScreen.textures[i]);
-    }
-
-    free(loadingScreen.textures);
 }
