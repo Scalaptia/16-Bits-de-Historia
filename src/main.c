@@ -36,6 +36,7 @@ int main(void)
     bool cinema2 = false;
     bool cinema3 = false;
     bool finalband = false;
+    bool resetBand = false;
 
     bool hasFadedIn = false;
 
@@ -108,8 +109,8 @@ int main(void)
         if (IsKeyPressed(KEY_F3))
         {
             InitRoom3Objects();
-            player.position.x = REL_TILE_SIZE * 4;
-            player.position.y = REL_TILE_SIZE * 49;
+            player.position.x = REL_TILE_SIZE * 2;
+            player.position.y = REL_TILE_SIZE * 55;
             player.heldItem = NONE;
 
             currentScene = SCENE3;
@@ -122,6 +123,23 @@ int main(void)
         case MENU:
             if (ToggleMusic)
                 PlayMusic(MenuMusic);
+
+            if (resetBand)
+            {
+                InitRoom1Objects();
+                player.position.x = REL_TILE_SIZE * 2;
+                player.position.y = REL_TILE_SIZE * 4;
+                player.heldItem = NONE;
+
+                currentScene = SCENE1;
+                menu.prevState = MENU;
+                menu.state = MENU;
+
+                cinema = false;
+                cinema2 = false;
+                cinema3 = false;
+                resetBand = false;
+            }
 
             //-------------------------------------------------
             CheckMenuButtons(fxButton, MenuMusic);
@@ -137,6 +155,7 @@ int main(void)
             break;
 
         case SCENE1:
+
             // Cinematica-------------------------------------------------
             if (cinema == false)
             {
@@ -449,8 +468,8 @@ int main(void)
             if (player.isDead)
             {
                 InitRoom3Objects();
-                player.position.x = REL_TILE_SIZE * 4;
-                player.position.y = REL_TILE_SIZE * 49;
+                player.position.x = REL_TILE_SIZE * 2;
+                player.position.y = REL_TILE_SIZE * 55;
                 player.hitbox.x = player.position.x + (REL_TILE_SIZE / 4);
                 player.hitbox.y = player.position.y;
 
@@ -468,6 +487,7 @@ int main(void)
 
                 SetMusicVolume(lv2, 0.5f);
                 cinema3 = finalCinematica(screenWidth, screenHeight, ToggleMusic);
+                resetBand = true;
             }
 
             break;

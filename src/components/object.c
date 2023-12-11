@@ -181,8 +181,8 @@ bool CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
 
         case 3:
             InitRoom3Objects();
-            player->position.x = REL_TILE_SIZE * 4;
-            player->position.y = REL_TILE_SIZE * 49;
+            player->position.x = REL_TILE_SIZE * 2;
+            player->position.y = REL_TILE_SIZE * 55;
             player->heldItem = NONE;
 
             *currentScene = SCENE3;
