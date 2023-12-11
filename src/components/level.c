@@ -146,7 +146,6 @@ void UnloadRoom(LevelData *room)
 void UnloadGraphics(GraphicsData *tileset)
 {
     UnloadTexture(tileset->texture);
-    UnloadImage(tileset->image);
 }
 
 // Check if a rectangle is 2 TILES away from the center of the camera

@@ -100,7 +100,7 @@ void movePlayer(Player *player, Music *sfx, LevelData room)
 
     if (IsKeyDown(controls.RUN_KEY))
     {
-        player->speed += 300.0f;
+        player->speed += 100.0f;
     }
 
     if (Vector2Length(direction) > 0.0f)
@@ -196,12 +196,12 @@ void playerHold(Player *player)
             break;
         }
 
-        player->speed = 300.0f;
+        player->speed = 250.0f;
     }
     else
     {
         player->sprite = charSprite;
-        player->speed = 350.0f;
+        player->speed = 300.0f;
     }
 }
 

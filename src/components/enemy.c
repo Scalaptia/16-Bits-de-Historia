@@ -11,6 +11,10 @@ Enemy enemy8;
 Enemy enemy9;
 Enemy enemy10;
 
+Sprite bulletUpSprite;
+Sprite bulletDownSprite;
+Sprite bulletLeftSprite;
+
 void InitEnemy(Enemy *enemy, Vector2 position, int direction, Sprite *sprite, int attackSpeed, int bulletSpeed, enum ShootDirection shootDirection)
 {
     position.x *= REL_TILE_SIZE;
@@ -22,6 +26,10 @@ void InitEnemy(Enemy *enemy, Vector2 position, int direction, Sprite *sprite, in
     enemy->shootDirection = shootDirection;
     enemy->sprite = sprite;
     enemy->bulletSpeed = bulletSpeed;
+
+    bulletUpSprite = RotateBullet(UP);
+    bulletDownSprite = RotateBullet(DOWN);
+    bulletLeftSprite = RotateBullet(LEFT);
 }
 
 void InitEnemys()
@@ -78,16 +86,33 @@ void ShootBullet(Enemy *enemy)
         enemy->bulletCount = 5;
     }
 
-    Bullet bullet = {
-        RotateBullet(enemy->shootDirection),
-        (Rectangle){enemy->position.x + (REL_TILE_SIZE / 4), enemy->position.y + (REL_TILE_SIZE / 4), REL_TILE_SIZE / 2, REL_TILE_SIZE / 2},
-        enemy->position,
-        enemy->shootDirection,
-        enemy->bulletSpeed,
-    };
+    Bullet bullet;
 
+    switch (enemy->shootDirection)
+    {
+    case UP:
+        bullet.sprite = bulletUpSprite;
+        break;
+
+    case DOWN:
+        bullet.sprite = bulletDownSprite;
+        break;
+
+    case LEFT:
+        bullet.sprite = bulletLeftSprite;
+        break;
+
+    case RIGHT:
+        bullet.sprite = bulletSprite;
+        break;
+    }
+
+    bullet.hitbox = (Rectangle){enemy->position.x + (REL_TILE_SIZE / 4), enemy->position.y + (REL_TILE_SIZE / 4), REL_TILE_SIZE / 2, REL_TILE_SIZE / 2};
+    bullet.position = enemy->position;
+    bullet.direction = enemy->shootDirection;
+    bullet.speed = enemy->bulletSpeed;
     enemy->bullets[enemy->bulletCount++] = bullet;
-}
+};
 
 void UpdateBullets(Enemy *enemy)
 {
