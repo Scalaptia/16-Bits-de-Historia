@@ -37,7 +37,7 @@ int main(void)
     bool cinema3 = false;
 
     bool showHint = true;
-    char *hintText;
+    char hintText[50];
 
     // Config -----------------------------------------
 
@@ -235,15 +235,16 @@ int main(void)
 
                     if (finishedLevel)
                     {
-                        hintText = "Encuentra la salida";
+                        // Encuentra la salida
+                        strcpy(hintText, "Encuentra la salida");
                     }
                     else
                     {
-                        hintText = "Entrega el armamento a los soldados";
+                        sprintf(hintText, "Entrega el armamento a los soldados (%d / %d)", room1.NPCcounter, room1.NPCCount);
                     }
 
-                    // "Entrega el armamento a los soldados"
-                    DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
+                    printf("%s\n", hintText);
+                    DrawText(hintText, screenWidth / 2 - (MeasureText(hintText, 30) / 2), screenHeight / 16 - 15, 30, WHITE);
                 }
 
                 if (isInteracting)
@@ -335,14 +336,13 @@ int main(void)
 
                     if (finishedLevel)
                     {
-                        hintText = "Encuentra la salida";
+                        strcpy(hintText, "Encuentra la salida");
                     }
                     else
                     {
-                        hintText = "Reúne armamento y colócalo en los sacos";
+                        sprintf(hintText, "Reúne armamento y colócalo en los sacos (%d / %d)", room2.NPCcounter, room2.NPCCount);
                     }
 
-                    // "Entrega el armamento a los soldados"
                     DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
                 }
 
@@ -359,16 +359,8 @@ int main(void)
             EndDrawing();
 
             if (finishedLevel && !isInteracting)
-            {
-                InitRoom3Objects();
-                player.position.x = REL_TILE_SIZE * 4;
-                player.position.y = REL_TILE_SIZE * 49;
-                player.heldItem = NONE;
+                CheckTeleportTile(&player, 3, 5 + 22, 3, &menu, &currentScene);
 
-                currentScene = SCENE3;
-                menu.prevState = menu.state;
-                menu.state = currentScene;
-            }
             break;
 
         case SCENE3:
@@ -441,7 +433,7 @@ int main(void)
                     // Show hint at the middle-top of the screen
                     DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
 
-                    hintText = "Llega a la salida!";
+                    strcpy(hintText, "Llega a la salida!");
 
                     // "Entrega el armamento a los soldados"
                     DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);

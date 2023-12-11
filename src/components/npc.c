@@ -84,13 +84,13 @@ void InitNPC(NPC *npc, Vector2 position, int direction, char *name, char *dialog
 
 bool UpdateRoom1NPCs()
 {
-    int i = 0;
+    room1.NPCcounter = 0;
 
     // *** Enojados ***
     if (enojado1.status)
     {
         enojado1.sprite = npcEnojado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         enojado1.sprite = npcEnojado1Sprite;
@@ -98,7 +98,7 @@ bool UpdateRoom1NPCs()
     if (enojado2.status)
     {
         enojado2.sprite = npcEnojado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         enojado2.sprite = npcEnojado1Sprite;
@@ -106,7 +106,7 @@ bool UpdateRoom1NPCs()
     if (enojado3.status)
     {
         enojado3.sprite = npcEnojado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         enojado3.sprite = npcEnojado1Sprite;
@@ -114,7 +114,7 @@ bool UpdateRoom1NPCs()
     if (enojado4.status)
     {
         enojado4.sprite = npcEnojado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         enojado4.sprite = npcEnojado1Sprite;
@@ -123,7 +123,7 @@ bool UpdateRoom1NPCs()
     if (tirado1.status)
     {
         tirado1.sprite = npcTirado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         tirado1.sprite = npcTirado1Sprite;
@@ -132,7 +132,7 @@ bool UpdateRoom1NPCs()
     if (recargado1.status)
     {
         recargado1.sprite = npcRecargado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         recargado1.sprite = npcRecargado1Sprite;
@@ -140,7 +140,7 @@ bool UpdateRoom1NPCs()
     if (recargado2.status)
     {
         recargado2.sprite = npcRecargado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         recargado2.sprite = npcRecargado1Sprite;
@@ -148,7 +148,7 @@ bool UpdateRoom1NPCs()
     if (recargado3.status)
     {
         recargado3.sprite = npcRecargado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         recargado3.sprite = npcRecargado1Sprite;
@@ -156,7 +156,7 @@ bool UpdateRoom1NPCs()
     if (recargado4.status)
     {
         recargado4.sprite = npcRecargado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         recargado4.sprite = npcRecargado1Sprite;
@@ -164,7 +164,7 @@ bool UpdateRoom1NPCs()
     if (recargado5.status)
     {
         recargado5.sprite = npcRecargado2Sprite;
-        i++;
+        room1.NPCcounter++;
     }
     else
         recargado5.sprite = npcRecargado1Sprite;
@@ -182,7 +182,7 @@ bool UpdateRoom1NPCs()
     DrawSpriteFrame(&recargado4.sprite, recargado4.position, SCALE, recargado4.color, recargado4.direction, true);
     DrawSpriteFrame(&recargado5.sprite, recargado5.position, SCALE, recargado5.color, recargado5.direction, true);
 
-    if (i >= room1.NPCCount)
+    if (room1.NPCcounter >= room1.NPCCount)
     {
         return true;
     }
@@ -208,12 +208,12 @@ void CheckRoom1NPCs(Player *player)
 
 bool UpdateRoom2NPCs()
 {
-    int i = 0;
+    room2.NPCcounter = 0;
 
     if (saco1.status)
     {
         saco1.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco1.sprite = npcSaco1Sprite;
@@ -221,7 +221,7 @@ bool UpdateRoom2NPCs()
     if (saco2.status)
     {
         saco2.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco2.sprite = npcSaco1Sprite;
@@ -229,7 +229,7 @@ bool UpdateRoom2NPCs()
     if (saco3.status)
     {
         saco3.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco3.sprite = npcSaco1Sprite;
@@ -237,7 +237,7 @@ bool UpdateRoom2NPCs()
     if (saco4.status)
     {
         saco4.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco4.sprite = npcSaco1Sprite;
@@ -245,7 +245,7 @@ bool UpdateRoom2NPCs()
     if (saco5.status)
     {
         saco5.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco5.sprite = npcSaco1Sprite;
@@ -253,7 +253,7 @@ bool UpdateRoom2NPCs()
     if (saco6.status)
     {
         saco6.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco6.sprite = npcSaco1Sprite;
@@ -261,7 +261,7 @@ bool UpdateRoom2NPCs()
     if (saco7.status)
     {
         saco7.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco7.sprite = npcSaco1Sprite;
@@ -269,7 +269,7 @@ bool UpdateRoom2NPCs()
     if (saco8.status)
     {
         saco8.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco8.sprite = npcSaco1Sprite;
@@ -277,7 +277,7 @@ bool UpdateRoom2NPCs()
     if (saco9.status)
     {
         saco9.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco9.sprite = npcSaco1Sprite;
@@ -285,7 +285,7 @@ bool UpdateRoom2NPCs()
     if (saco10.status)
     {
         saco10.sprite = npcSaco2Sprite;
-        i++;
+        room2.NPCcounter++;
     }
     else
         saco10.sprite = npcSaco1Sprite;
@@ -315,7 +315,7 @@ bool UpdateRoom2NPCs()
     DrawSpriteFrame(&mexicano5.sprite, mexicano5.position, SCALE, mexicano5.color, mexicano5.direction, true);
     DrawSpriteFrame(&mexicano6.sprite, mexicano6.position, SCALE, mexicano6.color, mexicano6.direction, true);
 
-    if (i >= room2.NPCCount)
+    if (room2.NPCcounter >= room2.NPCCount)
     {
         return true;
     }
