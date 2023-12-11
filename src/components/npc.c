@@ -182,6 +182,7 @@ bool UpdateRoom1NPCs()
     DrawSpriteFrame(&recargado4.sprite, recargado4.position, SCALE, recargado4.color, recargado4.direction, true);
     DrawSpriteFrame(&recargado5.sprite, recargado5.position, SCALE, recargado5.color, recargado5.direction, true);
 
+    // if (room1.NPCcounter >= 1)
     if (room1.NPCcounter >= room1.NPCCount)
     {
         return true;
@@ -315,6 +316,7 @@ bool UpdateRoom2NPCs()
     DrawSpriteFrame(&mexicano5.sprite, mexicano5.position, SCALE, mexicano5.color, mexicano5.direction, true);
     DrawSpriteFrame(&mexicano6.sprite, mexicano6.position, SCALE, mexicano6.color, mexicano6.direction, true);
 
+    // if (room2.NPCcounter >= 1)
     if (room2.NPCcounter >= room2.NPCCount)
     {
         return true;

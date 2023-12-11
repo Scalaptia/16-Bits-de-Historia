@@ -203,6 +203,12 @@ int main(void)
                         CheckRoom1NPCs(&player);
                         CheckRoom1Objects(&player);
 
+                        if (finishedLevel)
+                        {
+                            DrawSpriteFrame(&npcMexicano3Sprite, (Vector2){REL_TILE_SIZE * 1, REL_TILE_SIZE * 4}, SCALE, WHITE, 1, true);
+                            DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 2, REL_TILE_SIZE * 4}, SCALE, WHITE, 1, true);
+                        }
+
                         // Draw held item
                         if (player.heldItem != NONE)
                         {
@@ -243,7 +249,6 @@ int main(void)
                         sprintf(hintText, "Entrega el armamento a los soldados (%d / %d)", room1.NPCcounter, room1.NPCCount);
                     }
 
-                    printf("%s\n", hintText);
                     DrawText(hintText, screenWidth / 2 - (MeasureText(hintText, 30) / 2), screenHeight / 16 - 15, 30, WHITE);
                 }
 
@@ -260,7 +265,7 @@ int main(void)
             EndDrawing();
 
             if (finishedLevel && !isInteracting)
-                CheckTeleportTile(&player, 3, 3, 2, &menu, &currentScene);
+                CheckTeleportTile(&player, 1, 4, 2, &menu, &currentScene);
 
             break;
 
@@ -304,6 +309,12 @@ int main(void)
                         DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
                         CheckRoom2NPCs(&player);
                         CheckRoom2Objects(&player);
+
+                        if (finishedLevel)
+                        {
+                            DrawSpriteFrame(&npcMexicano3Sprite, (Vector2){REL_TILE_SIZE * 16, REL_TILE_SIZE * (18 + 22)}, SCALE, WHITE, 1, true);
+                            DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 17, REL_TILE_SIZE * (18 + 22)}, SCALE, WHITE, 1, true);
+                        }
 
                         // Draw held item
                         if (player.heldItem != NONE)
@@ -359,11 +370,12 @@ int main(void)
             EndDrawing();
 
             if (finishedLevel && !isInteracting)
-                CheckTeleportTile(&player, 3, 5 + 22, 3, &menu, &currentScene);
+                CheckTeleportTile(&player, 16, 18 + 22, 3, &menu, &currentScene);
 
             break;
 
         case SCENE3:
+
             player.isDead = false;
 
             if (cinema3 == false)
@@ -403,6 +415,9 @@ int main(void)
                     else
                     {
                         DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+
+                        DrawSpriteFrame(&huecoSalidaSprite, (Vector2){REL_TILE_SIZE * 50, REL_TILE_SIZE * (2 + 44)}, SCALE, WHITE, 1, true);
+                        DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 51, REL_TILE_SIZE * (2 + 44)}, SCALE, WHITE, 1, true);
 
                         // Draw held item
                         if (player.heldItem != NONE)
@@ -465,6 +480,8 @@ int main(void)
                 menu.prevState = menu.state;
                 menu.state = currentScene;
             }
+
+            CheckTeleportTile(&player, 50, 2 + 44, 4, &menu, &currentScene);
 
             break;
 

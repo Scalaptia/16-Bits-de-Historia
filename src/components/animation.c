@@ -24,6 +24,10 @@ Sprite enemy2Sprite;
 Sprite enemy3Sprite;
 Sprite enemy4Sprite;
 
+// Salidas
+Sprite textoSalidaSprite;
+Sprite huecoSalidaSprite;
+
 void InitSprite(Sprite *sprite, int frameCount)
 {
     char path[160];
@@ -81,6 +85,9 @@ void UpdateSpritesFrame()
     UpdateSpriteFrame(&npcMexicano2Sprite);
     UpdateSpriteFrame(&npcMexicano3Sprite);
     UpdateSpriteFrame(&npcMexicano4Sprite);
+
+    UpdateSpriteFrame(&textoSalidaSprite);
+    UpdateSpriteFrame(&huecoSalidaSprite);
 }
 
 void DrawSpriteFrame(Sprite *sprite, Vector2 position, float scale, Color color, int direction, bool isAnimated)
@@ -133,6 +140,9 @@ void InitSprites()
     strcpy(npcMexicano3Sprite.path, "NPCs/Mexicano/M3/");
     strcpy(npcMexicano4Sprite.path, "NPCs/Mexicano/M4/");
 
+    strcpy(textoSalidaSprite.path, "Salidas/Text/");
+    strcpy(huecoSalidaSprite.path, "Salidas/Hueco/");
+
     charSprite.frameTime = ANIMATION_SPEED;
     InitSprite(&charSprite, 4);
 
@@ -175,6 +185,11 @@ void InitSprites()
     InitSprite(&npcMexicano2Sprite, 1);
     InitSprite(&npcMexicano3Sprite, 1);
     InitSprite(&npcMexicano4Sprite, 1);
+
+    InitSprite(&huecoSalidaSprite, 1);
+
+    textoSalidaSprite.frameTime = ANIMATION_SPEED * 4;
+    InitSprite(&textoSalidaSprite, 2);
 }
 
 void UnloadSprites()
@@ -198,4 +213,6 @@ void UnloadSprites()
     UnloadSprite(&npcMexicano2Sprite);
     UnloadSprite(&npcMexicano3Sprite);
     UnloadSprite(&npcMexicano4Sprite);
+    UnloadSprite(&textoSalidaSprite);
+    UnloadSprite(&huecoSalidaSprite);
 }

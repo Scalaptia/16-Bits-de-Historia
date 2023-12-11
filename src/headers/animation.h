@@ -57,4 +57,7 @@ extern Sprite npcMexicano2Sprite;
 extern Sprite npcMexicano3Sprite;
 extern Sprite npcMexicano4Sprite;
 
+extern Sprite textoSalidaSprite;
+extern Sprite huecoSalidaSprite;
+
 #endif
