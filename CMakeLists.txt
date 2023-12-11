@@ -22,7 +22,7 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
   endif()
 endif()
 
-add_executable(raylib_template src/main.c 
+add_executable(16-Bits_de_Historia src/main.c 
 src/headers/player.h src/components/player.c 
 src/headers/debug.h src/components/debug.c 
 src/headers/level.h src/components/level.c 
@@ -35,5 +35,5 @@ src/headers/object.h src/components/object.c
 src/headers/cine.h src/components/cine.c
 src/headers/enemy.h src/components/enemy.c)
 
-target_link_libraries(raylib_template PUBLIC raylib)
-target_compile_definitions(raylib_template PUBLIC ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets/" AUDIO_PATH="${CMAKE_CURRENT_SOURCE_DIR}/audio/")
+target_link_libraries(16-Bits_de_Historia PUBLIC raylib)
+target_compile_definitions(16-Bits_de_Historia PUBLIC ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets/" AUDIO_PATH="${CMAKE_CURRENT_SOURCE_DIR}/audio/")

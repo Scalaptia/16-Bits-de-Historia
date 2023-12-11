@@ -52,6 +52,14 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "16-Bits de Historia");
     SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
 
+    BeginDrawing();
+    {
+        ClearBackground(BLACK);
+
+        DrawText("Cargando...", screenWidth / 2 - 100, screenHeight / 2 - 15, 30, WHITE);
+    }
+    EndDrawing();
+
     InitItemTextures();
     InitSprites();
     InitPlayer(&charSprite, &charPickSprite, window);
@@ -154,7 +162,7 @@ int main(void)
             BeginDrawing();
             {
                 ClearBackground(WHITE);
-                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight});
+                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight + 36});
                 DrawMenuUI();
             }
             EndDrawing();
@@ -516,7 +524,7 @@ int main(void)
             BeginDrawing();
             {
                 ClearBackground(WHITE);
-                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight});
+                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight + 36});
                 DrawOptionsUI();
             }
             EndDrawing();
@@ -537,8 +545,20 @@ int main(void)
             {
                 ClearBackground(RAYWHITE);
 
-                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight});
-                DrawRectangle(0, 0, screenWidth, screenHeight, rectangleColor); // Fondo gris
+                UpdateBackground((Rectangle){0, 0, screenWidth, screenHeight + 36});
+                // Draw title text (16-Bits de Historia)
+                DrawText("16-Bits de Historia", GetScreenWidth() / 2 - MeasureText("16-Bits de Historia", 100) / 2, 54, 101, BLACK);
+                DrawText("16-Bits de Historia", GetScreenWidth() / 2 - MeasureText("16-Bits de Historia", 100) / 2, 50, 100, WHITE);
+
+                // Draw subtitle text (La batalla de Puebla)
+                DrawText("La batalla de Puebla", GetScreenWidth() / 2 - MeasureText("La batalla de Puebla", 51) / 2, 164, 51, Fade(BLACK, 0.5f));
+                DrawText("La batalla de Puebla", GetScreenWidth() / 2 - MeasureText("La batalla de Puebla", 50) / 2, 160, 50, RED);
+
+                // Draw credits
+                DrawText("@OnlyCodes", 6, GetScreenHeight() - 30, 20, Fade(WHITE, 0.8f));
+
+                // Gray out the screen
+                DrawRectangle(0, 0, screenWidth, screenHeight, rectangleColor);
 
                 DrawRectangle(0, screenHeight / 2 - 100, screenWidth, 200, BLACK);
                 DrawText("¿Desea salir del juego? [S/N]", screenWidth / 2 - 230, screenHeight / 2 - 15, 30, WHITE);

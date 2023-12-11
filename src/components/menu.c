@@ -205,19 +205,38 @@ void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *T
 
 void DrawMenuUI()
 {
+    // Draw title text (16-Bits de Historia)
+    DrawText("16-Bits de Historia", GetScreenWidth() / 2 - MeasureText("16-Bits de Historia", 100) / 2, 54, 101, BLACK);
+    DrawText("16-Bits de Historia", GetScreenWidth() / 2 - MeasureText("16-Bits de Historia", 100) / 2, 50, 100, WHITE);
+
+    // Draw subtitle text (La batalla de Puebla)
+    DrawText("La batalla de Puebla", GetScreenWidth() / 2 - MeasureText("La batalla de Puebla", 51) / 2, 164, 51, Fade(BLACK, 0.5f));
+    DrawText("La batalla de Puebla", GetScreenWidth() / 2 - MeasureText("La batalla de Puebla", 50) / 2, 160, 50, RED);
+
     // Draw buttons
     DrawRectangleRec(startButton.rect, startButton.color);
     DrawRectangleRec(optionsButton.rect, optionsButton.color);
     DrawRectangleRec(exitButton.rect, exitButton.color);
 
-    // Draw text
-    DrawText(startButton.text, startButton.rect.x + 10, startButton.rect.y + 10, 30, WHITE);
-    DrawText(optionsButton.text, optionsButton.rect.x + 10, optionsButton.rect.y + 10, 30, WHITE);
-    DrawText(exitButton.text, exitButton.rect.x + 10, exitButton.rect.y + 10, 30, WHITE);
+    // Draw centered text
+    DrawText(startButton.text, GetScreenWidth() / 2 - MeasureText(startButton.text, 30) / 2, startButton.rect.y + 10, 30, WHITE);
+    DrawText(optionsButton.text, GetScreenWidth() / 2 - MeasureText(optionsButton.text, 30) / 2, optionsButton.rect.y + 10, 30, WHITE);
+    DrawText(exitButton.text, GetScreenWidth() / 2 - MeasureText(exitButton.text, 30) / 2, exitButton.rect.y + 10, 30, WHITE);
+
+    // Draw credits
+    DrawText("@OnlyCodes", 6, GetScreenHeight() - 30, 20, Fade(WHITE, 0.8f));
 }
 
 void DrawOptionsUI()
 {
+    // Draw title text (16-Bits de Historia)
+    DrawText("16-Bits de Historia", GetScreenWidth() / 2 - MeasureText("16-Bits de Historia", 100) / 2, 54, 101, BLACK);
+    DrawText("16-Bits de Historia", GetScreenWidth() / 2 - MeasureText("16-Bits de Historia", 100) / 2, 50, 100, WHITE);
+
+    // Draw subtitle text (La batalla de Puebla)
+    DrawText("La batalla de Puebla", GetScreenWidth() / 2 - MeasureText("La batalla de Puebla", 51) / 2, 164, 51, Fade(BLACK, 0.5f));
+    DrawText("La batalla de Puebla", GetScreenWidth() / 2 - MeasureText("La batalla de Puebla", 50) / 2, 160, 50, RED);
+
     // Draw buttons
     DrawRectangleRec(fullscreenButton.rect, fullscreenButton.color);
     DrawRectangleRec(toggleMusicButton.rect, toggleMusicButton.color);
@@ -225,12 +244,15 @@ void DrawOptionsUI()
     DrawRectangleRec(volumeDownButton.rect, volumeDownButton.color);
     DrawRectangleRec(backButton.rect, backButton.color);
 
-    // Draw text
-    DrawText(fullscreenButton.text, fullscreenButton.rect.x + 10, fullscreenButton.rect.y + 10, 30, WHITE);
-    DrawText(toggleMusicButton.text, toggleMusicButton.rect.x + 10, toggleMusicButton.rect.y + 10, 30, WHITE);
-    DrawText(volumeUpButton.text, volumeUpButton.rect.x + 10, volumeUpButton.rect.y + 10, 30, WHITE);
-    DrawText(volumeDownButton.text, volumeDownButton.rect.x + 10, volumeDownButton.rect.y + 10, 30, WHITE);
-    DrawText(backButton.text, backButton.rect.x + 10, backButton.rect.y + 10, 30, WHITE);
+    // Draw centered text
+    DrawText(fullscreenButton.text, GetScreenWidth() / 2 - MeasureText(fullscreenButton.text, 30) / 2, fullscreenButton.rect.y + 10, 30, WHITE);
+    DrawText(toggleMusicButton.text, GetScreenWidth() / 2 - MeasureText(toggleMusicButton.text, 30) / 2, toggleMusicButton.rect.y + 10, 30, WHITE);
+    DrawText(volumeUpButton.text, GetScreenWidth() / 2 - MeasureText(volumeUpButton.text, 30) / 2, volumeUpButton.rect.y + 10, 30, WHITE);
+    DrawText(volumeDownButton.text, GetScreenWidth() / 2 - MeasureText(volumeDownButton.text, 30) / 2, volumeDownButton.rect.y + 10, 30, WHITE);
+    DrawText(backButton.text, GetScreenWidth() / 2 - MeasureText(backButton.text, 30) / 2, backButton.rect.y + 10, 30, WHITE);
+
+    // Draw credits
+    DrawText("@OnlyCodes", 6, GetScreenHeight() - 30, 20, Fade(WHITE, 0.8f));
 }
 
 void UpdateBackground(Rectangle screen)
