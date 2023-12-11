@@ -169,6 +169,7 @@ void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
             break;
 
         case 2:
+            
             InitRoom2Objects();
             player->position.x = REL_TILE_SIZE * 4;
             player->position.y = REL_TILE_SIZE * 27;
@@ -191,7 +192,6 @@ void CheckTeleportTile(Player *player, int x, int y, int roomNumber, Menu *menu,
 
             *currentScene = MENU;
         }
-
         menu->prevState = menu->state;
         menu->state = *currentScene;
     }

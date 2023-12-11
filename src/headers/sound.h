@@ -26,6 +26,10 @@ extern float timeplayedpaint;
 extern Music lv3;
 extern float timeplayedtense;
 
+//final
+extern Music finalm;
+extern float timeplayedtense;
+
 //Musica escena 1 - 2 - 3 ---
 extern Music C1M_F;
 extern Music C2M_F;

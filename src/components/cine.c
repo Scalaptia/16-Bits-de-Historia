@@ -31,6 +31,10 @@ CINE C2_F5;
 CINE C3_F1;
 CINE C3_F2;
 
+//final
+CINE C4_F1;
+CINE C4_F2;
+
 void InitCinematica()
 {
     Image vinetai = LoadImage(ASSETS_PATH "Cinematicas/vineta.png");
@@ -86,7 +90,17 @@ void InitCinematica()
     C3_F1.TexturaC = LoadTextureFromImage(C3_F1I);
     C3_F2.TexturaC = LoadTextureFromImage(C3_F2I);
 
+    //Final
+    Image C4_F1I = LoadImage (ASSETS_PATH "Cinematicas/C4/retirada.png");
+    Image C4_F2I = LoadImage (ASSETS_PATH "Cinematicas/C4/final.png");
+
+    C4_F1.TexturaC = LoadTextureFromImage(C4_F1I);
+    C4_F2.TexturaC = LoadTextureFromImage(C4_F2I);
+
     // Descarga de imagenes
+    UnloadImage(C4_F1I);
+    UnloadImage(C4_F2I);
+
     UnloadImage(C3_F1I);
     UnloadImage(C3_F2I);
 
@@ -147,7 +161,7 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
             {
                 DrawText("LA BATALLA DE PUEBLA", (p_limite_x / 2) - 500, (p_limite_y / 2) - 50, 80, WHITE);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == INTRODUCCION)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && Esc_run == INTRODUCCION)
             {
                 PlaySound(fxButton);
                 Esc_run = MEXICO;
@@ -171,7 +185,7 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
                 // Texto
                 DrawText("En la década de 1860, méxico debía dinero por prestaciones que hacía a españa\nReino unido y francia, debía 80 millones de pesos, pero en ese tiempo \nméxico estaba en tiempos dificiles economicamente debido a la independencia\nEn 1861 el presidente Benito Juárez\nDecretó la suspensión de pagos de la deuda externa del país.", 190, p_limite_y - 450, 25, WHITE);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && Esc_run == MEXICO)
             {
                 PlaySound(fxButton);
                 Esc_run = MEXICO1;
@@ -192,7 +206,7 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
                 // texto
                 DrawText("Los demás países quedaron en ver como toman el dinero de vuelta\ndecidieronarmar un ejército cada país, españa con 5,789 soldados\nfrancia con 3,000 soldados y reino unido con\n700 marines británicos", 180, p_limite_y - 450, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO1)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && Esc_run == MEXICO1)
             {
                 PlaySound(fxButton);
                 Esc_run = MEXICO2;
@@ -213,7 +227,7 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
                 // Fondo
                 DrawText("Sin embargo, gracias a la diplomacia mexicana, méxico consiguió\nconvencer a españa y reino unido de que les pagaría después\ny estos 2 se retiraron, Además de que francian\nno solo quería su dinero de vuelta\nsi no que también quería hacer de México su protectorado", 180, p_limite_y - 450, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO2)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && Esc_run == MEXICO2)
             {
                 PlaySound(fxButton);
                 Esc_run = MEXICO3;
@@ -234,7 +248,7 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
                 // Fondo
                 DrawText("Imponiendo una monarquía en el país, dejando de lado\na sus compañeros creyó que conseguiría por sí solo la victoria\nya que llevaban una racha de 50 años sin perder una batalla\nAl final Francia terminó con 6m soldados y méxico\nse preparó con 6m hombres,la cual francia contaba\ncon fuerzas de elite (zuavos) y méxico.", 180, p_limite_y - 480, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO3)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && Esc_run == MEXICO3)
             {
                 PlaySound(fxButton);
                 Esc_run = MEXICO4;
@@ -255,7 +269,7 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
                 // Fondo
                 DrawText("México reclutó en su mayoría personas forzadas\nEs decir sin experiencia en el campo de batalla\ny no muy bien tratados, lo único sobresaliente de méxico\neran sus oficiales jóvenes bien experimentados\n", 250, p_limite_y - 440, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && Esc_run == MEXICO4)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && Esc_run == MEXICO4)
             {
                 PlaySound(fxButton);
                 Esc_run = PRIMER_ESCENARIO;
@@ -288,7 +302,7 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
                 // Texto
                 DrawText("Entre ellos\nIgnacio zaragoza", 520, p_limite_y - 100, 30, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && finish == true)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && finish == true)
             {
                 PlaySound(fxButton);
                 EndDrawing();
@@ -336,7 +350,7 @@ bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
                 // Texto
                 DrawText("La defensa organizada por el general Zaragoza\nen Puebla consistió en fortificar la ciudad ante el\ninminente ataque francés\n", 300, (p_limite_y / 2) - 50, 30, WHITE);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e1)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && run_esc == C2_e1)
             {
                 PlaySound(fxButton);
                 run_esc = C2_e2;
@@ -361,7 +375,7 @@ bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
                 // texto
                 DrawText("Se instaló un cuartel a unos metros\ndel frente de batallay las tropas mexicanas\n(que recibieron el nombre de Ejército de Oriente)\nSe prepararon para repeler a los invasores\nantes de que alcanzaran el área urbana.", 500, (p_limite_y / 2) - 50, 30, WHITE);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e2)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && run_esc == C2_e2)
             {
                 PlaySound(fxButton);
                 run_esc = C2_e3;
@@ -382,7 +396,7 @@ bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
                 // Texto
                 DrawText("Dos baterías de artillería\nY 1200 hombres defendían\nLos fuertes Guadalupe\nY Loreto ubicados\nEn sendos cerros al\nnorte de la ciudad", 70, (p_limite_y / 2) - 50, 40, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e3)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && run_esc == C2_e3)
             {
                 PlaySound(fxButton);
                 run_esc = C2_e4;
@@ -408,7 +422,7 @@ bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
                 // Texto
                 DrawText("Mientras que 3500 soldados\nDe infantería y una brigada\nDe caballería se distribuyeron\nEn distintas posiciones \ndefensivas\nUna de ellas la comandaba por\nPorfirio Díaz", 70, (p_limite_y / 2) - 200, 35, BLACK);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e4)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && run_esc == C2_e4)
             {
                 PlaySound(fxButton);
                 run_esc = C2_e5;
@@ -432,7 +446,7 @@ bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
                 // Texto
                 DrawText("Los franceses salieron de Amozoc hacia Puebla y dividieron sus tropas\nuna primera columna de alrededor de 4000 hombres protegida por la \nartillería avanzó sobre los fuertes, en los que el ejército mexicano era\nmás fuertela columna restante permaneció en la reserva", 90, 70, 30, WHITE);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && run_esc == C2_e5)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e5)
             {
                 PlaySound(fxButton);
                 exitbucle = true;
@@ -473,7 +487,7 @@ bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle)
                 //texto
                 DrawText("Una vez todas\nlas tropas armadas en posición\nEstaban todos listos para\nLa batalla",p_limite_x - 500, 200,30,WHITE);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && current_esc == C3_e1)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && current_esc == C3_e1)
             {
                 PlaySound(fxButton);
                 current_esc=C3_e2;
@@ -490,9 +504,76 @@ bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle)
                 DrawText("11:15 AM", (p_limite_x / 2)-120, (p_limite_y / 2) - 70, 80, RED);
                 DrawText("5 de mayo", (p_limite_x / 2)-180, (p_limite_y / 2), 80, RED);
             }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && current_esc == C3_e2)
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && current_esc == C3_e2)
             {
                 PlaySound(fxButton);
+                exitbucle = true;
+                EndDrawing();
+            }
+        }
+        EndDrawing();
+    }
+    return true;
+}
+
+bool finalCinematica(int p_limite_x, int p_limite_y, bool togle)
+{
+    bool exitbucle = false;
+    enum escenas current_esc = C4_e1;
+    
+    float mitady = p_limite_y/2;
+    float mitadx = p_limite_x/2;
+    
+    //Colores
+        Color b_colorgray = Fade(GRAY, 0.7f);
+        Color b_colorwhite = Fade(WHITE, 0.7f);
+        Color b_colorblack = Fade(BLACK, 0.7f);
+
+    while(!exitbucle)
+    {
+        BeginDrawing();
+        {
+            ClearBackground(BLACK);
+            //Escena 1----------------------------
+            if(current_esc==C4_e1)
+            {
+                DrawTextureEx(C4_F1.TexturaC,C4_F1.Posicion,0.0f,1.5f,WHITE);
+
+                Rectangle block = {100,100,480,500};
+                DrawRectangleRec(block,b_colorgray);
+
+                DrawText("El ataque de las tropas\nde Lorencez fue repelido\npor la infantería la\nartillería y la caballería\nmexicanas, los franceses\nno lograron avanzar\nretrocedieron a los Álamos\ndesde donde se\nretiraron hacia Amozoc",120,120,30,WHITE);
+
+            }
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && current_esc == C4_e1)
+            {
+                current_esc=C4_e2;
+                EndDrawing();
+            }
+
+            //Escena 2-----------------------------
+            if(current_esc==C4_e2)
+            {
+                DrawText("La batalla terminó a las 5:49PM",mitadx - 230 , mitady - 70,30,WHITE);
+                DrawText("Con la victoria de mexico",mitadx -300 , mitady,50,GREEN);
+            }
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && current_esc == C4_e2)
+            {
+                current_esc=C4_e3;
+                EndDrawing();
+            }
+
+            //Escena 3----------------------
+            if(current_esc==C4_e3)
+            {
+                DrawTextureEx(C4_F2.TexturaC,C4_F2.Posicion,0.0f,1.3f,WHITE);
+
+                DrawText("MUCHAS GRACIAS POR JUGAR",200,120,50,WHITE);
+                DrawText("Programadores\nFernando Haro Calvo\nAdan Gonzalez Ceseña\nGrupo : 932\nCrado con raylib en C",200,200,30,WHITE);
+
+            }
+            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT)|| IsKeyPressed(KEY_E)) && current_esc == C4_e3)
+            {   
                 exitbucle = true;
                 EndDrawing();
             }

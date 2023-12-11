@@ -14,6 +14,9 @@ Music lv2;
 //Lv2
 Music lv3;
 
+//Final
+Music finalm;
+
 //Cinematicas1
 Music C1M_F;
 Music C2M_F;
@@ -30,6 +33,7 @@ void InitSounds()
     C3M_F = LoadMusicStream(AUDIO_PATH "Music/Fortess.mp3");
     lv3 = LoadMusicStream(AUDIO_PATH "Music/paint.mp3");
     lv2 = LoadMusicStream(AUDIO_PATH "Music/tenso.mp3");
+    finalm= LoadMusicStream (AUDIO_PATH "Music/");
 
 
     fxButton = LoadSound(AUDIO_PATH "SoundEffects/Mine_button.mp3");
