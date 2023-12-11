@@ -24,6 +24,10 @@ enum escenas
     C3_e1,
     C3_e2,
     C3_e3,
+
+    C4_e1,
+    C4_e2,
+    C4_e3,
 };
 
 typedef struct cinestruct

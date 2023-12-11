@@ -504,5 +504,12 @@ bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle)
 
 bool finalCinematica(int p_limite_x, int p_limite_y, bool togle)
 {
-    
+    bool exitbucle = false;
+    enum escenas current_esc = C4_e1;
+
+    while(!exitbucle)
+    {
+        
+    }
+
 }
