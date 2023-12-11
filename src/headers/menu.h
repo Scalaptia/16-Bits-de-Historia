@@ -34,7 +34,7 @@ void InitBackground();
 void InitMenuButtons(Rectangle screen);
 
 void CheckMenuButtons(Sound fxButton, Music MenuMusic);
-void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *ToggleMusic);
+void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *ToggleMusic, Rectangle *window, int *screenWidth, int *screenHeight);
 
 void UpdateBackground(Rectangle screen);
 void DrawMenuUI();

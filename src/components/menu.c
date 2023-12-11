@@ -126,7 +126,7 @@ void CheckMenuButtons(Sound fxButton, Music MenuMusic)
     }
 }
 
-void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *ToggleMusic)
+void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *ToggleMusic, Rectangle *window, int *screenWidth, int *screenHeight)
 {
     mousePoint = GetMousePosition();
 
@@ -139,6 +139,15 @@ void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *T
     else
     {
         toggleMusicButton.text = "Encender Música";
+    }
+
+    if (IsWindowFullscreen())
+    {
+        fullscreenButton.text = "Ventana";
+    }
+    else
+    {
+        fullscreenButton.text = "Pantalla Completa";
     }
 
     volumeUpButton.color = rectangleColor;
@@ -154,6 +163,10 @@ void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *T
         {
             PlaySound(fxButton);
             ToggleFullscreen();
+
+            *screenWidth = GetScreenWidth();
+            *screenHeight = GetScreenHeight();
+            *window = (Rectangle){0, 0, *screenWidth, *screenHeight};
         }
     }
 

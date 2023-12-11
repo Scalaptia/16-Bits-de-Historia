@@ -187,7 +187,6 @@ void CheckPlayerHit(Player *player, Enemy *enemy)
         Bullet *bullet = &enemy->bullets[i];
         if (CheckCollisionRecs(player->hitbox, bullet->hitbox))
         {
-            printf("Player hit!\n");
             player->isDead = true;
             enemy1.bulletCount = 0;
             enemy2.bulletCount = 0;

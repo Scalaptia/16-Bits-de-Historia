@@ -518,7 +518,7 @@ int main(void)
             if (ToggleMusic)
                 PlayMusic(MenuMusic);
 
-            CheckOptionsButtons(fxButton, MenuMusic, &masterVolume, &ToggleMusic);
+            CheckOptionsButtons(fxButton, MenuMusic, &masterVolume, &ToggleMusic, &window, &screenWidth, &screenHeight);
             writeSaveFile(ToggleMusic, masterVolume);
 
             BeginDrawing();
