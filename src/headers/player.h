@@ -56,8 +56,10 @@ extern Texture2D itemRifleTexture;
 
 extern Texture2D itemMacheteTexture;
 extern Texture2D itemMachete2Texture;
+extern Texture2D itemHoldMacheteTexture;
 
 extern Texture2D itemLanzaTexture;
 extern Texture2D itemLanza2Texture;
+extern Texture2D itemHoldLanzaTexture;
 
 #endif

@@ -68,7 +68,7 @@ int main(void)
     SetTargetFPS(60);
 
     currentScene = SCENE1;
-    menu.state = MENU; // DEBERÍA SER LOADING
+    menu.state = SCENE3; // DEBERÍA SER LOADING
     // Main game loop
     while (!exitWindow)
     {
@@ -271,7 +271,7 @@ int main(void)
             }
 
             if (ToggleMusic)
-                PlayMusic(GameMusic);
+                PlayMusic(lv2);
             //-----------------------------------------------------------
 
             if (!isInteracting)
@@ -372,14 +372,13 @@ int main(void)
             break;
 
         case SCENE3:
-            player.isDead = false;
-
-            if (cinema3 == false)
+            if (cinema2 == false)
             {
-                cinema3 = RunCimeatica3(screenWidth, screenHeight, ToggleMusic);
+                cinema2 = RunCimeatica3(screenWidth, screenHeight, ToggleMusic);
             }
             if (ToggleMusic)
-                PlayMusic(GameMusic);
+                PlayMusic(lv3);
+            SetMusicVolume(lv3, 0.5f);
             //-----------------------------------------------------------
 
             if (!isInteracting)

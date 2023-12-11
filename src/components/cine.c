@@ -439,7 +439,7 @@ bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle)
     while (!exitbucle)
     {
         if (togle)
-            SetMusicVolume(C1M_F, 0.5f);
+            SetMusicVolume(C3M_F, 1.0f);
         PlayMusic(C3M_F);
         BeginDrawing();
         {
