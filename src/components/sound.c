@@ -33,8 +33,7 @@ void InitSounds()
     C3M_F = LoadMusicStream(AUDIO_PATH "Music/Fortess.mp3");
     lv3 = LoadMusicStream(AUDIO_PATH "Music/paint.mp3");
     lv2 = LoadMusicStream(AUDIO_PATH "Music/tenso.mp3");
-    finalm= LoadMusicStream (AUDIO_PATH "Music/");
-
+    finalm= LoadMusicStream (AUDIO_PATH "Music/flower.mp3");
 
     fxButton = LoadSound(AUDIO_PATH "SoundEffects/Mine_button.mp3");
     fxPasosGrava = LoadMusicStream(AUDIO_PATH "SoundEffects/Pasos_Grava/MP1.mp3");
