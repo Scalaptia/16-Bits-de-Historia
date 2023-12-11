@@ -50,15 +50,31 @@ extern CINE M5_F;
 extern CINE C1_Per;
 extern CINE C1_Fondo;
 
-//Escena 2
+extern CINE vineta;
+extern CINE negro;
 
+// Personajes
+extern CINE Por;
+extern CINE Por2;
+extern CINE Ign;
+extern CINE Ign2;
 
-//Escena 3
+// Escena 2----------------
+extern CINE C2_F1;
+extern CINE C2_F2;
+extern CINE C2_F3;
+extern CINE C2_F4;
+extern CINE C2_F5;
+
+// Escena 3----------------
+extern CINE C3_F1;
+extern CINE C3_F2;
 
 //Prototipos---------------------------------
 void InitCinematica ();
 bool RunCimeatica1(int p_limite_x,int p_limite_y,bool togle);
 bool RunCimeatica2(int p_limite_x,int p_limite_y,bool togle);
 bool RunCimeatica3(int p_limite_x,int p_limite_y,bool togle);
+bool finalCinematica(int p_limite_x, int p_limite_y, bool togle);
 
 #endif
