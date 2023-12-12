@@ -363,7 +363,7 @@ void InteractNPC(NPC *npc, Player *player)
 {
     char *necesidad;
 
-    if (IsKeyPressed(KEY_E) && isInteracting)
+    if ((IsKeyPressed(KEY_E) || IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) && isInteracting)
     {
         isInteracting = false;
         return;
