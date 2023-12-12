@@ -207,15 +207,40 @@ void playerHold(Player *player)
 
 void InitItemTextures()
 {
+    char strpath[512];
+
     // Load images
-    Image itemFoodImage = LoadImage(ASSETS_PATH "Items/Plato.png");
-    Image itemRifleImage = LoadImage(ASSETS_PATH "Items/Rifle.png");
-    Image itemMacheteImage = LoadImage(ASSETS_PATH "Items/Machete.png");
-    Image itemMachete2Image = LoadImage(ASSETS_PATH "Items/Machete2.png");
-    Image itemHoldMacheteImage = LoadImage(ASSETS_PATH "Items/smachete.png");
-    Image itemLanzaImage = LoadImage(ASSETS_PATH "Items/Lanza.png");
-    Image itemLanza2Image = LoadImage(ASSETS_PATH "Items/Lanza2.png");
-    Image itemHoldLanzaImage = LoadImage(ASSETS_PATH "Items/slanza.png");
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Items/Plato.png");
+    Image itemFoodImage = LoadImage(strpath);
+
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Items/Rifle.png");
+    Image itemRifleImage = LoadImage(strpath);
+
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Items/Machete.png");
+    Image itemMacheteImage = LoadImage(strpath);
+
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Items/Machete2.png");
+    Image itemMachete2Image = LoadImage(strpath);
+
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Items/smachete.png");
+    Image itemHoldMacheteImage = LoadImage(strpath);
+
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Items/Lanza.png");
+    Image itemLanzaImage = LoadImage(strpath);
+
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Items/Lanza2.png");
+    Image itemLanza2Image = LoadImage(strpath);
+
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Items/slanza.png");
+    Image itemHoldLanzaImage = LoadImage(strpath);
 
     // Load textures
     itemFoodTexture = LoadTextureFromImage(itemFoodImage);

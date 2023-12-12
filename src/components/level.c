@@ -39,23 +39,38 @@ void InitRoomCollisions(LevelData *room, Vector2 position, Vector2 size, char *f
 
 void InitRoom(LevelData *room, int roomNumber)
 {
-    char *path;
+    char strpath[512];
+    char path[512];
 
     switch (roomNumber)
     {
     case 1:
         room1.NPCCount = 10;
-        path = ASSETS_PATH "Escenarios/Escena1.png";
-        InitRoomCollisions(&room1, (Vector2){0, 0}, (Vector2){32, 22}, ASSETS_PATH "Collisions/col_room1.txt");
+
+        strcpy(path, GetWorkingDirectory());
+        strcat(path, "/assets/Escenarios/Escena1.png");
+
+        strcpy(strpath, GetWorkingDirectory());
+        strcat(strpath, "/assets/Collisions/col_room1.txt");
+        InitRoomCollisions(&room1, (Vector2){0, 0}, (Vector2){32, 22}, strpath);
         break;
     case 2:
         room2.NPCCount = 10;
-        path = ASSETS_PATH "Escenarios/Escena2.png";
-        InitRoomCollisions(&room2, (Vector2){2, 24}, (Vector2){28, 18}, ASSETS_PATH "Collisions/col_room2.txt");
+
+        strcpy(path, GetWorkingDirectory());
+        strcat(path, "/assets/Escenarios/Escena2.png");
+
+        strcpy(strpath, GetWorkingDirectory());
+        strcat(strpath, "/assets/Collisions/col_room2.txt");
+        InitRoomCollisions(&room2, (Vector2){2, 24}, (Vector2){28, 18}, strpath);
         break;
     case 3:
-        path = ASSETS_PATH "Escenarios/Escena3.png";
-        InitRoomCollisions(&room3, (Vector2){0, 44}, (Vector2){52, 22}, ASSETS_PATH "Collisions/col_room3.txt");
+        strcpy(path, GetWorkingDirectory());
+        strcat(path, "/assets/Escenarios/Escena3.png");
+
+        strcpy(strpath, GetWorkingDirectory());
+        strcat(strpath, "/assets/Collisions/col_room3.txt");
+        InitRoomCollisions(&room3, (Vector2){0, 44}, (Vector2){52, 22}, strpath);
         break;
     }
 

@@ -215,7 +215,6 @@ endif
 #  -D_DEFAULT_SOURCE    use with -std=c99 on Linux and PLATFORM_WEB, required for timespec
 
 CFLAGS = -std=c99 -Wall -Wno-missing-braces -Wunused-result -D_DEFAULT_SOURCE
-CFLAGS += -DASSETS_PATH=\"$(CURDIR)/assets/\" -DAUDIO_PATH=\"$(CURDIR)/audio/\"
 
 ifeq ($(BUILD_MODE),DEBUG)
     CFLAGS += -g -D_DEBUG
