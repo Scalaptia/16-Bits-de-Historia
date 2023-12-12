@@ -50,7 +50,11 @@ int main(void)
     Rectangle window = {0, 0, screenWidth, screenHeight};
 
     InitWindow(screenWidth, screenHeight, "16-Bits de Historia");
-    SetWindowIcon(LoadImage(ASSETS_PATH "Icon/Logo.png"));
+    char strpath[512];
+    strcpy(strpath, GetWorkingDirectory());
+    strcat(strpath, "/assets/Icon/Logo.png");
+
+    SetWindowIcon(LoadImage(strpath));
 
     BeginDrawing();
     {

@@ -30,7 +30,8 @@ Sprite huecoSalidaSprite;
 
 void InitSprite(Sprite *sprite, int frameCount)
 {
-    char path[160];
+    char strpath[512];
+    char path[512];
 
     sprite->frameCount = frameCount;
     sprite->frameCurrent = 0;
@@ -39,9 +40,13 @@ void InitSprite(Sprite *sprite, int frameCount)
 
     for (int i = 0; i < sprite->frameCount; i++)
     {
-        sprintf(path, ASSETS_PATH "%s%d.png", sprite->path, i + 1);
+        strcpy(strpath, GetWorkingDirectory());
+        strcat(strpath, "/assets/");
 
-        Image frameImage = LoadImage(path);
+        sprintf(path, "%s%d.png", sprite->path, i + 1);
+        strcat(strpath, path);
+
+        Image frameImage = LoadImage(strpath);
         sprite->textures[i] = LoadTextureFromImage(frameImage);
         UnloadImage(frameImage);
     }

@@ -25,7 +25,8 @@ enum GameState currentScene;
 
 void InitBackground()
 {
-    char path[100];
+    char strpath[512];
+    char path[512];
 
     menuBackground.frameCount = 33;
     menuBackground.frameCurrent = 0;
@@ -35,8 +36,12 @@ void InitBackground()
 
     for (int i = 0; i < menuBackground.frameCount; i++)
     {
-        sprintf(path, ASSETS_PATH "Background/bg%d.png", i + 1);
-        Image frameImage = LoadImage(path);
+        strcpy(strpath, GetWorkingDirectory());
+        strcat(strpath, "/assets/Background/");
+        sprintf(path, "bg%d.png", i + 1);
+
+        strcat(strpath, path);
+        Image frameImage = LoadImage(strpath);
         menuBackground.textures[i] = LoadTextureFromImage(frameImage);
         UnloadImage(frameImage);
     }
