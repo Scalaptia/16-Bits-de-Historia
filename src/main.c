@@ -593,8 +593,8 @@ void writeSaveFile(bool ToggleMusic, float masterVolume)
 {
     FILE *file = fopen("save.bin", "wb");
     fwrite(&currentScene, sizeof(currentScene), 1, file);
-    fwrite(&ToggleMusic, sizeof(ToggleMusic), 1, file);
-    fwrite(&masterVolume, sizeof(masterVolume), 1, file);
+    fwrite(&ToggleMusic, sizeof(bool), 1, file);
+    fwrite(&masterVolume, sizeof(float), 1, file);
 
     fclose(file);
 }
@@ -603,15 +603,12 @@ void readSaveFile(bool *ToggleMusic, float *masterVolume)
 {
     FILE *file = fopen("save.bin", "rb");
 
-    fread(&currentScene, sizeof(currentScene), 1, file);
-    fread(ToggleMusic, sizeof(ToggleMusic), 1, file);
-    fread(masterVolume, sizeof(masterVolume), 1, file);
-
-    fclose(file);
-
     if (file != NULL)
     {
         fread(&currentScene, sizeof(currentScene), 1, file);
+        fread(ToggleMusic, sizeof(*ToggleMusic), 1, file);
+        fread(masterVolume, sizeof(*masterVolume), 1, file);
+
         fclose(file);
 
         switch (currentScene)

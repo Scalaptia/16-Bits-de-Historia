@@ -43,30 +43,30 @@ void actPlayer(Player *player, Music *sfx, LevelData room)
 {
     movePlayer(player, sfx, room);
 
-    if (IsKeyPressed(KEY_ONE))
-    {
-        player->heldItem = FOOD;
-    }
+    // if (IsKeyPressed(KEY_ONE))
+    // {
+    //     player->heldItem = FOOD;
+    // }
 
-    if (IsKeyPressed(KEY_TWO))
-    {
-        player->heldItem = RIFLE;
-    }
+    // if (IsKeyPressed(KEY_TWO))
+    // {
+    //     player->heldItem = RIFLE;
+    // }
 
-    if (IsKeyPressed(KEY_THREE))
-    {
-        player->heldItem = MACHETE;
-    }
+    // if (IsKeyPressed(KEY_THREE))
+    // {
+    //     player->heldItem = MACHETE;
+    // }
 
-    if (IsKeyPressed(KEY_FOUR))
-    {
-        player->heldItem = LANZA;
-    }
+    // if (IsKeyPressed(KEY_FOUR))
+    // {
+    //     player->heldItem = LANZA;
+    // }
 
-    if (IsKeyPressed(KEY_ZERO))
-    {
-        player->heldItem = NONE;
-    }
+    // if (IsKeyPressed(KEY_ZERO))
+    // {
+    //     player->heldItem = NONE;
+    // }
 
     playerHold(player);
 }
