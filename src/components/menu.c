@@ -37,7 +37,7 @@ void InitBackground()
     for (int i = 0; i < menuBackground.frameCount; i++)
     {
         strcpy(strpath, GetWorkingDirectory());
-        strcat(strpath, "/assets/Background/");
+        strcat(strpath, "/assets/background/");
         sprintf(path, "bg%d.png", i + 1);
 
         strcat(strpath, path);

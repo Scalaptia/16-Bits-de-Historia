@@ -239,7 +239,7 @@ void InitItemTextures()
     Image itemLanza2Image = LoadImage(strpath);
 
     strcpy(strpath, GetWorkingDirectory());
-    strcat(strpath, "/assets/Items/slanza.png");
+    strcat(strpath, "/assets/Items/Slanza.png");
     Image itemHoldLanzaImage = LoadImage(strpath);
 
     // Load textures
