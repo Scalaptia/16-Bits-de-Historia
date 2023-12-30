@@ -93,47 +93,47 @@ int main(void)
             menu.state = MENU;
         }
 
-        if (IsKeyPressed(KEY_ONE))
-        {
-            InitRoom1Objects();
-            player.position.x = REL_TILE_SIZE * 2;
-            player.position.y = REL_TILE_SIZE * 4;
-            player.heldItem = NONE;
+        // if (IsKeyPressed(KEY_ONE))
+        // {
+        //     InitRoom1Objects();
+        //     player.position.x = REL_TILE_SIZE * 2;
+        //     player.position.y = REL_TILE_SIZE * 4;
+        //     player.heldItem = NONE;
 
-            currentScene = SCENE1;
-            menu.prevState = menu.state;
-            menu.state = currentScene;
+        //     currentScene = SCENE1;
+        //     menu.prevState = menu.state;
+        //     menu.state = currentScene;
 
-            writeSaveFile(ToggleMusic, masterVolume);
-        }
+        //     writeSaveFile(ToggleMusic, masterVolume);
+        // }
 
-        if (IsKeyPressed(KEY_TWO))
-        {
-            InitRoom2Objects();
-            player.position.x = REL_TILE_SIZE * 4;
-            player.position.y = REL_TILE_SIZE * 27;
-            player.heldItem = NONE;
+        // if (IsKeyPressed(KEY_TWO))
+        // {
+        //     InitRoom2Objects();
+        //     player.position.x = REL_TILE_SIZE * 4;
+        //     player.position.y = REL_TILE_SIZE * 27;
+        //     player.heldItem = NONE;
 
-            currentScene = SCENE2;
-            menu.prevState = menu.state;
-            menu.state = currentScene;
+        //     currentScene = SCENE2;
+        //     menu.prevState = menu.state;
+        //     menu.state = currentScene;
 
-            writeSaveFile(ToggleMusic, masterVolume);
-        }
+        //     writeSaveFile(ToggleMusic, masterVolume);
+        // }
 
-        if (IsKeyPressed(KEY_THREE))
-        {
-            InitRoom3Objects();
-            player.position.x = REL_TILE_SIZE * 2;
-            player.position.y = REL_TILE_SIZE * 55;
-            player.heldItem = NONE;
+        // if (IsKeyPressed(KEY_THREE))
+        // {
+        //     InitRoom3Objects();
+        //     player.position.x = REL_TILE_SIZE * 2;
+        //     player.position.y = REL_TILE_SIZE * 55;
+        //     player.heldItem = NONE;
 
-            currentScene = SCENE3;
-            menu.prevState = menu.state;
-            menu.state = currentScene;
+        //     currentScene = SCENE3;
+        //     menu.prevState = menu.state;
+        //     menu.state = currentScene;
 
-            writeSaveFile(ToggleMusic, masterVolume);
-        }
+        //     writeSaveFile(ToggleMusic, masterVolume);
+        // }
 
         switch (menu.state)
         {

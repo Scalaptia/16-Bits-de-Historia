@@ -57,9 +57,9 @@ void InitMenuButtons(Rectangle screen)
     optionsButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2, 300, 50};
     optionsButton.color = WHITE;
 
-    exitButton.text = "Salir";
-    exitButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 100, 300, 50};
-    exitButton.color = WHITE;
+    // exitButton.text = "Salir";
+    // exitButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 + 100, 300, 50};
+    // exitButton.color = WHITE;
 
     fullscreenButton.text = "Pantalla Completa";
     fullscreenButton.rect = (Rectangle){screen.width / 2 - 150, screen.height / 2 - 50, 300, 50};
@@ -91,7 +91,7 @@ void CheckMenuButtons(Sound fxButton, Music MenuMusic)
 
     startButton.color = rectangleColor;
     optionsButton.color = rectangleColor;
-    exitButton.color = rectangleColor;
+    // exitButton.color = rectangleColor;
 
     // Check mouse collision with buttons
     if (CheckCollisionPointRec(mousePoint, startButton.rect))
@@ -117,18 +117,18 @@ void CheckMenuButtons(Sound fxButton, Music MenuMusic)
         }
     }
 
-    if (CheckCollisionPointRec(mousePoint, exitButton.rect))
-    {
-        exitButton.color = selectedColor;
+    // if (CheckCollisionPointRec(mousePoint, exitButton.rect))
+    // {
+    //     exitButton.color = selectedColor;
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            PlaySound(fxButton);
-            StopMusicStream(MenuMusic);
-            menu.prevState = menu.state;
-            menu.state = EXIT;
-        }
-    }
+    //     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    //     {
+    //         PlaySound(fxButton);
+    //         StopMusicStream(MenuMusic);
+    //         menu.prevState = menu.state;
+    //         menu.state = EXIT;
+    //     }
+    // }
 }
 
 void CheckOptionsButtons(Sound fxButton, Music MenuMusic, float *volume, bool *ToggleMusic, Rectangle *window, int *screenWidth, int *screenHeight)
@@ -234,12 +234,12 @@ void DrawMenuUI()
     // Draw buttons
     DrawRectangleRec(startButton.rect, startButton.color);
     DrawRectangleRec(optionsButton.rect, optionsButton.color);
-    DrawRectangleRec(exitButton.rect, exitButton.color);
+    // DrawRectangleRec(exitButton.rect, exitButton.color);
 
     // Draw centered text
     DrawText(startButton.text, GetScreenWidth() / 2 - MeasureText(startButton.text, 30) / 2, startButton.rect.y + 10, 30, WHITE);
     DrawText(optionsButton.text, GetScreenWidth() / 2 - MeasureText(optionsButton.text, 30) / 2, optionsButton.rect.y + 10, 30, WHITE);
-    DrawText(exitButton.text, GetScreenWidth() / 2 - MeasureText(exitButton.text, 30) / 2, exitButton.rect.y + 10, 30, WHITE);
+    // DrawText(exitButton.text, GetScreenWidth() / 2 - MeasureText(exitButton.text, 30) / 2, exitButton.rect.y + 10, 30, WHITE);
 
     // Draw credits
     DrawText("@OnlyCodes", 6, GetScreenHeight() - 30, 20, Fade(WHITE, 0.8f));
