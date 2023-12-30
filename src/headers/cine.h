@@ -42,6 +42,7 @@ typedef struct cinestruct
 /*
     Funciona sin necesidad de las vairables externas
 */
+
 extern CINE vineta;
 
 // Escena 1
@@ -78,11 +79,11 @@ extern CINE C3_F2;
 // Prototipos---------------------------------
 void InitCinematica();
 
-void setupCine1();
+void setupCine1(bool reset);
 
 bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle, bool *band);
-bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle);
-bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle);
-bool finalCinematica(int p_limite_x, int p_limite_y, bool togle);
+bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle, bool *band);
+bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle, bool *band);
+bool finalCinematica(int p_limite_x, int p_limite_y, bool togle, bool *band);
 
 #endif

@@ -13,6 +13,7 @@ enum GameState
     SCENE1,
     SCENE2,
     SCENE3,
+    FINAL,
     OPTIONS,
     EXIT
 };

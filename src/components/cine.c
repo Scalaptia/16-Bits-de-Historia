@@ -189,9 +189,16 @@ void InitCinematica()
 }
 
 // Escena 1------------------------------
-void setupCine1()
+void setupCine1(bool reset)
 {
     static bool isSetup = false;
+
+    if (reset)
+    {
+        isSetup = false;
+        return;
+    }
+
     if (isSetup)
     {
         return;
@@ -383,212 +390,203 @@ bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle, bool *band)
     EndDrawing();
 }
 
-bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
+bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle, bool *band)
 {
-    enum escenas run_esc = C2_e1;
-    bool exitbucle = false;
-    // Colores
+    static enum escenas run_esc = C2_e1;
+
     Color b_colorgray = Fade(GRAY, 0.7f);
     Color b_colorwhite = Fade(WHITE, 0.7f);
     Color b_colorblack = Fade(BLACK, 0.7f);
 
-    while (!exitbucle)
+    if (togle)
+        SetMusicVolume(C1M_F, 0.5f);
+    PlayMusic(C2M_F);
+    BeginDrawing();
     {
-        if (togle)
-            SetMusicVolume(C1M_F, 0.5f);
-        PlayMusic(C2M_F);
-        BeginDrawing();
+        ClearBackground(BLACK);
+        //---------------------------Escena 1---------------------------
+        if (run_esc == C2_e1)
         {
-            ClearBackground(BLACK);
-            //---------------------------Escena 1---------------------------
-            if (run_esc == C2_e1)
-            {
-                // Fondo
-                DrawTextureEx(C2_F1.TexturaC, C2_F1.Posicion, 0.0f, 8.0f, WHITE);
-                DrawTextureEx(vineta.TexturaC, vineta.Posicion, 0.0f, 0.9f, WHITE);
+            // Fondo
+            DrawTextureEx(C2_F1.TexturaC, C2_F1.Posicion, 0.0f, 8.0f, WHITE);
+            DrawTextureEx(vineta.TexturaC, vineta.Posicion, 0.0f, 0.9f, WHITE);
 
-                // Ignacio
-                C1_Per.Posicion.x = 250;
-                C1_Per.Posicion.y = (p_limite_y / 2) - 250;
-                DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 15.0f, WHITE);
+            // Ignacio
+            C1_Per.Posicion.x = 250;
+            C1_Per.Posicion.y = (p_limite_y / 2) - 250;
+            DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 15.0f, WHITE);
 
-                // rectangulo
-                Rectangle block = {250, (p_limite_y / 2) - 80, 900, 200};
-                DrawRectangleRec(block, b_colorgray);
+            // rectangulo
+            Rectangle block = {250, (p_limite_y / 2) - 80, 900, 200};
+            DrawRectangleRec(block, b_colorgray);
 
-                // Texto
-                DrawText("La defensa organizada por el general Zaragoza\n\n\nen Puebla consistió en fortificar la ciudad ante el\n\n\ninminente ataque francés\n\n\n", 300, (p_limite_y / 2) - 50, 30, WHITE);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e1)
-            {
-                PlaySound(fxButton);
-                run_esc = C2_e2;
-                EndDrawing();
-            }
-            //---------------------------Escena 2---------------------------
-            if (run_esc == C2_e2)
-            {
-                // Fondo
-                DrawTextureEx(C2_F2.TexturaC, C2_F2.Posicion, 0.0f, 8.0f, WHITE);
-                DrawTextureEx(vineta.TexturaC, vineta.Posicion, 0.0f, 0.9f, WHITE);
-
-                // Ingacio
-                C1_Per.Posicion.x = -150;
-                C1_Per.Posicion.y = (p_limite_y / 2) - 100;
-                DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 40.0f, WHITE);
-
-                // Rectangulo
-                Rectangle block2 = {450, (p_limite_y / 2) - 80, 900, 300};
-                DrawRectangleRec(block2, b_colorgray);
-
-                // texto
-                DrawText("Se instaló un cuartel a unos metros\n\n\ndel frente de batalla y las tropas mexicanas\n\n\n(que recibieron el nombre de Ejército de Oriente)\n\n\nSe prepararon para repeler a los invasores\n\n\nantes de que alcanzaran el área urbana.", 500, (p_limite_y / 2) - 50, 30, WHITE);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e2)
-            {
-                PlaySound(fxButton);
-                run_esc = C2_e3;
-                EndDrawing();
-            }
-            //---------------------------Escena 3---------------------------
-            if (run_esc == C2_e3)
-            {
-                // Fondo
-                DrawTextureEx(C2_F3.TexturaC, C2_F3.Posicion, 0.0f, 8.0f, WHITE);
-
-                // Tropas------------------------------------------------------------------------------------PENDIENTE
-
-                // Rectangulo
-                Rectangle block3 = {50, (p_limite_y / 2) - 70, 600, 400};
-                DrawRectangleRec(block3, b_colorwhite);
-
-                // Texto
-                DrawText("Dos baterías de artillería\n\n\nY 1200 hombres defendían\n\n\nLos fuertes Guadalupe\n\n\nY Loreto ubicados\n\n\nEn sendos cerros al\n\n\nnorte de la ciudad", 70, (p_limite_y / 2) - 50, 40, BLACK);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e3)
-            {
-                PlaySound(fxButton);
-                run_esc = C2_e4;
-                EndDrawing();
-            }
-            //---------------------------Escena 4---------------------------
-            if (run_esc == C2_e4)
-            {
-                // Fondo
-                DrawTextureEx(C2_F4.TexturaC, C2_F4.Posicion, 0.0f, 8.0f, WHITE);
-
-                // Porfirio ----------------------------------------------------------------------------------CREAR IMAGEN
-                Por.Posicion.x = 200;
-                Por.Posicion.y = (p_limite_y / 2) + 200;
-                DrawTextureEx(Por.TexturaC, Por.Posicion, 0.0f, 15.0f, WHITE);
-
-                // Tropas------------------------------------------------------------------------------------PENDIENTE
-
-                // Rectangulo
-                Rectangle block3 = {50, (p_limite_y / 2) - 220, 600, 400};
-                DrawRectangleRec(block3, b_colorgray);
-
-                // Texto
-                DrawText("Mientras que 3500 soldados\n\n\nDe infantería y una brigada\n\n\nDe caballería se distribuyeron\n\n\nEn distintas posiciones \n\n\ndefensivas\n\n\nUna de ellas la comandaba\n\n\nPorfirio Díaz", 70, (p_limite_y / 2) - 200, 35, BLACK);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e4)
-            {
-                PlaySound(fxButton);
-                run_esc = C2_e5;
-                EndDrawing();
-            }
-            //---------------------------Escena 5---------------------------
-            if (run_esc == C2_e5)
-            {
-                // Fondo
-                DrawTextureEx(C2_F5.TexturaC, C2_F5.Posicion, 0.0f, 8.0f, WHITE);
-
-                // Porifirio
-                Por.Posicion.x = 200;
-                Por.Posicion.y = (p_limite_y / 2) + 100;
-                DrawTextureEx(Por.TexturaC, Por.Posicion, 0.0f, 20.0f, WHITE);
-
-                // Rectangulo
-                Rectangle block3 = {70, 50, 1200, 200};
-                DrawRectangleRec(block3, b_colorgray);
-
-                // Texto
-                DrawText("Los franceses salieron de Amozoc hacia Puebla y dividieron sus tropas\n\n\nuna primera columna de alrededor de 4000 hombres protegida por la \n\n\nartillería avanzó sobre los fuertes, en los que el ejército mexicano era\n\n\nmás fuerte, la columna restante permaneció en la reserva", 90, 70, 30, WHITE);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e5)
-            {
-                PlaySound(fxButton);
-                exitbucle = true;
-                EndDrawing();
-            }
+            // Texto
+            DrawText("La defensa organizada por el general Zaragoza\n\n\nen Puebla consistió en fortificar la ciudad ante el\n\n\ninminente ataque francés\n\n\n", 300, (p_limite_y / 2) - 50, 30, WHITE);
         }
-        EndDrawing();
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e1)
+        {
+            PlaySound(fxButton);
+            run_esc = C2_e2;
+            EndDrawing();
+        }
+        //---------------------------Escena 2---------------------------
+        if (run_esc == C2_e2)
+        {
+            // Fondo
+            DrawTextureEx(C2_F2.TexturaC, C2_F2.Posicion, 0.0f, 8.0f, WHITE);
+            DrawTextureEx(vineta.TexturaC, vineta.Posicion, 0.0f, 0.9f, WHITE);
+
+            // Ingacio
+            C1_Per.Posicion.x = -150;
+            C1_Per.Posicion.y = (p_limite_y / 2) - 100;
+            DrawTextureEx(C1_Per.TexturaC, C1_Per.Posicion, 0.0f, 40.0f, WHITE);
+
+            // Rectangulo
+            Rectangle block2 = {450, (p_limite_y / 2) - 80, 900, 300};
+            DrawRectangleRec(block2, b_colorgray);
+
+            // texto
+            DrawText("Se instaló un cuartel a unos metros\n\n\ndel frente de batalla y las tropas mexicanas\n\n\n(que recibieron el nombre de Ejército de Oriente)\n\n\nSe prepararon para repeler a los invasores\n\n\nantes de que alcanzaran el área urbana.", 500, (p_limite_y / 2) - 50, 30, WHITE);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e2)
+        {
+            PlaySound(fxButton);
+            run_esc = C2_e3;
+            EndDrawing();
+        }
+        //---------------------------Escena 3---------------------------
+        if (run_esc == C2_e3)
+        {
+            // Fondo
+            DrawTextureEx(C2_F3.TexturaC, C2_F3.Posicion, 0.0f, 8.0f, WHITE);
+
+            // Tropas------------------------------------------------------------------------------------PENDIENTE
+
+            // Rectangulo
+            Rectangle block3 = {50, (p_limite_y / 2) - 70, 600, 400};
+            DrawRectangleRec(block3, b_colorwhite);
+
+            // Texto
+            DrawText("Dos baterías de artillería\n\n\nY 1200 hombres defendían\n\n\nLos fuertes Guadalupe\n\n\nY Loreto ubicados\n\n\nEn sendos cerros al\n\n\nnorte de la ciudad", 70, (p_limite_y / 2) - 50, 40, BLACK);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e3)
+        {
+            PlaySound(fxButton);
+            run_esc = C2_e4;
+            EndDrawing();
+        }
+        //---------------------------Escena 4---------------------------
+        if (run_esc == C2_e4)
+        {
+            // Fondo
+            DrawTextureEx(C2_F4.TexturaC, C2_F4.Posicion, 0.0f, 8.0f, WHITE);
+
+            // Porfirio ----------------------------------------------------------------------------------CREAR IMAGEN
+            Por.Posicion.x = 200;
+            Por.Posicion.y = (p_limite_y / 2) + 200;
+            DrawTextureEx(Por.TexturaC, Por.Posicion, 0.0f, 15.0f, WHITE);
+
+            // Tropas------------------------------------------------------------------------------------PENDIENTE
+
+            // Rectangulo
+            Rectangle block3 = {50, (p_limite_y / 2) - 220, 600, 400};
+            DrawRectangleRec(block3, b_colorgray);
+
+            // Texto
+            DrawText("Mientras que 3500 soldados\n\n\nDe infantería y una brigada\n\n\nDe caballería se distribuyeron\n\n\nEn distintas posiciones \n\n\ndefensivas\n\n\nUna de ellas la comandaba\n\n\nPorfirio Díaz", 70, (p_limite_y / 2) - 200, 35, BLACK);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e4)
+        {
+            PlaySound(fxButton);
+            run_esc = C2_e5;
+            EndDrawing();
+        }
+        //---------------------------Escena 5---------------------------
+        if (run_esc == C2_e5)
+        {
+            // Fondo
+            DrawTextureEx(C2_F5.TexturaC, C2_F5.Posicion, 0.0f, 8.0f, WHITE);
+
+            // Porifirio
+            Por.Posicion.x = 200;
+            Por.Posicion.y = (p_limite_y / 2) + 100;
+            DrawTextureEx(Por.TexturaC, Por.Posicion, 0.0f, 20.0f, WHITE);
+
+            // Rectangulo
+            Rectangle block3 = {70, 50, 1200, 200};
+            DrawRectangleRec(block3, b_colorgray);
+
+            // Texto
+            DrawText("Los franceses salieron de Amozoc hacia Puebla y dividieron sus tropas\n\n\nuna primera columna de alrededor de 4000 hombres protegida por la \n\n\nartillería avanzó sobre los fuertes, en los que el ejército mexicano era\n\n\nmás fuerte, la columna restante permaneció en la reserva", 90, 70, 30, WHITE);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && run_esc == C2_e5)
+        {
+            PlaySound(fxButton);
+            EndDrawing();
+            *band = true;
+        }
     }
-    return true;
+    EndDrawing();
 }
 
-bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle)
+bool RunCimeatica3(int p_limite_x, int p_limite_y, bool togle, bool *band)
 {
-    bool exitbucle = false;
-    enum escenas current_esc = C3_e1;
+    static enum escenas current_esc = C3_e1;
+
     // Colores
     Color b_colorgray = Fade(GRAY, 0.7f);
     Color b_colorwhite = Fade(WHITE, 0.7f);
     Color b_colorblack = Fade(BLACK, 0.7f);
 
-    while (!exitbucle)
-    {
-        if (togle)
-            SetMusicVolume(C3M_F, 1.0f);
+    if (togle)
         PlayMusic(C3M_F);
-        BeginDrawing();
+
+    SetMusicVolume(C3M_F, 1.0f);
+    BeginDrawing();
+    {
+        //----------------------------------------------Escena 1-----------------------------------------------
+        if (current_esc == C3_e1)
         {
-            //----------------------------------------------Escena 1-----------------------------------------------
-            if (current_esc == C3_e1)
-            {
-                // fondo
-                DrawTextureEx(C3_F1.TexturaC, C3_F1.Posicion, 0.0f, 8.0f, WHITE);
+            // fondo
+            DrawTextureEx(C3_F1.TexturaC, C3_F1.Posicion, 0.0f, 8.0f, WHITE);
 
-                // Rectangulo
-                Rectangle block5 = {p_limite_x - 520, 180, 500, 270};
-                DrawRectangleRec(block5, b_colorblack);
+            // Rectangulo
+            Rectangle block5 = {p_limite_x - 520, 180, 500, 270};
+            DrawRectangleRec(block5, b_colorblack);
 
-                // texto
-                DrawText("Una vez todas\n\n\nlas tropas armadas en posición\n\n\nEstaban todos listos para\n\n\nLa batalla", p_limite_x - 500, 200, 30, WHITE);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C3_e1)
-            {
-                PlaySound(fxButton);
-                current_esc = C3_e2;
-                EndDrawing();
-            }
-            //----------------------------------------------Escena 2-----------------------------------------------
-            if (current_esc == C3_e2)
-            {
-                // fondo
-                ClearBackground(BLACK);
-
-                // texto
-                DrawText("La batalla comenzó a las", (p_limite_x / 2) - 500, (p_limite_y / 2) - 150, 80, WHITE);
-                DrawText("11:15 AM", (p_limite_x / 2) - 120, (p_limite_y / 2) - 70, 80, RED);
-                DrawText("5 de mayo", (p_limite_x / 2) - 180, (p_limite_y / 2), 80, RED);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C3_e2)
-            {
-                PlaySound(fxButton);
-                exitbucle = true;
-                EndDrawing();
-            }
+            // texto
+            DrawText("Una vez todas\n\n\nlas tropas armadas en posición\n\n\nEstaban todos listos para\n\n\nLa batalla", p_limite_x - 500, 200, 30, WHITE);
         }
-        EndDrawing();
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C3_e1)
+        {
+            PlaySound(fxButton);
+            current_esc = C3_e2;
+            EndDrawing();
+        }
+        //----------------------------------------------Escena 2-----------------------------------------------
+        if (current_esc == C3_e2)
+        {
+            // fondo
+            ClearBackground(BLACK);
+
+            // texto
+            DrawText("La batalla comenzó a las", (p_limite_x / 2) - 500, (p_limite_y / 2) - 150, 80, WHITE);
+            DrawText("11:15 AM", (p_limite_x / 2) - 120, (p_limite_y / 2) - 70, 80, RED);
+            DrawText("5 de mayo", (p_limite_x / 2) - 180, (p_limite_y / 2), 80, RED);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C3_e2)
+        {
+            PlaySound(fxButton);
+            EndDrawing();
+            *band = true;
+        }
     }
-    return true;
+    EndDrawing();
 }
 
-bool finalCinematica(int p_limite_x, int p_limite_y, bool togle)
+bool finalCinematica(int p_limite_x, int p_limite_y, bool togle, bool *band)
 {
-    bool exitbucle = false;
-    enum escenas current_esc = C4_e1;
+    static enum escenas current_esc = C4_e1;
 
     float mitady = p_limite_y / 2;
     float mitadx = p_limite_x / 2;
@@ -598,54 +596,50 @@ bool finalCinematica(int p_limite_x, int p_limite_y, bool togle)
     Color b_colorwhite = Fade(WHITE, 0.7f);
     Color b_colorblack = Fade(BLACK, 0.7f);
 
-    while (!exitbucle)
+    BeginDrawing();
     {
-        BeginDrawing();
+        ClearBackground(BLACK);
+        // Escena 1----------------------------
+        if (current_esc == C4_e1)
         {
-            ClearBackground(BLACK);
-            // Escena 1----------------------------
-            if (current_esc == C4_e1)
-            {
-                DrawTextureEx(C4_F1.TexturaC, C4_F1.Posicion, 0.0f, 1.5f, WHITE);
+            DrawTextureEx(C4_F1.TexturaC, C4_F1.Posicion, 0.0f, 1.5f, WHITE);
 
-                Rectangle block = {100, 100, 480, 500};
-                DrawRectangleRec(block, b_colorgray);
+            Rectangle block = {100, 100, 480, 500};
+            DrawRectangleRec(block, b_colorgray);
 
-                DrawText("El ataque de las tropas\n\n\nde Lorencez fue repelido\n\n\npor la infantería la\n\n\nartillería y la caballería\n\n\nmexicanas, los franceses\n\n\nno lograron avanzar\n\n\nretrocedieron a los Álamos\n\n\ndesde donde se\n\n\nretiraron hacia Amozoc", 120, 120, 30, WHITE);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C4_e1)
-            {
-                current_esc = C4_e2;
-                EndDrawing();
-            }
-
-            // Escena 2-----------------------------
-            if (current_esc == C4_e2)
-            {
-                DrawText("La batalla terminó a las 5:49PM", mitadx - 230, mitady - 70, 30, WHITE);
-                DrawText("Con la victoria de mexico", mitadx - 300, mitady, 50, GREEN);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C4_e2)
-            {
-                current_esc = C4_e3;
-                EndDrawing();
-            }
-
-            // Escena 3----------------------
-            if (current_esc == C4_e3)
-            {
-                DrawTextureEx(C4_F2.TexturaC, C4_F2.Posicion, 0.0f, 1.3f, WHITE);
-
-                DrawText("MUCHAS GRACIAS POR JUGAR", 200, 120, 50, WHITE);
-                DrawText("Programadores\n\n\nFernando Haro Calvo\n\n\nAdan Gonzalez Ceseña\n\n\nGrupo : 932\n\n\nCrado con raylib en C", 200, 200, 30, WHITE);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C4_e3)
-            {
-                exitbucle = true;
-                EndDrawing();
-            }
+            DrawText("El ataque de las tropas\n\n\nde Lorencez fue repelido\n\n\npor la infantería la\n\n\nartillería y la caballería\n\n\nmexicanas, los franceses\n\n\nno lograron avanzar\n\n\nretrocedieron a los Álamos\n\n\ndesde donde se\n\n\nretiraron hacia Amozoc", 120, 120, 30, WHITE);
         }
-        EndDrawing();
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C4_e1)
+        {
+            current_esc = C4_e2;
+            EndDrawing();
+        }
+
+        // Escena 2-----------------------------
+        if (current_esc == C4_e2)
+        {
+            DrawText("La batalla terminó a las 5:49PM", mitadx - 230, mitady - 70, 30, WHITE);
+            DrawText("Con la victoria de mexico", mitadx - 300, mitady, 50, GREEN);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C4_e2)
+        {
+            current_esc = C4_e3;
+            EndDrawing();
+        }
+
+        // Escena 3----------------------
+        if (current_esc == C4_e3)
+        {
+            DrawTextureEx(C4_F2.TexturaC, C4_F2.Posicion, 0.0f, 1.3f, WHITE);
+
+            DrawText("MUCHAS GRACIAS POR JUGAR", 200, 120, 50, WHITE);
+            DrawText("Programadores\n\n\nFernando Haro Calvo\n\n\nAdan Gonzalez Ceseña\n\n\nGrupo : 932\n\n\nCrado con raylib en C", 200, 200, 30, WHITE);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && current_esc == C4_e3)
+        {
+            EndDrawing();
+            *band = true;
+        }
     }
-    return true;
+    EndDrawing();
 }

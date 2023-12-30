@@ -153,8 +153,10 @@ int main(void)
                 menu.state = MENU;
 
                 cinema = false;
+                setupCine1(true);
                 cinema2 = false;
                 cinema3 = false;
+                finalband = false;
                 resetBand = false;
             }
 
@@ -292,106 +294,109 @@ int main(void)
             // Cinematica
             if (cinema2 == false)
             {
-                cinema2 = RunCimeatica2(screenWidth, screenHeight, ToggleMusic);
+                RunCimeatica2(screenWidth, screenHeight, ToggleMusic, &cinema2);
             }
-
-            if (ToggleMusic)
-                PlayMusic(lv2);
-            //-----------------------------------------------------------
-
-            if (!isInteracting)
+            else
             {
-                Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
-                actPlayer(&player, &fxPasosGrava, room2);
-            }
 
-            camera.target = (Vector2){player.position.x, player.position.y};
+                if (ToggleMusic)
+                    PlayMusic(lv2);
+                //-----------------------------------------------------------
 
-            // Draw
-            //----------------------------------------------------------------------------------
-            UpdateSpritesFrame();
-            BeginTextureMode(screenCam);
-            {
-                BeginMode2D(camera);
+                if (!isInteracting)
                 {
-                    ClearBackground(BROWN);
-                    DrawElement(&room2.tileset, (Vector2){0, TILE_SIZE * 22});
+                    Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
+                    actPlayer(&player, &fxPasosGrava, room2);
+                }
 
-                    finishedLevel = UpdateRoom2NPCs();
+                camera.target = (Vector2){player.position.x, player.position.y};
 
-                    if (debug)
+                // Draw
+                //----------------------------------------------------------------------------------
+                UpdateSpritesFrame();
+                BeginTextureMode(screenCam);
+                {
+                    BeginMode2D(camera);
                     {
-                        DebugRoom(camera, player, room2, (Vector2){0, 22});
+                        ClearBackground(BROWN);
+                        DrawElement(&room2.tileset, (Vector2){0, TILE_SIZE * 22});
+
+                        finishedLevel = UpdateRoom2NPCs();
+
+                        if (debug)
+                        {
+                            DebugRoom(camera, player, room2, (Vector2){0, 22});
+                        }
+                        else
+                        {
+                            DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+                            CheckRoom2NPCs(&player);
+                            CheckRoom2Objects(&player);
+
+                            if (finishedLevel)
+                            {
+                                DrawSpriteFrame(&npcMexicano3Sprite, (Vector2){REL_TILE_SIZE * 16, REL_TILE_SIZE * (18 + 22)}, SCALE, WHITE, 1, true);
+                                DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 17, REL_TILE_SIZE * (18 + 22)}, SCALE, WHITE, 1, true);
+                            }
+
+                            // Draw held item
+                            if (player.heldItem != NONE)
+                            {
+                                if (player.direction == 1)
+                                {
+                                    DrawTexturePro(player.heldTexture, (Rectangle){0, 0, 16, 16}, (Rectangle){player.position.x + (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                                }
+                                else
+                                {
+                                    DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                                }
+                            }
+                        }
                     }
-                    else
+                    EndMode2D();
+                }
+                EndTextureMode();
+                //-----------------------------------------
+
+                BeginDrawing();
+                {
+                    // Pintar pantalla (textura)
+                    DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
+
+                    if (showHint)
                     {
-                        DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
-                        CheckRoom2NPCs(&player);
-                        CheckRoom2Objects(&player);
+                        // Show hint at the middle-top of the screen
+                        DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
 
                         if (finishedLevel)
                         {
-                            DrawSpriteFrame(&npcMexicano3Sprite, (Vector2){REL_TILE_SIZE * 16, REL_TILE_SIZE * (18 + 22)}, SCALE, WHITE, 1, true);
-                            DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 17, REL_TILE_SIZE * (18 + 22)}, SCALE, WHITE, 1, true);
+                            strcpy(hintText, "Encuentra la salida");
                         }
-
-                        // Draw held item
-                        if (player.heldItem != NONE)
+                        else
                         {
-                            if (player.direction == 1)
-                            {
-                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, 16, 16}, (Rectangle){player.position.x + (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
-                            }
-                            else
-                            {
-                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
-                            }
+                            sprintf(hintText, "Reúne armamento y colócalo en los sacos (%d / %d)", room2.NPCcounter, room2.NPCCount);
                         }
+
+                        DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
                     }
-                }
-                EndMode2D();
-            }
-            EndTextureMode();
-            //-----------------------------------------
 
-            BeginDrawing();
-            {
-                // Pintar pantalla (textura)
-                DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
-
-                if (showHint)
-                {
-                    // Show hint at the middle-top of the screen
-                    DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
-
-                    if (finishedLevel)
+                    if (isInteracting)
                     {
-                        strcpy(hintText, "Encuentra la salida");
-                    }
-                    else
-                    {
-                        sprintf(hintText, "Reúne armamento y colócalo en los sacos (%d / %d)", room2.NPCcounter, room2.NPCCount);
+                        DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
+                        DrawRectangle(0, screenHeight - screenHeight / 4, screenWidth, screenHeight / 4, Fade(BLACK, 0.9f));
+                        DrawText(currentName, 20, (screenHeight - screenHeight / 4) + 20, 30, WHITE);
+                        DrawText(currentDialogue, 20, (screenHeight - screenHeight / 4) + 70, 25, WHITE);
                     }
 
-                    DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
+                    DrawFPS(GetScreenWidth() - 95, 10);
                 }
+                EndDrawing();
 
-                if (isInteracting)
+                if (finishedLevel && !isInteracting)
                 {
-                    DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
-                    DrawRectangle(0, screenHeight - screenHeight / 4, screenWidth, screenHeight / 4, Fade(BLACK, 0.9f));
-                    DrawText(currentName, 20, (screenHeight - screenHeight / 4) + 20, 30, WHITE);
-                    DrawText(currentDialogue, 20, (screenHeight - screenHeight / 4) + 70, 25, WHITE);
+                    CheckTeleportTile(&player, 16, 18 + 22, 3, &menu, &currentScene);
+                    writeSaveFile(ToggleMusic, masterVolume);
                 }
-
-                DrawFPS(GetScreenWidth() - 95, 10);
-            }
-            EndDrawing();
-
-            if (finishedLevel && !isInteracting)
-            {
-                CheckTeleportTile(&player, 16, 18 + 22, 3, &menu, &currentScene);
-                writeSaveFile(ToggleMusic, masterVolume);
             }
 
             break;
@@ -402,118 +407,135 @@ int main(void)
 
             if (cinema3 == false)
             {
-                cinema3 = RunCimeatica3(screenWidth, screenHeight, ToggleMusic);
+                RunCimeatica3(screenWidth, screenHeight, ToggleMusic, &cinema3);
             }
-
-            if (ToggleMusic)
-                PlayMusic(lv3);
-            SetMusicVolume(lv3, 0.5f);
-            //-----------------------------------------------------------
-
-            if (!isInteracting)
+            else
             {
-                Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
-                actPlayer(&player, &fxPasosGrava, room3);
-            }
 
-            camera.target = (Vector2){player.position.x, player.position.y};
+                if (ToggleMusic)
+                    PlayMusic(lv3);
+                SetMusicVolume(lv3, 0.5f);
+                //-----------------------------------------------------------
 
-            // Draw
-            //----------------------------------------------------------------------------------
-            UpdateSpritesFrame();
-            BeginTextureMode(screenCam);
-            {
-                BeginMode2D(camera);
+                if (!isInteracting)
                 {
-                    ClearBackground(DARKBROWN);
-                    DrawElement(&room3.tileset, (Vector2){0, TILE_SIZE * 44});
+                    Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
+                    actPlayer(&player, &fxPasosGrava, room3);
+                }
 
-                    CheckRoom3Objects(&player);
-                    UpdateEnemys();
+                camera.target = (Vector2){player.position.x, player.position.y};
 
-                    if (debug)
+                // Draw
+                //----------------------------------------------------------------------------------
+                UpdateSpritesFrame();
+                BeginTextureMode(screenCam);
+                {
+                    BeginMode2D(camera);
                     {
-                        DebugRoom(camera, player, room3, (Vector2){0, 44});
-                    }
-                    else
-                    {
-                        DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+                        ClearBackground(DARKBROWN);
+                        DrawElement(&room3.tileset, (Vector2){0, TILE_SIZE * 44});
 
-                        DrawSpriteFrame(&huecoSalidaSprite, (Vector2){REL_TILE_SIZE * 50, REL_TILE_SIZE * (2 + 44)}, SCALE, WHITE, 1, true);
-                        DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 51, REL_TILE_SIZE * (2 + 44)}, SCALE, WHITE, 1, true);
+                        CheckRoom3Objects(&player);
+                        UpdateEnemys();
 
-                        // Draw held item
-                        if (player.heldItem != NONE)
+                        if (debug)
                         {
-                            if (player.direction == 1)
+                            DebugRoom(camera, player, room3, (Vector2){0, 44});
+                        }
+                        else
+                        {
+                            DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+
+                            DrawSpriteFrame(&huecoSalidaSprite, (Vector2){REL_TILE_SIZE * 50, REL_TILE_SIZE * (2 + 44)}, SCALE, WHITE, 1, true);
+                            DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 51, REL_TILE_SIZE * (2 + 44)}, SCALE, WHITE, 1, true);
+
+                            // Draw held item
+                            if (player.heldItem != NONE)
                             {
-                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, 16, 16}, (Rectangle){player.position.x + (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
-                            }
-                            else
-                            {
-                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                                if (player.direction == 1)
+                                {
+                                    DrawTexturePro(player.heldTexture, (Rectangle){0, 0, 16, 16}, (Rectangle){player.position.x + (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                                }
+                                else
+                                {
+                                    DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                                }
                             }
                         }
                     }
+                    EndMode2D();
                 }
-                EndMode2D();
-            }
-            EndTextureMode();
-            //-----------------------------------------
+                EndTextureMode();
+                //-----------------------------------------
 
-            BeginDrawing();
-            {
-                // Pintar pantalla (textura)
-                DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
-
-                if (showHint)
+                BeginDrawing();
                 {
-                    // Show hint at the middle-top of the screen
-                    DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
+                    // Pintar pantalla (textura)
+                    DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
 
-                    strcpy(hintText, "Llega a la salida!");
+                    if (showHint)
+                    {
+                        // Show hint at the middle-top of the screen
+                        DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
 
-                    // "Entrega el armamento a los soldados"
-                    DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
+                        strcpy(hintText, "Llega a la salida!");
+
+                        // "Entrega el armamento a los soldados"
+                        DrawText(hintText, screenWidth / 2 - (TextLength(hintText) * 6.5), screenHeight / 16 - 15, 30, WHITE);
+                    }
+
+                    if (isInteracting)
+                    {
+                        DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
+                        DrawRectangle(0, screenHeight - screenHeight / 4, screenWidth, screenHeight / 4, Fade(BLACK, 0.9f));
+                        DrawText(currentName, 20, (screenHeight - screenHeight / 4) + 20, 30, WHITE);
+                        DrawText(currentDialogue, 20, (screenHeight - screenHeight / 4) + 70, 25, WHITE);
+                    }
+
+                    DrawFPS(GetScreenWidth() - 95, 10);
                 }
+                EndDrawing();
 
-                if (isInteracting)
+                if (player.isDead)
                 {
-                    DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
-                    DrawRectangle(0, screenHeight - screenHeight / 4, screenWidth, screenHeight / 4, Fade(BLACK, 0.9f));
-                    DrawText(currentName, 20, (screenHeight - screenHeight / 4) + 20, 30, WHITE);
-                    DrawText(currentDialogue, 20, (screenHeight - screenHeight / 4) + 70, 25, WHITE);
+                    InitRoom3Objects();
+                    player.position.x = REL_TILE_SIZE * 2;
+                    player.position.y = REL_TILE_SIZE * 55;
+                    player.hitbox.x = player.position.x + (REL_TILE_SIZE / 4);
+                    player.hitbox.y = player.position.y;
+
+                    player.heldItem = NONE;
+
+                    currentScene = SCENE3;
+                    menu.prevState = menu.state;
+                    menu.state = currentScene;
                 }
 
-                DrawFPS(GetScreenWidth() - 95, 10);
-            }
-            EndDrawing();
-
-            if (player.isDead)
-            {
-                InitRoom3Objects();
-                player.position.x = REL_TILE_SIZE * 2;
-                player.position.y = REL_TILE_SIZE * 55;
-                player.hitbox.x = player.position.x + (REL_TILE_SIZE / 4);
-                player.hitbox.y = player.position.y;
-
-                player.heldItem = NONE;
-
-                currentScene = SCENE3;
-                menu.prevState = menu.state;
-                menu.state = currentScene;
+                if (CheckTeleportTile(&player, 50, 2 + 44, 4, &menu, &currentScene) && (player.position.x >= REL_TILE_SIZE * 49) && (player.position.y >= REL_TILE_SIZE * (45)))
+                {
+                    menu.prevState = menu.state;
+                    menu.state = FINAL;
+                }
             }
 
-            if (CheckTeleportTile(&player, 50, 2 + 44, 4, &menu, &currentScene))
+            break;
+
+        case FINAL:
+            if (finalband == false)
             {
+                finalCinematica(screenWidth, screenHeight, ToggleMusic, &finalband);
+
                 if (ToggleMusic)
                     PlayMusic(finalm);
 
                 SetMusicVolume(lv2, 0.5f);
-                cinema3 = finalCinematica(screenWidth, screenHeight, ToggleMusic);
-                resetBand = true;
             }
-
+            else
+            {
+                resetBand = true;
+                menu.prevState = menu.state;
+                menu.state = MENU;
+            }
             break;
 
         case OPTIONS:
