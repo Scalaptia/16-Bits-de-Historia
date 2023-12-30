@@ -40,8 +40,6 @@ int main(void)
     bool finalband = false;
     bool resetBand = false;
 
-    bool hasFadedIn = false;
-
     bool showHint = true;
     char hintText[50];
 
@@ -95,47 +93,47 @@ int main(void)
             menu.state = MENU;
         }
 
-        // if (IsKeyPressed(KEY_F1))
-        // {
-        //     InitRoom1Objects();
-        //     player.position.x = REL_TILE_SIZE * 2;
-        //     player.position.y = REL_TILE_SIZE * 4;
-        //     player.heldItem = NONE;
+        if (IsKeyPressed(KEY_ONE))
+        {
+            InitRoom1Objects();
+            player.position.x = REL_TILE_SIZE * 2;
+            player.position.y = REL_TILE_SIZE * 4;
+            player.heldItem = NONE;
 
-        //     currentScene = SCENE1;
-        //     menu.prevState = menu.state;
-        //     menu.state = currentScene;
+            currentScene = SCENE1;
+            menu.prevState = menu.state;
+            menu.state = currentScene;
 
-        //     writeSaveFile(ToggleMusic, masterVolume);
-        // }
+            writeSaveFile(ToggleMusic, masterVolume);
+        }
 
-        // if (IsKeyPressed(KEY_F2))
-        // {
-        //     InitRoom2Objects();
-        //     player.position.x = REL_TILE_SIZE * 4;
-        //     player.position.y = REL_TILE_SIZE * 27;
-        //     player.heldItem = NONE;
+        if (IsKeyPressed(KEY_TWO))
+        {
+            InitRoom2Objects();
+            player.position.x = REL_TILE_SIZE * 4;
+            player.position.y = REL_TILE_SIZE * 27;
+            player.heldItem = NONE;
 
-        //     currentScene = SCENE2;
-        //     menu.prevState = menu.state;
-        //     menu.state = currentScene;
+            currentScene = SCENE2;
+            menu.prevState = menu.state;
+            menu.state = currentScene;
 
-        //     writeSaveFile(ToggleMusic, masterVolume);
-        // }
+            writeSaveFile(ToggleMusic, masterVolume);
+        }
 
-        // if (IsKeyPressed(KEY_F3))
-        // {
-        //     InitRoom3Objects();
-        //     player.position.x = REL_TILE_SIZE * 2;
-        //     player.position.y = REL_TILE_SIZE * 55;
-        //     player.heldItem = NONE;
+        if (IsKeyPressed(KEY_THREE))
+        {
+            InitRoom3Objects();
+            player.position.x = REL_TILE_SIZE * 2;
+            player.position.y = REL_TILE_SIZE * 55;
+            player.heldItem = NONE;
 
-        //     currentScene = SCENE3;
-        //     menu.prevState = menu.state;
-        //     menu.state = currentScene;
+            currentScene = SCENE3;
+            menu.prevState = menu.state;
+            menu.state = currentScene;
 
-        //     writeSaveFile(ToggleMusic, masterVolume);
-        // }
+            writeSaveFile(ToggleMusic, masterVolume);
+        }
 
         switch (menu.state)
         {
@@ -178,111 +176,113 @@ int main(void)
             // Cinematica-------------------------------------------------
             if (cinema == false)
             {
-                cinema = RunCimeatica1(screenWidth, screenHeight, ToggleMusic);
-                hasFadedIn = false;
+                RunCimeatica1(screenWidth, screenHeight, ToggleMusic, &cinema);
             }
-
-            // Nivel-------------------------------------------------------
-            if (ToggleMusic)
-                PlayMusic(GameMusic);
-            //-----------------------------------------------------------
-
-            if (!isInteracting)
+            else
             {
-                Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
-                actPlayer(&player, &fxPasosGrava, room1);
-            }
 
-            camera.target = (Vector2){player.position.x, player.position.y};
+                // Nivel-------------------------------------------------------
+                if (ToggleMusic)
+                    PlayMusic(GameMusic);
+                //-----------------------------------------------------------
 
-            // Draw
-            //----------------------------------------------------------------------------------
-
-            UpdateSpritesFrame();
-            BeginTextureMode(screenCam);
-            {
-                BeginMode2D(camera);
+                if (!isInteracting)
                 {
-                    ClearBackground(BLACK);
-                    DrawElement(&room1.tileset, (Vector2){0, 0});
+                    Keybinds(&debug, &pause, &camera, &GameMusic, &fxButton);
+                    actPlayer(&player, &fxPasosGrava, room1);
+                }
 
-                    finishedLevel = UpdateRoom1NPCs();
+                camera.target = (Vector2){player.position.x, player.position.y};
 
-                    if (debug)
+                // Draw
+                //----------------------------------------------------------------------------------
+
+                UpdateSpritesFrame();
+                BeginTextureMode(screenCam);
+                {
+                    BeginMode2D(camera);
                     {
-                        DebugRoom(camera, player, room1, (Vector2){0, 0});
+                        ClearBackground(BLACK);
+                        DrawElement(&room1.tileset, (Vector2){0, 0});
+
+                        finishedLevel = UpdateRoom1NPCs();
+
+                        if (debug)
+                        {
+                            DebugRoom(camera, player, room1, (Vector2){0, 0});
+                        }
+                        else
+                        {
+                            DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
+                            CheckRoom1NPCs(&player);
+                            CheckRoom1Objects(&player);
+
+                            if (finishedLevel)
+                            {
+                                DrawSpriteFrame(&npcMexicano3Sprite, (Vector2){REL_TILE_SIZE * 1, REL_TILE_SIZE * 4}, SCALE, WHITE, 1, true);
+                                DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 2, REL_TILE_SIZE * 4}, SCALE, WHITE, 1, true);
+                            }
+
+                            // Draw held item
+                            if (player.heldItem != NONE)
+                            {
+                                if (player.direction == 1)
+                                {
+                                    DrawTexturePro(player.heldTexture, (Rectangle){0, 0, 16, 16}, (Rectangle){player.position.x + (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                                }
+                                else
+                                {
+                                    DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
+                                }
+                            }
+                        }
                     }
-                    else
+                    EndMode2D();
+                }
+                EndTextureMode();
+                //-----------------------------------------
+
+                BeginDrawing();
+                {
+
+                    // Pintar pantalla (textura)
+                    DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
+
+                    if (showHint)
                     {
-                        DrawSpriteFrame(&player.sprite, player.position, SCALE, player.color, player.direction, player.isAnimated);
-                        CheckRoom1NPCs(&player);
-                        CheckRoom1Objects(&player);
+                        // Show hint at the middle-top of the screen
+                        DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
 
                         if (finishedLevel)
                         {
-                            DrawSpriteFrame(&npcMexicano3Sprite, (Vector2){REL_TILE_SIZE * 1, REL_TILE_SIZE * 4}, SCALE, WHITE, 1, true);
-                            DrawSpriteFrame(&textoSalidaSprite, (Vector2){REL_TILE_SIZE * 2, REL_TILE_SIZE * 4}, SCALE, WHITE, 1, true);
+                            // Encuentra la salida
+                            strcpy(hintText, "Encuentra la salida");
                         }
-
-                        // Draw held item
-                        if (player.heldItem != NONE)
+                        else
                         {
-                            if (player.direction == 1)
-                            {
-                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, 16, 16}, (Rectangle){player.position.x + (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
-                            }
-                            else
-                            {
-                                DrawTexturePro(player.heldTexture, (Rectangle){0, 0, -16, 16}, (Rectangle){player.position.x - (REL_TILE_SIZE / 2), player.position.y, REL_TILE_SIZE, REL_TILE_SIZE}, (Vector2){0, 0}, 0, WHITE);
-                            }
+                            sprintf(hintText, "Entrega el armamento a los soldados (%d / %d)", room1.NPCcounter, room1.NPCCount);
                         }
+
+                        DrawText(hintText, screenWidth / 2 - (MeasureText(hintText, 30) / 2), screenHeight / 16 - 15, 30, WHITE);
                     }
-                }
-                EndMode2D();
-            }
-            EndTextureMode();
-            //-----------------------------------------
 
-            BeginDrawing();
-            {
-
-                // Pintar pantalla (textura)
-                DrawTextureRec(screenCam.texture, (Rectangle){0, 0, screenWidth, -(screenHeight)}, (Vector2){0, 0}, WHITE);
-
-                if (showHint)
-                {
-                    // Show hint at the middle-top of the screen
-                    DrawRectangle(0, 0, screenWidth, screenHeight / 8, Fade(BLACK, 0.9f));
-
-                    if (finishedLevel)
+                    if (isInteracting)
                     {
-                        // Encuentra la salida
-                        strcpy(hintText, "Encuentra la salida");
-                    }
-                    else
-                    {
-                        sprintf(hintText, "Entrega el armamento a los soldados (%d / %d)", room1.NPCcounter, room1.NPCCount);
+                        DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
+                        DrawRectangle(0, screenHeight - screenHeight / 4, screenWidth, screenHeight / 4, Fade(BLACK, 0.9f));
+                        DrawText(currentName, 20, (screenHeight - screenHeight / 4) + 20, 30, WHITE);
+                        DrawText(currentDialogue, 20, (screenHeight - screenHeight / 4) + 70, 25, WHITE);
                     }
 
-                    DrawText(hintText, screenWidth / 2 - (MeasureText(hintText, 30) / 2), screenHeight / 16 - 15, 30, WHITE);
+                    DrawFPS(GetScreenWidth() - 95, 10);
                 }
+                EndDrawing();
 
-                if (isInteracting)
+                if (finishedLevel && !isInteracting)
                 {
-                    DrawRectangle(0, 0, screenWidth, screenHeight, Fade(BLACK, 0.5f));
-                    DrawRectangle(0, screenHeight - screenHeight / 4, screenWidth, screenHeight / 4, Fade(BLACK, 0.9f));
-                    DrawText(currentName, 20, (screenHeight - screenHeight / 4) + 20, 30, WHITE);
-                    DrawText(currentDialogue, 20, (screenHeight - screenHeight / 4) + 70, 25, WHITE);
+                    CheckTeleportTile(&player, 1, 4, 2, &menu, &currentScene);
+                    writeSaveFile(ToggleMusic, masterVolume);
                 }
-
-                DrawFPS(GetScreenWidth() - 95, 10);
-            }
-            EndDrawing();
-
-            if (finishedLevel && !isInteracting)
-            {
-                CheckTeleportTile(&player, 1, 4, 2, &menu, &currentScene);
-                writeSaveFile(ToggleMusic, masterVolume);
             }
 
             break;
@@ -293,7 +293,6 @@ int main(void)
             if (cinema2 == false)
             {
                 cinema2 = RunCimeatica2(screenWidth, screenHeight, ToggleMusic);
-                hasFadedIn = false;
             }
 
             if (ToggleMusic)
@@ -404,7 +403,6 @@ int main(void)
             if (cinema3 == false)
             {
                 cinema3 = RunCimeatica3(screenWidth, screenHeight, ToggleMusic);
-                hasFadedIn = false;
             }
 
             if (ToggleMusic)

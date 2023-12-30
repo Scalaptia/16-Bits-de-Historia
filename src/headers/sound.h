@@ -2,6 +2,7 @@
 #define SOUND_H
 
 #include "raylib.h"
+#include <string.h>
 
 void InitSounds();
 void PlayMusic(Music music);
@@ -18,19 +19,19 @@ extern float timePlayed;
 extern Music MenuMusic;
 extern float timePlayedMenu;
 
-//Musca 3-------------------
+// Musca 3-------------------
 extern Music lv2;
 extern float timeplayedpaint;
 
-//Musca 3-------------------
+// Musca 3-------------------
 extern Music lv3;
 extern float timeplayedtense;
 
-//final
+// final
 extern Music finalm;
 extern float timeplayedtense;
 
-//Musica escena 1 - 2 - 3 ---
+// Musica escena 1 - 2 - 3 ---
 extern Music C1M_F;
 extern Music C2M_F;
 extern Music C3M_F;

@@ -188,192 +188,199 @@ void InitCinematica()
     UnloadImage(IgnI2);
 }
 
-bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle)
+// Escena 1------------------------------
+void setupCine1()
+{
+    static bool isSetup = false;
+    if (isSetup)
+    {
+        return;
+    }
+
+    // Personaje------------
+    Ign.Posicion.x = -100;
+    Ign.Posicion.y = 250;
+
+    // Fondo-----------------
+    C1_Fondo.Posicion.x = 0;
+    C1_Fondo.Posicion.y = -200;
+
+    // Bandera E-Mexico
+    M_B.Posicion.x = 15;
+    M_B.Posicion.y = 15;
+
+    isSetup = true;
+}
+
+bool RunCimeatica1(int p_limite_x, int p_limite_y, bool togle, bool *band)
 {
     // Reducir texto en escenas, osea dar 2 clicks para seguir el texto
-    enum escenas Esc_run = INTRODUCCION;
-    bool exitbucle = false;
-    bool finish = false;
-    // Escena 1------------------------------
+    static enum escenas Esc_run = INTRODUCCION;
+    static bool finish = false;
+
+    if (togle)
     {
-        // Personaje------------
-        Ign.Posicion.x = -100;
-        Ign.Posicion.y = 250;
-
-        // Fondo-----------------
-        C1_Fondo.Posicion.x = 0;
-        C1_Fondo.Posicion.y = -200;
-
-        // Bandera E-Mexico
-        M_B.Posicion.x = 15;
-        M_B.Posicion.y = 15;
-    }
-
-    while (exitbucle == false)
-    {
-        if (togle)
-            SetMusicVolume(C1M_F, 0.5f);
+        SetMusicVolume(C1M_F, 0.5f);
         PlayMusic(C1M_F);
-        BeginDrawing();
-        {
-            ClearBackground(BLACK);
-
-            //----------------------------------PRE Escenario----------------------------------
-            if (Esc_run == INTRODUCCION)
-            {
-                DrawText("LA BATALLA DE PUEBLA", (p_limite_x / 2) - 500, (p_limite_y / 2) - 50, 80, WHITE);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == INTRODUCCION)
-            {
-                PlaySound(fxButton);
-                Esc_run = MEXICO;
-                EndDrawing();
-            }
-
-            //---------------------------------Mexico Ip1-------------------------------------
-            if (Esc_run == MEXICO)
-            {
-                // Fondo
-                DrawTextureEx(M_F.TexturaC, M_F.Posicion, 0.0f, 1.2f, WHITE);
-
-                // Bandera
-                DrawTextureEx(M_B.TexturaC, M_B.Posicion, 0.0f, 5.0f, WHITE);
-
-                // Rectangulo de texto
-                Color bloque = Fade(BLACK, 0.5f);
-                Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
-                DrawRectangleRec(TxtFondo, bloque);
-
-                // Texto
-                DrawText("En la década de 1860, méxico debía dinero por prestaciones que hacía a españa\n\n\nReino unido y francia, debía 80 millones de pesos, pero en ese tiempo \n\n\nméxico estaba en tiempos dificiles economicamente debido a la independencia\n\n\nEn 1861 el presidente Benito Juárez\n\n\nDecretó la suspensión de pagos de la deuda externa del país.", 190, p_limite_y - 450, 25, WHITE);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO)
-            {
-                PlaySound(fxButton);
-                Esc_run = MEXICO1;
-                EndDrawing();
-            }
-
-            //---------------------------------Mexico1 Ip2-------------------------------------
-            if (Esc_run == MEXICO1)
-            {
-                // fondo
-                DrawTextureEx(M2_F.TexturaC, M2_F.Posicion, 0.0f, 0.73f, WHITE);
-
-                // Rectangulo de texto
-                Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
-                DrawRectangleRec(TxtFondo, bloque);
-
-                // texto
-                DrawText("Los demás países quedaron en ver como toman el dinero de vuelta\n\n\ndecidieronarmar un ejército cada país, españa con 5,789 soldados\n\n\nfrancia con 3,000 soldados y reino unido con\n\n\n700 marines británicos", 180, p_limite_y - 450, 30, BLACK);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO1)
-            {
-                PlaySound(fxButton);
-                Esc_run = MEXICO2;
-                EndDrawing();
-            }
-
-            //---------------------------------Mexico2 Ip3-------------------------------------
-            if (Esc_run == MEXICO2)
-            {
-                // fondo
-                DrawTextureEx(M3_F.TexturaC, M3_F.Posicion, 0.0f, 2.5f, WHITE);
-
-                // Rectangulo de texto
-                Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
-                DrawRectangleRec(TxtFondo, bloque);
-
-                // Fondo
-                DrawText("Sin embargo, gracias a la diplomacia mexicana, méxico consiguió\n\n\nconvencer a españa y reino unido de que les pagaría después\n\n\ny estos 2 se retiraron, Además de que francian\n\n\nno solo quería su dinero de vuelta\n\n\nsi no que también quería hacer de México su protectorado", 180, p_limite_y - 450, 30, BLACK);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO2)
-            {
-                PlaySound(fxButton);
-                Esc_run = MEXICO3;
-                EndDrawing();
-            }
-
-            //---------------------------------Mexico3 Ip4-------------------------------------
-            if (Esc_run == MEXICO3)
-            {
-                // Fondo
-                DrawTextureEx(M4_F.TexturaC, M4_F.Posicion, 0.0f, 0.8f, WHITE);
-
-                // Rectangulo de texto
-                Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
-                DrawRectangleRec(TxtFondo, bloque);
-
-                // Fondo
-                DrawText("Imponiendo una monarquía en el país, dejando de lado\n\n\na sus compañeros creyó que conseguiría por sí solo la victoria\n\n\nya que llevaban una racha de 50 años sin perder una batalla\n\n\nAl final Francia terminó con 6m soldados y méxico\n\n\nse preparó con 6m hombres,la cual francia contaba\n\n\ncon fuerzas de elite (zuavos) y méxico.", 180, p_limite_y - 480, 30, BLACK);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO3)
-            {
-                PlaySound(fxButton);
-                Esc_run = MEXICO4;
-                EndDrawing();
-            }
-
-            //---------------------------------Mexico4 Ip5-------------------------------------
-            if (Esc_run == MEXICO4)
-            {
-                // Fondo
-                DrawTextureEx(M5_F.TexturaC, M5_F.Posicion, 0.0f, 1.0f, WHITE);
-
-                // Rectangulo de texto
-                Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {230, p_limite_y - 450, 900, 200};
-                DrawRectangleRec(TxtFondo, bloque);
-
-                // Fondo
-                DrawText("México reclutó en su mayoría personas forzadas\n\n\nEs decir sin experiencia en el campo de batalla\n\n\ny no muy bien tratados, lo único sobresaliente de méxico\n\n\neran sus oficiales jóvenes bien experimentados\n\n\n", 250, p_limite_y - 440, 30, BLACK);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO4)
-            {
-                PlaySound(fxButton);
-                Esc_run = PRIMER_ESCENARIO;
-                EndDrawing();
-            }
-
-            //----------------------------------Escenario 1 ----------------------------------
-            if (Esc_run == PRIMER_ESCENARIO)
-            {
-                // Fondo
-                DrawTextureEx(C1_Fondo.TexturaC, C1_Fondo.Posicion, 0.0f, 5.0f, WHITE);
-
-                // Personaje
-                DrawTextureEx(Ign.TexturaC, Ign.Posicion, 0.0f, 40.0f, WHITE);
-
-                if (Ign.Posicion.x < p_limite_x / 2 - 360)
-                {
-                    Ign.Posicion.x += 4;
-                }
-                if (Ign.Posicion.x >= p_limite_x / 2 - 360)
-                {
-                    finish = true;
-                }
-
-                // Rectangulo de texto
-                Color bloque = Fade(WHITE, 0.8f);
-                Rectangle TxtFondo = {500, p_limite_y - 100, 300, 80};
-                DrawRectangleRec(TxtFondo, bloque);
-
-                // Texto
-                DrawText("Entre ellos\n\n\nIgnacio zaragoza", 520, p_limite_y - 100, 30, BLACK);
-            }
-            if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && finish == true)
-            {
-                PlaySound(fxButton);
-                EndDrawing();
-                exitbucle = true;
-            }
-        }
-        EndDrawing();
     }
-    return true;
+    BeginDrawing();
+    {
+        ClearBackground(BLACK);
+
+        //----------------------------------PRE Escenario----------------------------------
+        if (Esc_run == INTRODUCCION)
+        {
+            DrawText("LA BATALLA DE PUEBLA", (p_limite_x / 2) - 500, (p_limite_y / 2) - 50, 80, WHITE);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == INTRODUCCION)
+        {
+            PlaySound(fxButton);
+            Esc_run = MEXICO;
+            EndDrawing();
+        }
+
+        //---------------------------------Mexico Ip1-------------------------------------
+        if (Esc_run == MEXICO)
+        {
+            // Fondo
+            DrawTextureEx(M_F.TexturaC, M_F.Posicion, 0.0f, 1.2f, WHITE);
+
+            // Bandera
+            DrawTextureEx(M_B.TexturaC, M_B.Posicion, 0.0f, 5.0f, WHITE);
+
+            // Rectangulo de texto
+            Color bloque = Fade(BLACK, 0.5f);
+            Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
+            DrawRectangleRec(TxtFondo, bloque);
+
+            // Texto
+            DrawText("En la década de 1860, méxico debía dinero por prestaciones que hacía a españa\n\n\nReino unido y francia, debía 80 millones de pesos, pero en ese tiempo \n\n\nméxico estaba en tiempos dificiles economicamente debido a la independencia\n\n\nEn 1861 el presidente Benito Juárez\n\n\nDecretó la suspensión de pagos de la deuda externa del país.", 190, p_limite_y - 450, 25, WHITE);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO)
+        {
+            PlaySound(fxButton);
+            Esc_run = MEXICO1;
+            EndDrawing();
+        }
+
+        //---------------------------------Mexico1 Ip2-------------------------------------
+        if (Esc_run == MEXICO1)
+        {
+            // fondo
+            DrawTextureEx(M2_F.TexturaC, M2_F.Posicion, 0.0f, 0.73f, WHITE);
+
+            // Rectangulo de texto
+            Color bloque = Fade(WHITE, 0.8f);
+            Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
+            DrawRectangleRec(TxtFondo, bloque);
+
+            // texto
+            DrawText("Los demás países quedaron en ver como toman el dinero de vuelta\n\n\ndecidieronarmar un ejército cada país, españa con 5,789 soldados\n\n\nfrancia con 3,000 soldados y reino unido con\n\n\n700 marines británicos", 180, p_limite_y - 450, 30, BLACK);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO1)
+        {
+            PlaySound(fxButton);
+            Esc_run = MEXICO2;
+            EndDrawing();
+        }
+
+        //---------------------------------Mexico2 Ip3-------------------------------------
+        if (Esc_run == MEXICO2)
+        {
+            // fondo
+            DrawTextureEx(M3_F.TexturaC, M3_F.Posicion, 0.0f, 2.5f, WHITE);
+
+            // Rectangulo de texto
+            Color bloque = Fade(WHITE, 0.8f);
+            Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
+            DrawRectangleRec(TxtFondo, bloque);
+
+            // Fondo
+            DrawText("Sin embargo, gracias a la diplomacia mexicana, méxico consiguió\n\n\nconvencer a españa y reino unido de que les pagaría después\n\n\ny estos 2 se retiraron, Además de que francian\n\n\nno solo quería su dinero de vuelta\n\n\nsi no que también quería hacer de México su protectorado", 180, p_limite_y - 450, 30, BLACK);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO2)
+        {
+            PlaySound(fxButton);
+            Esc_run = MEXICO3;
+            EndDrawing();
+        }
+
+        //---------------------------------Mexico3 Ip4-------------------------------------
+        if (Esc_run == MEXICO3)
+        {
+            // Fondo
+            DrawTextureEx(M4_F.TexturaC, M4_F.Posicion, 0.0f, 0.8f, WHITE);
+
+            // Rectangulo de texto
+            Color bloque = Fade(WHITE, 0.8f);
+            Rectangle TxtFondo = {160, p_limite_y - 500, 1050, 300};
+            DrawRectangleRec(TxtFondo, bloque);
+
+            // Fondo
+            DrawText("Imponiendo una monarquía en el país, dejando de lado\n\n\na sus compañeros creyó que conseguiría por sí solo la victoria\n\n\nya que llevaban una racha de 50 años sin perder una batalla\n\n\nAl final Francia terminó con 6m soldados y méxico\n\n\nse preparó con 6m hombres,la cual francia contaba\n\n\ncon fuerzas de elite (zuavos) y méxico.", 180, p_limite_y - 480, 30, BLACK);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO3)
+        {
+            PlaySound(fxButton);
+            Esc_run = MEXICO4;
+            EndDrawing();
+        }
+
+        //---------------------------------Mexico4 Ip5-------------------------------------
+        if (Esc_run == MEXICO4)
+        {
+            // Fondo
+            DrawTextureEx(M5_F.TexturaC, M5_F.Posicion, 0.0f, 1.0f, WHITE);
+
+            // Rectangulo de texto
+            Color bloque = Fade(WHITE, 0.8f);
+            Rectangle TxtFondo = {230, p_limite_y - 450, 900, 200};
+            DrawRectangleRec(TxtFondo, bloque);
+
+            // Fondo
+            DrawText("México reclutó en su mayoría personas forzadas\n\n\nEs decir sin experiencia en el campo de batalla\n\n\ny no muy bien tratados, lo único sobresaliente de méxico\n\n\neran sus oficiales jóvenes bien experimentados\n\n\n", 250, p_limite_y - 440, 30, BLACK);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && Esc_run == MEXICO4)
+        {
+            PlaySound(fxButton);
+            Esc_run = PRIMER_ESCENARIO;
+            EndDrawing();
+        }
+
+        //----------------------------------Escenario 1 ----------------------------------
+        if (Esc_run == PRIMER_ESCENARIO)
+        {
+            // Fondo
+            DrawTextureEx(C1_Fondo.TexturaC, C1_Fondo.Posicion, 0.0f, 5.0f, WHITE);
+
+            // Personaje
+            DrawTextureEx(Ign.TexturaC, Ign.Posicion, 0.0f, 40.0f, WHITE);
+
+            if (Ign.Posicion.x < p_limite_x / 2 - 360)
+            {
+                Ign.Posicion.x += 4;
+            }
+            if (Ign.Posicion.x >= p_limite_x / 2 - 360)
+            {
+                finish = true;
+            }
+
+            // Rectangulo de texto
+            Color bloque = Fade(WHITE, 0.8f);
+            Rectangle TxtFondo = {500, p_limite_y - 100, 300, 80};
+            DrawRectangleRec(TxtFondo, bloque);
+
+            // Texto
+            DrawText("Entre ellos\n\n\nIgnacio zaragoza", 520, p_limite_y - 100, 30, BLACK);
+        }
+        if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_E)) && finish == true)
+        {
+            PlaySound(fxButton);
+            EndDrawing();
+            *band = true;
+        }
+    }
+    EndDrawing();
 }
 
 bool RunCimeatica2(int p_limite_x, int p_limite_y, bool togle)
