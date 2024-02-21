@@ -37,8 +37,10 @@ Los controles básicos para jugar son las siguientes:
 -   **Click Izquierdo** o **E** para continuar a la siguiente cinemática
 -   **ESC**: Salir / Pausa
 
----Tabla de speedrunes
+***************************
+---Tabla de speedrunes----
 1.-ToñitoPerrito 2:50m
+***************************
 
 Si tiene alguna duda, revise el manual de usuario encontrado en este mismo repositorio como <a href="https://github.com/Scalaptia/16-Bits-de-Historia/blob/main/Manual%20de%20Usuario%20-%2016-Bits%20de%20Historia.pdf">`Manual de Usuario - 16-Bits de Historia.pdf`</a> o póngase en contacto con alguno de los desarrolladores.
 
